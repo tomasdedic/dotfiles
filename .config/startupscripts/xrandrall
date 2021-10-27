@@ -1,0 +1,27 @@
+#!/bin/bash
+if [ -z "`xrandr --query |grep -a13 eDP-1| awk '/^   1920x1080/'`" ]
+then
+        #xrandr --newmode "1600x900" 118.25  1600 1696 1856 2112  900 903 908 934 -hsync +vsync 
+        #xrandr --addmode eDP1 1600x900 
+        xrandr --output eDP-1 --mode 1920x1080
+        #xrandr --output eDP1 --gamma 0.8:0.8:0.8 
+        xbacklight -set 80
+fi
+
+if [ ! -z "`xrandr --query |awk '/^HDMI-2 connected/'`" ]
+then
+                xrandr --output eDP-1 --mode 1920x1080 --primary --rotate normal --auto --output HDMI-2 --mode 1920x1080 --auto --above eDP-1 
+fi
+
+#if [ ! -z "`xrandr --query | awk '/^DP1 connected/'`" ]
+#then    
+        #xrandr --newmode "1680x1050" 146.25  1680 1784 1960 2240  1050 1053 1059 1089 -hsync +vsync
+        #xrandr --addmode DP1 1680x1050
+        #xrandr --output eDP1 --mode 1600x900 --rotate normal --pos 0x0 --output DP1 --primary --mode 1680x1050 --left-of eDP1
+        #xrandr --output eDP1 --mode 1600x900 --rotate normal --auto --output DP1 --primary --pos 0x0 --mode 1680x1050 --auto --above eDP1 
+#        xrandr --output eDP1 --mode 1600x900 --primary --rotate normal --auto --output DP1 --mode 1680x1050 --auto --above eDP1 
+#        xrandr --output eDP1 --gamma 0.8:0.8:0.8
+#        xbacklight -set 100
+#else
+#        xrandr --output eDP1 --mode 1600x900 --off --output DP1 --auto
+#fi

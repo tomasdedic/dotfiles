@@ -1,0 +1,10 @@
+snippet fish "fish shell shebang" b
+#!/usr/bin/env fish
+set fish_trace 1 #same as set -x in bash
+endsnippet
+
+snippet testv "test if variable exists" b
+if set -q ${0:${VISUAL}}
+	echo "variable $0 not set" 
+end
+endsnippet
