@@ -1,0 +1,49 @@
+pane	NOT	1	:NOTes	0	:-	1	:/home/ts/git_repositories/moje/mantab	1	nvim	:nvim notes.man
+pane	NOT	2	:writing	1	:*	1	:/home/ts/git_repositories	1	zsh	:
+pane	NOT	2	:writing	1	:*	2	:/home/ts/git_repositories/moje/madopenshift	0	zsh	:
+pane	NOT	3	:lab	0	:	1	:/home/ts/git_repositories/moje/madopenshift/content/wotw/6-state	0	nvim	:nvim index.md
+pane	NOT	3	:lab	0	:	2	:/home/ts/git_repositories/moje/madopenshift/content/wotw/6-state	1	zsh	:
+pane	NOT	3	:lab	0	:	3	:/home/ts/git_repositories/work/openshift/schooly/k9s	0	zsh	:
+pane	NOT	4	:zsh	0	:	1	:/home/ts/Downloads	1	zsh	:
+pane	gol	1	:gol	0	:-	1	:/home/ts/go/src/myprojects/argo-cd/cmd/argocd-dex/commands	1	nvim	:nvim argocd_dex.go
+pane	gol	1	:gol	0	:-	2	:/home/ts/go/src/myprojects/gob	0	zsh	:
+pane	gol	2	:zsh	1	:*	1	:/home/ts/go/src/myprojects/gob	1	zsh	:
+pane	gol	2	:zsh	1	:*	2	:/home/ts/go/src/myprojects/gob/function_options	0	zsh	:
+pane	kvm	1	:VPN	1	:*	1	:/home/ts	1	ssh	:ssh ts@192.168.122.168
+pane	kvm	1	:VPN	1	:*	2	:/home	0	zsh	:
+pane	kvm	1	:VPN	1	:*	3	:/home/ts	0	zsh	:
+pane	kvm	1	:VPN	1	:*	4	:/home/ts/utils	0	sudo	:sudo openvpn --config opvpnclient.ovpn
+pane	nifi	1	:nvim	1	:*	1	:/home/ts/git_repositories/work/openshift/argo_related/clusters/oshi43/monolog-nifi/helm-csas-nifi	1	nvim	:nvim values-lab1.yaml
+pane	nifi	1	:nvim	1	:*	2	:/home/ts/git_repositories/work/openshift/argo_related/clusters/oshi43/monolog-nifi/helm-csas-nifi/helmcharts/charts/registry	0	zsh	:
+pane	nifi	1	:nvim	1	:*	3	:/home/ts/git_repositories/work/openshift/argo_related/clusters/oshi43/monolog-nifi/helm-csas-nifi/api-dev/nifi-registry	0	zsh	:
+pane	nifi	1	:nvim	1	:*	4	:/home/ts/git_repositories/work/openshift/argo_related/clusters/oshi43/monolog-nifi/helm-csas-nifi	0	zsh	:
+pane	nifi	2	:zsh	0	:-	1	:/home/ts/git_repositories/work/openshift/oshi	1	zsh	:
+pane	nifi	2	:zsh	0	:-	2	:/home/ts/git_repositories/work/openshift/argo_related/clusters/oshi43/monolog-nifi/helm-csas-nifi	0	zsh	:
+pane	nifi	2	:zsh	0	:-	3	:/home/ts/git_repositories/work/openshift/argo_related/clusters/oshi43/monolog-nifi/helm-csas-nifi	0	zsh	:
+pane	nifi	2	:zsh	0	:-	4	:/home/ts/git_repositories/work/openshift/argo_related/clusters/oshi43/monolog-nifi/helm-csas-nifi	0	zsh	:
+pane	nifi	2	:zsh	0	:-	5	:/home/ts/git_repositories/work/openshift/argo_related/clusters/oshi43/monolog-nifi/helm-csas-nifi	0	nvim	:nvim helmcharts/templates/statefulset.yaml
+pane	ocp	1	:dex	0	:-	1	:/home/ts/git_repositories/work/openshift/oshi/oidc-dex-client/exdex-app	1	zsh	:
+pane	ocp	1	:dex	0	:-	2	:/home/ts/git_repositories/work/openshift/oshi/oidc-dex-client	0	zsh	:
+pane	ocp	1	:dex	0	:-	3	:/home/ts/git_repositories/work/openshift/oshi/dex	0	stern	:stern -n openshift-authentication oauth
+pane	ocp	1	:dex	0	:-	4	:/home/ts/git_repositories/work/openshift/oshi/oidc-dex-client	0	zsh	:
+pane	ocp	2	:zsh	1	:*	1	:/home/ts/git_repositories/work/openshift/argo_related/clusters/ocp-oaz-lab1-system/resources	1	zsh	:
+pane	ocp	2	:zsh	1	:*	2	:/home/ts/git_repositories/work/openshift/oshi/compliance_operator	0	nvim	:nvim scansettings.yaml
+pane	ocp	2	:zsh	1	:*	3	:/home/ts/git_repositories/work/openshift/oshi	0	nvim	:nvim /home/ts/.zshrc
+pane	ocp	5	:lab1	0	:	1	:/home/ts/git_repositories/work/openshift/argo_related/clusters/ocp-oaz-lab1-system/resources/cluster-config/templates/RedHat/Cluster/OAuth	0	zsh	:
+pane	ocp	5	:lab1	0	:	2	:/home/ts/git_repositories/work/unconditionalaccess	1	zsh	:
+pane	ocp	6	:k3d	0	:	1	:/home/ts/git_repositories/work/openshift/schooly/k9s/2	0	zsh	:
+pane	ocp	6	:k3d	0	:	2	:/home/ts/git_repositories/work/openshift/schooly/k9s/2	1	zsh	:
+window	NOT	1	0	:-	bafe,318x81,0,0,1
+window	NOT	2	1	:*	e0cd,318x81,0,0{158x81,0,0,2,159x81,159,0,93}
+window	NOT	3	0	:	66bc,212x56,0,0[212x22,0,0,4,212x22,0,23,67,212x10,0,46,6]
+window	NOT	4	0	:	bb04,318x81,0,0,7
+window	gol	1	0	:-	3c41,238x60,0,0[238x49,0,0,63,238x10,0,50,66]
+window	gol	2	1	:*	ff65,318x81,0,0[318x60,0,0,70,318x20,0,61,100]
+window	kvm	1	1	:*	e3be,318x81,0,0[318x40,0,0{154x40,0,0,8,163x40,155,0,9},318x40,0,41{154x40,0,41,10,163x40,155,41,11}]
+window	nifi	1	1	:*	0dff,318x81,0,0{167x81,0,0,68,150x81,168,0[150x34,168,0,156,150x33,168,35,191,150x12,168,69,163]}
+window	nifi	2	0	:-	aa96,272x68,0,0{135x68,0,0,128,136x68,136,0[136x16,136,0,129,136x15,136,17,132,136x17,136,33,131,136x17,136,51,133]}
+window	ocp	1	0	:-	628c,318x81,0,0{177x81,0,0[177x61,0,0,48,177x19,0,62,55],140x81,178,0[140x40,178,0,13,140x40,178,41,49]}
+window	ocp	2	1	:*	5901,318x81,0,0{159x81,0,0,74,158x81,160,0[158x41,160,0,75,158x39,160,42,76]}
+window	ocp	5	0	:	f74a,238x60,0,0[238x30,0,0,97,238x29,0,31,135]
+window	ocp	6	0	:	7c8b,318x81,0,0{159x81,0,0,27,158x81,160,0,125}
+state	nifi	kvm
