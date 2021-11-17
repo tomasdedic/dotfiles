@@ -205,7 +205,7 @@ configs.gopls = {
 -- require'lspinstall'.setup()
 -- local servers = require'lspinstall'.installed_servers()
 --local servers = {"gopls","bashls","jsonls"}
-local servers = {"gopls","bashls","jsonls"}
+local servers = {"gopls","bashls"}
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
         capabilities = capabilities,
@@ -217,26 +217,5 @@ for _, lsp in ipairs(servers) do
         -- };
     }
 end
-
---local saga = require'lspsaga'
---saga.init_lsp_saga {
---    max_preview_lines = 10,
---    finder_action_keys = {
---      open = 'o',
---      vsplit = 's',
---      split = 'i',
---      quit = {'q','<esc>'},
---      scroll_down = '<C-j>',
---      scroll_up = '<C-k>' -- quit can be a table
---    },
---    code_action_keys = {
---      quit = {'q','<esc>'},
---      exec = '<CR>',
---    },
---    rename_action_keys = {
---      quit = {'<C-c>', '<esc>'},
---      exec = '<CR>',
---    },
---  }
 
 EOF

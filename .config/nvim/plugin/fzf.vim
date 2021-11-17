@@ -1,5 +1,6 @@
 set grepprg=rg\ --vimgrep\ --smart-case\ --follow
 let g:fzf_preview_window = []
+
 nmap ; :Buffers<CR>
 " nmap <Leader>t :Files<cr>
 "hledani souboru
@@ -14,14 +15,22 @@ nmap <Leader>h :History:<CR>
 "grep
 "file not be hit in grep
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+" command! -bar -bang -nargs=? -complete=buffer Buffers call fzf#vim#buffers(<q-args>, fzf#vim#with_preview({'options': ['--delimiter', '/','--with-nth', '-3..' ] }), <bang>0)
+command! -bar -bang -nargs=? -complete=buffer Buffers call fzf#vim#buffers(<q-args>, fzf#vim#with_preview({'placeholder':"{1}"}), <bang>0)
+" command! -bang -nargs=* -complete=dir Files
+                " \ call fzf#vim#files(<q-args>, {'options': ['--delimiter', '/', '--with-nth', '-2..', '--preview', 'echo {};echo;~/.vim/bundle/fzf.vim/bin/preview.sh {}']}, <bang>0)
+" command! -bang -nargs=* Rg
+"   \ call fzf#vim#grep(
+"   \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
+"   \   fzf#vim#with_preview(), <bang>0)
 nmap <leader>f :Rg<cr>
 "find world under cursor
 nnoremap <silent> <Leader>ag :Rg <C-R><C-W><CR>
 nnoremap <silent> <Leader>lg :Lines <C-R><C-W><CR>
 nmap <leader>c :Commits<cr>
 nmap <leader>m :Marks<CR>
-"radky v bufferu
-nmap <leader>/ :Blines<CR>
+"radky v bufferech
+nmap <leader>/ :Lines<CR>
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)

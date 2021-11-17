@@ -1,4 +1,5 @@
 set shell=/usr/bin/zsh 
+set completeopt=menu,menuone,noselect
 "autocompletition enhance separatoor mezi slovy
 set iskeyword+=\-
 set iskeyword+=\_
@@ -22,6 +23,8 @@ Plug 'neovim/nvim-lspconfig'
 " NOTE: Use either one of this
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
+"Plug 'hrsh7th/cmp-path'
+"Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 " Better LSP experience
 "Plug 'glepnir/lspsaga.nvim', {'branch': 'main' }
@@ -33,12 +36,16 @@ Plug 'gennaro-tedesco/nvim-peekup'
 Plug 'szw/vim-maximizer'
 Plug 'dyng/ctrlsf.vim'
 " Better syntax
-"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate' }
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate' }
 "Plug 'nvim-treesitter/playground'
 " -- Snippets
-Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/cmp-vsnip' "completition for vsnip
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
+" -- Snippets premake
+Plug 'rafamadriz/friendly-snippets'
+" Plug 'SirVer/ultisnips'
+" Plug 'quangnguyen30192/cmp-nvim-ultisnips' "completition for ultisnips
 " -- show textdocuments/codeactions
 Plug 'kosayoda/nvim-lightbulb'
 
@@ -122,16 +129,16 @@ Plug 'mustache/vim-mustache-handlebars'
 
 let g:vsnip_snippet_dir="~/.config/nvim/vsnip"
 "tyhle konfigurace musi byt pred volanim vim-snippets
-let g:UltiSnipsSnippetsDir="~/.config/nvim/custom_snippets"
+" let g:UltiSnipsSnippetsDir="~/.config/nvim/custom_snippets"
 " set runtimepath^=~/.config/nvim
-let g:UltiSnipsSnippetDirectories=["custom_snippets"]
+" let g:UltiSnipsSnippetDirectories=["custom_snippets"]
 " Track the engine.
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 " Snippets are separated from the engine. Add this if you want them:
-let g:UltiSnipsExpandTrigger="<c-tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-let g:UltiSnipsEditSplit="vertical"
+" let g:UltiSnipsExpandTrigger="<c-tab>"
+" let g:UltiSnipsJumpForwardTrigger="<c-j>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" let g:UltiSnipsEditSplit="vertical"
 "skovavani specialnich tagu hlavne pro markdown
 set conceallevel=0
 

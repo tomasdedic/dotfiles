@@ -161,7 +161,7 @@ setopt complete_aliases
 
 export DISABLE_MAGIC_FUNCTIONS=true
 export FZF_BASE="$HOME/.fzf"
-export PATH="${FZF_BASE/bin}:${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export FZF_LEGACY_KEYBINDINGS=0
 export FZF_TMUX=1
 
@@ -182,7 +182,8 @@ fif() {
     echo "Need a string to search for!";
     return 1;
   fi
-  rg --files-with-matches --no-messages "$1" | fzf $FZF_PREVIEW_WINDOW --preview "rg --ignore-case --pretty --context 10 '$1' {}"
+  local file=$(rg --files-with-matches --ignore-case --no-messages "$1" | fzf $FZF_PREVIEW_WINDOW --preview "rg --ignore-case --pretty --context 10 '$1' {}"|awk '{print $1}')
+  vim $file
 }
 
 # Select a running docker container to stop
