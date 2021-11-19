@@ -1,9 +1,9 @@
-set shell=/usr/bin/zsh 
+set shell=/usr/bin/zsh
 set completeopt=menu,menuone,noselect
 "autocompletition enhance separatoor mezi slovy
 set iskeyword+=\-
 set iskeyword+=\_
-set iskeyword-=\.
+set iskeyword+=\.
 " set t_Co=256
 set foldenable
 set cursorline
@@ -18,32 +18,34 @@ set timeoutlen=500
 filetype off
 
 call plug#begin('~/.vim/plugged')
+"terminal integration
+Plug 'akinsho/toggleterm.nvim'
 " LSP
 Plug 'neovim/nvim-lspconfig'
 " NOTE: Use either one of this
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-nvim-lsp' , {'branch': 'main' }
+Plug 'hrsh7th/cmp-buffer', {'branch': 'main' }
 "Plug 'hrsh7th/cmp-path'
 "Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/nvim-cmp', {'branch': 'main' }
 " Better LSP experience
 "Plug 'glepnir/lspsaga.nvim', {'branch': 'main' }
-Plug 'onsails/lspkind-nvim'
+" Plug 'onsails/lspkind-nvim'
 Plug 'sbdchd/neoformat'
 "Plug 'p00f/nvim-ts-rainbow'
-Plug 'gennaro-tedesco/nvim-peekup'
+"Plug 'gennaro-tedesco/nvim-peekup'
 " Plug 'ray-x/lsp_signature.nvim'
 Plug 'szw/vim-maximizer'
 Plug 'dyng/ctrlsf.vim'
 " Better syntax
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate' }
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate all' }
 "Plug 'nvim-treesitter/playground'
 " -- Snippets
-Plug 'hrsh7th/cmp-vsnip' "completition for vsnip
+Plug 'hrsh7th/cmp-vsnip', {'branch': 'main' } "completition for vsnip
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 " -- Snippets premake
-Plug 'rafamadriz/friendly-snippets'
+Plug 'rafamadriz/friendly-snippets', {'branch': 'main' }
 " Plug 'SirVer/ultisnips'
 " Plug 'quangnguyen30192/cmp-nvim-ultisnips' "completition for ultisnips
 " -- show textdocuments/codeactions
@@ -173,7 +175,7 @@ map! <S-Insert> <MiddleMouse>
 
 " CTRL-C is Copy
 vnoremap <C-Insert> "+y
-set nohidden
+set hidden
 set updatetime=300
 set signcolumn=yes
 set mouse=a
@@ -200,7 +202,7 @@ autocmd FileType yaml set ts=2 sts=2 sw=2 expandtab
 autocmd FileType helm set ts=2 sts=2 sw=2 expandtab iskeyword+=\.
 autocmd FileType helm set commentstring=#\ %s
 autocmd FileType perl set tabstop=4|set shiftwidth=4|set expandtab|set softtabstop=4
-autocmd FileType markdown setlocal ts=2 sts=2 sw=2 expandtab 
+autocmd FileType markdown setlocal ts=2 sts=2 sw=2 expandtab
 
 augroup filetypedetect
     autocmd BufRead,BufNewFile Jenkinsfile set filetype=groovy

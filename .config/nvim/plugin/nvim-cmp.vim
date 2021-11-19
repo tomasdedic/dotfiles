@@ -28,8 +28,18 @@ lua <<EOF
       -- { name = 'luasnip' }, -- For luasnip users.
       -- { name = 'ultisnips' }, -- For ultisnips users.
       -- { name = 'snippy' }, -- For snippy users.
-    }, {
-      { name = 'buffer' },
+       { name = "buffer",
+         -- load completition from all openbuffers but in init.vim set hidden must be set instead of set nohidden(bufer get offloaded)
+          opts = {
+          -- Default: [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%([\-.]\w*\)*\)]]
+          -- A vim's regular expression for creating a word list from buffer content.
+          -- You can set this to \k\+ if you want to use the iskeyword option for recognizing words.
+          --  keyword_pattern = [[\k\+]],
+            get_bufnrs = function()
+              return vim.api.nvim_list_bufs()
+            end
+              }
+        },
     })
   })
 

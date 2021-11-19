@@ -1,4 +1,5 @@
 "obsession integration
+
 let g:lightline = {
       \ 'colorscheme': 'PaperColor',
       \ 'active': {
@@ -26,3 +27,4 @@ function! Pwd()
   return fnamemodify(getcwd(), ':t')
   " return fnamemodify(getcwd(), ':~')
 endfunction
+
