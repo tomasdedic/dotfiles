@@ -30,7 +30,7 @@ lua <<EOF
       -- { name = 'snippy' }, -- For snippy users.
        { name = "buffer",
          -- load completition from all openbuffers but in init.vim set hidden must be set instead of set nohidden(bufer get offloaded)
-          opts = {
+          option = {
           -- Default: [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%([\-.]\w*\)*\)]]
           -- A vim's regular expression for creating a word list from buffer content.
           -- You can set this to \k\+ if you want to use the iskeyword option for recognizing words.

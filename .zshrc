@@ -5,7 +5,7 @@ export TERM=xterm-256color
 export GOPATH=$HOME/go
 export EDITOR="/usr/local/bin/nvim"
 # If you come from bash you might have to change your $PATH.
-export PATH=/opt/Citrix/ICAClient:$HOME/bin:/usr/local/bin:/usr/bin:/usr/local/go/bin:$GOPATH/bin:/usr/local/kubebuilder/bin:$PATH
+export PATH=/opt/Citrix/ICAClient:$HOME/bin:/usr/local/bin:/usr/bin:/usr/local/go/bin:$GOPATH/bin:/usr/local/kubebuilder/bin:~/node_modules/.bin:$PATH
 #ZSH_THEME="powerlevel10k/powerlevel10k"
 export LC_ALL=en_US.UTF-8
 # Path to your oh-my-zsh installation.
@@ -110,6 +110,7 @@ export FZF_TMUX=1
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/share/zsh-syntax-highlighting/highlighters
 source $ZSH/oh-my-zsh.sh
 source <(oc completion zsh)
+source <(kubectl completion zsh | sed 's/kubectl/kb/g')
 source ${ZSH_CUSTOM}/run_complete.sh
 #ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
 bindkey "^ " forward-word
@@ -132,7 +133,7 @@ alias hr="fc -RI" #sync history
 alias viq="urxvt -e vim "
 alias v='nvim'
 alias cat="bat -p --theme GitHub"
-alias docker=podman
+# alias docker=podman
 alias bc='bc -l'
 alias zshconfig="source ~/.zshrc"
 alias dirs='dirs -v'
@@ -155,8 +156,8 @@ if type nvim > /dev/null 2>&1; then
   alias vim='nvim'
   alias vi='nvim'
 fi
-compdef kb='kubectl'
-setopt complete_aliases
+alias compdef kb='kubectl'
+# setopt complete_aliases
 
 
 export DISABLE_MAGIC_FUNCTIONS=true
@@ -246,10 +247,11 @@ bindkey "^[OB" down-history
 export HOWDOI_COLORIZE=1
 
 export PATH=$PATH:/home/ts/bin
-autoload -U compinit; compinit
+# autoload -U compinit; compinit
 source '/home/ts/lib/azure-cli/az.completion'
 # custom comletion
 fpath=(~/.zsh.d/ $fpath)
 
 
 alias luamake=/home/ts/tmp/luamake/luamake
+eval $(dircolors ~/.config/dircolors/dircolors.ansi-dark)

@@ -1,5 +1,5 @@
 {
-    "workbench.colorTheme": "papercolor-vscode",
+    "workbench.colorTheme": "Monokai",
     "rsp-ui.enableStartServerOnActivation": [
         {
             "id": "redhat.vscode-server-connector",
@@ -122,9 +122,9 @@
         "workbench.colorCustomizations" : {
             "terminal.foreground": "#000000",
             "terminal.background": "#ffffff",
-            "statusBar.background": "#BF616A",
-            "statusBar.noFolderBackground": "#BF616A",
-            "statusBar.debuggingBackground": "#BF616A",
+            "statusBar.background": "#8FBCBB",
+            "statusBar.noFolderBackground": "#8FBCBB",
+            "statusBar.debuggingBackground": "#8FBCBB",
             "statusBar.foreground": "#434C5E"
         },
         "redhat.telemetry.enabled": true,

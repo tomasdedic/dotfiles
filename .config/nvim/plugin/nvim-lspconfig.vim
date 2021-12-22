@@ -9,12 +9,13 @@
 lua << EOF
 local prettier = require "efm/prettier"
 local eslint = require "efm/eslint"
-local language_formatterts = {
+local language_formatters = {
   typescript = {prettier, eslint},
   javascript = {prettier, eslint},
   typescriptreact = {prettier, eslint},
   javascriptreact = {prettier, eslint},
-  yaml = {prettier},
+  yaml = {prettier, yamllint},
+  -- yaml = {prettier},
   json = {prettier},
   html = {prettier},
   scss = {prettier},
@@ -27,7 +28,7 @@ local language_formatterts = {
 
 local nvim_lsp = require "lspconfig"
  efm = {
-    filetypes = vim.tbl_keys(language_formatterts),
+    filetypes = vim.tbl_keys(language_formatters),
     root_dir = nvim_lsp.util.root_pattern("package.json","yarn.lock", ".git"),
     init_options = {
       documentFormatting = true,
@@ -35,7 +36,7 @@ local nvim_lsp = require "lspconfig"
     },
     settings = {
       rootMarkers = {".git/"},
-      languages = language_formatterts
+      languages = language_formatters
     }
   }
 
@@ -171,27 +172,45 @@ local lspconfig = require'lspconfig'
 
 
 
-configs.yamlls = {
-  default_config = {
-    cmd = {"yaml-language-server", "--stdio"};
-    filetypes = {"yaml"};
-    root_dir = util.root_pattern(vim.fn.getcwd());
-  };
-}
+ -- configs.yamlls = {
+ --   default_config = {
+ --     cmd = {"yaml-language-server", "--stdio"};
+ --     filetypes = {"yaml"};
+ --     root_dir = util.root_pattern(vim.fn.getcwd());
+ --   };
+ -- }
 
-
---lspconfig.yamlls.setup{
---    settings = {
---        yaml = {
---           schemas = { kubernetes = "/*.yaml" };
---           schemaStore = { enable = true };
---           completion = true;
---           format = { bracketspacing = true };
---      }
---      };
---    capabilities = capabilities,
---    on_attach = on_attach,
---}
+nvim_lsp["yamlls"].setup {
+    --cmd = cmd,
+    on_attach = on_attach,
+    settings = {
+      yaml = {
+        trace = {
+          server = "verbose"
+        },
+        schemas = {
+          ["kubernetes"] = "*.yaml",
+          ["helm"] = "templates/*.yaml",
+          ["http://json.schemastore.org/kustomization"]= "kustomization.yaml" 
+          -- ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.22.0/all.json"] = "/*.yaml"
+        },
+        schemaDownload = {  enable = true },
+      	validate = false,
+      }
+    },
+  }
+-- lspconfig.yamlls.setup{
+--     settings = {
+--         yaml = {
+--            schemas = { kubernetes = "/*.yaml" };
+--            schemaStore = { enable = true };
+--            completion = true;
+--            format = { bracketspacing = true };
+--       }
+--       };
+--     capabilities = capabilities,
+--     on_attach = on_attach,
+-- }
 
 configs.gopls = {
   default_config = {
