@@ -22,6 +22,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'akinsho/toggleterm.nvim'
 " LSP
 Plug 'neovim/nvim-lspconfig'
+" LSP servers auto install
+Plug 'williamboman/nvim-lsp-installer' , {'branch': 'main' }
 " NOTE: Use either one of this
 Plug 'hrsh7th/cmp-nvim-lsp' , {'branch': 'main' }
 Plug 'hrsh7th/cmp-buffer', {'branch': 'main' }
@@ -31,15 +33,18 @@ Plug 'hrsh7th/nvim-cmp', {'branch': 'main' }
 " Better LSP experience
 "Plug 'glepnir/lspsaga.nvim', {'branch': 'main' }
 " Plug 'onsails/lspkind-nvim'
-Plug 'sbdchd/neoformat'
+" Plug 'sbdchd/neoformat'
 "Plug 'p00f/nvim-ts-rainbow'
 "Plug 'gennaro-tedesco/nvim-peekup'
 " Plug 'ray-x/lsp_signature.nvim'
 Plug 'szw/vim-maximizer'
-Plug 'dyng/ctrlsf.vim'
+" Plug 'dyng/ctrlsf.vim'
 " Better syntax
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate all' }
-"Plug 'nvim-treesitter/playground'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+" paranthesis color diff
+" Plug 'p00f/nvim-ts-rainbow'
 " -- Snippets
 Plug 'hrsh7th/cmp-vsnip', {'branch': 'main' } "completition for vsnip
 Plug 'hrsh7th/vim-vsnip'
@@ -55,19 +60,15 @@ Plug 'kosayoda/nvim-lightbulb'
 
 " auto yaml folds
 " Plug 'pedrohdz/vim-yaml-folds'
-Plug 'mileszs/ack.vim'
+"Plug 'mileszs/ack.vim'
 " set autochdir
 map ad :set autochdir!<CR>
 "let g:ackprg = 'ag --vimgrep --smart-case'
-let g:ackprg = 'ag --nogroup --nocolor --column'
-cnoreabbrev ag Ack!
+"let g:ackprg = 'ag --nogroup --nocolor --column'
+cnoreabbrev ag Ag
 cnoreabbrev rg Rg
-cnoreabbrev Ack Ack!
-cnoreabbrev aG Ack!
-cnoreabbrev Ag Ack!
-cnoreabbrev AG Ack!
-" cnoreabbrev md Ack! --markdown
-" cnoreabbrev yaml Ack! --yaml
+cnoreabbrev md Ag --markdown
+cnoreabbrev yaml Ag --yaml
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
@@ -83,7 +84,7 @@ let g:rooter_targets = '/,*'
 Plug 'gioele/vim-autoswap'
 " Plug 'liuchengxu/vim-which-key'
 "helm syntax
-Plug 'towolf/vim-helm'
+" Plug 'towolf/vim-helm'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-eunuch'
@@ -128,6 +129,7 @@ Plug 'liuchengxu/vista.vim'
 Plug 'jeetsukumaran/vim-markology'
 "working with mustache and handlebars templates.
 Plug 'mustache/vim-mustache-handlebars'
+let g:mustache_abbreviations = 1
 
 let g:vsnip_snippet_dir="~/.config/nvim/vsnip"
 "tyhle konfigurace musi byt pred volanim vim-snippets

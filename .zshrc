@@ -1,6 +1,6 @@
 # profiler
 #zmodload zsh/zprof
-export TERM=xterm-256color
+#export TERM=xterm-256color
 #golang
 export GOPATH=$HOME/go
 export EDITOR="/usr/local/bin/nvim"

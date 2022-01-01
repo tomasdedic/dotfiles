@@ -186,16 +186,25 @@ nvim_lsp["yamlls"].setup {
     settings = {
       yaml = {
         trace = {
-          server = "verbose"
+          server = "verbose",
+        },
+        format = {
+          enable = true,
+          singleQuote = false,
+          bracketSpacing = true
         },
         schemas = {
-          ["kubernetes"] = "*.yaml",
-          ["helm"] = "templates/*.yaml",
-          ["http://json.schemastore.org/kustomization"]= "kustomization.yaml" 
+          -- https://www.schemastore.org/api/json/catalog.json
+          --["kubernetes"] = "*.yaml",
+          ["kubernetes"] = "manifests/*.yaml",
+          ["kubernetes"] = "templates/*.yaml",
+          ["http://json.schemastore.org/kustomization"]= "kustomization.yaml",
+          ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/v1.174.2/service-schema.json"] = "pipelines/*.yaml"
           -- ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.22.0/all.json"] = "/*.yaml"
         },
-        schemaDownload = {  enable = true },
+      -- schemaDownload = {  enable = true },
       	validate = false,
+        completion = true
       }
     },
   }

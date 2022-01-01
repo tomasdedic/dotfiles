@@ -1,4 +1,13 @@
 {
+    "mustache": {
+      "description": "Mustache filetype",
+      "body": [
+        "{{/* vim: set filetype=mustache: */}}"
+      ],
+      "prefix": [
+        "mus"
+      ]
+    },
     "sa": {
         "description": "ServiceAccount",
         "body": [
