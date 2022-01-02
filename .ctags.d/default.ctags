@@ -4,10 +4,13 @@
 # --regex-markdown=/\[([^\[]+)\]\(([^\)]+)\)/\1/l,link,Markdown Links/
 # --regex-markdown=/!\[\]\(.*[\/ ](.*\.[a-z]{3})\)/\1/i,image,Markdown Image/
 # --langmap=yaml:.yaml,.yml
---langmap=Yaml:+.yaml
+--langmap=Yaml:+.yaml,+.yml
 --kinddef-yaml=s,section,sections
 --kinddef-yaml=e,entry,entries
 --regex-yaml=/^([a-zA-Z0-9_\/-]+):/\1/s/{scope=set}
---regex-yaml=/^ *- (name: .*)$/\1/e/{scope=ref}
+#--regex-yaml=/^ *- (name: .*)$/\1/e/{scope=ref}
+--regex-yaml=/^ *- (.*)$/\1/e/{scope=ref}
+
 # --kinddef-Yaml=z,array,array at start of line
 # --regex-Yaml=/^([[:graph:]]+):[[:space:]]*^/\1/a/i
+#--regex-yaml=/^[ \t]*(.*):/\1/k,key,keys/
