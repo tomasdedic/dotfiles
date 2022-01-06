@@ -1,0 +1,13 @@
+{
+"npm authenticate (for task runners)": {
+"prefix": "adonpmAuthenticate0",
+"body": [
+"- task: npmAuthenticate@0",
+"  inputs:",
+"    workingFile: $1  # Required  # Path to the .npmrc file that specifies the registries you want to work with. Select the file, not the folder e.g. \"/packages/mypackage.npmrc\".",
+"    #customEndpoint:  # Optional  # Credentials to use for external registries located in the project's .npmrc. For registries in this organization/collection, leave this blank; the build’s credentials are used automatically.",
+"$2"
+],
+"description": "Don't use this task if you're also using the npm task. Provides npm credentials to an .npmrc file in your repository for the scope of the build. This enables npm task runners like gulp and Grunt to authenticate with private registries."
+}
+}

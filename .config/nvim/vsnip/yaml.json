@@ -1,4 +1,119 @@
 {
+
+"Azure CLI": {
+"prefix": "adoAzureCLI2",
+"body": [
+"- task: AzureCLI@2",
+"  inputs:",
+"    connectedServiceNameARM: $1  # Required  # Select an Azure Resource Manager service connection for the deployment",
+"    scriptType: $2 # Options: 'ps', 'pscore', 'batch', 'bash' # Required  # Type of script: PowerShell/PowerShell Core/Bat/Shell script. Select Shell/PowerShell Core script when running on Linux agent or Batch/PowerShell/PowerShell Core script when running on Windows agent. PowerShell Core script can run on cross-platform agents (Linux, macOS, or Windows).",
+"    scriptLocation: ${3:scriptPath} # Options: 'inlineScript', 'scriptPath' # Required  # Path to script: File path or Inline script",
+"    scriptPath: $4  # Required when scriptLocation = scriptPath  # Fully qualified path of the script(.ps1 or .bat or .cmd when using Windows based agent else .ps1 or .sh when using linux based agent) or a path relative to the the default working directory",
+"    inlineScript: $5  # Required when scriptLocation = inlineScript  # You can write your scripts inline here. When using Windows agent, use PowerShell or PowerShell Core or batch scripting whereas use PowerShell Core or shell scripting when using Linux based agents. For batch files use the prefix \"call\" before every azure command. You can also pass predefined and custom variables to this script using arguments  example for PowerShell/PowerShellCore/shell: az --version az account show  example for batch:call  az --version call az account show",
+"    #scriptArguments:  # Optional  # Arguments passed to the script",
+"    #powerShellErrorActionPreference: # Options: 'stop', 'continue', 'silentlyContinue' # Optional  # Prepends the line `$ErrorActionPreference = 'VALUE'` at the top of your powershell/powershell core script.",
+"    #addSpnToEnvironment:  # Optional  # Adds service principal id, service principal key and tenant id of the Azure endpoint you chose to the script's execution environment. You can use variables: `servicePrincipalId`, `servicePrincipalKey` and `tenantId` in your script.This is honored only when the Azure endpoint has Service Principal authentication scheme.Syntax to access environment variables based on script type.Powershell script: $env:servicePrincipalIdBatch script: %servicePrincipalId% Shell script: $servicePrincipalId",
+"    #useGlobalConfig:  # Optional  # If this is false, this task will use its own separate [Azure CLI configuration directory](https://docs.microsoft.com/en-us/cli/azure/azure-cli-configuration?view=azure-cli-latest#cli-configuration-file). This can be used to run Azure CLI tasks in *parallel* releases",
+"    #cwd:  # Optional  # Current working directory where the script is run.  Empty is the root of the repo (build) or artifacts (release), which is \\$(System.DefaultWorkingDirectory)",
+"    #failOnStandardError:  # Optional  # If this is true, this task will fail when any errors are written to the StandardError stream. Unselect the checkbox to ignore standard errors and rely on exit codes to determine the status",
+"    #powerShellIgnoreLASTEXITCODE:  # Optional  # If this is false, the line `if ((Test-Path -LiteralPath variable:/\/LASTEXITCODE)) { exit $LASTEXITCODE }` is appended to the end of your script. This will cause the last exit code from an external command to be propagated as the exit code of powershell. Otherwise the line is not appended to the end of your script.",
+"$6"
+],
+"description": "Run Azure CLI commands against an Azure subscription in a PowerShell Core/Shell script when running on Linux agent or PowerShell/PowerShell Core/Batch script when running on Windows agent."
+},
+
+"Download build artifacts": {
+"prefix": "adoDownloadBuildArtifacts1",
+"body": [
+"- task: DownloadBuildArtifacts@1",
+"  inputs:",
+"    buildType: ${1:current} # Options: 'current', 'specific' # Required  # Download artifacts produced by the current build, or from a specific build.",
+"    project: $2  # Required when buildType == specific  # The project from which to download the build artifacts",
+"    definition: $3  # Required when buildType == specific  # Select the build pipeline name",
+"    #specificBuildWithTriggering:  # Optional  # If checked, this build task will try to download artifacts from the triggering build. If there is no triggering build from the specified pipeline, it will download artifacts from the build specified in the options below.",
+"    buildVersionToDownload: ${4:latest} # Options: 'latest', 'latestFromBranch', 'specific' # Required ",
+"    #allowPartiallySucceededBuilds:  # Optional  # If checked, this build task will try to download artifacts whether the build is succeeded or partially succeeded.",
+"    branchName: ${5:refs/heads/master}  # Required  # Specify to filter on branch/ref name, for example: ```refs/heads/develop```.",
+"    buildId: $6  # Required when buildType == specific && buildVersionToDownload == specific  # The build from which to download the artifacts",
+"    #tags:  # Optional  # A comma-delimited list of tags. Only builds with these tags will be returned.",
+"    downloadType: ${7:single} # Options: 'single', 'specific' # Required  # Download a specific artifact or specific files from the build.",
+"    artifactName: $8  # Required when downloadType == single  # The name of the artifact to download",
+"    #itemPattern:  # Optional  # Specify files to be downloaded as multi line minimatch pattern. [More Information](https://aka.ms/minimatchexamples) <p>The default pattern (/\/*/\/*) will download all files across all artifacts in the build if \"Specific files\" option is selected. To download all files within artifact drop use drop/**.</p>",
+"    downloadPath: ${9:$(System.ArtifactsDirectory)}  # Required  # Path on the agent machine where the artifacts will be downloaded",
+"    #cleanDestinationFolder:  # Optional  # Delete all existing files in destination folder before artifact download",
+"    #parallelizationLimit:  # Optional  # Number of files to download simultaneously",
+"    #checkDownloadedFiles:  # Optional  # If checked, this build task will check that all files are fully downloaded.",
+"    #retryDownloadCount:  # Optional  # Optional number of times to retry downloading a build artifact if the download fails.",
+"    #extractTars:  # Optional  # Enable this option to extract all downloaded files that have .tar extension. This is helpful because you need to pack your artifact files into tar if you want to preserve Unix file permissions. Enabling `StoreAsTar` option in PublishBuildArtifacts task will store artifacts as .tar files automatically.",
+"$10"
+],
+"description": "Download files that were saved as artifacts of a completed build"
+},
+"Package and deploy Helm charts": {
+"prefix": "adoHelmDeploy0",
+"body": [
+"- task: HelmDeploy@0",
+"  inputs:",
+"    connectionType: ${1:Azure Resource Manager} # Options: 'Azure Resource Manager', 'Kubernetes Service Connection', 'None' # Required  # Select 'Azure Resource Manager' to connect to an Azure Kubernetes Service by using Azure Service Connection. Select 'Kubernetes Service Connection' to connect to any Kubernetes cluster by using kubeconfig or Service Account",
+"    azureSubscriptionEndpoint: $2  # Required when connectionType = Azure Resource Manager  # Select an Azure subscription, which has your Azure Container Registry.",
+"    azureResourceGroup: $3  # Required when connectionType = Azure Resource Manager  # Select an Azure Resource Group.",
+"    kubernetesCluster: $4  # Required when connectionType = Azure Resource Manager  # Select an Azure Managed Cluster.",
+"    #useClusterAdmin:  # Optional  # Use cluster administrator credentials instead of default cluster user credentials.",
+"    kubernetesServiceEndpoint: $5  # Required when connectionType = Kubernetes Service Connection  # Select a Kubernetes service connection.",
+"    #namespace:  # Optional  # Specify K8 namespace to use. Use Tiller namespace can be specified in the advanced section of the task or by passing the --tiller-namespace option as argument.",
+"    azureSubscriptionEndpointForACR: $6  # Required  # Select an Azure subscription, which has your Azure Container Registry.",
+"    azureResourceGroupForACR: $7  # Required  # Select an Azure Resource Group, which has your Container Registry.",
+"    azureContainerRegistry: $8  # Required  # Select an Azure Container Registry which will be used for pushing helm charts.",
+"    command: ${9:ls} # Options: 'create', 'delete', 'expose', 'get', 'init', 'install', 'login', 'logout', 'ls', 'package', 'rollback', 'save', 'upgrade', 'uninstall' # Required  # Select a helm command.",
+"    chartType: ${10:Name} # Options: 'Name', 'FilePath' # Required  # Select how you want to enter chart info. You can either provide name of the chart or folder/file path to the chart.",
+"    chartName: $11  # Required when chartType == Name  # Chart reference to install, this can be a url or a chart name. For example, if chart name is 'stable/mysql', the task will run 'helm install stable/mysql'.",
+"    chartPath: $12  # Required when chartType == FilePath || command == package  # Path to the chart to install. This can be a path to a packaged chart or a path to an unpacked chart directory. For example, if './redis' is specified the task will run 'helm install ./redis'.",
+"    #version:  # Optional  # Specify the exact chart version to install. If this is not specified, the latest version is installed. Set the version on the chart to this semver version​",
+"    #releaseName:  # Optional  # Release name. If unspecified, it will autogenerate one for you.",
+"    #overrideValues:  # Optional  # Set values on the command line (can specify multiple or separate values with commas or newlines: key1=val1,key2=val2 or <br>key1=val1<br>key2=val2<br>). The task will construct the helm command by using these set values. For example, helm install --set key1=val1 ./redis.",
+"    #valueFile:  # Optional  # Specify values in a YAML file or a URL. For example, specifying myvalues.yaml will result in 'helm install --values=myvals.yaml'.",
+"    #destination:  # Optional  # Specify values in a YAML file or a URL.",
+"    #canaryimage:  # Optional  # Use the canary Tiller image, the latest pre-release version of Tiller.",
+"    #upgradetiller:  # Optional  # Upgrade if Tiller is already installed.",
+"    #updatedependency:  # Optional  # Run helm dependency update before installing the chart. Update dependencies from 'requirements.yaml' to dir 'charts/' before packaging",
+"    #save:  # Optional  # Save packaged chart to local chart repository (default true)​",
+"    #install:  # Optional  # If a release by this name doesn't already exist, run an install​.",
+"    #recreate:  # Optional  # Performs pods restart for the resource if applicable.",
+"    #resetValues:  # Optional  # Reset the values to the ones built into the chart.",
+"    #force:  # Optional  # Force resource update through delete/recreate if needed​",
+"    #waitForExecution:  # Optional  # Block till command execution completes.",
+"    #arguments:  # Optional  # Helm command options.",
+"    #enableTls:  # Optional  # Enables using SSL between Helm and Tiller.",
+"    caCert: $13  # Required when enableTls == true  # CA cert used to issue certificate for tiller and helm client.",
+"    certificate: $14  # Required when enableTls == true  # Specify Tiller certificate or Helm client certificate",
+"    privatekey: $15  # Required when enableTls == true  # Specify Tiller Key or Helm client key",
+"    #tillernamespace:  # Optional  # Specify K8 namespace of tiller.",
+"    #failOnStderr:  # Optional  # If this is true, this task will fail if any errors are written to the error pipeline, or if any data is written to the Standard Error stream. Otherwise the task will rely on the exit code to determine failure.",
+"    #publishPipelineMetadata:  # Optional  # If this is true, the task will collect and publish deployment metadata",
+"    chartNameForACR: $16  # Required when command == save  # Chart name with which the chart will be stored in Azure Container Registry.",
+"    chartPathForACR: $17  # Required when command == save  # Path to the chart directory.",
+"$18"
+],
+"description": "Deploy, configure, update a Kubernetes cluster in Azure Container Service by running helm commands"
+},
+
+"Bash": {
+"prefix": "adoBash3",
+"body": [
+"- task: Bash@3",
+"  inputs:",
+"    #targetType: # Options: 'filePath', 'inline' # Optional  # Target script type: File Path or Inline",
+"    filePath: $1  # Required when targetType = filePath  # Path of the script to execute. Must be a fully qualified path or relative to (System.DefaultWorkingDirectory).",
+"    #arguments:  # Optional  # Arguments passed to the shell script. Either ordinal parameters or named parameters.",
+"    script: ${2:# Write your commands hereecho 'Hello world'}  # Required ",
+"    #workingDirectory:  # Optional ",
+"    #failOnStderr:  # Optional  # If this is true, this task will fail if any errors are written to the StandardError stream.",
+"    #bashEnvValue:  # Optional  # If input is specified, it's value is expanded and used as the path of a startup file to execute before running the script. If the environment variable `BASH_ENV` has already been defined, the task will override this variable only for the current task. You can find more details by [link](https://www.gnu.org/software/bash/manual/html_node/Bash-Startup-Files.html).",
+"$3"
+],
+"description": "Run a Bash script "
+},
+
     "mustache": {
       "description": "Mustache filetype",
       "body": [

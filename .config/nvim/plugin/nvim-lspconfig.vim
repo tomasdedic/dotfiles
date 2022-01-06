@@ -165,11 +165,24 @@ end
   }
 
 ---lsp servers----
+
 local configs = require 'lspconfig/configs'
 local util = require 'lspconfig/util'
 
 local lspconfig = require'lspconfig'
 
+-- setup lsp installer
+--local lsp_installer = require("nvim-lsp-installer")
+--lsp_installer.on_server_ready(function(server)
+--    local opts = {
+--        on_attach = on_attach,
+--        capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+--        flags = {
+--            debounce_text_changes = 150,
+--        },
+--    }
+--    server:setup(opts)
+--end)
 
 
  -- configs.yamlls = {
@@ -197,13 +210,13 @@ nvim_lsp["yamlls"].setup {
           -- https://www.schemastore.org/api/json/catalog.json
           --["kubernetes"] = "*.yaml",
           ["kubernetes"] = "manifests/*.yaml",
-          ["kubernetes"] = "templates/*.yaml",
+          ["kubernetes"] = "*.yaml",
           ["http://json.schemastore.org/kustomization"]= "kustomization.yaml",
           ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/v1.174.2/service-schema.json"] = "pipelines/*.yaml"
           -- ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.22.0/all.json"] = "/*.yaml"
         },
       -- schemaDownload = {  enable = true },
-      	validate = false,
+      	validate = true,
         completion = true
       }
     },
