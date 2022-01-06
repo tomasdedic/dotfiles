@@ -1,0 +1,16 @@
+{
+"Service Fabric PowerShell": {
+"prefix": "adoServiceFabricPowerShell1",
+"body": [
+"- task: ServiceFabricPowerShell@1",
+"  inputs:",
+"    serviceConnectionName: $1  # Required  # Azure Service Fabric cluster which will have an established service connection when executing the specified PowerShell script.",
+"    ScriptType: ${2:FilePath} # Options: 'FilePath', 'InlineScript' # Required  # Type of the script: File Path or Inline Script",
+"    #ScriptPath:  # Optional  # Path of the script. Should be fully qualified path or relative to the default working directory.",
+"    #Inline:  # Optional  # Enter the script to execute.",
+"    #ScriptArguments:  # Optional  # Additional parameters to pass to PowerShell.  Can be either ordinal or named parameters.",
+"$3"
+],
+"description": "Run a PowerShell script in the context of an Azure Service Fabric cluster connection"
+}
+}

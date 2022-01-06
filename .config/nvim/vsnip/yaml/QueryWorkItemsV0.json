@@ -1,0 +1,14 @@
+{
+"Query work items": {
+"prefix": "adoqueryWorkItems0",
+"body": [
+"- task: queryWorkItems@0",
+"  inputs:",
+"    queryId: $1  # Required  # Select a saved work item query to execute.",
+"    maxThreshold: ${2:0}  # Required  # The maximum number of matching workitems from the query.",
+"    minThreshold: ${3:0}  # Required  # The minimum number of matching workitems from the query.",
+"$4"
+],
+"description": "Execute a work item query and check the number of items returned"
+}
+}

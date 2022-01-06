@@ -1,0 +1,35 @@
+{
+"Azure file copy": {
+"prefix": "adoAzureFileCopy2",
+"body": [
+"- task: AzureFileCopy@2",
+"  inputs:",
+"    SourcePath: $1  # Required  # Absolute path of the source folder, or file on the local machine, or a UNC share. Expression should return a single folder or a file.",
+"    #ConnectedServiceNameSelector: # Options: 'ConnectedServiceName', 'ConnectedServiceNameARM' # Optional ",
+"    ConnectedServiceName: $2  # Required when ConnectedServiceNameSelector = ConnectedServiceName  # Azure Classic subscription to target for copying the files.",
+"    ConnectedServiceNameARM: $3  # Required when ConnectedServiceNameSelector = ConnectedServiceNameARM  # Azure Resource Manager subscription to target for copying the files.",
+"    Destination: $4 # Options: 'AzureBlob', 'AzureVMs' # Required  # Select the destination, either Azure Blob or Azure VMs.",
+"    StorageAccount: $5  # Required when ConnectedServiceNameSelector = ConnectedServiceName  # Specify a pre-existing classic storage account. It is also used as an intermediary for copying files to Azure VMs",
+"    StorageAccountRM: $6  # Required when ConnectedServiceNameSelector = ConnectedServiceNameARM  # Specify a pre-existing ARM storage account. It is also used as an intermediary for copying files to Azure VMs",
+"    ContainerName: $7  # Required when Destination = AzureBlob  # Name of the Container for uploading the files. If a container with the given name does not exist in the specified storage account, it will automatically be created. <br> If you need to create a virtual directory inside the container, use the blob prefix input below. <br> Example: If your target location is <i>https://myaccount.blob.core.windows.net/mycontainer/vd1/vd2/</i>, then specify <i>mycontainer</i> as container name and <i>vd1/vd2</i> as blob prefix.",
+"    #BlobPrefix:  # Optional  # Useful for filtering files, for example, append build number to all the blobs to download files from that build only. Example: If you specify blob prefix as <i>myvd1</i>, a virtual directory with this name will be created inside the container. The source files will be copied to <i>https://myaccount.blob.core.windows.net/mycontainer/myvd1/</i>.",
+"    EnvironmentName: $8  # Required when ConnectedServiceNameSelector = ConnectedServiceName && Destination = AzureVMs  # Name of the target Cloud Service for copying files to.",
+"    EnvironmentNameRM: $9  # Required when ConnectedServiceNameSelector = ConnectedServiceNameARM && Destination = AzureVMs  # Name of the target Resource Group for copying files to.",
+"    #ResourceFilteringMethod: # Options: 'machineNames', 'tags' # Optional  # Optionally, select a subset of VMs in resource group either by providing VMs host name or tags. [Tags](https://azure.microsoft.com/en-in/documentation/articles/virtual-machines-tagging-arm/) are supported for resources created via the Azure Resource Manager only.",
+"    #MachineNames:  # Optional  # Provide a list of VMs host name like ffweb, ffdb, or tags like Role:DB, Web; OS:Win8.1. Note the delimiters used for tags are &#44;(comma), &#58;(colon) and &#59;(semicolon). If multiple tags are provided, then the task will run in all the VMs with the specified tags. The default is to run the task in all the VMs.",
+"    vmsAdminUserName: $10  # Required when Destination = AzureVMs  # Administrator Username of the VMs.",
+"    vmsAdminPassword: $11  # Required when Destination = AzureVMs  # The administrator password of the VMs. <br>It can accept variable defined in build or release pipelines as '$(passwordVariable)'. <br>You may mark variable as 'secret' to secure it.",
+"    TargetPath: $12  # Required when Destination = AzureVMs  # Local path on the target machines for copying the files from the source. Environment variable can be used like $env:windir/\/BudgetIT/\/Web.",
+"    #AdditionalArgumentsForBlobCopy:  # Optional  # Optional AzCopy.exe arguments that will be applied when uploading to blob like, /NC:10. If no optional arguments are specified here, the following optional arguments will be added by default.<br> /Y, /SetContentType, /Z, /V,<br> /S (only if container name is not $root),<br> /BlobType:page (only if specified storage account is a premium account).<br> If source path is a file, /Pattern will always be added irrespective of whether or not you have specified optional arguments.",
+"    #AdditionalArgumentsForVMCopy:  # Optional  # Optional AzCopy.exe arguments that will be applied when downloading to VM like, /NC:10. If no optional arguments are specified here, the following optional arguments will be added by default.<br> /Y, /S, /Z, /V",
+"    #enableCopyPrerequisites:  # Optional  # Enabling this option configures Windows Remote Management (WinRM) listener over HTTPS protocol on port 5986, using a self-signed certificate. This configuration is required for performing copy operation on Azure machines. If the target Virtual Machines are backed by a Load balancer, ensure Inbound NAT rules are configured for target port (5986). Applicable only for ARM VMs.",
+"    #CopyFilesInParallel:  # Optional  # Setting it to true will copy files in parallel to the target machines.",
+"    #CleanTargetBeforeCopy:  # Optional  # Setting it to true will clean-up the destination folder before copying the files.",
+"    #skipCACheck:  # Optional  # If this option is selected, client skips the validation that the server certificate is signed by a trusted certificate authority (CA) when connecting over Hypertext Transfer Protocol over Secure Socket Layer (HTTPS).",
+"    #outputStorageUri:  # Optional  # Provide a name for the variable for the storage container URI that the files were copied to with this task.  Valid only when the selected destination is Azure Blob.",
+"    #outputStorageContainerSasToken:  # Optional  # Provide a name for the variable for the storage container SAS Token used to access the files copied to with this task.  Valid only when the selected destination is Azure Blob.",
+"$13"
+],
+"description": "Copy files to Azure Blob Storage or virtual machines"
+}
+}

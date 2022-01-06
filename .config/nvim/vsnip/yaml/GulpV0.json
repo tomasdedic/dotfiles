@@ -1,0 +1,23 @@
+{
+"gulp": {
+"prefix": "adogulp0",
+"body": [
+"- task: gulp@0",
+"  inputs:",
+"    gulpFile: ${1:gulpfile.js}  # Required  # Relative path from repo root of the gulp file script file to run.",
+"    #targets:  # Optional  # Optional.  Space delimited list of tasks to run.  If not specified, the default task will run.",
+"    #arguments:  # Optional  # Additional arguments passed to gulp.  --gulpfile is not needed since already added via gulpFile input above.",
+"    #cwd:  # Optional  # Current working directory when script is run.  Defaults to the folder where the script is located.",
+"    gulpjs: ${2:node_modules/gulp/bin/gulp.js}  # Required  # gulp.js to run when agent can't find global installed gulp.  Defaults to the gulp.js under node_modules folder of the working directory.",
+"    #publishJUnitResults:  # Optional  # Select this option to publish JUnit test results produced by the gulp build to Azure Pipelines.",
+"    testResultsFiles: ${3:**/TEST-*.xml}  # Required  # Test results files path. Wildcards can be used. For example, `**/TEST-*.xml` for all XML files whose name starts with TEST-.",
+"    #testRunTitle:  # Optional  # Provide a name for the test run.",
+"    enableCodeCoverage: ${4:false}  # Required  # Select this option to enable Code Coverage using Istanbul.",
+"    #testFramework: # Options: 'Mocha', 'Jasmine' # Optional  # Select your test framework.",
+"    #srcFiles:  # Optional  # Provide the path to your source files which you want to hookRequire()",
+"    testFiles: ${5:test/*.js}  # Required  # Provide the path to your test script files",
+"$6"
+],
+"description": "Run the gulp Node.js streaming task-based build system"
+}
+}

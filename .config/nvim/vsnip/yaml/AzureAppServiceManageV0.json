@@ -1,0 +1,26 @@
+{
+"Azure App Service manage": {
+"prefix": "adoAzureAppServiceManage0",
+"body": [
+"- task: AzureAppServiceManage@0",
+"  inputs:",
+"    ConnectedServiceName: $1  # Required  # Select the Azure Resource Manager subscription",
+"    #Action: # Options: 'Swap Slots', 'Start Azure App Service', 'Stop Azure App Service', 'Restart Azure App Service', 'Start Swap With Preview', 'Complete Swap', 'Cancel Swap', 'Delete Slot', 'Install Extensions', 'Enable Continuous Monitoring', 'Start all continuous webjobs', 'Stop all continuous webjobs' # Optional  # Action to be performed on the App Service. You can Start, Stop, Restart, Slot swap, Install site extensions or enable Continuous Monitoring for an Azure App Service",
+"    WebAppName: $2  # Required  # Enter or select the name of an existing Azure App Service",
+"    #SpecifySlot:  # Optional ",
+"    ResourceGroupName: $3  # Required when Action = Swap Slots || Action = Delete Slot || SpecifySlot = true || Action = Start Swap With Preview || Action = Complete Swap || Action = Cancel Swap  # Enter or Select the Azure Resource Group that contains the Azure App Service specified above",
+"    SourceSlot: $4  # Required when Action = Swap Slots || Action = Start Swap With Preview  || Action = Complete Swap  # The swap action directs destination slot's traffic to the source slot",
+"    #SwapWithProduction:  # Optional  # Select the option to swap the traffic of source slot with production. If this option is not selected, then you will have to provide source and target slot names.",
+"    TargetSlot: $5  # Required when SwapWithProduction = false  # The swap action directs destination slot's traffic to the source slot",
+"    #PreserveVnet:  # Optional  # Preserve the Virtual network settings",
+"    Slot: ${6:production}  # Required ",
+"    ExtensionsList: $7  # Required when Action = Install Extensions  # Site Extensions run on Microsoft Azure App Service. You can install set of tools as site extension and better manage your Azure App Service. The  App Service will be restarted to make sure latest changes take effect.",
+"    #OutputVariable:  # Optional  # Provide the variable name for the local installation path for the selected extension.<br/>This field is now deprecated and would be removed. Use LocalPathsForInstalledExtensions variable from Output Variables section in subsequent tasks.",
+"    AppInsightsResourceGroupName: $8  # Required when Action == Enable Continuous Monitoring  # Enter or Select resource group where your application insights resource is available",
+"    ApplicationInsightsResourceName: $9  # Required when Action == Enable Continuous Monitoring  # Select Application Insights resource where continuous monitoring data will be recorded. <br/>If your application insights resource is not listed here and you want to create a new resource, click on [+New] button. Once the resource is created on Azure Portal, come back here and click on refresh button.",
+"    #ApplicationInsightsWebTestName:  # Optional  # Enter Application Insights Web Test name to be created or updated. <br/>If not provided, the default test name will be used.",
+"$10"
+],
+"description": "Start, stop, restart, slot swap, slot delete, install site extensions or enable continuous monitoring for an Azure App Service"
+}
+}

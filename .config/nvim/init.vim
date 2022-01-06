@@ -1,4 +1,4 @@
-set shell=/usr/local/bin/zsh
+set shell=/usr/bin/zsh
 set completeopt=menu,menuone,noselect
 "autocompletition enhance separatoor mezi slovy
 set iskeyword+=\-
@@ -56,6 +56,7 @@ Plug 'rafamadriz/friendly-snippets', {'branch': 'main' }
 " -- show textdocuments/codeactions
 Plug 'kosayoda/nvim-lightbulb'
 Plug 'mfussenegger/nvim-lint'
+
 
 
 " auto yaml folds
@@ -133,6 +134,17 @@ let g:mustache_abbreviations = 1
 
 let g:vsnip_snippet_dir="~/.config/nvim/vsnip"
 "tyhle konfigurace musi byt pred volanim vim-snippets
+" let g:UltiSnipsSnippetsDir="~/.config/nvim/custom_snippets"
+" set runtimepath^=~/.config/nvim
+" let g:UltiSnipsSnippetDirectories=["custom_snippets"]
+" Track the engine.
+" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+" Snippets are separated from the engine. Add this if you want them:
+" let g:UltiSnipsExpandTrigger="<c-tab>"
+" let g:UltiSnipsJumpForwardTrigger="<c-j>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" let g:UltiSnipsEditSplit="vertical"
+"skovavani specialnich tagu hlavne pro markdown
 set conceallevel=0
 
 "golang

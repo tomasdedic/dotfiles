@@ -1,0 +1,16 @@
+{
+"Container Build": {
+"prefix": "adoContainerBuild0",
+"body": [
+"- task: ContainerBuild@0",
+"  inputs:",
+"    #dockerRegistryServiceConnection:  # Optional  # Select a Docker registry service connection.",
+"    #repository:  # Optional  # Name of the repository within the container registry.",
+"    Dockerfile: ${1:Dockerfile}  # Required  # Path to Dockerfile.",
+"    #buildContext:  # Optional  # Path to Build context.",
+"    #tags:  # Optional  # A list of tags in separate lines. Tags are used while building and pushing the image to container registry.",
+"$2"
+],
+"description": "Container Build Task"
+}
+}

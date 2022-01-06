@@ -1,0 +1,22 @@
+{
+"npm": {
+"prefix": "adoNpm1",
+"body": [
+"- task: Npm@1",
+"  inputs:",
+"    command: ${1:install} # Options: 'ci', 'install', 'publish', 'custom' # Required  # The command and arguments which will be passed to npm for execution.If your arguments contain double quotes (\"), escape them with a slash (/\//\/), and surround the escaped string with double quotes (\").",
+"    #workingDir:  # Optional  # Path to the folder containing the target package.json and .npmrc files. Select the folder, not the file e.g. \"/packages/mypackage\".",
+"    #verbose:  # Optional  # Select to print more information to the console on run",
+"    customCommand: $2  # Required when command = custom  # Custom command to run, e.g. \"dist-tag ls mypackage\".",
+"    #customRegistry: # Options: 'useNpmrc', 'useFeed' # Optional  # You can either commit a .npmrc file to your source code repository and set its path here or select a registry from Azure Artifacts here.",
+"    customFeed: $3  # Required when customRegistry = useFeed  # Include the selected feed in the generated .npmrc.",
+"    #customEndpoint:  # Optional  # Credentials to use for external registries located in the project's .npmrc. For registries in this organization/collection, leave this blank; the build’s credentials are used automatically.",
+"    #publishRegistry: # Options: 'useExternalRegistry', 'useFeed' # Optional  # Registry the command will target.",
+"    publishFeed: $4  # Required when publishRegistry = useFeed  # Select a registry hosted in this account. You must have Azure Artifacts installed and licensed to select a registry here.",
+"    #publishPackageMetadata:  # Optional  # Associate this build/release pipeline’s metadata (run #, source code information) with the package",
+"    publishEndpoint: $5  # Required when publishRegistry = useExternalRegistry  # Credentials to use for publishing to an external registry.",
+"$6"
+],
+"description": "Install and publish npm packages, or run an npm command. Supports npmjs.com and authenticated registries like Azure Artifacts."
+}
+}
