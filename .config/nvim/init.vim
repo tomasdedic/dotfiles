@@ -85,7 +85,7 @@ let g:rooter_targets = '/,*'
 Plug 'gioele/vim-autoswap'
 " Plug 'liuchengxu/vim-which-key'
 "helm syntax
-" Plug 'towolf/vim-helm'
+Plug 'towolf/vim-helm'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-eunuch'
