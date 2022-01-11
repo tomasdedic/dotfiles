@@ -15,4 +15,3 @@
 ~/.ctags.d/
 ~/.bash_aliases
 ~/.config/yamllint
-~/.ctags.d

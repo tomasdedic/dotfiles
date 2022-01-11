@@ -172,34 +172,25 @@ local util = require 'lspconfig/util'
 local lspconfig = require'lspconfig'
 
 -- setup lsp installer
---local lsp_installer = require("nvim-lsp-installer")
---lsp_installer.on_server_ready(function(server)
---    local opts = {
---        on_attach = on_attach,
---        capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
---        flags = {
---            debounce_text_changes = 150,
---        },
---    }
---    server:setup(opts)
---end)
-
-
- -- configs.yamlls = {
- --   default_config = {
- --     cmd = {"yaml-language-server", "--stdio"};
- --     filetypes = {"yaml"};
- --     root_dir = util.root_pattern(vim.fn.getcwd());
- --   };
- -- }
-
-nvim_lsp["yamlls"].setup {
-    --cmd = cmd,
+local lsp_installer = require("nvim-lsp-installer")
+    local opts = {
+        on_attach = on_attach,
+        capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+        flags = {
+            debounce_text_changes = 150,
+        },
+    }
+lsp_installer.on_server_ready(function(server)
+  if server.name == "yamlls" then
+    opts = {
+    cmd = { "yaml-language-server", "--stdio" },
+    root_dir = util.root_pattern(vim.fn.getcwd()),
+    filetypes =  {"yaml"},
     on_attach = on_attach,
     settings = {
       yaml = {
         trace = {
-          server = "verbose",
+          server = "off",
         },
         format = {
           enable = true,
@@ -208,19 +199,59 @@ nvim_lsp["yamlls"].setup {
         },
         schemas = {
           -- https://www.schemastore.org/api/json/catalog.json
-          --["kubernetes"] = "*.yaml",
           ["kubernetes"] = "manifests/*.yaml",
           ["kubernetes"] = "*.yaml",
           ["http://json.schemastore.org/kustomization"]= "kustomization.yaml",
           ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/v1.174.2/service-schema.json"] = "pipelines/*.yaml"
           -- ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.22.0/all.json"] = "/*.yaml"
         },
-      -- schemaDownload = {  enable = true },
+      -- schemaStore = {  enable = true },
       	validate = true,
         completion = true
       }
     },
   }
+        end
+    server:setup(opts)
+end)
+
+-- yamls config moved to nvim-lsp-installer
+ -- configs.yamlls = {
+ --   default_config = {
+ --     cmd = {"yaml-language-server", "--stdio"};
+ --     filetypes = {"yaml"};
+ --     root_dir = util.root_pattern(vim.fn.getcwd());
+ --   };
+ -- }
+
+--nvim_lsp["yamlls"].setup {
+--    --cmd = cmd,
+--    on_attach = on_attach,
+--    settings = {
+--      yaml = {
+--        trace = {
+--          server = "verbose",
+--        },
+--        format = {
+--          enable = true,
+--          singleQuote = false,
+--          bracketSpacing = true
+--        },
+--        schemas = {
+--          -- https://www.schemastore.org/api/json/catalog.json
+--          --["kubernetes"] = "*.yaml",
+--          ["kubernetes"] = "manifests/*.yaml",
+--          ["kubernetes"] = "*.yaml",
+--          ["http://json.schemastore.org/kustomization"]= "kustomization.yaml",
+--          ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/v1.174.2/service-schema.json"] = "pipelines/*.yaml"
+--          -- ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.22.0/all.json"] = "/*.yaml"
+--        },
+--      -- schemaDownload = {  enable = true },
+--      	validate = true,
+--        completion = true
+--      }
+--    },
+--  }
 -- lspconfig.yamlls.setup{
 --     settings = {
 --         yaml = {

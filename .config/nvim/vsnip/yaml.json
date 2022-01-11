@@ -123,6 +123,15 @@
         "mus"
       ]
     },
+    "helm": {
+      "description": "Mustache filetype",
+      "body": [
+        "{{/* vim: set filetype=helm: */}}"
+      ],
+      "prefix": [
+        "helm"
+      ]
+    },
     "sa": {
         "description": "ServiceAccount",
         "body": [
