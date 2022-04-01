@@ -21,9 +21,6 @@
             "  - \"Openshift\"",
             "tags:",
             "  - \"OCP\"",
-            "toc: true",
-            "autonumbering: true",
-            "thumbnail: \"img/${3:Thumbnail}\"",
             "---"
         ],
         "prefix": [
