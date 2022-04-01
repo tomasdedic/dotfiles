@@ -183,15 +183,15 @@ local lsp_installer = require("nvim-lsp-installer")
 lsp_installer.on_server_ready(function(server)
   if server.name == "yamlls" then
     opts = {
-    cmd = { "yaml-language-server", "--stdio" },
+    --cmd = { "yaml-language-server", "--stdio" },
     root_dir = util.root_pattern(vim.fn.getcwd()),
     filetypes =  {"yaml"},
     on_attach = on_attach,
     settings = {
       yaml = {
-        trace = {
-          server = "off",
-        },
+       -- trace = {
+       --   server = "off",
+       -- },
         format = {
           enable = true,
           singleQuote = false,
@@ -200,13 +200,13 @@ lsp_installer.on_server_ready(function(server)
         schemas = {
           -- https://www.schemastore.org/api/json/catalog.json
           ["kubernetes"] = "manifests/*.yaml",
-          ["kubernetes"] = "*.yaml",
+          --["kubernetes"] = "*.yaml",
           ["http://json.schemastore.org/kustomization"]= "kustomization.yaml",
           ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/v1.174.2/service-schema.json"] = "pipelines/*.yaml"
           -- ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.22.0/all.json"] = "/*.yaml"
         },
       -- schemaStore = {  enable = true },
-      	validate = true,
+      	validate = false,
         completion = true
       }
     },
@@ -277,7 +277,7 @@ configs.gopls = {
 -- require'lspinstall'.setup()
 -- local servers = require'lspinstall'.installed_servers()
 --local servers = {"gopls","bashls","jsonls"}
-local servers = {"gopls","bashls"}
+local servers = {"gopls"}
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
         capabilities = capabilities,

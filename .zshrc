@@ -1,16 +1,16 @@
 # profiler
-#zmodload zsh/zprof
-#export TERM=xterm-256color
+# zmodload zsh/zprof
+# export TERM=xterm-256color
+export DISPLAY=:0
 #golang
 export GOPATH=$HOME/go
 export EDITOR="/usr/local/bin/nvim"
 # If you come from bash you might have to change your $PATH.
-export PATH=/opt/Citrix/ICAClient:$HOME/bin:/usr/local/bin:/usr/bin:/usr/local/go/bin:$GOPATH/bin:/usr/local/kubebuilder/bin:~/node_modules/.bin:$PATH
 #ZSH_THEME="powerlevel10k/powerlevel10k"
 export LC_ALL=en_US.UTF-8
 # Path to your oh-my-zsh installation.
-export ZSH="/home/ts/.oh-my-zsh"
-
+export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="/usr/local/share/zsh-syntax-highlighting/highlighters"
+export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="fishy"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -62,7 +62,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
-export ZSH_CUSTOM=~/.oh-my-zsh/custom
+export ZSH_CUSTOM=$HOME/.oh-my-zsh/custom
 #source ${ZSH_CUSTOM}/run_complete.sh
 # source  ${ZSH_CUSTOM}/oc_completion.sh
 
@@ -102,15 +102,12 @@ plugins=(
      golang
 )
 # KUBE-PS1
-export KUBE_PS1_BINARY=oc
+export KUBE_PS1_BINARY=kubectl
 export KUBE_PS1_SYMBOL_ENABLE=false
 
 export FZF_LEGACY_KEYBINDINGS=0
 export FZF_TMUX=1
-export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/share/zsh-syntax-highlighting/highlighters
 source $ZSH/oh-my-zsh.sh
-source <(oc completion zsh)
-source <(kubectl completion zsh | sed 's/kubectl/kb/g')
 source ${ZSH_CUSTOM}/run_complete.sh
 #ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
 bindkey "^ " forward-word
@@ -120,18 +117,24 @@ bindkey "^ " forward-word
 # zstyle ':completion:*' expand prefix suffix
 # export MANPATH="/usr/local/man:$MANPATH"
 ENABLE_CORRECTION="true"
+alias sed='gsed'
+alias dircolors='gdircolors'
 alias setkey='~/.config/startupscripts/setkeyboard'
+alias neat='kubectl neat'
+alias ls='gls --color=auto'
+alias kn='kubectl config view --minify --output 'jsonpath={..namespace}'; echo'
+eval $(dircolors ~/.config/dircolors.ansi-dark)
 alias tmux='tmux -2'
 alias gdoc='gopherdoc'
 alias -g pbcopy='xclip -selection clipboard'
 alias -g pbpaste='xclip -selection clipboard -o'
 alias las='history -1|awk "{\$1=\"\";print substr(\$0,2)}"|xclip -selection clipboard'
 alias kb='kubectl'
-alias pb='xclip -selection clipboard'
+alias pb='tmux loadb -'
 alias xin='xinput --disable $(xinput list --id-only "Synaptics TM3276-022")'
 alias hr="fc -RI" #sync history
 alias viq="urxvt -e vim "
-alias v='nvim'
+alias vim='nvim'
 alias cat="bat -p --theme GitHub"
 # alias docker=podman
 alias bc='bc -l'
@@ -148,21 +151,18 @@ alias 7='cd -7'
 alias 8='cd -8'
 alias 9='cd -9'
 
-#local exported env
-export ocpdoc=$(echo ~/git_repositories/moje/madopenshift/content/openshift/)
-export oshi=$(echo ~/git_repositories/work/openshift/oshi/)
-
 if type nvim > /dev/null 2>&1; then
   alias vim='nvim'
   alias vi='nvim'
 fi
-alias compdef kb='kubectl'
 # setopt complete_aliases
-
+alias compdef kb='kubectl'
+compdef kb='kubectl'
 
 export DISABLE_MAGIC_FUNCTIONS=true
 export FZF_BASE="$HOME/.fzf"
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export LSPPATH="$HOME/.local/share/nvim/lsp_servers/yaml/node_modules/yaml-language-server/bin":"$HOME/.local/share/nvim/lsp_servers/bash/node_modules/bash-language-server/bin"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH:$LSPPATH:/usr/local/bin:/usr/X11/bin"
 export FZF_LEGACY_KEYBINDINGS=0
 export FZF_TMUX=1
 
@@ -170,12 +170,6 @@ export FZF_TMUX=1
 # select files with tab and delete
 rmf() {
     ls -p | fzf -m | while read filename; do rm -rf $filename; done
-}
-
-hugohard() {
-  HUGO_STASH_REPOSITORY='/home/ts/git_repositories/moje/madopenshift/content/faze'
-  echo "linking $(pwd) to $HUGO_STASH_REPOSITORY"
-  ln -s $(pwd) $HUGO_STASH_REPOSITORY/
 }
 
 fif() {
@@ -240,18 +234,13 @@ bindkey '^s' pet-select
 
 export SUDO_ASKPASS=/usr/bin/ssh-askpass
 # profiler output
-#zprof
+# zprof
 #
 bindkey "^[OA" up-history
 bindkey "^[OB" down-history
 export HOWDOI_COLORIZE=1
-
-export PATH=$PATH:/home/ts/bin
-# autoload -U compinit; compinit
-source '/home/ts/lib/azure-cli/az.completion'
+# autoload -U +X compinit && compinit
+# autoload -U +X bashcompinit && bashcompinit
 # custom comletion
-fpath=(~/.zsh.d/ $fpath)
-
-
-alias luamake=/home/ts/tmp/luamake/luamake
-eval $(dircolors ~/.config/dircolors/dircolors.ansi-dark)
+#fpath=(~/.zsh.d/ $fpath)
+#source <(kubectl completion zsh )

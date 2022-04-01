@@ -1,4 +1,4 @@
-set shell=/usr/bin/zsh
+set shell=/usr/local/bin/zsh
 set completeopt=menu,menuone,noselect
 "autocompletition enhance separatoor mezi slovy
 set iskeyword+=\-
@@ -55,12 +55,11 @@ Plug 'rafamadriz/friendly-snippets', {'branch': 'main' }
 " Plug 'quangnguyen30192/cmp-nvim-ultisnips' "completition for ultisnips
 " -- show textdocuments/codeactions
 Plug 'kosayoda/nvim-lightbulb'
-Plug 'mfussenegger/nvim-lint'
-
+" Plug 'mfussenegger/nvim-lint'
 
 
 " auto yaml folds
-" Plug 'pedrohdz/vim-yaml-folds'
+Plug 'pedrohdz/vim-yaml-folds'
 "Plug 'mileszs/ack.vim'
 " set autochdir
 map ad :set autochdir!<CR>
@@ -68,8 +67,8 @@ map ad :set autochdir!<CR>
 "let g:ackprg = 'ag --nogroup --nocolor --column'
 cnoreabbrev ag Ag
 cnoreabbrev rg Rg
-cnoreabbrev md Ag --markdown
-cnoreabbrev yaml Ag --yaml
+" cnoreabbrev md Ag --markdown
+" cnoreabbrev yaml Ag --yaml
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
@@ -83,9 +82,13 @@ Plug 'airblade/vim-rooter'
 let g:rooter_manual_only = 1
 let g:rooter_targets = '/,*'
 Plug 'gioele/vim-autoswap'
-" Plug 'liuchengxu/vim-which-key'
+
+" Plug 'folke/which-key.nvim', {'branch': 'main' }
+
+"Plug 'liuchengxu/vim-which-key'
 "helm syntax
 Plug 'towolf/vim-helm'
+Plug 'hashivim/vim-terraform'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-eunuch'
@@ -112,13 +115,15 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'jacoborus/tender.vim'
 Plug 'lifepillar/vim-solarized8'
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
+nnoremap <C-n> :NvimTreeToggle<CR>
 "full screen plugin only for markdown
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 let g:goyo_width=160
 
 
 "markdown
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'godlygeek/tabular'
 Plug 'dhruvasagar/vim-table-mode'
 let g:table_mode_corner='|'
@@ -288,8 +293,10 @@ set showmode        " ukazuje se aktualni rezim editoru v prik. radku
 set vb              "visual bell misto beep
 set t_vb="<Esc>|40f"  "visual bell misto beep
 set novisualbell
-set foldlevel=99
+" set foldlevel=99
 set foldlevelstart=20
+nnoremap <Space> za
+
 
 "autocmd BufRead [Mm][Aa][Kk][Ee][Ff][Ii][Ll][Ee]* set noexpandtab
 map em :%g/^$/d<cr>
@@ -363,4 +370,8 @@ command! -nargs=0 Dir let @+=expand("%:p:h")
 " gp to reselect last paste text
 nnoremap gp `[v`]
 
+" autocmd BufRead,BufNewFile,BufWinEnter */templates/*.yaml,*/templates/*.tpl,*.gotmpl,!/render/*/templates/*.yaml set ft=helm
+" workaround not to complete yaml files by yamlls
+autocmd BufRead,BufReadPost,BufNewFile *.{yaml,yml} :LspRestart
+autocmd BufNewFile,BufReadPost,BufRead *.{yaml,yml} set filetype=yaml foldmethod=indent
 

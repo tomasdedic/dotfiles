@@ -8,10 +8,9 @@ nnoremap <leader>j <cmd>lua require('telescope.builtin').jumplist()<cr>
 nnoremap <leader>f <cmd>lua require('telescope.builtin').grep_string()<cr>
 nnoremap <leader>r <cmd>lua require('telescope.builtin').registers()<cr>
 nnoremap <leader>/ <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
-nnoremap <leader>lg <cmd>lua require('telescope.builtin').live_grep({grep_open_files=true})<CR>
+nnoremap <leader>lg <cmd>lua require('telescope.builtin').live_grep({grep_open_files=true})<cr>
 "radky v bufferech
 " nmap <leader>/ :Lines<CR>
-
 
 lua<<EOF
 require('telescope').setup{
@@ -30,7 +29,7 @@ require('telescope').setup{
         -- map actions.which_key to <C-h> (default: <C-/>)
         -- actions.which_key shows the mappings for your picker,
         -- e.g. git_{create, delete, ...}_branch for the git_branches picker
-        ["<C-h>"] = "which_key"
+--        ["<C-h>"] = "which_key"
       }
     }
   },
@@ -38,6 +37,7 @@ require('telescope').setup{
      buffers = {
             ignore_current_buffer = true,
             sort_lastused = true,
+            sort_mru = true,
             layout_config = {
               preview_cutoff = 200
               }
