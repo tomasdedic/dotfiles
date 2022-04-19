@@ -161,7 +161,9 @@ compdef kb='kubectl'
 
 export DISABLE_MAGIC_FUNCTIONS=true
 export FZF_BASE="$HOME/.fzf"
-export LSPPATH="$HOME/.local/share/nvim/lsp_servers/yaml/node_modules/yaml-language-server/bin":"$HOME/.local/share/nvim/lsp_servers/bash/node_modules/bash-language-server/bin"
+export LSPPATH="$HOME/.local/share/nvim/lsp_servers/yaml/node_modules/yaml-language-server/bin":"$HOME/.local/share/nvim/lsp_servers/bash/node_modules/bash-language-server/bin":"$HOME/.local/share/nvim/lsp_servers/terraform/terraform-ls":"$HOME/.local/share/nvim/lsp_servers/terraform/terraform-ls":"$HOME/.local/share/nvim/lsp_servers/tflint"
+
+ 
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH:$LSPPATH:/usr/local/bin:/usr/X11/bin"
 export FZF_LEGACY_KEYBINDINGS=0
 export FZF_TMUX=1

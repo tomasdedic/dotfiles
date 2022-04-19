@@ -7,6 +7,8 @@
 
 
 lua << EOF
+vim.lsp.set_log_level("error")
+
 local prettier = require "efm/prettier"
 local eslint = require "efm/eslint"
 local language_formatters = {
@@ -180,13 +182,22 @@ local lsp_installer = require("nvim-lsp-installer")
             debounce_text_changes = 150,
         },
     }
+
 lsp_installer.on_server_ready(function(server)
+  if server.name == "terraformls" then
+    opts = {
+    --cmd = { "yaml-language-server", "--stdio" },
+    filetypes =  {"terraform"},
+    capabilities = capabilities
+    }
+  end
+
   if server.name == "yamlls" then
     opts = {
     --cmd = { "yaml-language-server", "--stdio" },
     root_dir = util.root_pattern(vim.fn.getcwd()),
     filetypes =  {"yaml"},
-    on_attach = on_attach,
+    capabilities = capabilities,
     settings = {
       yaml = {
        -- trace = {
@@ -211,9 +222,10 @@ lsp_installer.on_server_ready(function(server)
       }
     },
   }
-        end
+  end
     server:setup(opts)
-end)
+end
+)
 
 -- yamls config moved to nvim-lsp-installer
  -- configs.yamlls = {
