@@ -114,6 +114,8 @@ Plug 'nanotech/jellybeans.vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'jacoborus/tender.vim'
 Plug 'lifepillar/vim-solarized8'
+Plug 'morhetz/gruvbox'
+Plug 'sainnhe/everforest'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 nnoremap <C-n> :NvimTreeToggle<CR>
@@ -221,7 +223,16 @@ set foldcolumn=1   "abychom videli kde mame foldy
 set lsp=4
 syntax on
 set background=dark
-colorscheme jellybeans
+if has('termguicolors')
+  set termguicolors
+endif
+" let g:everforest_background = 'medium'
+" let g:everforest_better_performance = 1
+let g:gruvbox_contrast_dark = 'medium'
+let g:gruvbox_italic=1
+colorscheme gruvbox
+
+" colorscheme PaperColor
 highlight Cursor guifg=indianred guibg=white
 highlight iCursor guifg=indianred guibg=white
 set nospell
@@ -326,12 +337,12 @@ function! s:SwitchColorscheme()
   if exists('g:colors_name')
     "if g:colors_name == 'PaperColor'
     if &background == 'light'
-      colorscheme jellybeans
       set background=dark
+      colorscheme gruvbox
     "elseif g:colors_name == 'gruvbox'
     elseif &background == 'dark'
-      colorscheme PaperColor
       set background=light
+      colorscheme PaperColor
     endif
   endif
 endfunction
@@ -374,4 +385,5 @@ nnoremap gp `[v`]
 " workaround not to complete yaml files by yamlls
 autocmd BufRead,BufReadPost,BufNewFile *.{yaml,yml} :LspRestart
 autocmd BufNewFile,BufReadPost,BufRead *.{yaml,yml} set filetype=yaml foldmethod=indent
-
+autocmd BufNewFile,BufReadPost,BufRead *.{tf} set filetype=terraform foldmethod=indent
+autocmd BufWritePre *.tf lua vim.lsp.buf.formatting_sync()
