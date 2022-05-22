@@ -5,7 +5,7 @@
 export GOPATH=$HOME/go
 export EDITOR="/usr/local/bin/nvim"
 # If you come from bash you might have to change your $PATH.
-export PATH=/opt/Citrix/ICAClient:$HOME/bin:/usr/local/bin:/usr/bin:/usr/local/go/bin:$GOPATH/bin:/usr/local/kubebuilder/bin:~/node_modules/.bin:$PATH
+export PATH=/opt/Citrix/ICAClient:$HOME/bin:/usr/local/bin:/usr/bin:/usr/local/go/bin:$GOPATH/bin:/usr/local/kubebuilder/bin:$HOME/.local/share/nvim/lsp_servers/yaml/node_modules/yaml-language-server/bin:$HOME/.local/share/nvim/lsp_servers/terraform:$PATH
 #ZSH_THEME="powerlevel10k/powerlevel10k"
 export LC_ALL=en_US.UTF-8
 # Path to your oh-my-zsh installation.
@@ -93,21 +93,20 @@ plugins=(
      docker
      kubectl
      helm
-     fzf
 	   git
      zsh-vim-mode
      z
      kube-ps1
      zshmarks
      golang
+     fzf
 )
 # KUBE-PS1
 export KUBE_PS1_BINARY=oc
 export KUBE_PS1_SYMBOL_ENABLE=false
 
-export FZF_LEGACY_KEYBINDINGS=0
-export FZF_TMUX=1
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/share/zsh-syntax-highlighting/highlighters
+
 source $ZSH/oh-my-zsh.sh
 source <(oc completion zsh)
 source <(kubectl completion zsh | sed 's/kubectl/kb/g')
@@ -121,7 +120,7 @@ bindkey "^ " forward-word
 # export MANPATH="/usr/local/man:$MANPATH"
 ENABLE_CORRECTION="true"
 alias setkey='~/.config/startupscripts/setkeyboard'
-alias tmux='tmux -2'
+# alias tmux='tmux -2'
 alias gdoc='gopherdoc'
 alias -g pbcopy='xclip -selection clipboard'
 alias -g pbpaste='xclip -selection clipboard -o'
@@ -165,6 +164,7 @@ export FZF_BASE="$HOME/.fzf"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export FZF_LEGACY_KEYBINDINGS=0
 export FZF_TMUX=1
+export FZF_TMUX_OPTS='-p 80%'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # select files with tab and delete
@@ -247,7 +247,7 @@ bindkey "^[OB" down-history
 export HOWDOI_COLORIZE=1
 
 export PATH=$PATH:/home/ts/bin
-# autoload -U compinit; compinit
+autoload -U compinit; compinit
 source '/home/ts/lib/azure-cli/az.completion'
 # custom comletion
 fpath=(~/.zsh.d/ $fpath)
@@ -255,3 +255,5 @@ fpath=(~/.zsh.d/ $fpath)
 
 alias luamake=/home/ts/tmp/luamake/luamake
 eval $(dircolors ~/.config/dircolors/dircolors.ansi-dark)
+
+source /home/ts/.config/broot/launcher/bash/br

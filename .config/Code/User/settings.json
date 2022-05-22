@@ -1,5 +1,5 @@
 {
-    "workbench.colorTheme": "Monokai",
+    "workbench.colorTheme": "Visual Studio Dark",
     "rsp-ui.enableStartServerOnActivation": [
         {
             "id": "redhat.vscode-server-connector",

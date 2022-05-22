@@ -55,12 +55,13 @@ Plug 'rafamadriz/friendly-snippets', {'branch': 'main' }
 " Plug 'quangnguyen30192/cmp-nvim-ultisnips' "completition for ultisnips
 " -- show textdocuments/codeactions
 Plug 'kosayoda/nvim-lightbulb'
-Plug 'mfussenegger/nvim-lint'
-
+"Plug 'mfussenegger/nvim-lint'
 
 
 " auto yaml folds
-" Plug 'pedrohdz/vim-yaml-folds'
+Plug 'pedrohdz/vim-yaml-folds'
+" Plug 'lmeijvogel/vim-yaml-helper'
+Plug 'jeetsukumaran/vim-indentwise'
 "Plug 'mileszs/ack.vim'
 " set autochdir
 map ad :set autochdir!<CR>
@@ -68,8 +69,8 @@ map ad :set autochdir!<CR>
 "let g:ackprg = 'ag --nogroup --nocolor --column'
 cnoreabbrev ag Ag
 cnoreabbrev rg Rg
-cnoreabbrev md Ag --markdown
-cnoreabbrev yaml Ag --yaml
+" cnoreabbrev md Ag --markdown
+" cnoreabbrev yaml Ag --yaml
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
@@ -83,9 +84,9 @@ Plug 'airblade/vim-rooter'
 let g:rooter_manual_only = 1
 let g:rooter_targets = '/,*'
 Plug 'gioele/vim-autoswap'
-" Plug 'liuchengxu/vim-which-key'
 "helm syntax
 Plug 'towolf/vim-helm'
+Plug 'hashivim/vim-terraform'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-eunuch'
@@ -111,7 +112,10 @@ Plug 'nanotech/jellybeans.vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'jacoborus/tender.vim'
 Plug 'lifepillar/vim-solarized8'
+Plug 'morhetz/gruvbox'
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
+nnoremap <C-n> :NvimTreeToggle<CR>
 "full screen plugin only for markdown
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 let g:goyo_width=160
@@ -133,17 +137,6 @@ Plug 'mustache/vim-mustache-handlebars'
 let g:mustache_abbreviations = 1
 
 let g:vsnip_snippet_dir="~/.config/nvim/vsnip"
-"tyhle konfigurace musi byt pred volanim vim-snippets
-" let g:UltiSnipsSnippetsDir="~/.config/nvim/custom_snippets"
-" set runtimepath^=~/.config/nvim
-" let g:UltiSnipsSnippetDirectories=["custom_snippets"]
-" Track the engine.
-" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-" Snippets are separated from the engine. Add this if you want them:
-" let g:UltiSnipsExpandTrigger="<c-tab>"
-" let g:UltiSnipsJumpForwardTrigger="<c-j>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-" let g:UltiSnipsEditSplit="vertical"
 "skovavani specialnich tagu hlavne pro markdown
 set conceallevel=0
 
@@ -215,8 +208,13 @@ augroup END
 set foldcolumn=1   "abychom videli kde mame foldy
 set lsp=4
 syntax on
-set background=dark
-colorscheme jellybeans
+if has('termguicolors')
+   set termguicolors
+endif
+let g:gruvbox_contrast_dark = 'soft'
+let g:gruvbox_italic=1
+colorscheme gruvbox
+
 highlight Cursor guifg=indianred guibg=white
 highlight iCursor guifg=indianred guibg=white
 set nospell
@@ -288,7 +286,7 @@ set showmode        " ukazuje se aktualni rezim editoru v prik. radku
 set vb              "visual bell misto beep
 set t_vb="<Esc>|40f"  "visual bell misto beep
 set novisualbell
-set foldlevel=99
+" set foldlevel=99
 set foldlevelstart=20
 
 "autocmd BufRead [Mm][Aa][Kk][Ee][Ff][Ii][Ll][Ee]* set noexpandtab
@@ -319,12 +317,12 @@ function! s:SwitchColorscheme()
   if exists('g:colors_name')
     "if g:colors_name == 'PaperColor'
     if &background == 'light'
-      colorscheme jellybeans
       set background=dark
+      colorscheme gruvbox
     "elseif g:colors_name == 'gruvbox'
     elseif &background == 'dark'
-      colorscheme PaperColor
       set background=light
+      colorscheme PaperColor
     endif
   endif
 endfunction
@@ -363,4 +361,9 @@ command! -nargs=0 Dir let @+=expand("%:p:h")
 " gp to reselect last paste text
 nnoremap gp `[v`]
 
-
+"workaround to restart Lspserver when entering yaml from helm in netrw
+autocmd BufRead,BufNewFile *.yaml,*.yml :LspRestart
+autocmd BufRead,BufNewFile *.md setlocal textwidth=80
+autocmd BufNewFile,BufReadPost,BufRead *.{yaml,yml} set filetype=yaml foldmethod=indent
+autocmd BufNewFile,BufReadPost,BufRead *.{tf} set filetype=terraform foldmethod=indent
+autocmd BufWritePre *.tf lua vim.lsp.buf.formatting_sync()
