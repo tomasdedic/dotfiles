@@ -117,6 +117,7 @@ bindkey "^ " forward-word
 # zstyle ':completion:*' expand prefix suffix
 # export MANPATH="/usr/local/man:$MANPATH"
 ENABLE_CORRECTION="true"
+alias dog='git log --all --decorate --oneline --graph'
 alias sed='gsed'
 alias dircolors='gdircolors'
 alias setkey='~/.config/startupscripts/setkeyboard'

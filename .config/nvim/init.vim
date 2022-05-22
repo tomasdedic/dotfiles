@@ -60,6 +60,8 @@ Plug 'kosayoda/nvim-lightbulb'
 
 " auto yaml folds
 Plug 'pedrohdz/vim-yaml-folds'
+" Plug 'lmeijvogel/vim-yaml-helper'
+Plug 'jeetsukumaran/vim-indentwise'
 "Plug 'mileszs/ack.vim'
 " set autochdir
 map ad :set autochdir!<CR>
