@@ -18,6 +18,8 @@ set timeoutlen=500
 filetype off
 
 call plug#begin('~/.vim/plugged')
+"registers
+Plug 'tversteeg/registers.nvim', { 'branch': 'main' }
 "terminal integration
 Plug 'akinsho/toggleterm.nvim'
 " LSP

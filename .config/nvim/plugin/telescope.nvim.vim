@@ -2,16 +2,16 @@ nnoremap <C-f> <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap ; <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>h <cmd>lua require('telescope.builtin').command_history()<cr>
-nmap <leader>c <cmd>lua require('telescope.builtin').git_bcommits()<cr>
+nnoremap <leader>c <cmd>lua require('telescope.builtin').git_bcommits()<cr>
 nnoremap <leader>m <cmd>lua require('telescope.builtin').marks()<cr>
 nnoremap <leader>j <cmd>lua require('telescope.builtin').jumplist()<cr>
 nnoremap <leader>f <cmd>lua require('telescope.builtin').grep_string()<cr>
-nnoremap <leader>r <cmd>lua require('telescope.builtin').registers()<cr>
+" nnoremap <leader>r <cmd>lua require('telescope.builtin').registers()<cr>
+nnoremap <leader>o <cmd>lua require('telescope.builtin').oldfiles()<cr>
 nnoremap <leader>/ <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
 nnoremap <leader>lg <cmd>lua require('telescope.builtin').live_grep({grep_open_files=true})<CR>
 "radky v bufferech
 " nmap <leader>/ :Lines<CR>
-
 
 lua<<EOF
 require('telescope').setup{
