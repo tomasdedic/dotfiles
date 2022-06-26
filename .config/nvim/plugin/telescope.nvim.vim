@@ -9,6 +9,7 @@ nnoremap <leader>f <cmd>lua require('telescope.builtin').grep_string()<cr>
 nnoremap <leader>r <cmd>lua require('telescope.builtin').registers()<cr>
 nnoremap <leader>/ <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
 nnoremap <leader>lg <cmd>lua require('telescope.builtin').live_grep({grep_open_files=true})<cr>
+nnoremap <leader>gg <cmd>lua require('telescope.builtin').live_grep()<cr>
 "radky v bufferech
 " nmap <leader>/ :Lines<CR>
 
