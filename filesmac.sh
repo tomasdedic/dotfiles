@@ -3,3 +3,4 @@ cp -r ~/.config/nvim ./.config/
 cp -r ~/.zshrc ./.zshrc
 cp -r ~/.tmux.conf ./.tmux.conf
 cp -r ~/.ctags.d/ ./
+cp -r ~/.gitconfig ./.gitconfig

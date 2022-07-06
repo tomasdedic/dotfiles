@@ -1,0 +1,17 @@
+[core]
+	excludesfile = /Users/ts/.gitignore_global
+	editor = nvim
+[difftool]
+  prompt = false
+[diff]
+  tool = vimdiff
+[difftool "vimdiff"]
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+[merge]
+  tool = vimdiff
+[mergetool]
+  prompt = true
+[mergetool "vimdiff"]
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c 'wincmd w' -c 'wincmd J'"
+[alias]
+	d = difftool
