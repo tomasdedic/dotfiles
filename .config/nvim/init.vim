@@ -1,3 +1,4 @@
+set mmp=10000
 set shell=/usr/local/bin/zsh
 set completeopt=menu,menuone,noselect
 "autocompletition enhance separatoor mezi slovy
@@ -108,6 +109,7 @@ Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-surround'
 "git related
 Plug 'tpope/vim-fugitive'
+" Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 let g:tmux_navigator_disable_when_zoomed = 1
 " Plug 'tmux-plugins/vim-tmux-focus-events'
