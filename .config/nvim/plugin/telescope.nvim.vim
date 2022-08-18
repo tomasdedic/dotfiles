@@ -6,10 +6,13 @@ nmap <leader>c <cmd>lua require('telescope.builtin').git_bcommits()<cr>
 nnoremap <leader>m <cmd>lua require('telescope.builtin').marks()<cr>
 nnoremap <leader>j <cmd>lua require('telescope.builtin').jumplist()<cr>
 nnoremap <leader>f <cmd>lua require('telescope.builtin').grep_string()<cr>
+vnoremap <leader>f <cmd>lua require('telescope.builtin').grep_string({grep_open_files=true})<cr>
 nnoremap <leader>r <cmd>lua require('telescope.builtin').registers()<cr>
 nnoremap <leader>/ <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
 nnoremap <leader>lg <cmd>lua require('telescope.builtin').live_grep({grep_open_files=true})<cr>
+vnoremap <leader>lg <cmd>lua require('telescope.builtin').live_grep({grep_open_files=true})<cr>
 nnoremap <leader>gg <cmd>lua require('telescope.builtin').live_grep()<cr>
+vnoremap <leader>gg <cmd>lua require('telescope.builtin').live_grep()<cr>
 "radky v bufferech
 " nmap <leader>/ :Lines<CR>
 

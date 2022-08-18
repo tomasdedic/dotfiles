@@ -1,6 +1,9 @@
 [core]
 	excludesfile = /Users/ts/.gitignore_global
 	editor = nvim
+[user]
+	name = Tomas Dedic
+	email = tdedic@healthequity.com
 [difftool]
   prompt = false
 [diff]
