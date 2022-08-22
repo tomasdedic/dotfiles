@@ -106,6 +106,7 @@ Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-surround'
 "git related
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 let g:tmux_navigator_disable_when_zoomed = 1
 " Plug 'tmux-plugins/vim-tmux-focus-events'
@@ -363,9 +364,10 @@ command! -nargs=0 Dir let @+=expand("%:p:h")
 " gp to reselect last paste text
 nnoremap gp `[v`]
 
-"workaround to restart Lspserver when entering yaml from helm in netrw
-autocmd BufRead,BufNewFile *.yaml,*.yml :LspRestart
-autocmd BufRead,BufNewFile *.md setlocal textwidth=80
+" autocmd BufRead,BufNewFile,BufWinEnter */templates/*.yaml,*/templates/*.tpl,*.gotmpl,!/render/*/templates/*.yaml set ft=helm
+" workaround not to complete yaml files by yamlls
 autocmd BufNewFile,BufReadPost,BufRead *.{yaml,yml} set filetype=yaml foldmethod=indent
+autocmd BufRead,BufNewFile */templates/*.yaml,*/templates/*.tpl,*.gotmpl,helmfile.yaml,values.yaml set ft=helm
+autocmd BufRead,BufReadPost,BufNewFile *.{yaml,yml} :LspRestart
 autocmd BufNewFile,BufReadPost,BufRead *.{tf} set filetype=terraform foldmethod=indent
 autocmd BufWritePre *.tf lua vim.lsp.buf.formatting_sync()
