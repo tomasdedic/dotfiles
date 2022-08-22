@@ -8,6 +8,15 @@
     "yado"
     ]
     },
+    "yaml-githubactions":{
+    "description" : "yaml-language-server githubActions scheme",
+    "body": [
+    "# yaml-language-server: \\$schema=https://json.schemastore.org/github-workflow.json"
+    ],
+    "prefix": [
+    "ygha"
+    ]
+    },
     "mustache": {
       "description": "Mustache filetype",
       "body": [

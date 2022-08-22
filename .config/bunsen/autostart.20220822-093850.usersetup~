@@ -1,8 +1,3 @@
-## Bunsenlabs User config files
-## All default BunsenLabs user config files are located in /usr/share/bunsen/skel.
-## The script bl-user-setup copies them to the user $HOME directory on first login.
-## See more info with command 'bl-user-setup --help'
-
 ## BunsenLabs autostart
 ## ====================
 ## When you login to your BunsenLabs session, this autostart script
@@ -30,8 +25,7 @@
 ## Do not edit the next line unless you have also installed any
 ## necessary other programs for the different window manager,
 ## and edited the window-manager-dependent section later in this file.
-## Use the window manager's actual command, not name.
-## This should be the first uncommented line in this file:
+## Use the window manager's actual command, not name:
 window_manager=openbox
 
 # test if chosen window manager is actually running (you should probably not edit this line)
@@ -91,16 +85,15 @@ openbox)
     ## Set a wallpaper
     nitrogen --restore
 
-    ## Composition
+    ## Compton
     ## NOTE: composition must be started before tint2
     bl-compositor --start
-
-    ## Start the Conky session (the default conkyrc will run if no sessions have been set)
-    bl-conky-session &
 
     ## Start the tint2 session (the default tint2 will run if no sessions have been set)
     ( sleep 2; bl-tint2-session ) &
 
+    ## Start the Conky session (the default conkyrc will run if no sessions have been set)
+    bl-conky-session --autostart &
     ;;
     # End of openbox application group.
 
@@ -108,15 +101,15 @@ openbox)
 #xfwm4)
 #   xcape -e 'Super_L=Super_L|space'
 #   (sleep 3; xfdesktop) &
-#   bl-tint2-session &
-#   bl-conky-session &
+#   bl-tint2-session
+#   bl-conky-session --autostart &
 #   ;;
 
 ## Vague possibility for Awesome window manager
 #awesome)
 #    bl-compositor --start
 #    xfce4-panel &
-#    bl-conky-session &
+#    bl-conky-session --autostart &
 #    ;;
 
 esac
@@ -130,10 +123,10 @@ esac
 pnmixer &
 
 ## Start Clipboard manager
-xfce4-clipman &
-
+#cpoyq &
+copyq &
 ## Start Thunar Daemon, if set as bl-file-manager
-if [ "$(readlink -f "$(which bl-file-manager)")" = "$(which thunar)" ]
+if [ "$(readlink -f $(which bl-file-manager))" = "$(which thunar)" ]
 then
     thunar --daemon &
 fi
@@ -150,6 +143,12 @@ fi
 ## Uncomment the following line to enable this (adjust the sleep seconds to taste).
 #(sleep 20; bl-fortune) &
 
-## Run the XDG autostart stuff. This requires python3-xdg to be installed.
-## See 'bl-xdg-autostart --list' for list of autostarted applications.
+## Run the XDG autostart stuff. This requires python-xdg to be installed.
+## See bl-xdg-autostart --list for list of autostarted applications.
 bl-xdg-autostart
+#set keyboard
+fbxkb &
+xinput --disable $(xinput list --id-only "Synaptics TM3276-022") &
+~/.config/startupscripts/setkeyboard &
+(sleep 60s; /home/ts/bin/dropbox.py start) &
+virt-manager &

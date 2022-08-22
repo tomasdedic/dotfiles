@@ -3,6 +3,7 @@
 #export TERM=xterm-256color
 #golang
 export GOPATH=$HOME/go
+export GODOCC_STYLE="pygments"
 export EDITOR="/usr/local/bin/nvim"
 # If you come from bash you might have to change your $PATH.
 export PATH=/opt/Citrix/ICAClient:$HOME/bin:/usr/local/bin:/usr/bin:/usr/local/go/bin:$GOPATH/bin:/usr/local/kubebuilder/bin:$HOME/.local/share/nvim/lsp_servers/yaml/node_modules/yaml-language-server/bin:$HOME/.local/share/nvim/lsp_servers/terraform:$PATH
@@ -248,7 +249,7 @@ export HOWDOI_COLORIZE=1
 
 export PATH=$PATH:/home/ts/bin
 autoload -U compinit; compinit
-source '/home/ts/lib/azure-cli/az.completion'
+# source '/home/ts/lib/azure-cli/az.completion'
 # custom comletion
 fpath=(~/.zsh.d/ $fpath)
 
@@ -257,3 +258,4 @@ alias luamake=/home/ts/tmp/luamake/luamake
 eval $(dircolors ~/.config/dircolors/dircolors.ansi-dark)
 
 source /home/ts/.config/broot/launcher/bash/br
+

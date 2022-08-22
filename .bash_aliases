@@ -15,4 +15,5 @@ alias krita='flatpak run org.kde.krita'
 alias evolution='flatpak run org.gnome.Evolution'
 alias xin="xinput --disable $(xinput list --id-only "Synaptics TM3276-022")"
 alias viq="urxvt -e vim"
+alias viq="terminator -e vim"
 alias dropbox="dropbox.py start"
