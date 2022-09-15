@@ -3,7 +3,7 @@ cp -r ~/.config/openbox ./.config/
 cp -r ~/.config/startupscripts ./.config/
 cp -r ~/.config/bunsen ./.config/
 cp -r ~/.config/nvim ./.config/
-cp -r ~/.config/terminator ./config/
+cp -r ~/.config/terminator ./.config/
 cp -r ~/.screenlayout ./.screenlayout
 cp -r ~/.tmux/customscripts ./.tmux
 if [[ ! -d .config/Code/User ]];then
