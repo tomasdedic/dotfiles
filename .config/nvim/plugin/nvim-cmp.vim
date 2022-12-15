@@ -17,9 +17,12 @@ lua <<EOF
       -- documentation = cmp.config.window.bordered(),
     },
     mapping = cmp.mapping.preset.insert({
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-x>'] = cmp.mapping.complete(),
+        ['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i','c'}),
+        ['<C-k>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i','c'}),
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
       }),
     sources = cmp.config.sources({
@@ -39,7 +42,7 @@ lua <<EOF
               return vim.api.nvim_list_bufs()
             end
               }
-        },
+        },jj
     })
   })
 
@@ -53,7 +56,8 @@ lua <<EOF
   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 
   -- Setup lspconfig.
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  -- local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
   -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
   --require('lspconfig')('terraformls').setup {
   --  capabilities = capabilities

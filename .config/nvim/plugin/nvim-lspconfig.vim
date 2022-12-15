@@ -29,6 +29,7 @@ vim.lsp.set_log_level("error")
 --}
 
 local nvim_lsp = require "lspconfig"
+
 -- efm = {
 --    filetypes = vim.tbl_keys(language_formatters),
 --    root_dir = nvim_lsp.util.root_pattern("package.json","yarn.lock", ".git"),
@@ -112,7 +113,7 @@ require("nvim-lsp-installer").setup {}
 
 -- LSPs
 -- require'lspinstall'.setup()
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local servers = {"bashls","tflint"}
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
@@ -125,6 +126,13 @@ nvim_lsp.gopls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
   cmd = {"gopls"},
+  settings = {
+      gopls = {
+          analyses = {
+              fillstruct = true,
+          },
+      },
+  },
   filetypes = {"go","gomod"},
   root_dir = util.root_pattern("go.mod", ".git"),
   }
@@ -153,8 +161,9 @@ nvim_lsp.yamlls.setup {
         },
         schemas = {
           -- https://www.schemastore.org/api/json/catalog.json
-          ["kubernetes"] = "manifests/*.yaml",
-          ["kubernetes"] = "*.yaml",
+          --  ["kubernetes"] = "manifests/*.yaml",
+          -- ["kubernetes"] = "*.yaml",
+          ["https://openshiftjsonschema.dev/v4.9.18-standalone/all.json"] = "*.yaml",
           --["/home/ts/GIT/work/openshift/oshi/scheme/scheme.json"] = "*.yaml",
           ["http://json.schemastore.org/kustomization"]= "kustomization.yaml",
           ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/v1.174.2/service-schema.json"] = "pipelines/*.yaml"

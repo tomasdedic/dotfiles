@@ -12,6 +12,15 @@ export LC_ALL=en_US.UTF-8
 # Path to your oh-my-zsh installation.
 export ZSH="/home/ts/.oh-my-zsh"
 
+# custom comletion
+fpath=(~/.zsh.d/ $fpath)
+autoload -U +X compinit; compinit -i
+# source <(oc completion zsh)
+alias compdef kb='kubectl'
+# setopt complete_aliases
+# source <(kubectl completion zsh | sed 's/kubectl/kb/g')
+# source ${ZSH_CUSTOM}/run_complete.sh
+
 ZSH_THEME="fishy"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -109,10 +118,9 @@ export KUBE_PS1_SYMBOL_ENABLE=false
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/share/zsh-syntax-highlighting/highlighters
 
 source $ZSH/oh-my-zsh.sh
-source <(oc completion zsh)
-source <(kubectl completion zsh | sed 's/kubectl/kb/g')
-source ${ZSH_CUSTOM}/run_complete.sh
 #ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+ZSH_AUTOSUGGEST_MANUAL_REBIND=true
 bindkey "^ " forward-word
 # User configuration
 # partial completion suggestions
@@ -156,8 +164,7 @@ if type nvim > /dev/null 2>&1; then
   alias vim='nvim'
   alias vi='nvim'
 fi
-alias compdef kb='kubectl'
-# setopt complete_aliases
+
 
 
 export DISABLE_MAGIC_FUNCTIONS=true
@@ -225,19 +232,19 @@ function azctx() {
 }
 
 #pet register
-function prev() {
-  PREV=$(fc -lrn | head -n 1)
-  sh -c "pet new `printf %q "$PREV"`"
-}
-#pet search
-function pet-select() {
-  BUFFER=$(pet search --query "$LBUFFER")
-  CURSOR=$#BUFFER
-  zle redisplay
-}
-zle -N pet-select
+#function prev() {
+#  PREV=$(fc -lrn | head -n 1)
+#  sh -c "pet new `printf %q "$PREV"`"
+#}
+##pet search
+#function pet-select() {
+#  BUFFER=$(pet search --query "$LBUFFER")
+#  CURSOR=$#BUFFER
+#  zle redisplay
+#}
+# zle -N pet-select
 stty -ixon
-bindkey '^s' pet-select
+# bindkey '^s' pet-select
 
 export SUDO_ASKPASS=/usr/bin/ssh-askpass
 # profiler output
@@ -248,10 +255,9 @@ bindkey "^[OB" down-history
 export HOWDOI_COLORIZE=1
 
 export PATH=$PATH:/home/ts/bin
-autoload -U compinit; compinit
+
 # source '/home/ts/lib/azure-cli/az.completion'
-# custom comletion
-fpath=(~/.zsh.d/ $fpath)
+
 
 
 alias luamake=/home/ts/tmp/luamake/luamake
