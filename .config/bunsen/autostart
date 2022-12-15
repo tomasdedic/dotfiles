@@ -153,3 +153,5 @@ fi
 ## Run the XDG autostart stuff. This requires python3-xdg to be installed.
 ## See 'bl-xdg-autostart --list' for list of autostarted applications.
 bl-xdg-autostart
+
+xinput --disable $(xinput list --id-only "Synaptics TM3276-022") &

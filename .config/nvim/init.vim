@@ -36,7 +36,7 @@ Plug 'hrsh7th/nvim-cmp', {'branch': 'main' }
 "Plug 'glepnir/lspsaga.nvim', {'branch': 'main' }
 " Plug 'onsails/lspkind-nvim'
 " Plug 'sbdchd/neoformat'
-"Plug 'p00f/nvim-ts-rainbow'
+" Plug 'p00f/nvim-ts-rainbow'
 "Plug 'gennaro-tedesco/nvim-peekup'
 " Plug 'ray-x/lsp_signature.nvim'
 Plug 'szw/vim-maximizer'
@@ -57,7 +57,7 @@ Plug 'rafamadriz/friendly-snippets', {'branch': 'main' }
 " Plug 'quangnguyen30192/cmp-nvim-ultisnips' "completition for ultisnips
 " -- show textdocuments/codeactions
 Plug 'kosayoda/nvim-lightbulb'
-"Plug 'mfussenegger/nvim-lint'
+Plug 'mfussenegger/nvim-lint'
 
 
 " auto yaml folds
@@ -296,7 +296,7 @@ set foldlevelstart=20
 map em :%g/^$/d<cr>
 "remove trailing characters at the end of line
 map tr :%s/\s\+$//
-highlight PMenu gui=bold guibg=Brown
+" highlight PMenu gui=bold guibg=Brown
 set laststatus=2
 "foldy v fold column +
 hi FoldColumn guifg=DarkRed
