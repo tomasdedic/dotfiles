@@ -19,6 +19,8 @@ set timeoutlen=500
 filetype off
 
 call plug#begin('~/.vim/plugged')
+"registers
+Plug 'tversteeg/registers.nvim', { 'branch': 'main' }
 "terminal integration
 Plug 'akinsho/toggleterm.nvim'
 " LSP
@@ -35,7 +37,7 @@ Plug 'hrsh7th/nvim-cmp', {'branch': 'main' }
 "Plug 'glepnir/lspsaga.nvim', {'branch': 'main' }
 " Plug 'onsails/lspkind-nvim'
 " Plug 'sbdchd/neoformat'
-"Plug 'p00f/nvim-ts-rainbow'
+Plug 'p00f/nvim-ts-rainbow'
 "Plug 'gennaro-tedesco/nvim-peekup'
 " Plug 'ray-x/lsp_signature.nvim'
 Plug 'szw/vim-maximizer'
@@ -56,7 +58,7 @@ Plug 'rafamadriz/friendly-snippets', {'branch': 'main' }
 " Plug 'quangnguyen30192/cmp-nvim-ultisnips' "completition for ultisnips
 " -- show textdocuments/codeactions
 Plug 'kosayoda/nvim-lightbulb'
-" Plug 'mfussenegger/nvim-lint'
+Plug 'mfussenegger/nvim-lint'
 
 
 " auto yaml folds
@@ -97,6 +99,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-abolish'
 " plugin for netrw
 Plug 'tpope/vim-vinegar'
 Plug 'romainl/vim-cool/' "hlsearch auto on/off
@@ -171,6 +174,7 @@ call plug#end()
 
 " Use <leader>l to toggle display of whitespace
 nmap <leader>l :set list!<CR>
+nmap <leader>z :LspStart<CR>
 "folding save when leave vim and load on startup
 " augroup AutoSaveFolds
 "   autocmd!
@@ -237,8 +241,8 @@ let g:gruvbox_italic=1
 colorscheme gruvbox
 
 " colorscheme PaperColor
-highlight Cursor guifg=indianred guibg=white
-highlight iCursor guifg=indianred guibg=white
+"highlight Cursor guifg=indianred guibg=white
+"highlight iCursor guifg=indianred guibg=white
 set nospell
 "auto read when a fileis changed from outside
 set autoread
@@ -317,7 +321,7 @@ nnoremap <Space> za
 map em :%g/^$/d<cr>
 "remove trailing characters at the end of line
 map tr :%s/\s\+$//
-highlight PMenu gui=bold guibg=Brown
+"highlight PMenu gui=bold guibg=Brown
 set laststatus=2
 "foldy v fold column +
 hi FoldColumn guifg=DarkRed
@@ -391,3 +395,4 @@ autocmd BufRead,BufReadPost,BufNewFile *.{yaml,yml} :LspRestart
 autocmd BufNewFile,BufReadPost,BufRead *.{yaml,yml} set filetype=yaml foldmethod=indent
 autocmd BufNewFile,BufReadPost,BufRead *.{tf} set filetype=terraform foldmethod=indent
 autocmd BufWritePre *.tf lua vim.lsp.buf.formatting_sync()
+autocmd BufWritePre *.tfvars lua vim.lsp.buf.formatting_sync()

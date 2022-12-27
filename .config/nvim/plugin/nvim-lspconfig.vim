@@ -9,38 +9,39 @@
 lua << EOF
 vim.lsp.set_log_level("error")
 
-local prettier = require "efm/prettier"
-local eslint = require "efm/eslint"
-local language_formatters = {
-  typescript = {prettier, eslint},
-  javascript = {prettier, eslint},
-  typescriptreact = {prettier, eslint},
-  javascriptreact = {prettier, eslint},
-  yaml = {prettier, yamllint},
-  -- yaml = {prettier},
-  json = {prettier},
-  html = {prettier},
-  scss = {prettier},
-  css = {prettier},
-  markdown = {prettier},
-  lua = {
-    {formatCommand = "lua-format -i", formatStdin = true}
-  }
-}
+--local prettier = require "efm/prettier"
+--local eslint = require "efm/eslint"
+--local language_formatters = {
+--  typescript = {prettier, eslint},
+--  javascript = {prettier, eslint},
+--  typescriptreact = {prettier, eslint},
+--  javascriptreact = {prettier, eslint},
+--  yaml = {prettier, yamllint},
+--  -- yaml = {prettier},
+--  json = {prettier},
+--  html = {prettier},
+--  scss = {prettier},
+--  css = {prettier},
+--  markdown = {prettier},
+--  lua = {
+--    {formatCommand = "lua-format -i", formatStdin = true}
+--  }
+--}
 
 local nvim_lsp = require "lspconfig"
- efm = {
-    filetypes = vim.tbl_keys(language_formatters),
-    root_dir = nvim_lsp.util.root_pattern("package.json","yarn.lock", ".git"),
-    init_options = {
-      documentFormatting = true,
-      codeAction = true
-    },
-    settings = {
-      rootMarkers = {".git/"},
-      languages = language_formatters
-    }
-  }
+
+--  efm = {
+--    filetypes = vim.tbl_keys(language_formatters),
+--    root_dir = nvim_lsp.util.root_pattern("package.json","yarn.lock", ".git"),
+--    init_options = {
+--      documentFormatting = true,
+--      codeAction = true
+--    },
+--    settings = {
+--      rootMarkers = {".git/"},
+--      languages = language_formatters
+--    }
+--  }
 
 
 
@@ -98,73 +99,9 @@ local on_attach = function(client, bufnr)
     -- This is causing an out of bounds error, see if this changed in a nightly
     --vim.api.nvim_command("autocmd InsertLeave <buffer> lua vim.lsp.diagnostic.set_loclist({open_loclist = false})")
     vim.api.nvim_command [[ highlight TSCurrentScope ctermbg=NONE guibg=NONE ]]
-    vim.api.nvim_command [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
-
-    if client.resolved_capabilities.document_highlight then
-      vim.api.nvim_command("autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()")
-      vim.api.nvim_command("autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()")
-    end
-
-    -- Set some keybinds conditional on server capabilities
-    if client.resolved_capabilities.document_formatting then
-        buf_set_keymap("n", "<leader>lf","<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-    elseif client.resolved_capabilities.document_range_formatting then
-        buf_set_keymap("n", "<leader>lf","<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
-    end
-
-    -- Set autocommands conditional on server_capabilities
-    if client.resolved_capabilities.document_highlight then
-        vim.api.nvim_exec([[
-        hi LspReferenceRead cterm=bold ctermbg=160 guibg=LightYellow
-        hi LspReferenceText cterm=bold ctermbg=160 guibg=LightYellow
-        hi LspReferenceWrite cterm=bold ctermbg=160 guibg=LightYellow
-        augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-        augroup END
-        ]], false)
-    end
-
-  local function custom_codeAction(_, _, action)
-  print(vim.inspect(action))
-  end
-
+    --vim.api.nvim_command [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
 
 end
-
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  -- Code actions
-  capabilities.textDocument.codeAction = {
-      -- dynamicRegistration = true
-      dynamicRegistration = false,
-      codeActionLiteralSupport = {
-          codeActionKind = {
-              valueSet = (function()
-                  local res = vim.tbl_values(vim.lsp.protocol.CodeActionKind)
-                  table.sort(res)
-                  return res
-              end)()
-          }
-      }
-      -- codeActionLiteralSupport = {
-      --     codeActionKind = {
-      --         valueSet = {
-      --             "", "quickfix", "refactor", "refactor.extract",
-      --             "refactor.inline", "refactor.rewrite", "source",
-      --             "source.organizeImports"
-      --         }
-      --     }
-      -- }
-  }
-  capabilities.textDocument.completion.completionItem.snippetSupport = true;
-  capabilities.textDocument.completion.completionItem.resolveSupport = {
-  properties = {
-    'documentation',
-    'detail',
-    'additionalTextEdits',
-              }
-  }
 
 ---lsp servers----
 
@@ -173,36 +110,60 @@ local util = require 'lspconfig/util'
 
 local lspconfig = require'lspconfig'
 
--- setup lsp installer
-local lsp_installer = require("nvim-lsp-installer")
-    local opts = {
+require("nvim-lsp-installer").setup {}
+
+-- LSPs
+-- require'lspinstall'.setup()
+local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    'documentation',
+    'detail',
+    'additionalTextEdits',
+  }
+}
+local servers = {"bashls"}
+for _, lsp in ipairs(servers) do
+    nvim_lsp[lsp].setup {
+        capabilities = capabilities,
         on_attach = on_attach,
-        capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-        flags = {
-            debounce_text_changes = 150,
-        },
     }
+end
 
-lsp_installer.on_server_ready(function(server)
-  if server.name == "terraformls" then
-    opts = {
-    --cmd = { "yaml-language-server", "--stdio" },
-    filetypes =  {"terraform"},
-    capabilities = capabilities
-    }
-  end
+nvim_lsp.gopls.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  cmd = {"gopls"},
+  settings = {
+      gopls = {
+          analyses = {
+              fillstruct = true,
+          },
+      },
+  },
+  filetypes = {"go","gomod"},
+  root_dir = util.root_pattern("go.mod", ".git"),
+  }
 
-  if server.name == "yamlls" then
-    opts = {
-    --cmd = { "yaml-language-server", "--stdio" },
-    root_dir = util.root_pattern(vim.fn.getcwd()),
-    filetypes =  {"yaml"},
-    capabilities = capabilities,
-    settings = {
+
+nvim_lsp.terraformls.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  root_dir = util.root_pattern(vim.fn.getcwd()),
+  filetypes =  {"terraform"},
+  cmd = { "terraform-ls", "serve", "-log-file", "/dev/null" },
+  -- tenhle root pattern nejak spatne funguje pro Infrastructure
+  --root_dir = util.root_pattern(".terraform", ".git"),
+  }
+
+nvim_lsp.yamlls.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  root_dir = util.root_pattern(vim.fn.getcwd()),
+  filetypes =  {"yaml"},
+  settings = {
       yaml = {
-       -- trace = {
-       --   server = "off",
-       -- },
         format = {
           enable = true,
           singleQuote = false,
@@ -222,84 +183,5 @@ lsp_installer.on_server_ready(function(server)
       }
     },
   }
-  end
-    server:setup(opts)
-end
-)
-
--- yamls config moved to nvim-lsp-installer
- -- configs.yamlls = {
- --   default_config = {
- --     cmd = {"yaml-language-server", "--stdio"};
- --     filetypes = {"yaml"};
- --     root_dir = util.root_pattern(vim.fn.getcwd());
- --   };
- -- }
-
---nvim_lsp["yamlls"].setup {
---    --cmd = cmd,
---    on_attach = on_attach,
---    settings = {
---      yaml = {
---        trace = {
---          server = "verbose",
---        },
---        format = {
---          enable = true,
---          singleQuote = false,
---          bracketSpacing = true
---        },
---        schemas = {
---          -- https://www.schemastore.org/api/json/catalog.json
---          --["kubernetes"] = "*.yaml",
---          ["kubernetes"] = "manifests/*.yaml",
---          ["kubernetes"] = "*.yaml",
---          ["http://json.schemastore.org/kustomization"]= "kustomization.yaml",
---          ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/v1.174.2/service-schema.json"] = "pipelines/*.yaml"
---          -- ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.22.0/all.json"] = "/*.yaml"
---        },
---      -- schemaDownload = {  enable = true },
---      	validate = true,
---        completion = true
---      }
---    },
---  }
--- lspconfig.yamlls.setup{
---     settings = {
---         yaml = {
---            schemas = { kubernetes = "/*.yaml" };
---            schemaStore = { enable = true };
---            completion = true;
---            format = { bracketspacing = true };
---       }
---       };
---     capabilities = capabilities,
---     on_attach = on_attach,
--- }
-
-configs.gopls = {
-  default_config = {
-    cmd = {"gopls"};
-    filetypes = {"go","gomod"};
-    root_dir = util.root_pattern("go.mod", ".git");
-  };
-}
-
--- LSPs
--- require'lspinstall'.setup()
--- local servers = require'lspinstall'.installed_servers()
---local servers = {"gopls","bashls","jsonls"}
-local servers = {"gopls"}
-for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {
-        capabilities = capabilities,
-        on_attach = on_attach,
-        -- init_options = {
-        --     onlyAnalyzeProjectsWithOpenFiles = true,
-        --     suggestFromUnimportedLibraries = false,
-        --     closingLabels = true,
-        -- };
-    }
-end
 
 EOF

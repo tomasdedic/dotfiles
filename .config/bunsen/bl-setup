@@ -1,5 +1,0 @@
-Do not delete this file.
-
-If it is not present, the import of config files from /usr/share/bunsen/skel
-will be repeated, overwriting any user modifications.
-(However, backups will be made of overwritten files.)

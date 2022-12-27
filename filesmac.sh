@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
-cp -r ~/.config/nvim ./.config/
+mkdir .config
+cp -r ~/.config/nvim ./.config/nvim
 cp -r ~/.zshrc ./.zshrc
 cp -r ~/.tmux.conf ./.tmux.conf
 cp -r ~/.ctags.d/ ./
