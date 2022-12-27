@@ -16,10 +16,12 @@ return packer.startup {
 
     use {
       "fatih/vim-go",
+      ft = "go",
     }
 
     use {
       "towolf/vim-helm",
+      ft = "helm",
     }
     -- :Stripwthitespaces
     use {
@@ -208,6 +210,7 @@ return packer.startup {
 
     use {
       "plasticboy/vim-markdown",
+      ft = "markdown"
     }
 
     use {
