@@ -1,0 +1,20 @@
+{
+"Archive files": {
+"prefix": "adoArchiveFiles2",
+"body": [
+"- task: ArchiveFiles@2",
+"  inputs:",
+"    rootFolderOrFile: ${1:$(Build.BinariesDirectory)}  # Required  # Enter the root folder or file path to add to the archive. If a folder, everything under the folder will be added to the resulting archive.",
+"    includeRootFolder: ${2:true}  # Required  # If selected, the root folder name will be prepended to file paths within the archive. Otherwise, all file paths will start one level lower.<p>For example, suppose the selected root folder is: <b>`/home/user/output/classes/`</b>, and contains: <b>`com/acme/Main.class`</b>. <ul><li>If selected, the resulting archive would contain: <b>`classes/com/acme/Main.class`</b>.</li><li>Otherwise, the resulting archive would contain: <b>`com/acme/Main.class`</b>.</li></ul>",
+"    archiveType: ${3:zip} # Options: 'zip', '7z', 'tar', 'wim' # Required  # Specify the compression scheme used.  To create <b>`foo.jar`</b>, for example, choose <b>`zip`</b> for the compression, and specify <b>`foo.jar`</b> as the archive file to create.  For all tar files (including compressed ones), choose <b>`tar`</b>.",
+"    #sevenZipCompression: # Options: 'ultra', 'maximum', 'normal', 'fast', 'fastest', 'none' # Optional  # Optionally choose a compression level, or choose <b>`None`</b> to create an uncompressed 7z file.",
+"    #tarCompression: # Options: 'gz', 'bz2', 'xz', 'none' # Optional  # Optionally choose a compression scheme, or choose <b>`None`</b> to create an uncompressed tar file.",
+"    archiveFile: ${4:$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip}  # Required  # Specify the name of the archive file to create.  For example, to create <b>`foo.tgz`</b>, select the <b>`tar`</b> archive type and <b>`gz`</b> for tar compression.",
+"    replaceExistingArchive: ${5:true}  # Required  # If an existing archive exists, specify whether to overwrite it.  Otherwise, files will be added to it.",
+"    #verbose:  # Optional  # If set to true, forces tools to use verbose output. Overrides 'quiet'",
+"    #quiet:  # Optional  # If set to true, forces tools to use quiet output. Can be overridden by 'verbose'",
+"$6"
+],
+"description": "Compress files into .7z, .tar.gz, or .zip"
+}
+}

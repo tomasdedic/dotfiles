@@ -1,0 +1,13 @@
+{
+"NuGet authenticate": {
+"prefix": "adoNuGetAuthenticate0",
+"body": [
+"- task: NuGetAuthenticate@0",
+"  inputs:",
+"    #nuGetServiceConnections:  # Optional  # Comma-separated list of NuGet service connection names for feeds outside this organization/collection. For feeds in this organization/collection, leave this blank; the build’s credentials are used automatically.",
+"    #forceReinstallCredentialProvider:  # Optional  # If the credential provider is already installed in the user profile, determines if it is overwritten with the task-provided credential provider. This may upgrade (or potentially downgrade) the credential provider.",
+"$1"
+],
+"description": "Configure NuGet tools to authenticate with Azure Artifacts and other NuGet repositories. Requires NuGet >= 4.8.5385, dotnet >= 2.1.400, or MSBuild >= 15.8.166.59604"
+}
+}

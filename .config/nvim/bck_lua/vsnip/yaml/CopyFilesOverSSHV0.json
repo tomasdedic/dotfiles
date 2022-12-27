@@ -1,0 +1,21 @@
+{
+"Copy files over SSH": {
+"prefix": "adoCopyFilesOverSSH0",
+"body": [
+"- task: CopyFilesOverSSH@0",
+"  inputs:",
+"    sshEndpoint: $1  # Required  # SSH service connection with connection details for the remote machine.",
+"    #sourceFolder:  # Optional  # The source folder of the files to copy to the remote machine.  When empty, the root of the repository (build) or artifacts directory (release) is used, which is $(System.DefaultWorkingDirectory).  Use [variables](https://go.microsoft.com/fwlink/?LinkID=550988) if files are not in the repository. Example: $(Agent.BuildDirectory)",
+"    contents: ${2:**}  # Required  # File paths to include as part of the copy. Supports multiple lines of minimatch patterns. [More Information](https://go.microsoft.com/fwlink/?LinkId=821894)",
+"    #targetFolder:  # Optional  # Target folder on the remote machine to where files will be copied. Example: /home/user/MySite.",
+"    #isWindowsOnTarget:  # Optional  # Target machine running Windows",
+"    #cleanTargetFolder:  # Optional  # Delete all existing files and subfolders in the target folder before copying.",
+"    readyTimeout: ${3:20000}  # Required  # How long (in milliseconds) to wait for the SSH handshake to complete.",
+"    #overwrite:  # Optional  # Replace existing files in and beneath the target folder.",
+"    #failOnEmptySource:  # Optional  # Fail if no matching files to be copied are found under the source folder.",
+"    #flattenFolders:  # Optional  # Flatten the folder structure and copy all files into the specified target folder on the remote machine.",
+"$4"
+],
+"description": "Copy files or build artifacts to a remote machine over SSH"
+}
+}

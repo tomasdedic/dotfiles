@@ -1,0 +1,20 @@
+{
+"Azure Function on Kubernetes": {
+"prefix": "adoAzureFunctionOnKubernetes0",
+"body": [
+"- task: AzureFunctionOnKubernetes@0",
+"  inputs:",
+"    dockerRegistryServiceConnection: $1  # Required  # Select a Docker registry service connection.",
+"    kubernetesServiceConnection: $2  # Required  # Select a Kubernetes service connection.",
+"    #namespace:  # Optional  # Kubernetes namespace",
+"    #secretName:  # Optional  # Kubernetes secret containing function config data (for ex. AzureWebJobsStorage: <Azure storage connection string>)",
+"    #dockerHubNamespace:  # Optional  # Docker Hub namespace. Required for private Docker Hub repository.",
+"    appName: $3  # Required  # Application Name. The Kubernetes objects created use this name. This should follow Kubernetes naming conventions for resource names.",
+"    #functionRootDirectory:  # Optional  # Function root directory. Should contain host.json. Docker build and push is performed from this directory.",
+"    #waitForStability:  # Optional  # Wait for the Kubernetes objects to reach the desired state.",
+"    #arguments:  # Optional  # Pass arguments to command. Ex:<br>--no-docker --service-type NodePort",
+"$4"
+],
+"description": "Deploy Azure function to Kubernetes cluster."
+}
+}

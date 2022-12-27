@@ -1,0 +1,16 @@
+{
+"Batch script": {
+"prefix": "adoBatchScript1",
+"body": [
+"- task: BatchScript@1",
+"  inputs:",
+"    filename: $1  # Required  # Path of the cmd or bat script to execute. Should be fully qualified path or relative to the default working directory (please note that working directory could differ from 'workingFolder' which could be specified for this task).",
+"    #arguments:  # Optional  # Arguments passed to the cmd or bat script",
+"    #modifyEnvironment:  # Optional  # Determines whether environment variable modifications will affect subsequent tasks.",
+"    #workingFolder:  # Optional  # Current working directory when script is run.  Defaults to the folder where the script is located.",
+"    #failOnStandardError:  # Optional  # If this is true, this task will fail if any errors are written to the StandardError stream.",
+"$2"
+],
+"description": "Run a Windows command or batch script and optionally allow it to change the environment"
+}
+}

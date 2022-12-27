@@ -1,0 +1,14 @@
+{
+"Download secure file": {
+"prefix": "adoDownloadSecureFile1",
+"body": [
+"- task: DownloadSecureFile@1",
+"  inputs:",
+"    secureFile: $1  # Required  # The file name or GUID of the secure file to download to the agent machine. The file will be deleted after the pipeline runs.",
+"    retryCount: ${2:8}  # Required  # Optional number of times to retry downloading a secure file if the download fails.",
+"    socketTimeout: $3  # Required  # Optional timeout for a socket associated with downloading secure file request in ms.",
+"$4"
+],
+"description": "Download a secure file to the agent machine"
+}
+}
