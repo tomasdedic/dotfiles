@@ -1,0 +1,16 @@
+{
+"Conda environment": {
+"prefix": "adoCondaEnvironment0",
+"body": [
+"- task: CondaEnvironment@0",
+"  inputs:",
+"    environmentName: $1  # Required  # Name of the Conda environment to create and activate.",
+"    #packageSpecs:  # Optional  # Space-delimited list of packages to install when creating the environment.",
+"    #updateConda:  # Optional  # Update Conda to the latest version. This applies to the Conda installation found in `PATH` or at the path specified by the `CONDA` environment variable.",
+"    #createOptions:  # Optional  # Space-delimited list of other options to pass to the `conda create` command.",
+"    #cleanEnvironment:  # Optional  # Delete the environment and recreate it if it already exists. If not selected, the task will reactivate an existing environment.",
+"$2"
+],
+"description": "Create and activate a Conda environment"
+}
+}

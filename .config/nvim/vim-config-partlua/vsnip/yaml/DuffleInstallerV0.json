@@ -1,0 +1,13 @@
+{
+"Duffle tool installer": {
+"prefix": "adoDuffleInstaller0",
+"body": [
+"- task: DuffleInstaller@0",
+"  inputs:",
+"    version: ${1:0.1.0-ralpha.4+dramallamabuie}  # Required  # Specify the version of Duffle to install.",
+"    #checkLatestVersion:  # Optional  # Always checks online for the latest available version (stable.txt) that satisfies the version spec. This is typically false unless you have a specific scenario to always get latest. This will cause it to incur download costs when potentially not necessary, especially with the hosted build pool.",
+"$2"
+],
+"description": "Install a specified version of Duffle for installing and managing CNAB bundles"
+}
+}

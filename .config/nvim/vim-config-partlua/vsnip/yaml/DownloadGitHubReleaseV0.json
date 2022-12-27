@@ -1,0 +1,17 @@
+{
+"Download GitHub Release": {
+"prefix": "adoDownloadGitHubRelease0",
+"body": [
+"- task: DownloadGitHubRelease@0",
+"  inputs:",
+"    connection: $1  # Required  # GitHub service connection",
+"    userRepository: $2  # Required  # GitHub repository full name",
+"    defaultVersionType: ${3:latest} # Options: 'latest', 'specificVersion', 'specificTag' # Required  # Download assets from latest release or specific release version/tag",
+"    version: $4  # Required when defaultVersionType != latest  # Release version/tag to download",
+"    #itemPattern:  # Optional  # Minimatch pattern to filter files to be downloaded. To download all files within release use **",
+"    downloadPath: ${5:$(System.ArtifactsDirectory)}  # Required  # Path on the agent machine where the release assets will be downloaded",
+"$6"
+],
+"description": "Downloads a GitHub Release from a repository"
+}
+}

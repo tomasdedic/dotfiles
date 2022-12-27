@@ -155,3 +155,4 @@ fi
 bl-xdg-autostart
 
 xinput --disable $(xinput list --id-only "Synaptics TM3276-022") &
+copyq

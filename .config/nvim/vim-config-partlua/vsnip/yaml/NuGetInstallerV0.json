@@ -1,0 +1,19 @@
+{
+"NuGet Installer": {
+"prefix": "adoNuGetInstaller0",
+"body": [
+"- task: NuGetInstaller@0",
+"  inputs:",
+"    solution: ${1:**/*.sln}  # Required  # The path to the Visual Studio solution file or NuGet packages.config",
+"    nugetConfigPath: $2  # Required  # Equivalent to the -ConfigFile NuGet.exe command line argument",
+"    restoreMode: ${3:restore} # Options: 'restore', 'install' # Required  # Restore will restore the packages a solution depends upon, and is generally what you want.Install will install packages from a packages.config file. Use this option if you want to install a standalone tool package.",
+"    noCache: ${4:false}  # Required  # Equivalent to the -NoCache NuGet.exe command line argument",
+"    #nuGetRestoreArgs:  # Optional  # Additional arguments passed to NuGet.exe restore or install. [More Information](https://docs.nuget.org/consume/command-line-reference#user-content-restore-command).",
+"    verbosity: ${5:-} # Options: '-', 'Quiet', 'Normal', 'Detailed' # Required  # NuGet's verbosity level",
+"    nuGetVersion: ${6:3.3.0} # Options: '3.3.0', '3.5.0.1829', '4.0.0.2283', 'custom' # Required  # The version of NuGet to use, or external version.",
+"    #nuGetPath:  # Optional  # Optionally supply the path to NuGet.exe. Will override version selection.",
+"$7"
+],
+"description": "Installs or restores missing NuGet packages. Use NuGetAuthenticate@0 task for latest capabilities."
+}
+}

@@ -1,0 +1,25 @@
+{
+"MSBuild": {
+"prefix": "adoMSBuild1",
+"body": [
+"- task: MSBuild@1",
+"  inputs:",
+"    solution: ${1:**/*.sln}  # Required  # Relative path from repo root of the project(s) or solution(s) to run.  Wildcards can be used.  For example, `**/*.csproj` for all csproj files in all sub folders.",
+"    #msbuildLocationMethod: # Options: 'version', 'location' # Optional ",
+"    #msbuildVersion: # Options: 'latest', '17.0', '16.0', '15.0', '14.0', '12.0', '4.0' # Optional  # If the preferred version cannot be found, the latest version found will be used instead. On an macOS agent, xbuild (Mono) will be used if version is lower than 15.0.",
+"    #msbuildArchitecture: # Options: 'x86', 'x64' # Optional  # Optionally supply the architecture (x86, x64) of MSBuild to run.",
+"    #msbuildLocation:  # Optional  # Optionally supply the path to MSBuild.",
+"    #platform:  # Optional ",
+"    #configuration:  # Optional ",
+"    #msbuildArguments:  # Optional  # Additional arguments passed to MSBuild (on Windows) and xbuild (on macOS).",
+"    #clean:  # Optional  # Run a clean build (/t:clean) prior to the build.",
+"    #maximumCpuCount:  # Optional  # If your MSBuild target configuration is compatible with building in parallel, you can optionally check this input to pass the /m switch to MSBuild (Windows only). If your target configuration is not compatible with building in parallel, checking this option may cause your build to result in file-in-use errors, or intermittent or inconsistent build failures.",
+"    #restoreNugetPackages:  # Optional  # This option is deprecated. To restore NuGet packages, add a [NuGet](https://docs.microsoft.com/azure/devops/pipelines/tasks/package/nuget) task before the build.",
+"    #logProjectEvents:  # Optional  # Optionally record timeline details for each project (Windows only).",
+"    #createLogFile:  # Optional  # Optionally create a log file (Windows only).",
+"    #logFileVerbosity: # Options: 'quiet', 'minimal', 'normal', 'detailed', 'diagnostic' # Optional  # Optional log file verbosity.",
+"$2"
+],
+"description": "Build with MSBuild"
+}
+}
