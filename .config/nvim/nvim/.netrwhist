@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =9
+let g:netrw_dirhist_9='/home/ts/git_repositories/moje/madopenshift/content/openshift'
+let g:netrw_dirhist_8='/home/ts/git_repositories/moje/madopenshift/content/openshift/install'
+let g:netrw_dirhist_7='/home/ts/git_repositories/moje/madopenshift/content/openshift'
+let g:netrw_dirhist_6='/home/ts/git_repositories/moje/madopenshift/content/openshift/artifactory_as_proxy_for_containerregistries'
+let g:netrw_dirhist_5='/home/ts/git_repositories/moje/madopenshift/content/openshift'
+let g:netrw_dirhist_4='/home/ts/git_repositories/moje/madopenshift/content/openshift/DNS'
+let g:netrw_dirhist_3='/home/ts/git_repositories/moje/madopenshift/content/openshift'
+let g:netrw_dirhist_2='/home/ts/git_repositories/moje/madopenshift/content/openshift/CONFIG'
+let g:netrw_dirhist_1='/home/ts/git_repositories/moje/madopenshift/content/openshift'
+let g:netrw_dirhist_0='/home/ts/git_repositories/moje/madopenshift/content/openshift/ingress-egress'

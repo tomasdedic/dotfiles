@@ -1,0 +1,14 @@
+{
+"CocoaPods": {
+"prefix": "adoCocoaPods0",
+"body": [
+"- task: CocoaPods@0",
+"  inputs:",
+"    #cwd:  # Optional  # Specify the working directory in which to execute this task. If left empty, the repository directory will be used.",
+"    forceRepoUpdate: $1  # Required  # Selecting this option will force running 'pod repo update' before install.",
+"    #projectDirectory:  # Optional  # Optionally specify the path to the root of the project directory. If left empty, the project specified in the Podfile will be used. If no project is specified, then a search for an Xcode project will be made. If more than one Xcode project is found, an error will occur.",
+"$2"
+],
+"description": "Install CocoaPods dependencies for Swift and Objective-C Cocoa projects"
+}
+}

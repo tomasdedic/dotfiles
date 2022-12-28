@@ -1,0 +1,27 @@
+{
+"Ant": {
+"prefix": "adoAnt1",
+"body": [
+"- task: Ant@1",
+"  inputs:",
+"    antBuildFile: ${1:build.xml}  # Required  # Relative path from the repository root to the Ant build file.",
+"    #options:  # Optional  # Provide any options to pass to the Ant command line. You can provide your own properties (for example, ***-DmyProperty=myPropertyValue***) and also use built-in variables (for example, ***-DcollectionId=$(system.collectionId)***). Alternatively, the built-in variables are already set as environment variables during the build and can be passed directly (for example, ***-DcollectionIdAsEnvVar=%SYSTEM_COLLECTIONID%***).",
+"    #targets:  # Optional  # An optional, space-separated list of targets to build. If not specified, the `default` target will be used. If no `default` target is defined, Ant 1.6.0 and later will build all top-level tasks.",
+"    publishJUnitResults: ${2:true}  # Required  # Select this option to publish JUnit test results produced by the Ant build to Azure Pipelines. Each test results file matching `Test Results Files` will be published as a test run in Azure Pipelines.",
+"    testResultsFiles: ${3:**/TEST-*.xml}  # Required  # Test results files path. Wildcards can be used ([more information](https://go.microsoft.com/fwlink/?linkid=856077)). For example, `**/TEST-*.xml` for all XML files whose name starts with TEST-.",
+"    #testRunTitle:  # Optional  # Provide a name for the test run.",
+"    #codeCoverageTool: # Options: 'None', 'Cobertura', 'JaCoCo' # Optional  # Select the code coverage tool. For on-premises agent support, refer to the `More Information` link below.",
+"    classFilesDirectories: ${4:.}  # Required  # Comma-separated list of relative paths from the Ant build file to directories containing class files and archive files (JAR, WAR, etc.). Code coverage is reported for class files in these directories. For example: target/classes,target/testClasses.",
+"    #classFilter:  # Optional  # Comma-separated list of filters to include or exclude classes from collecting code coverage. For example: +:com.*,+:org.*,-:my.app*.*.",
+"    #srcDirectories:  # Optional  # Comma-separated list of relative paths from the Ant build file to source code directories. Code coverage reports will use these to highlight source code. For example: src/java,src/Test.",
+"    #failIfCoverageEmpty:  # Optional  # Fail the build if code coverage did not produce any results to publish.",
+"    #antHomeUserInputPath:  # Optional  # If set, overrides any existing ANT_HOME environment variable with the given path.",
+"    javaHomeSelection: ${5:JDKVersion} # Options: 'JDKVersion', 'Path' # Required  # Sets JAVA_HOME either by selecting a JDK version that will be discovered during builds or by manually entering a JDK path.",
+"    #jdkVersion: # Options: 'default', '1.11', '1.10', '1.9', '1.8', '1.7', '1.6' # Optional  # Will attempt to discover the path to the selected JDK version and set JAVA_HOME accordingly.",
+"    jdkUserInputPath: $6  # Required when javaHomeSelection = Path  # Sets JAVA_HOME to the given path.",
+"    #jdkArchitecture: # Options: 'x86', 'x64' # Optional  # Optionally supply the architecture (x86, x64) of the JDK.",
+"$7"
+],
+"description": "Build with Apache Ant"
+}
+}

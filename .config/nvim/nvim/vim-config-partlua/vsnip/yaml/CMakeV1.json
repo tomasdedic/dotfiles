@@ -1,0 +1,14 @@
+{
+"CMake": {
+"prefix": "adoCMake1",
+"body": [
+"- task: CMake@1",
+"  inputs:",
+"    #cwd:  # Optional  # Current working directory when cmake is run.",
+"    #cmakeArgs:  # Optional  # Arguments passed to cmake",
+"    #runInsideShell:  # Optional  # CMake arguments will be handled like they would be inside of an OS specific shell. It can be used to handle environment variables inside of argument strings.",
+"$1"
+],
+"description": "Build with the CMake cross-platform build system"
+}
+}

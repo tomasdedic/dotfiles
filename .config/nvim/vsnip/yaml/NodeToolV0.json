@@ -1,0 +1,14 @@
+{
+"Node.js tool installer": {
+"prefix": "adoNodeTool0",
+"body": [
+"- task: NodeTool@0",
+"  inputs:",
+"    versionSpec: ${1:6.x}  # Required  # Version Spec of version to get.  Examples: 6.x, 4.x, 6.10.0, >=6.10.0",
+"    #checkLatest:  # Optional  # Always checks online for the latest available version that satisfies the version spec. This is typically false unless you have a specific scenario to always get latest. This will cause it to incur download costs when potentially not necessary, especially with the hosted build pool.",
+"    #force32bit:  # Optional  # Installs the x86 version of Node regardless of the CPU architecture of the agent.",
+"$2"
+],
+"description": "Finds or downloads and caches the specified version spec of Node.js and adds it to the PATH"
+}
+}

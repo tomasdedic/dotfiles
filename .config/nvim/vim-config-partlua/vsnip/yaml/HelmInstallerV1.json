@@ -1,0 +1,12 @@
+{
+"Helm tool installer": {
+"prefix": "adoHelmInstaller1",
+"body": [
+"- task: HelmInstaller@1",
+"  inputs:",
+"    #helmVersionToInstall:  # Optional  # Specify the version of Helm to install.",
+"$1"
+],
+"description": "Install Helm on an agent machine"
+}
+}

@@ -1,0 +1,22 @@
+{
+"Java tool installer": {
+"prefix": "adoJavaToolInstaller0",
+"body": [
+"- task: JavaToolInstaller@0",
+"  inputs:",
+"    versionSpec: ${1:8}  # Required  # A number that specifies the JDK version to make available on the path. Use a whole number version, such as 10",
+"    jdkArchitectureOption: $2 # Options: 'x64', 'x86' # Required  # The architecture (x86, x64) of the JDK.",
+"    jdkSourceOption: $3 # Options: 'AzureStorage', 'LocalDirectory', 'PreInstalled' # Required  # Source for the compressed JDK.",
+"    jdkFile: $4  # Required when jdkSourceOption == LocalDirectory  # Path to where the compressed JDK is located. The path could be in your source repository or a local path on the agent.",
+"    azureResourceManagerEndpoint: $5  # Required when jdkSourceOption == AzureStorage  # Choose the Azure Resource Manager subscription for the JDK.",
+"    azureStorageAccountName: $6  # Required when jdkSourceOption == AzureStorage  # Azure Classic and Resource Manager storage accounts are listed. Select the storage account name in which the JDK is located.",
+"    azureContainerName: $7  # Required when jdkSourceOption == AzureStorage  # Name of the container in the storage account in which the JDK is located.",
+"    azureCommonVirtualFile: $8  # Required when jdkSourceOption == AzureStorage  # Path to the JDK inside the Azure storage container.",
+"    jdkDestinationDirectory: $9  # Required when jdkSourceOption != PreInstalled  # On Linux and Windows, this is used as the destination directory for JDK installation. On macOS, this directory is used as a temporary folder for extracting of .dmg's since macOS doesn't support installing of JDK to specific directory.",
+"    cleanDestinationDirectory: ${10:true}  # Required  # Select this option to clean the destination directory before JDK is extracted into it.",
+"    #createExtractDirectory:  # Optional  # By default, task is creating a directory similar to this JAVA_HOME_8_X64_OpenJDK_zip for extracting JDK. This option allows to disable creation of this folder, in this case, JDK will be located in the root of jdkDestinationDirectory",
+"$11"
+],
+"description": "Acquire a specific version of Java from a user-supplied Azure blob or the tool cache and sets JAVA_HOME"
+}
+}

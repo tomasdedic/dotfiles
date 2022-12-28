@@ -1,0 +1,14 @@
+{
+"npm": {
+"prefix": "adoNpm0",
+"body": [
+"- task: Npm@0",
+"  inputs:",
+"    #cwd:  # Optional  # Working directory where the npm command is run. Defaults to the root of the repo.",
+"    command: ${1:install}  # Required ",
+"    #arguments:  # Optional  # Additional arguments passed to npm.",
+"$2"
+],
+"description": "Run an npm command. Use NpmAuthenticate@0 task for latest capabilities."
+}
+}
