@@ -1,0 +1,12 @@
+{
+"Kubectl tool installer": {
+"prefix": "adoKubectlInstaller0",
+"body": [
+"- task: KubectlInstaller@0",
+"  inputs:",
+"    #kubectlVersion:  # Optional  # Specify the version of Kubectl to install",
+"$1"
+],
+"description": "Install Kubectl on agent machine"
+}
+}

@@ -1,0 +1,15 @@
+{
+"Delete files": {
+"prefix": "adoDeleteFiles1",
+"body": [
+"- task: DeleteFiles@1",
+"  inputs:",
+"    #SourceFolder:  # Optional  # The source folder that the deletion(s) will be run from. Empty is the root of the repo. Use [variables](https://go.microsoft.com/fwlink/?LinkID=550988) if files are not in the repo. Example: $(agent.builddirectory)",
+"    Contents: ${1:myFileShare}  # Required  # File/folder paths to delete. Supports multiple lines of minimatch patterns. [More Information](https://go.microsoft.com/fwlink/?LinkID=722333)",
+"    #RemoveSourceFolder:  # Optional  # Attempt to remove the source folder as well.",
+"    #RemoveDotFiles:  # Optional  # Delete files starting with a dot (.git, .dockerfile). Omits these files if it's not specified explicitly (for example, '/.*'). Please see this [link](https://github.com/isaacs/minimatch#dot) for more info",
+"$2"
+],
+"description": "Delete folders, or files matching a pattern"
+}
+}

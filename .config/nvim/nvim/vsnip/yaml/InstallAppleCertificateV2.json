@@ -1,0 +1,19 @@
+{
+"Install Apple certificate": {
+"prefix": "adoInstallAppleCertificate2",
+"body": [
+"- task: InstallAppleCertificate@2",
+"  inputs:",
+"    certSecureFile: $1  # Required  # Select the certificate (.p12) that was uploaded to `Secure Files` to install on the macOS agent.",
+"    #certPwd:  # Optional  # Password to the Apple certificate (.p12). Use a new build variable with its lock enabled on the `Variables` tab to encrypt this value.",
+"    keychain: ${2:temp} # Options: 'default', 'temp', 'custom' # Required  # Select the keychain in which to install the Apple certificate. For Microsoft hosted builds, use `Temporary Keychain`. A temporary keychain will always be deleted after the build or release is complete.",
+"    keychainPassword: $3  # Required when keychain = custom || keychain = default  # Password to unlock the keychain. Use a new build variable with its lock enabled on the `Variables` tab to encrypt this value.",
+"    customKeychainPath: $4  # Required when keychain = custom  # Full path to a custom keychain file. The keychain will be created if it does not exist.",
+"    #deleteCert:  # Optional  # Select to delete the certificate from the keychain after the build or release is complete.",
+"    #deleteCustomKeychain:  # Optional  # Select to delete the custom keychain from the agent after the build or release is complete.",
+"    #signingIdentity:  # Optional  # The Common Name of the subject in the signing certificate.  Will attempt to parse the Common Name if this is left empty.",
+"$5"
+],
+"description": "Install an Apple certificate required to build on a macOS agent machine"
+}
+}

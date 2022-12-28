@@ -1,0 +1,37 @@
+{
+"Kubectl": {
+"prefix": "adoKubernetes0",
+"body": [
+"- task: Kubernetes@0",
+"  inputs:",
+"    #kubernetesServiceEndpoint:  # Optional  # Select a Kubernetes service connection.",
+"    #namespace:  # Optional  # Set the namespace for the kubectl command by using the –namespace flag. If the namespace is not provided, the commands will run in the default namespace.",
+"    #command: # Options: 'apply', 'create', 'delete', 'exec', 'expose', 'get', 'logs', 'run', 'set', 'top' # Optional  # Select or specify a kubectl command to run.",
+"    #useConfigurationFile:  # Optional  # Use Kubernetes configuration file with the kubectl command. Filename, directory, or URL to Kubernetes configuration files can also be provided.",
+"    configuration: $1  # Required when useConfigurationFile = true  # Filename, directory, or URL to kubernetes configuration files that will be used with the commands.",
+"    #arguments:  # Optional  # Arguments to the specified kubectl command.",
+"    secretType: ${2:dockerRegistry} # Options: 'dockerRegistry', 'generic' # Required  # Create/update a generic or docker imagepullsecret. Select dockerRegistry to create/update the imagepullsecret of the selected registry. An imagePullSecret is a way to pass a secret that contains a container registry password to the Kubelet so it can pull a private image on behalf of your Pod.",
+"    #secretArguments:  # Optional  # Specify keys and literal values to insert in secret.For example, --from-literal=key1=value1 --from-literal=key2=\"top secret\".",
+"    containerRegistryType: ${3:Azure Container Registry} # Options: 'Azure Container Registry', 'Container Registry' # Required  # Select a Container registry type. The task can use Azure Subscription details to work with an Azure Container registry. Other standard Container registries are also supported.",
+"    #dockerRegistryEndpoint:  # Optional  # Select a Docker registry service connection. Required for commands that need to authenticate with a registry.",
+"    #azureSubscriptionEndpoint:  # Optional  # Select the Azure Resource Manager subscription, which contains Azure Container Registry. Note: To configure new service connection, select the Azure subscription from the list and click 'Authorize'. If your subscription is not listed or if you want to use an existing Service Principal, you can setup an Azure service connection using 'Add' or 'Manage' button.",
+"    #azureContainerRegistry:  # Optional  # Select an Azure Container Registry which will be used for pulling container images and deploying applications to the Kubernetes cluster. Required for commands that need to authenticate with a registry.",
+"    #secretName:  # Optional  # Name of the secret. You can use this secret name in the Kubernetes YAML configuration file.",
+"    #forceUpdate:  # Optional  # Delete the secret if it exists and create a new one with updated values.",
+"    #configMapName:  # Optional  # ConfigMaps allow you to decouple configuration artifacts from image content to keep containerized applications portable.",
+"    #forceUpdateConfigMap:  # Optional  # Delete the configmap if it exists and create a new one with updated values.",
+"    #useConfigMapFile:  # Optional  # Create a ConfigMap from an individual file, or from multiple files by specifying a directory.",
+"    configMapFile: $4  # Required when useConfigMapFile = true  # Specify a file or directory that contains the configMaps",
+"    #configMapArguments:  # Optional  # Specify keys and literal values to insert in configMap.For example, --from-literal=key1=value1 --from-literal=key2=\"top secret\".",
+"    #versionOrLocation: # Options: 'version', 'location' # Optional  # kubectl is a command line interface for running commands against Kubernetes clusters.",
+"    #versionSpec:  # Optional  # Version Spec of version to get.  Examples: 1.7.0, 1.x.0, 4.x.0, 6.10.0",
+"    #checkLatest:  # Optional  # Always checks online for the latest available version (stable.txt) that satisfies the version spec. This is typically false unless you have a specific scenario to always get latest. This will cause it to incur download costs when potentially not necessary, especially with the hosted build pool.",
+"    specifyLocation: $5  # Required when versionOrLocation = location  # Full path to the kubectl.exe",
+"    #cwd:  # Optional  # Working directory for the Kubectl command.",
+"    #outputFormat: # Options: 'json', 'yaml' # Optional  # Output format.",
+"    #kubectlOutput:  # Optional  # Name of the variable in which output of the command should be saved.",
+"$6"
+],
+"description": "Deploy, configure, update a Kubernetes cluster in Azure Container Service by running kubectl commands"
+}
+}

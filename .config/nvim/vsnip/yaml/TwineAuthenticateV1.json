@@ -1,0 +1,13 @@
+{
+"Python twine upload authenticate": {
+"prefix": "adoTwineAuthenticate1",
+"body": [
+"- task: TwineAuthenticate@1",
+"  inputs:",
+"    artifactFeed: $1  # Required  # Select a feed to authenticate present in this organization.",
+"    #pythonUploadServiceConnection:  # Optional  # Select an endpoint to authenticate outside this organization. Make sure the endpoint has package upload permissions.",
+"$2"
+],
+"description": "Authenticate for uploading Python distributions using twine. Add '-r FeedName/EndpointName --config-file $(PYPIRC_PATH)' to your twine upload command. For feeds present in this organization, use the feed name as the repository (-r). Otherwise, use the endpoint name defined in the service connection."
+}
+}

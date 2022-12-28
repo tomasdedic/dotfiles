@@ -1,0 +1,30 @@
+{
+"Azure IoT Edge": {
+"prefix": "adoAzureIoTEdge2",
+"body": [
+"- task: AzureIoTEdge@2",
+"  inputs:",
+"    action: ${1:Build module images} # Options: 'Build module images', 'Push module images', 'Generate deployment manifest', 'Deploy to IoT Edge devices' # Required  # Select an Azure IoT Edge action. **Build module images** will only build modules (You can use it to check compilation error). **Push module images** will push modules to container registry. **Deploy to IoT Edge devices** will deploy the generated deployment file to IoT Hub. (We recommend to put **Deploy** task in release pipeline).",
+"    deploymentFilePath: ${2:$(System.DefaultWorkingDirectory)/config/deployment.json}  # Required  # Select the deployment json file. If this task is in **release pipeline**, you need to set the location of deployment file in artifact.(The default value works for most conditions). If this task is in **build pipeline**, you need to set it to the path of **Path of output deployment file**.",
+"    connectedServiceNameARM: $3  # Required when action == Deploy to IoT Edge devices  # Select an **Azure subscription** that contains IoT Hub",
+"    iothubname: $4  # Required when action == Deploy to IoT Edge devices  # Select the **IoT Hub**",
+"    deploymentid: ${5:$(System.TeamProject)-devops-deployment}  # Required  # Input the **IoT Edge Deployment ID**, if ID exists, it will be overridden. Up to 128 lowercase letters, numbers and the following characters are allowed [ -:+%_#*?!(),=@;' ]. Check more information for [Azure IoT Edge deployment](https://docs.microsoft.com/azure/iot-edge/how-to-deploy-monitor#monitor-a-deployment)",
+"    priority: ${6:0}  # Required  # Set the **priority** to a positive integer to resolve deployment conflicts: when targeted by multiple deployments a device will use the one with highest priority or (in case of two deployments with the same priority) latest creation time. Check more information for [Azure IoT Edge deployment](https://docs.microsoft.com/azure/iot-edge/how-to-deploy-monitor#monitor-a-deployment)",
+"    deviceOption: $7 # Options: 'Single Device', 'Multiple Devices' # Required when action == Deploy to IoT Edge devices  # Choose to deploy to single or multiple(by tags) devices",
+"    deviceId: $8  # Required when deviceOption == Single Device  # Input the IoT Edge **device ID**",
+"    targetcondition: $9  # Required when deviceOption == Multiple Devices  # Input the **target condition** of devices you would like to deploy. Do not use double quote. Example: **tags.building=9 and tags.environment='test'**. Check more information for [Azure IoT Edge deployment](https://docs.microsoft.com/azure/iot-edge/how-to-deploy-monitor#monitor-a-deployment)",
+"    containerregistrytype: ${10:Azure Container Registry} # Options: 'Azure Container Registry', 'Generic Container Registry' # Required  # Select a **Container Registry Type**. **Azure Container Registry** for ACR and **Generic Container Registry** for generic registries including docker hub.",
+"    dockerRegistryEndpoint: $11  # Required when containerregistrytype = Generic Container Registry  # Select a generic **Docker registry connection**. Required for **Build and Push**.",
+"    #azureSubscriptionEndpoint:  # Optional  # Select an Azure subscription",
+"    azureContainerRegistry: $12  # Required when containerregistrytype = Azure Container Registry  # Select an **Azure Container Registry**",
+"    templateFilePath: ${13:deployment.template.json}  # Required  # The path of Azure IoT Edge solution **.template.json**. This file defines the modules and routes in Azure IoT Edge solution, file name must end with **.template.json**",
+"    defaultPlatform: ${14:amd64} # Options: 'amd64', 'windows-amd64', 'arm32v7' # Required  # In your **.template.json**, you can leave the modules platform unspecified. For these modules, the **default platform** will be used.",
+"    fillRegistryCredential: ${15:true} # Options: 'true', 'false' # Required  # Add registry credential for pushing docker images to deployment manifest",
+"    deploymentManifestOutputPath: ${16:$(System.DefaultWorkingDirectory)/config/deployment.json}  # Required  # The output path of generated deployment manifest",
+"    validateGeneratedDeploymentManifest: ${17:false} # Options: 'true', 'false' # Required  # Fail this step if the generated deployment manifest does not pass schema validation. You can search `Azure IoT Edge deployment` in [JSON Schema Store](http://schemastore.org/json/) to find latest schema.",
+"    #bypassModules:  # Optional  # Select the module(s) that you **DO NOT** need to build(or push) in the .template.json, specify module names and separate with comma. Example: if you have 2 modules **SampleModule1,SampleModule2** in your .template.json, you want to just build or push **SampleModule1**, then you set the bypass modules as **SampleModule2**. Leave empty if you would like to build all the modules in .template.json.",
+"$18"
+],
+"description": "Build and deploy an Azure IoT Edge image"
+}
+}

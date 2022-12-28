@@ -1,0 +1,40 @@
+{
+"Maven": {
+"prefix": "adoMaven3",
+"body": [
+"- task: Maven@3",
+"  inputs:",
+"    mavenPOMFile: ${1:pom.xml}  # Required  # Relative path from the repository root to the Maven POM file.",
+"    #goals:  # Optional ",
+"    #options:  # Optional ",
+"    publishJUnitResults: ${2:true}  # Required  # Select this option to publish JUnit test results produced by the Maven build to Azure Pipelines. Each test results file matching `Test Results Files` will be published as a test run in Azure Pipelines.",
+"    testResultsFiles: ${3:**/surefire-reports/TEST-*.xml}  # Required  # Specify the path and pattern of test results files to publish. Wildcards can be used ([more information](https://go.microsoft.com/fwlink/?linkid=856077)). For example, `**/TEST-*.xml` for all XML files whose name starts with `TEST-`. If no root path is specified, files are matched beneath the default working directory, the value of which is available in the variable: $(System.DefaultWorkingDirectory).  For example, a value of '**/TEST-*.xml' will actually result in matching files from '$(System.DefaultWorkingDirectory)/**/TEST-*.xml'.",
+"    #testRunTitle:  # Optional  # Provide a name for the test run.",
+"    #allowBrokenSymbolicLinks:  # Optional  # Set false to fail build when task finds broken symbolic link during publishing tests result",
+"    #codeCoverageTool: # Options: 'None', 'Cobertura', 'JaCoCo' # Optional  # Select the code coverage tool.",
+"    #classFilter:  # Optional  # Comma-separated list of filters to include or exclude classes from collecting code coverage. For example: +:com.*,+:org.*,-:my.app*.*.",
+"    #classFilesDirectories:  # Optional  # This field is required for a multi-module project. Specify a comma-separated list of relative paths from the Maven POM file to directories containing class files and archive files (JAR, WAR, etc.). Code coverage is reported for class files in these directories. For example: target/classes,target/testClasses.",
+"    #srcDirectories:  # Optional  # This field is required for a multi-module project. Specify a comma-separated list of relative paths from the Maven POM file to source code directories. Code coverage reports will use these to highlight source code. For example: src/java,src/Test.",
+"    #failIfCoverageEmpty:  # Optional  # Fail the build if code coverage did not produce any results to publish.",
+"    #restoreOriginalPomXml:  # Optional  # Code coverage modifies pom.xml to produce results. Use this option if you need to keep original pom.xml.",
+"    javaHomeSelection: ${4:JDKVersion} # Options: 'JDKVersion', 'Path' # Required  # Sets JAVA_HOME either by selecting a JDK version that will be discovered during builds or by manually entering a JDK path.",
+"    #jdkVersion: # Options: 'default', '1.11', '1.10', '1.9', '1.8', '1.7', '1.6' # Optional  # Will attempt to discover the path to the selected JDK version and set JAVA_HOME accordingly.",
+"    jdkUserInputPath: $5  # Required when javaHomeSelection = Path  # Sets JAVA_HOME to the given path.",
+"    #jdkArchitecture: # Options: 'x86', 'x64' # Optional  # Optionally supply the architecture (x86, x64) of the JDK.",
+"    mavenVersionSelection: ${6:Default} # Options: 'Default', 'Path' # Required  # Uses either the default Maven version or the version in the specified custom path.",
+"    mavenPath: $7  # Required when mavenVersionSelection = Path  # Supply the custom path to the Maven installation (e.g., /usr/share/maven).",
+"    mavenSetM2Home: ${8:false}  # Required  # Sets the M2_HOME variable to a custom Maven installation path.",
+"    #mavenOpts:  # Optional  # Sets the MAVEN_OPTS environment variable, which is used to send command-line arguments to start the JVM. The -Xmx flag specifies the maximum memory available to the JVM.",
+"    mavenFeedAuthenticate: ${9:false}  # Required  # Automatically authenticate Maven feeds from Azure Artifacts. If built-in Maven feeds are not in use, deselect this option for faster builds.",
+"    skipEffectivePom: ${10:false}  # Required  # Authenticate built-in Maven feeds using the POM only, allowing parent POMs in Azure Artifacts/Azure DevOps Server [Package Management] feeds.",
+"    sqAnalysisEnabled: ${11:false}  # Required  # This option has changed from version 1 of the **Maven** task to use the [SonarQube](https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarqube) and [SonarCloud](https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarcloud) marketplace extensions.  Enable this option to run [SonarQube or SonarCloud analysis](http://redirect.sonarsource.com/doc/install-configure-scanner-tfs-ts.html) after executing goals in the **Goals** field. The **install** or **package** goal should run first. You must also add a **Prepare Analysis Configuration** task from one of the extensions to the build pipeline before this Maven task.",
+"    #isJacocoCoverageReportXML:  # Optional  # Use XML Jacoco reports for SonarQube analysis. [More info](https://docs.sonarqube.org/latest/analysis/coverage/)",
+"    sqMavenPluginVersionChoice: ${12:latest} # Options: 'latest', 'pom' # Required  # The SonarQube Maven plugin version to use. You can use latest version, or rely on the version in your pom.xml.",
+"    #checkstyleAnalysisEnabled:  # Optional  # Run the Checkstyle tool with the default Sun checks. Results are uploaded as build artifacts.",
+"    #pmdAnalysisEnabled:  # Optional  # Use the PMD static analysis tool to look for bugs in the code. Results are uploaded as build artifacts.",
+"    #findbugsAnalysisEnabled:  # Optional  # Use the FindBugs static analysis tool to look for bugs in the code. Results are uploaded as build artifacts.",
+"$13"
+],
+"description": "Build, test, and deploy with Apache Maven"
+}
+}

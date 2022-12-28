@@ -1,0 +1,18 @@
+{
+"Visual Studio test platform installer": {
+"prefix": "adoVisualStudioTestPlatformInstaller1",
+"body": [
+"- task: VisualStudioTestPlatformInstaller@1",
+"  inputs:",
+"    packageFeedSelector: ${1:nugetOrg} # Options: 'nugetOrg', 'customFeed', 'netShare' # Required  # Specify the feed from which the Visual Studio Test Platform nuget packge should be fetched.",
+"    versionSelector: ${2:latestPreRelease} # Options: 'latestPreRelease', 'latestStable', 'specificVersion' # Required  # Pick whether to install the latest version or a specific version of the Visual Studio Test Platform. <br>If you use the test platform installer to run Coded UI tests, ensure that the version you choose matches the major version of Visual Studio with which the test binaries were built. For e.g., if the Coded UI test project was built using Visual Studio 2017 (version 15.x), you must use test platform version 15.x.",
+"    testPlatformVersion: $3  # Required when versionSelector = specificVersion  # Specify the version of Visual Studio Test Platform to install on the agent. Available versions can be viewed on <a href=\"https://www.nuget.org/packages/Microsoft.TestPlatform/\">nuget</a>.",
+"    customFeed: $4  # Required when packageFeedSelector = customFeed  # Fetch the testplatform package from the specified package feed. Can be a public or a private feed.",
+"    #username:  # Optional  # User name for authenticating against the specified feed. If providing a PAT token as password, username is optional.",
+"    #password:  # Optional  # Password or personal access token for authenticating against the specified feed.",
+"    netShare: $5  # Required when packageFeedSelector = netShare  # Specify the full UNC path to the microsoft.testplatform nupkg file.",
+"$6"
+],
+"description": "Acquire the test platform from nuget.org or the tool cache. Satisfies the ‘vstest’ demand and can be used for running tests and collecting diagnostic data using the Visual Studio Test task."
+}
+}

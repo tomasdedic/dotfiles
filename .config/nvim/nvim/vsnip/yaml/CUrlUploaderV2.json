@@ -1,0 +1,20 @@
+{
+"cURL upload files": {
+"prefix": "adocURLUploader2",
+"body": [
+"- task: cURLUploader@2",
+"  inputs:",
+"    files: $1  # Required  # File(s) to be uploaded. Wildcards can be used. For example, `**/*.zip` for all ZIP files in all subfolders.",
+"    #authType: # Options: 'ServiceEndpoint', 'UserAndPass' # Optional ",
+"    serviceEndpoint: $2  # Required when authType = ServiceEndpoint  # The service connection with the credentials for the server authentication. Use the Generic service connection type for the service connection.",
+"    #username:  # Optional  # Specify the username for server authentication.",
+"    #password:  # Optional  # Specify the password for server authentication. Use a new build variable with its lock enabled on the Variables tab to encrypt this value.",
+"    url: $3  # Required when authType = UserAndPass  # Specify the URL to where the file(s) will be uploaded. The directory should end with a trailing slash. Possible URL protocols include `DICT://`, `FILE://`, `FTP://`, `FTPS://`, `GOPHER://`, `HTTP://`, `HTTPS://`, `IMAP://`, `IMAPS://`, `LDAP://`, `LDAPS://`, `POP3://`, `POP3S://`, `RTMP://`, `RTSP://`, `SCP://`, `SFTP://`, `SMTP://`, `SMTPS://`, `TELNET://` and `TFTP://`.",
+"    #remotePath:  # Optional  # If supplied, this is the sub-folder on the remote server for the URL supplied in the credentials.",
+"    #options:  # Optional  # Additional arguments that will be passed to cURL.",
+"    #redirectStderr:  # Optional  # Adds '--stderr -' as an argument to cURL. By default, cURL writes its progress bar to stderr, which is interpreted by the build as error output. Enabling this checkbox suppresses that behavior.",
+"$4"
+],
+"description": "Use cURL's supported protocols to upload files"
+}
+}

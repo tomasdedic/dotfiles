@@ -1,0 +1,13 @@
+{
+".NET Core SDK/runtime installer": {
+"prefix": "adoDotNetCoreInstaller0",
+"body": [
+"- task: DotNetCoreInstaller@0",
+"  inputs:",
+"    packageType: ${1:sdk} # Options: 'runtime', 'sdk' # Required  # Please select whether to install only runtime or full SDK.",
+"    version: ${2:1.0.4}  # Required  # Specify exact version of .NET Core SDK or runtime to install.<br/>Find the value of `version-sdk` for installing SDK, or `version-runtime` for installing Runtime from any releases [here](https://github.com/microsoft/azure-pipelines-tasks/blob/master/Tasks/DotNetCoreInstallerV0/externals/releases.json). **NOTE: the task will not work with new versions of .NET Core. Kindly upgrade to 2./\/* version of the task to download latest versions od .NET Core.**",
+"$3"
+],
+"description": "Acquire a specific version of the .NET Core SDK from the internet or local cache and add it to the PATH"
+}
+}

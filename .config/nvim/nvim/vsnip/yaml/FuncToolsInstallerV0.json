@@ -1,0 +1,12 @@
+{
+"Install Azure Func Core Tools": {
+"prefix": "adoFuncToolsInstaller0",
+"body": [
+"- task: FuncToolsInstaller@0",
+"  inputs:",
+"    #version:  # Optional  # Specify the version of Azure func tools to install. Ex:<br><br>2.7.1575<br>v2.7.1575<br>latest",
+"$1"
+],
+"description": "Install Azure Func Core Tools"
+}
+}

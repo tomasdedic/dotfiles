@@ -1,0 +1,14 @@
+{
+"Review App": {
+"prefix": "adoReviewApp0",
+"body": [
+"- task: ReviewApp@0",
+"  inputs:",
+"    resourceName: $1  # Required  # Name of an existing resource in the environment which will be used for resource type information",
+"    #baseEnvironmentName:  # Optional ",
+"    #reviewResourceName:  # Optional ",
+"$2"
+],
+"description": "Use this task under deploy phase provider to create a resource dynamically"
+}
+}

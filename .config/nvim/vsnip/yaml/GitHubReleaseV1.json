@@ -1,0 +1,31 @@
+{
+"GitHub Release": {
+"prefix": "adoGitHubRelease1",
+"body": [
+"- task: GitHubRelease@1",
+"  inputs:",
+"    gitHubConnection: $1  # Required  # Specify the name of the GitHub service connection to use to connect to the GitHub repository. The connection must be based on a GitHub user's OAuth or a GitHub personal access token. Learn more about service connections [here](https://aka.ms/AA3am5s).",
+"    repositoryName: ${2:$(Build.Repository.Name)}  # Required  # Specify the name of the GitHub repository in which the GitHub release will be created, edited, or deleted.",
+"    action: ${3:create} # Options: 'create', 'edit', 'delete' # Required  # Specify the type of release operation to perform. This task can create, edit, or delete a GitHub release.",
+"    target: ${4:$(Build.SourceVersion)}  # Required  # Specify the commit SHA for which the GitHub release will be created. E.g. `48b11d8d6e92a22e3e9563a3f643699c16fd6e27`. You can also use a variable here. E.g. `$(myCommitSHA)`.",
+"    tagSource: ${5:gitTag} # Options: 'gitTag', 'userSpecifiedTag' # Required  # Specify the tag to be used for release creation. The 'Git tag' option automatically takes the tag which is associated with the Git commit. Use the 'User specified tag' option to manually provide a tag.",
+"    #tagPattern:  # Optional  # Specify the git tag pattern using regex(Eg. `release-v1.*`). GitHub release will be created only for commits that have matching git tag. ",
+"    tag: $6  # Required when action = edit || action = delete || tagSource = userSpecifiedTag  # Specify the tag for which to create, edit, or delete a release. You can also use a variable here. E.g. `$(myTagName)`.",
+"    #title:  # Optional  # Specify the title of the GitHub release. If left empty, the tag will be used as the release title.",
+"    #releaseNotesSource: # Options: 'filePath', 'inline' # Optional  # Specify the description of the GitHub release. Use the 'Release notes file' option to use the contents of a file as release notes. Use the 'Inline release notes' option to manually enter release notes.",
+"    #releaseNotesFilePath:  # Optional  # Select the file which contains the release notes.",
+"    #releaseNotesInline:  # Optional  # Enter the release notes here. Markdown is supported.",
+"    #assets:  # Optional  # Specify the files to be uploaded as assets of the release. You can use wildcard characters to specify multiple files. E.g. For build pipelines, `$(Build.ArtifactStagingDirectory)/*.zip` or in case of release pipelines `$(System.DefaultWorkingDirectory)/*.zip`. You can also specify multiple patterns - one per line. By default, all files in the $(Build.ArtifactStagingDirectory) directory will be uploaded. To know more about the list of pre-defined variables available, see [build variables](https://aka.ms/AA4449z) and [release variables](https://aka.ms/AA43wws).",
+"    #assetUploadMode: # Options: 'delete', 'replace' # Optional  # Use the 'Delete existing assets' option to first delete any existing assets in the release and then upload all assets. Use the 'Replace existing assets' option to replace any assets that have the same name.",
+"    #isDraft:  # Optional  # Indicate whether the release should be saved as a draft (unpublished). If `false`, the release will be published.",
+"    #isPreRelease:  # Optional  # Indicate whether the release should be marked as a pre-release.",
+"    #addChangeLog:  # Optional  # If set to `true`, a list of changes (commits and issues) between this and the last published release will be generated and appended to the release notes.",
+"    changeLogCompareToRelease: ${7:lastFullRelease} # Options: 'lastFullRelease', 'lastNonDraftRelease', 'lastNonDraftReleaseByTag' # Required  # Indicate which release we should compare with to generate the changelog: Last full release: Compares the current release with  the most recent non-draft release which is not marked as pre-release.Last non-draft release: Compares the current release with the most recent non-draft release.Last non-draft release by tag: Compares the current release with the last non-draft release matching the specified tag. You can also specify a regex instead of an exact tag.",
+"    changeLogCompareToReleaseTag: $8  # Required when changeLogCompareToRelease = lastNonDraftReleaseByTag  # Specify the regex for release tag. Release matching this tag will be used as base for changelog computation.",
+"    changeLogType: ${9:commitBased} # Options: 'commitBased', 'issueBased' # Required  # Changelog can be commit based or issue based . Commit based changelog lists all commits included in a release where as Issue based changelog lists all the issues/pr included in the release. ",
+"    #changeLogLabels:  # Optional  # Using this you can categorize changes based on the label associated with the issue/pr. For a label you can mention the display name for the category and the state of issue. E.g. `\"[{ \"label\" : \"bug\", \"displayName\" : \"Bugs\", \"state\" : \"closed\" }]\"` .In case a change has multiple labels on it, the first specified label takes priority. Leave this field empty, to see a flat list of issues/pr.",
+"$10"
+],
+"description": "Create, edit, or delete a GitHub release"
+}
+}

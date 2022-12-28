@@ -1,0 +1,20 @@
+{
+"Azure CLI": {
+"prefix": "adoAzureCLI1",
+"body": [
+"- task: AzureCLI@1",
+"  inputs:",
+"    connectedServiceNameARM: $1  # Required  # Select an Azure resource manager subscription for the deployment",
+"    scriptLocation: ${2:scriptPath} # Options: 'inlineScript', 'scriptPath' # Required  # Type of script: File path or Inline script",
+"    scriptPath: $3  # Required when scriptLocation = scriptPath  # Fully qualified path of the script(.bat or .cmd when using Windows based agent and .sh when using linux based agent) or a path relative to the the default working directory",
+"    inlineScript: $4  # Required when scriptLocation = inlineScript  # You can write your scripts inline here. When using Windows agent, use batch scripting whereas use shell scripting when using Linux based agents. For batch script use the prefix \"call\" before every azure command. You can also pass predefined and custom variables to this script using arguments  example for shell: az --version az account show  example for batch:call  az --version call az account show",
+"    #args:  # Optional  # Arguments passed to the script",
+"    #addSpnToEnvironment:  # Optional  # Adds service principal id and key of the Azure endpoint you chose to the script's execution environment. You can use these variables: `$servicePrincipalId`, `$servicePrincipalKey` and `$tenantId` in your script.This is honored only when the Azure endpoint has Service Principal authentication scheme.",
+"    #useGlobalConfig:  # Optional  # If this is false, this task will use its own separate [Azure CLI configuration directory](https://docs.microsoft.com/en-us/cli/azure/azure-cli-configuration?view=azure-cli-latest#cli-configuration-file). This can be used to run Azure CLI tasks in *parallel* releases",
+"    #cwd:  # Optional  # Current working directory where the script is run.  Empty is the root of the repo (build) or artifacts (release), which is $(System.DefaultWorkingDirectory)",
+"    #failOnStandardError:  # Optional  # If this is true, this task will fail when any errors are written to the StandardError stream. Unselect the checkbox to ignore standard errors and rely on exit codes to determine the status",
+"$5"
+],
+"description": "Run Azure CLI commands against an Azure subscription in a Shell script when running on Linux agent or Batch script when running on Windows agent."
+}
+}

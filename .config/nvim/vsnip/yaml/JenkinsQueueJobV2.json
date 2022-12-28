@@ -1,0 +1,22 @@
+{
+"Jenkins queue job": {
+"prefix": "adoJenkinsQueueJob2",
+"body": [
+"- task: JenkinsQueueJob@2",
+"  inputs:",
+"    serverEndpoint: $1  # Required  # Select the service connection for your Jenkins instance.  To create one, click the Manage link and create a new Jenkins service connection.",
+"    jobName: $2  # Required  # The name of the Jenkins job to queue.  This must exactly match the job name on the Jenkins server.",
+"    #isMultibranchJob:  # Optional  # This job is of multibranch pipeline type.  If selected, enter the appropriate branch name. Requires Team Foundation Server Plugin for Jenkins v5.3.4 or later.",
+"    multibranchPipelineBranch: $3  # Required when isMultibranchJob = true  # Queue this multibranch pipeline job on the specified branch. This requires Team Foundation Server Plugin for Jenkins v5.3.4 or later.",
+"    captureConsole: ${4:true}  # Required  # If selected, this task will capture the Jenkins build console output, wait for the Jenkins build to complete, and succeed/fail based on the Jenkins build result.  Otherwise, once the Jenkins job is successfully queued, this task will successfully complete without waiting for the Jenkins build to run.",
+"    capturePipeline: ${5:true}  # Required  # If selected, this task will capture the full Jenkins build pipeline console output, wait for the full Jenkins build pipeline to complete, and succeed/fail based on the Jenkins build pipeline result.  Otherwise, once the first Jenkins job completes, this task will successfully complete without waiting for full Jenkins build pipeline to run.",
+"    parameterizedJob: $6  # Required  # Select if the Jenkins job accepts parameters. This should be selected even if all default parameter values are used and no parameters are actually specified.",
+"    #jobParameters:  # Optional  # Specify job parameters, one per line, in the form <b>`<parameterName>=<parameterValue>`</b><p>To set a parameter to an empty value (useful for overriding a default value), leave off the parameter value. For example, specify <b>`<parameterName>=`</b><p>Variables are supported. For example, to set a <b>`commitId`</b> parameter value to the Git commit ID of the build, use: <b>`commitId=$(Build.SourceVersion)`</b>. See the [documentation on variables](https://go.microsoft.com/fwlink/?linkid=875288) for more details.<p>Supported Jenkins parameter types are: <ul><li>`Boolean`</li><li>`Choice`</li><li>`Password`</li><li>`String`</li></ul>",
+"    #failOnUnstableResult:  # Optional  # Specifies strictness of a success definition: whether to consider unstable as a failure or not. False for non-strict, and true for strict version.",
+"    #retryCount:  # Optional  # Specify number of retries on errors or failures",
+"    #delayBetweenRetries:  # Optional  # Specify time between retries. This is specified in seconds",
+"$7"
+],
+"description": "Queue a job on a Jenkins server"
+}
+}
