@@ -242,7 +242,7 @@ return packer.startup {
       branch = "master",
       keys = "<C-n>",
       config = function()
-        vim.cmd [[let g:VM_custom_motions  = {'h': 'j', 'j': 'k', 'k':'l', 'l':';'}]]
+        vim.cmd [[let g:VM_custom_motions  = {'h': 'h', 'j': 'j', 'k':'k', 'l':'l'}]]
       end,
     }
 

@@ -141,7 +141,7 @@ function! s:SwitchColorscheme()
     "elseif g:colors_name == 'gruvbox'
     elseif &background == 'dark'
       set background=light
-      colorscheme PaperColor
+      colorscheme tokyonight
     endif
   endif
 endfunction

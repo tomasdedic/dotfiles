@@ -1,12 +1,13 @@
 vim.keymap.set(
   "n",
-  "<D-f>",
+  "<leader>fg",
   "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_ivy())<CR>",
   {}
 )
 vim.keymap.set("n", ";", "<cmd>lua require('telescope.builtin').buffers()<CR>", {})
 vim.keymap.set("n", "<C-p>", "<cmd>lua require('telescope.builtin').git_files()<CR>", {})
 vim.keymap.set("n", "<C-f>", "<cmd>lua require('telescope.builtin').find_files()<CR>", {})
+vim.keymap.set("n", "<leader>lg", "<cmd>lua require('telescope.builtin').live_grep({grep_open_files=true})<CR>", {})
 vim.keymap.set("n", "<leader>ps", "<cmd>lua require('telescope.builtin').live_grep()<CR>", {})
 vim.keymap.set("n", "<leader>fb", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", {})
 vim.keymap.set(

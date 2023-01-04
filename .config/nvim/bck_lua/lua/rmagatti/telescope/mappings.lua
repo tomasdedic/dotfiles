@@ -1,6 +1,6 @@
 vim.keymap.set(
   "n",
-  "<D-f>",
+  "<C-r>",
   "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_ivy())<CR>",
   {}
 )
