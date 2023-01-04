@@ -37,7 +37,7 @@ M.on_attach = function(client, bufnr)
   -- Code navigation
   buf_set_keymap("n", "gD", vim.lsp.buf.declaration, opts)
   buf_set_keymap("n", "gd", vim.lsp.buf.definition, opts)
-  buf_set_keymap("n", "K", vim.lsp.buf.hover, opts)
+  buf_set_keymap("n", "gk", vim.lsp.buf.hover, opts)
   buf_set_keymap("n", "gi", vim.lsp.buf.implementation, opts)
   buf_set_keymap("n", "gr", function()
     require("telescope.builtin").lsp_references()
