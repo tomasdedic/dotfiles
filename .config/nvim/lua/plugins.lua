@@ -663,6 +663,7 @@ return packer.startup {
       config = function()
         require("neoclip").setup {
           enable_persistent_history = true,
+          continuous_sync = true,
         }
         vim.cmd [[nnoremap <leader>y <cmd>lua require('telescope').extensions.neoclip.default()<CR>]]
       end,
