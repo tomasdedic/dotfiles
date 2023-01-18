@@ -6,13 +6,13 @@ M.setup = function()
   local common_on_attach = require("pluginsconf.lsp.lsp-common").common_on_attach
 
   local opts = {
-    on_attach = common_on_attach,
     capabilities = capabilities,
-    filetypes = {"go","gomod"},
-    root_dir = util.root_pattern("go.mod", ".git"),
+    on_attach = common_on_attach,
+    -- root_dir = util.root_pattern(vim.fn.getcwd()),
+    -- root_dir = util.root_pattern(".terraform", ".git"),
   }
 
-  require("lspconfig").gopls.setup(opts)
+  require("lspconfig").bashls.setup(opts)
 end
 
 return M

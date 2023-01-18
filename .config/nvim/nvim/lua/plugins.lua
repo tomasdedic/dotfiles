@@ -242,7 +242,7 @@ return packer.startup {
       branch = "master",
       keys = "<C-n>",
       config = function()
-        vim.cmd [[let g:VM_custom_motions  = {'h': 'j', 'j': 'k', 'k':'l', 'l':';'}]]
+        vim.cmd [[let g:VM_custom_motions  = {'h': 'h', 'j': 'j', 'k':'k', 'l':'l'}]]
       end,
     }
 
@@ -348,10 +348,10 @@ return packer.startup {
       "tpope/vim-fugitive",
       -- cmd = { "Git", "Gstatus", "Gblame", "Gpush", "Gpull", "Gvdiffsplit" },
       config = require("pluginsconf.fugitive").setup,
-      keys = {
-        { "n", "<leader>gd" },
-        { "n", "<leader>gb" },
-      },
+      -- keys = {
+      --   { "n", "<leader>gd" },
+      --   { "n", "<leader>gb" },
+      -- },
     }
 
     use {
@@ -406,13 +406,9 @@ return packer.startup {
     -- }
 
     -- Themes
-    use { "gruvbox-community/gruvbox",
+    use { 'ellisonleao/gruvbox.nvim',
       config = function()
-        vim.cmd [[
-        let g:gruvbox_contrast_dark="hard"
-        let g:gruvbox_italic=1
-        ]]
-
+        require "pluginsconf.gruvbox"
       end,
   }
 
@@ -666,12 +662,13 @@ return packer.startup {
       config = function()
         require("neoclip").setup {
           enable_persistent_history = true,
+          continuous_sync = true,
         }
         vim.cmd [[nnoremap <leader>y <cmd>lua require('telescope').extensions.neoclip.default()<CR>]]
       end,
-      keys = {
-        { "n", "<leader>y" },
-      },
+      -- keys = {
+      --   { "n", "<leader>y" },
+      -- },
     }
     use {
       'rmagatti/auto-session',

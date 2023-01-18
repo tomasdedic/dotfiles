@@ -31,7 +31,9 @@ M.setup = function()
         },
       -- schemaStore = {  enable = true },
       	validate = true,
-        completion = true
+        completion = true,
+
+
       }
     },
 
