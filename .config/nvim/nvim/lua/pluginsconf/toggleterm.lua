@@ -12,7 +12,10 @@ require("toggleterm").setup {
 }
 
 if vim.g.neovide then
-  vim.keymap.set("n", "<D-d>", "<cmd>ToggleTerm<CR>", { noremap = true })
-  vim.keymap.set("i", "<D-d>", "<C-\\><C-n><cmd>ToggleTerm<CR>", { noremap = true })
-  vim.keymap.set("t", "<D-d>", "<C-\\><C-n><cmd>ToggleTerm<CR>", { noremap = true })
+  vim.keymap.set("n", "<C-d>", "<cmd>ToggleTerm<CR>", { noremap = true })
+  vim.keymap.set("i", "<C-d>", "<C-\\><C-n><cmd>ToggleTerm<CR>", { noremap = true })
+  vim.keymap.set("t", "<C-d>", "<C-\\><C-n><cmd>ToggleTerm<CR>", { noremap = true })
 end
+
+
+
