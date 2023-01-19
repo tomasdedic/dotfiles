@@ -8,10 +8,10 @@ M.setup = function()
   local opts = {
     capabilities = capabilities,
     on_attach = common_on_attach,
-    -- root_dir = util.root_pattern(vim.fn.getcwd()),
+    root_dir = util.root_pattern(vim.fn.getcwd()),
     filetypes =  {"terraform"},
     cmd = { "terraform-ls", "serve", "-log-file", "/dev/null" },
-    root_dir = util.root_pattern(".terraform", ".git"),
+    -- root_dir = util.root_pattern(".terraform", ".git"),
   }
 
   require("lspconfig").terraformls.setup(opts)
