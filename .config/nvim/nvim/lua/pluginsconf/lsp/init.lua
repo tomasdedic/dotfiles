@@ -14,9 +14,9 @@ require("pluginsconf.lsp.lsp-yaml").setup()
 require("pluginsconf.lsp.lsp-json").setup()
 require("pluginsconf.lsp.lsp-vimscript").setup()
 require("pluginsconf.lsp.lsp-go").setup()
-require("pluginsconf.lsp.lsp-terraform").setup()
+-- require("pluginsconf.lsp.lsp-terraform").setup()
 require("pluginsconf.lsp.lsp-bash").setup()
--- require("pluginsconf.lsp.tflint").setup()
+require("pluginsconf.lsp.tflint").setup()
 
 
 -- require("pluginsconf.lsp.null-ls").setup(common_on_attach)
