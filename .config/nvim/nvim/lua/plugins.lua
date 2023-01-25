@@ -28,6 +28,7 @@ return packer.startup {
       "ntpeters/vim-better-whitespace",
       config = function()
         vim.cmd [[let g:better_whitespace_ctermcolor='174']]
+        vim.cmd [[let g:better_whitespace_filetypes_blacklist=['toggleterm','diff', 'git', 'gitcommit', 'unite', 'qf', 'help', 'markdown', 'fugitive'] ]]
       end,
     }
     -- TODO: trying out Comment.nvim, remove if not working out
