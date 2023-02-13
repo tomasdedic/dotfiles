@@ -28,6 +28,7 @@ return packer.startup {
       "ntpeters/vim-better-whitespace",
       config = function()
         vim.cmd [[let g:better_whitespace_ctermcolor='174']]
+        vim.cmd [[let g:better_whitespace_filetypes_blacklist=['toggleterm','diff', 'git', 'gitcommit', 'unite', 'qf', 'help', 'markdown', 'fugitive'] ]]
       end,
     }
     -- TODO: trying out Comment.nvim, remove if not working out
@@ -73,6 +74,9 @@ return packer.startup {
       },
     }
 
+    use {
+      "tpope/vim-abolish",
+    }
     use {
       "tpope/vim-repeat",
     }
@@ -207,10 +211,16 @@ return packer.startup {
       },
     }
 
-
     use {
-      "plasticboy/vim-markdown",
-      ft = "markdown"
+      "preservim/vim-markdown",
+      branch = "master",
+      require = {
+        "godlygeek/tabular"
+      },
+      ft = {"markdown","md"},
+      config = function()
+        require "pluginsconf.markdown"
+      end,
     }
 
     use {
@@ -348,10 +358,10 @@ return packer.startup {
       "tpope/vim-fugitive",
       -- cmd = { "Git", "Gstatus", "Gblame", "Gpush", "Gpull", "Gvdiffsplit" },
       config = require("pluginsconf.fugitive").setup,
-      keys = {
-        { "n", "<leader>gd" },
-        { "n", "<leader>gb" },
-      },
+      -- keys = {
+      --   { "n", "<leader>gd" },
+      --   { "n", "<leader>gb" },
+      -- },
     }
 
     use {
@@ -406,12 +416,11 @@ return packer.startup {
     -- }
 
     -- Themes
-    use { 'gruvbox-community/gruvbox',
-      config = function()
-        vim.cmd [[let g:gruvbox_contrast_dart="soft"]]
-
-      end,
-  }
+  --   use { 'ellisonleao/gruvbox.nvim',
+  --     config = function()
+  --       require "pluginsconf.gruvbox"
+  --     end,
+  -- }
 
     use {
       "folke/tokyonight.nvim",
@@ -667,9 +676,9 @@ return packer.startup {
         }
         vim.cmd [[nnoremap <leader>y <cmd>lua require('telescope').extensions.neoclip.default()<CR>]]
       end,
-      keys = {
-        { "n", "<leader>y" },
-      },
+      -- keys = {
+      --   { "n", "<leader>y" },
+      -- },
     }
     use {
       'rmagatti/auto-session',
