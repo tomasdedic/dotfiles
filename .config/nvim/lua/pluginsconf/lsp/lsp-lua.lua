@@ -6,12 +6,12 @@ M.setup = function()
 
   require("neodev").setup {}
 
-  local sumneko_lua_opts = {
+  local lua_ls_opts = {
     on_attach = common_on_attach,
     capabilities = capabilities,
   }
 
-  require("lspconfig").sumneko_lua.setup(vim.tbl_deep_extend("force", sumneko_lua_opts, {}))
+  require("lspconfig").lua_ls.setup(vim.tbl_deep_extend("force", lua_ls_opts, {}))
 end
 
 return M

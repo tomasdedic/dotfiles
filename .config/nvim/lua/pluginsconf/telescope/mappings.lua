@@ -1,21 +1,42 @@
+function vim.getVisualSelection()
+	vim.cmd('noau normal! "vy"')
+	local text = vim.fn.getreg('v')
+	vim.fn.setreg('v', {})
+
+	text = string.gsub(text, "\n", "")
+	if #text > 0 then
+		return text
+	else
+		return ''
+	end
+end
+
+
 vim.keymap.set(
   "n",
   "<leader>fg",
   "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_ivy())<CR>",
   {}
 )
-vim.keymap.set("n", ";", "<cmd>lua require('telescope.builtin').buffers()<CR>", {})
+
+vim.keymap.set("n", ";", "<cmd>lua require('telescope.builtin').buffers({sort_mru=true})<CR>", {})
 vim.keymap.set("n", "<C-p>", "<cmd>lua require('telescope.builtin').git_files()<CR>", {})
 vim.keymap.set("n", "<C-f>", "<cmd>lua require('telescope.builtin').find_files()<CR>", {})
+-- only open buffers
 vim.keymap.set("n", "<leader>lg", "<cmd>lua require('telescope.builtin').live_grep({grep_open_files=true})<CR>", {})
+vim.keymap.set("v", "<leader>lg", "<cmd>lua local text = vim.getVisualSelection() require('telescope.builtin').live_grep({grep_open_files=true, default_text = text })<CR>", {})
+vim.keymap.set("n", "<leader>po", "<cmd>lua require('telescope.builtin').live_grep({grep_open_files=true})<CR>", {})
+vim.keymap.set("v", "<leader>po", "<cmd>lua local text = vim.getVisualSelection() require('telescope.builtin').live_grep({grep_open_files=true, default_text = text })<CR>", {})
+-- all files in cwd
 vim.keymap.set("n", "<leader>ps", "<cmd>lua require('telescope.builtin').live_grep()<CR>", {})
+vim.keymap.set("v", "<leader>ps", "<cmd>lua local text = vim.getVisualSelection() require('telescope.builtin').live_grep({ default_text = text })<CR>", {})
+-- only active buffer
+-- vim.keymap.set( "n", "<leader>pg", "<cmd>lua require('telescope.builtin').grep_string({search=vim.fn.input('Search: ')})<CR>", {})
+vim.keymap.set( "n", "<leader>pg", "<cmd>lua require('telescope.builtin').grep_string()<CR>", {})
+vim.keymap.set("v", "<leader>pg", "<cmd>lua local text = vim.getVisualSelection() require('telescope.builtin').current_buffer_fuzzy_find({ default_text = text })<CR>",{})
+
 vim.keymap.set("n", "<leader>fb", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", {})
-vim.keymap.set(
-  "n",
-  "<leader>pg",
-  "<cmd>lua require('telescope.builtin').grep_string({search=vim.fn.input('Search: ')})<CR>",
-  {}
-)
+vim.keymap.set("v", "<leader>fb", "<cmd>lua local text = vim.getVisualSelection() require('telescope.builtin').current_buffer_fuzzy_find({ default_text = text })<CR>",{})
 -- vim.keymap.set("n", "<leader>wt", "<cmd>lua require('telescope.extensions').git_worktree.git_worktrees()<CR>", {})
 vim.keymap.set("n", "<C-b>", require("telescope.builtin").git_branches, {})
 
