@@ -114,10 +114,6 @@ autocmd BufRead,BufNewFile */templates/*.yaml,*/templates/*.tpl,*.gotmpl,helmfil
 ]]
 
 vim.cmd [[
-autocmd FileType markdown setlocal ts=2 sts=2 sw=2 expandtab
-]]
-
-vim.cmd [[
 augroup goyocmds
   autocmd!
   autocmd User GoyoEnter Limelight
