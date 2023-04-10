@@ -28,7 +28,7 @@ return packer.startup {
       "ntpeters/vim-better-whitespace",
       config = function()
         vim.cmd [[let g:better_whitespace_ctermcolor='174']]
-        vim.cmd [[let g:better_whitespace_filetypes_blacklist=['toggleterm','diff', 'git', 'gitcommit', 'unite', 'qf', 'help', 'markdown', 'fugitive'] ]]
+        vim.cmd [[let g:better_whitespace_filetypes_blacklist=['toggleterm','diff', 'git', 'gitcommit', 'unite', 'qf', 'help', 'fugitive'] ]]
       end,
     }
     -- TODO: trying out Comment.nvim, remove if not working out
@@ -636,6 +636,11 @@ return packer.startup {
       end,
     }
 
+    -- jump in indent 
+    use {
+      "jeetsukumaran/vim-indentwise",
+    }
+
     -- Bufferize commands
     use {
       "AndrewRadev/bufferize.vim",
@@ -729,6 +734,12 @@ return packer.startup {
     --   },
     -- }
     --
+    use {
+      'ryicoh/deepl.vim',
+      config = function()
+        require "pluginsconf.deepl"
+      end,
+    }
      use {
        'rmagatti/session-lens',
        requires = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
