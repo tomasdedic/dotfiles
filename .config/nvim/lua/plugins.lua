@@ -31,6 +31,11 @@ return packer.startup {
         vim.cmd [[let g:better_whitespace_filetypes_blacklist=['toggleterm','diff', 'git', 'gitcommit', 'unite', 'qf', 'help', 'fugitive'] ]]
       end,
     }
+
+    use {
+      "Einenlum/yaml-revealer",
+      ft = "yaml",
+    }
     -- TODO: trying out Comment.nvim, remove if not working out
     -- use {
     --   "tpope/vim-commentary",
@@ -636,7 +641,7 @@ return packer.startup {
       end,
     }
 
-    -- jump in indent 
+    -- jump in indent, usefull for yaml
     use {
       "jeetsukumaran/vim-indentwise",
     }
