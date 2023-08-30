@@ -58,9 +58,7 @@ cmp.setup {
     { name = "vsnip" },
     { name = "path" },
     { name = "npm", keyword_length = 4 },
-    -- TODO: enable me? disabling to try and debug input lag/freeze on insert mode
-    -- { name = "nvim_lua" },
-    -- { name = "rg" },
+    { name = "rg" },
     { name = "copilot", group_index = 2 },
   }, {
     { name = "buffer",
@@ -78,7 +76,7 @@ vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 cmp.setup.filetype("lua", {
   sources = cmp.config.sources {
     { name = "nvim_lsp" },
-    { name = "nvim_lua" },
+    -- { name = "nvim_lua" },
   },
 })
 
