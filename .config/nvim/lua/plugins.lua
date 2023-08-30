@@ -329,6 +329,7 @@ return packer.startup {
     use { "nvim-lua/plenary.nvim" }
     use {
       "nvim-telescope/telescope.nvim",
+      tag = "0.1.2",
       requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } },
       config = function()
         require "pluginsconf.telescope"

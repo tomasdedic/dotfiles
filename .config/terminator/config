@@ -8,6 +8,7 @@
   enabled_plugins = ,
   title_use_system_font = False
   title_font = Hack Nerd Font 12
+  putty_paste_style_source_clipboard = True
 [keybindings]
   cycle_next = None
   cycle_prev = None
