@@ -44,7 +44,7 @@ cmp.setup({
     end,
   },
   experimental = {
-    ghost_text = true,
+    ghost_text = { enabled = true },
   },
   snippet = {
     expand = function(args)

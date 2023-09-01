@@ -23,8 +23,8 @@ M.setup = function()
         },
         schemas = {
           -- https://www.schemastore.org/api/json/catalog.json
-          ["https://openshiftjsonschema.dev/v4.9.18-standalone/all.json"] = "*.yaml",
-          --["kubernetes"] = "*.yaml",
+         -- ["https://openshiftjsonschema.dev/v4.9.18-standalone/all.json"] = "*.yaml",
+          ["kubernetes"] = "*.yaml",
           ["http://json.schemastore.org/kustomization"]= "kustomization.yaml",
           ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/v1.174.2/service-schema.json"] = "pipelines/*.yaml"
           -- ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.22.0/all.json"] = "/*.yaml"

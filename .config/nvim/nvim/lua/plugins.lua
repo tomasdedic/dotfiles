@@ -28,7 +28,7 @@ return packer.startup {
       "ntpeters/vim-better-whitespace",
       config = function()
         vim.cmd [[let g:better_whitespace_ctermcolor='174']]
-        vim.cmd [[let g:better_whitespace_filetypes_blacklist=['toggleterm','diff', 'git', 'gitcommit', 'unite', 'qf', 'help', 'markdown', 'fugitive'] ]]
+        vim.cmd [[let g:better_whitespace_filetypes_blacklist=['toggleterm','diff', 'git', 'gitcommit', 'unite', 'qf', 'help','fugitive', 'sh','term'] ]]
       end,
     }
     -- TODO: trying out Comment.nvim, remove if not working out
@@ -72,6 +72,10 @@ return packer.startup {
         { "x", "S" },
         { "n", "ys" },
       },
+    }
+
+    use {
+      "tpope/vim-abolish",
     }
 
     use {
@@ -153,9 +157,10 @@ return packer.startup {
       config = function()
         vim.cmd [[
              command! VLeftDirvish leftabove vsplit | vertical resize 50 | silent Dirvish
-             command! VLeftDirvishFile leftabove vsplit | vertical resize 50 | silent Dirvish %
+             " command! VLeftDirvishFile leftabove vsplit | vertical resize 50 | silent Dirvish %
+             " command! VLeftDirvishRoot leftabove vsplit | vertical resize 50 | silent Dirvish %
              nnoremap <leader>fs :VLeftDirvish<CR>
-             nnoremap <leader>ff :VLeftDirvishFile<CR>
+             nnoremap <leader>ff :Dirvish .<CR>
            ]]
       end,
     }
@@ -210,8 +215,15 @@ return packer.startup {
 
 
     use {
-      "plasticboy/vim-markdown",
-      ft = "markdown"
+      "preservim/vim-markdown",
+      branch = "master",
+      require = {
+        "godlygeek/tabular"
+      },
+      ft = {"markdown","md"},
+      config = function()
+        require "pluginsconf.markdown"
+      end,
     }
 
     use {
@@ -345,6 +357,7 @@ return packer.startup {
     use {
       "airblade/vim-gitgutter"
     }
+
     use {
       "tpope/vim-fugitive",
       -- cmd = { "Git", "Gstatus", "Gblame", "Gpush", "Gpull", "Gvdiffsplit" },
@@ -407,11 +420,11 @@ return packer.startup {
     -- }
 
     -- Themes
-    use { 'ellisonleao/gruvbox.nvim',
-      config = function()
-        require "pluginsconf.gruvbox"
-      end,
-  }
+  --   use { 'ellisonleao/gruvbox.nvim',
+  --     config = function()
+  --       require "pluginsconf.gruvbox"
+  --     end,
+  -- }
 
     use {
       "folke/tokyonight.nvim",
@@ -627,6 +640,11 @@ return packer.startup {
       end,
     }
 
+    -- jump in indent, usefull for yaml
+    use {
+      "jeetsukumaran/vim-indentwise",
+    }
+
     -- Bufferize commands
     use {
       "AndrewRadev/bufferize.vim",
@@ -720,6 +738,13 @@ return packer.startup {
     --   },
     -- }
     --
+    use {
+      'ryicoh/deepl.vim',
+      config = function()
+        require "pluginsconf.deepl"
+      end,
+    }
+
      use {
        'rmagatti/session-lens',
        requires = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
