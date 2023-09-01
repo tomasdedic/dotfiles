@@ -1,13 +1,24 @@
-local packer = require "packer"
+local ensure_packer = function()
+  local install_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+  if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    vim.fn.system { "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path }
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
+end
+
+local packer_bootstrap = ensure_packer()
+
 local config = {
-  compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua",
+  -- compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua",
   -- profile = {
   --   enable = true,
   --   threshold = 1 -- the amount in ms that a plugins load time must be over for it to be included in the profile
   -- }
 }
 
-return packer.startup {
+return require("packer").startup {
   function(use)
     use {
       "wbthomason/packer.nvim",
@@ -44,12 +55,12 @@ return packer.startup {
     --   },
     -- }
 
-    use {
-      "numToStr/Comment.nvim",
-      config = function()
-        require "pluginsconf.comment"
-      end,
-    }
+    -- use {
+    --   "numToStr/Comment.nvim",
+    --   config = function()
+    --     require "pluginsconf.comment"
+    --   end,
+    -- }
 
     use {
       "JoosepAlviste/nvim-ts-context-commentstring",
@@ -60,9 +71,9 @@ return packer.startup {
     --      "tpope/vim-eunuch",
     --    }
 
-    use {
-      "lewis6991/impatient.nvim",
-    }
+    -- use {
+    --   "lewis6991/impatient.nvim",
+    -- }
 
     use {
       "christoomey/vim-tmux-navigator",
@@ -77,6 +88,10 @@ return packer.startup {
         { "x", "S" },
         { "n", "ys" },
       },
+    }
+
+    use {
+      "tpope/vim-commentary",
     }
 
     use {
@@ -118,20 +133,20 @@ return packer.startup {
       cmd = { "Rg" },
     }
 
-    use {
-      "mhinz/vim-grepper",
-      config = function()
-        vim.cmd [[
-           nmap gs <Plug>(GrepperOperator)
-           xmap gs <Plug>(GrepperOperator)
-         ]]
-      end,
-      cmd = { "Grepper", "<Plug>(GrepperOperator)" },
-      keys = {
-        { "n", "gs" },
-        { "x", "gs" },
-      },
-    }
+    -- use {
+    --   "mhinz/vim-grepper",
+    --   config = function()
+    --     vim.cmd [[
+    --        nmap gs <Plug>(GrepperOperator)
+    --        xmap gs <Plug>(GrepperOperator)
+    --      ]]
+    --   end,
+    --   cmd = { "Grepper", "<Plug>(GrepperOperator)" },
+    --   keys = {
+    --     { "n", "gs" },
+    --     { "x", "gs" },
+    --   },
+    -- }
 
     use {
       "nvim-tree/nvim-web-devicons",
@@ -357,9 +372,9 @@ return packer.startup {
     }
 
     ---- Git
-    use {
-      "airblade/vim-gitgutter"
-    }
+    -- use {
+    --   "airblade/vim-gitgutter"
+    -- }
     use {
       "tpope/vim-fugitive",
       -- cmd = { "Git", "Gstatus", "Gblame", "Gpush", "Gpull", "Gvdiffsplit" },
@@ -836,6 +851,9 @@ return packer.startup {
     -- -- use {
     -- --   "mattn/emmet-vim",
     -- -- }
+    if packer_bootstrap then
+      require("packer").sync()
+    end
   end,
   config = config,
 }
