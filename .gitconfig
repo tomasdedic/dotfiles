@@ -6,7 +6,7 @@
 	email = tdedic@healthequity.com
 [alias]
   lol = log --graph --decorate --pretty=oneline --abbrev-commit
-  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all --date=format:%c
   hide = update-index --assume-unchanged
   unhide = update-index --no-assume-unchanged
   ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
@@ -15,11 +15,11 @@
 [difftool]
   prompt = false
 [diff]
-  tool = vimdiff
+  tool = nvimdiff
 [difftool "vimdiff"]
   cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [merge]
-  tool = vimdiff
+  tool = nvimdiff
 [mergetool]
   prompt = true
 [mergetool "vimdiff"]
