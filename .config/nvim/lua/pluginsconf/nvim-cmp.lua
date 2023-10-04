@@ -60,6 +60,7 @@ cmp.setup {
     { name = "npm", keyword_length = 4 },
     { name = "rg" },
     { name = "copilot", group_index = 2 },
+
   }, {
     { name = "buffer",
       option = {
