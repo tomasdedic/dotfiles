@@ -45,7 +45,7 @@ return require("packer").startup {
 
     use {
       "Einenlum/yaml-revealer",
-      ft = "yaml",
+      ft = {"yaml","helm"},
     }
     -- TODO: trying out Comment.nvim, remove if not working out
     -- use {
