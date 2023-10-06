@@ -40,6 +40,16 @@ cmp.setup {
         vim_item.kind_hl_group = "CmpItemKindCopilot"
         return vim_item
       end
+      if entry.source.name == "codeium" then
+        vim_item.kind = "[🜘]"
+        vim_item.kind_hl_group = "CmpItemKindCopilot"
+        return vim_item
+      end
+      if entry.source.name == "rg" then
+        vim_item.kind = "RG"
+        vim_item.kind_hl_group = "CmpItemKindRg"
+        return vim_item
+      end
       -- return lspkind.cmp_format { with_text = true, maxwidth = 50 }(entry, vim_item)
       return vim_item
     end,
@@ -54,14 +64,6 @@ cmp.setup {
   },
   mapping = mapping,
   sources = cmp.config.sources({
-    { name = "nvim_lsp" },
-    { name = "vsnip" },
-    { name = "path" },
-    { name = "npm", keyword_length = 4 },
-    { name = "rg" },
-    { name = "copilot", group_index = 2 },
-
-  }, {
     { name = "buffer",
       option = {
         get_bufnrs= function ()
@@ -69,10 +71,19 @@ cmp.setup {
         end
       }
       },
+    { name = "nvim_lsp" },
+    { name = "vsnip" },
+    { name = "path" },
+    { name = "npm", keyword_length = 4 },
+    { name = "rg" , group_index = 2, keyword_length = 3 },
+    -- { name = "copilot", group_index = 2 },
+    { name = "codeium", group_index = 2 },
+
   }),
 }
 
-vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+vim.api.nvim_set_hl(0, "CmpItemKindCodeium", { fg = "#7984F9" })
+vim.api.nvim_set_hl(0, "CmpItemKindRg", { fg = "#B76819" })
 
 cmp.setup.filetype("lua", {
   sources = cmp.config.sources {
