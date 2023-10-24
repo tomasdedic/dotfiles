@@ -8,8 +8,18 @@ M.setup = function()
   local opts = {
     on_attach = common_on_attach,
     capabilities = capabilities,
-    filetypes = {"go","gomod"},
-    root_dir = util.root_pattern("go.mod", ".git"),
+    cmd = {"gopls"},
+    filetypes = {"go","gomod","gowork","gotmpl"},
+    root_dir = util.root_pattern("go.work","go.mod", ".git"),
+    settings = {
+      gopls = {
+        completeUnimported =true,
+        usePlaceholders =true,
+        analyses = {
+          unusedparams = true,
+        }
+      }
+    }
   }
 
   require("lspconfig").gopls.setup(opts)

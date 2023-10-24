@@ -1,4 +1,5 @@
 local ensure_packer = function()
+
   local install_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
   if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     vim.fn.system { "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path }
@@ -25,10 +26,10 @@ return require("packer").startup {
       -- commit = '8bee5e4ce13691fcb040eced2a219e637b7ef1a1',
     }
 
-    use {
-      "fatih/vim-go",
-      ft = "go",
-    }
+    -- use {
+    --   "fatih/vim-go",
+    --   ft = "go",
+    -- }
 
     use {
       "towolf/vim-helm",
@@ -163,18 +164,18 @@ return require("packer").startup {
       event = "InsertEnter",
     }
 
-   use {
+   -- use {
      -- also exists codeium.nvim with vim-cmp integration instead of virtual text
-     "Exafunction/codeium.nvim",
-      requires = {
-        "nvim-lua/plenary.nvim",
-        "hrsh7th/nvim-cmp",
-      },
-      config = function()
-        require("codeium").setup({
-        })
-      end
-   }
+     -- "Exafunction/codeium.nvim",
+     --  requires = {
+     --    "nvim-lua/plenary.nvim",
+     --    "hrsh7th/nvim-cmp",
+     --  },
+     --  config = function()
+     --    require("codeium").setup({
+     --    })
+     --  end
+   -- }
 
     -- use {
     --   "nvim-tree/nvim-tree.lua",
@@ -290,6 +291,34 @@ return require("packer").startup {
     }
 
     -- LSP
+
+    -- use {
+    -- "jay-babu/mason-null-ls.nvim",
+    --   event = { "BufReadPre", "BufNewFile" },
+    --   requires= {{"williamboman/mason.nvim"}, {"jose-elias-alvarez/null-ls.nvim"}},
+    -- config = function()
+    --   require("mason-null-ls").setup({
+    --     ensure_installed = {"golines"}
+    --   }
+    --   )-- require your null-ls config here (example below)
+    -- end,
+-- }
+    use {
+      "WhoIsSethDaniel/mason-tool-installer",
+      config = function()
+        require('mason-tool-installer').setup {
+          ensure_installed = {
+          'gopls',
+          'golines',
+          'goimports-reviser',
+          'jq',
+          'tflint',
+          'lua-language-server',
+            },
+          }
+     end,
+    }
+
     use {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
@@ -582,10 +611,33 @@ return require("packer").startup {
       cmd = { "SymbolsOutline", "SymbolsOutlineOpen", "SymbolsOutlineClose" },
     }
 
-    -- Typescript utils
-    -- use {
-    --   "jose-elias-alvarez/null-ls.nvim",
-    -- }
+    use {
+      "jose-elias-alvarez/null-ls.nvim",
+      -- ft = {"go"},
+      -- config = require("pluginsconf.lsp.null-ls").setup,
+        config = function()
+          require "pluginsconf.lsp.null-ls"
+        end,
+    }
+
+    use {
+      "olexsmir/gopher.nvim",
+      ft = {"go"},
+      run = function()
+        vim.cmd [[silent! GoInstallDeps]]
+      end,
+      config = function ()
+        require("gopher").setup{
+          commands = {
+              go = "go",
+              gomodifytags = "gomodifytags",
+              gotests = "~/go/bin/gotests", -- also you can set custom command path
+              impl = "impl",
+              iferr = "iferr",
+            },
+        }
+      end,
+    }
     --
     -- use {
     --   "jose-elias-alvarez/typescript.nvim",
@@ -608,7 +660,7 @@ return require("packer").startup {
         require("bqf").setup {
           auto_enable = true,
         }
-      end,
+      end,pl
     }
 
     -- Aligning
