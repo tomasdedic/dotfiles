@@ -1,4 +1,4 @@
-require "impatient"
+vim.loader.enable()
 vim.g.mapleader = ","
 vim.g.maplocalleader = " "
 
@@ -111,8 +111,9 @@ end
 -- Custom autocmds
 vim.cmd [[
 autocmd BufRead,BufNewFile */templates/*.yaml,*/templates/*.tpl,*.gotmpl,helmfile.yaml,values.yaml set ft=helm
+autocmd FileType terraform setlocal commentstring=#%s
+autocmd FileType hcl setlocal commentstring=#%s
 ]]
-
 
 vim.cmd [[
 augroup goyocmds
@@ -131,7 +132,6 @@ augroup end
 ]]
 --schemeswitcher
 
-
 vim.cmd [[
 function! s:SwitchColorscheme()
   if exists('g:colors_name')
@@ -148,18 +148,6 @@ function! s:SwitchColorscheme()
 endfunction
 map <silent> <F6> :call <SID>SwitchColorscheme()<CR>
 ]]
-
-vim.cmd [[
-function! CopyMatches(reg)
-  let hits = []
-  %s//\=len(add(hits, submatch(0))) ? submatch(0) : ''/gne
-  let reg = empty(a:reg) ? '+' : a:reg
-  execute 'let @'.reg.' = join(hits, "\n") . "\n"'
-endfunction
-command! -register CopyMatches call CopyMatches(<q-reg>)
-]]
-
-
 -- Presentation Mode
 vim.g.in_presentation_mode = 0
 
@@ -249,5 +237,5 @@ vim.keymap.set("n", "<leader>cab!", ":call v:lua.delete_hidden_buffers(1)<CR>")
 -- TODO: remove me?
 vim.opt.syntax = "off"
 
-require "packer_compiled"
+-- require "packer_compiled"
 require "plugins"
