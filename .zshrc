@@ -246,6 +246,6 @@ export HOWDOI_COLORIZE=1
 # custom comletion
 #fpath=(~/.zsh.d/ $fpath)
 #source <(kubectl completion zsh )
-
 #set open files limit
 ulimit -n 10240
+eval "$(zoxide init zsh)"

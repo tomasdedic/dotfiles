@@ -35,14 +35,20 @@ require("telescope").setup {
     layout_strategy = "horizontal",
     layout_config = {
       horizontal = {
-        mirror = false,
+        prompt_position = "bottom",
+        preview_width = 0.55,
+        result_width = 0.8,
+        -- mirror = false,
       },
       vertical = {
         mirror = false,
       },
+      width = 0.87,
+      height = 0.80,
+      preview_cutoff = 120,
     },
     file_sorter = require("telescope.sorters").get_fuzzy_file,
-    file_ignore_patterns = {},
+    file_ignore_patterns = {"node_modules"},
     generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
     winblend = 0,
     border = {},
@@ -59,6 +65,8 @@ require("telescope").setup {
         ["<esc>"] = actions.close,
         ["<C-i>"] = require("telescope.actions").cycle_history_next,
         ["<C-o>"] = require("telescope.actions").cycle_history_prev,
+        ["<C-j>"] = require("telescope.actions").move_selection_next,
+        ["<C-k>"] = require("telescope.actions").move_selection_previous,
       },
     },
     extensions = {
@@ -75,7 +83,9 @@ require("telescope").setup {
   },
 }
 
+
 require("pluginsconf.telescope.buffers").setup()
-require("pluginsconf.telescope.dotfiles").setup()
+-- require("pluginsconf.telescope.dotfiles").setup()
 require("pluginsconf.telescope.session-searching").setup()
 require("pluginsconf.telescope.mappings")
+

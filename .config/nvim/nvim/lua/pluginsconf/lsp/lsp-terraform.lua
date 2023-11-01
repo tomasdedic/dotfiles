@@ -2,6 +2,12 @@ local M = {}
 local util = require 'lspconfig/util'
 
 M.setup = function()
+  vim.api.nvim_create_autocmd({"BufWritePre"}, {
+  pattern = {"*.tf", "*.tfvars"},
+  callback = function()
+    vim.lsp.buf.format()
+  end,
+})
   local capabilities = require("pluginsconf.lsp.lsp-common").capabilities
   local common_on_attach = require("pluginsconf.lsp.lsp-common").common_on_attach
 

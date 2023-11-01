@@ -1,23 +1,35 @@
-local packer = require "packer"
+local ensure_packer = function()
+
+  local install_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+  if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    vim.fn.system { "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path }
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
+end
+
+local packer_bootstrap = ensure_packer()
+
 local config = {
-  compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua",
+  -- compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua",
   -- profile = {
   --   enable = true,
   --   threshold = 1 -- the amount in ms that a plugins load time must be over for it to be included in the profile
   -- }
 }
 
-return packer.startup {
+return require("packer").startup {
   function(use)
     use {
       "wbthomason/packer.nvim",
       -- commit = '8bee5e4ce13691fcb040eced2a219e637b7ef1a1',
     }
 
-    use {
-      "fatih/vim-go",
-      ft = "go",
-    }
+    -- use {
+    --   "fatih/vim-go",
+    --   ft = "go",
+    -- }
 
     use {
       "towolf/vim-helm",
@@ -28,8 +40,13 @@ return packer.startup {
       "ntpeters/vim-better-whitespace",
       config = function()
         vim.cmd [[let g:better_whitespace_ctermcolor='174']]
-        vim.cmd [[let g:better_whitespace_filetypes_blacklist=['toggleterm','diff', 'git', 'gitcommit', 'unite', 'qf', 'help','fugitive', 'sh','term'] ]]
+        vim.cmd [[let g:better_whitespace_filetypes_blacklist=['toggleterm','diff', 'git', 'gitcommit', 'unite', 'qf', 'help', 'fugitive'] ]]
       end,
+    }
+
+    use {
+      "Einenlum/yaml-revealer",
+      ft = {"yaml","helm"},
     }
     -- TODO: trying out Comment.nvim, remove if not working out
     -- use {
@@ -39,12 +56,12 @@ return packer.startup {
     --   },
     -- }
 
-    use {
-      "numToStr/Comment.nvim",
-      config = function()
-        require "pluginsconf.comment"
-      end,
-    }
+    -- use {
+    --   "numToStr/Comment.nvim",
+    --   config = function()
+    --     require "pluginsconf.comment"
+    --   end,
+    -- }
 
     use {
       "JoosepAlviste/nvim-ts-context-commentstring",
@@ -55,9 +72,9 @@ return packer.startup {
     --      "tpope/vim-eunuch",
     --    }
 
-    use {
-      "lewis6991/impatient.nvim",
-    }
+    -- use {
+    --   "lewis6991/impatient.nvim",
+    -- }
 
     use {
       "christoomey/vim-tmux-navigator",
@@ -75,9 +92,12 @@ return packer.startup {
     }
 
     use {
-      "tpope/vim-abolish",
+      "tpope/vim-commentary",
     }
 
+    use {
+      "tpope/vim-abolish",
+    }
     use {
       "tpope/vim-repeat",
     }
@@ -114,20 +134,20 @@ return packer.startup {
       cmd = { "Rg" },
     }
 
-    use {
-      "mhinz/vim-grepper",
-      config = function()
-        vim.cmd [[
-           nmap gs <Plug>(GrepperOperator)
-           xmap gs <Plug>(GrepperOperator)
-         ]]
-      end,
-      cmd = { "Grepper", "<Plug>(GrepperOperator)" },
-      keys = {
-        { "n", "gs" },
-        { "x", "gs" },
-      },
-    }
+    -- use {
+    --   "mhinz/vim-grepper",
+    --   config = function()
+    --     vim.cmd [[
+    --        nmap gs <Plug>(GrepperOperator)
+    --        xmap gs <Plug>(GrepperOperator)
+    --      ]]
+    --   end,
+    --   cmd = { "Grepper", "<Plug>(GrepperOperator)" },
+    --   keys = {
+    --     { "n", "gs" },
+    --     { "x", "gs" },
+    --   },
+    -- }
 
     use {
       "nvim-tree/nvim-web-devicons",
@@ -144,6 +164,19 @@ return packer.startup {
       event = "InsertEnter",
     }
 
+   use {
+     -- also exists codeium.nvim with vim-cmp integration instead of virtual text
+     "Exafunction/codeium.nvim",
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "hrsh7th/nvim-cmp",
+      },
+      config = function()
+        require("codeium").setup({
+        })
+      end
+   }
+
     -- use {
     --   "nvim-tree/nvim-tree.lua",
     --   tag = "nightly", -- optional, updated every week. (see issue #1193)
@@ -156,11 +189,10 @@ return packer.startup {
       "justinmk/vim-dirvish",
       config = function()
         vim.cmd [[
-             command! VLeftDirvish leftabove vsplit | vertical resize 50 | silent Dirvish
-             " command! VLeftDirvishFile leftabove vsplit | vertical resize 50 | silent Dirvish %
-             " command! VLeftDirvishRoot leftabove vsplit | vertical resize 50 | silent Dirvish %
-             nnoremap <leader>fs :VLeftDirvish<CR>
-             nnoremap <leader>ff :Dirvish .<CR>
+             command! PwdDirvish silent Dirvish $PWD
+             command! VLeftDirvish leftabove vsplit | vertical resize 50 | silent Dirvish 
+             nnoremap <leader>fs :PwdDirvish<CR>
+             nnoremap <leader>ff :VLeftDirvish<CR>
            ]]
       end,
     }
@@ -213,7 +245,6 @@ return packer.startup {
       },
     }
 
-
     use {
       "preservim/vim-markdown",
       branch = "master",
@@ -260,6 +291,34 @@ return packer.startup {
     }
 
     -- LSP
+
+    -- use {
+    -- "jay-babu/mason-null-ls.nvim",
+    --   event = { "BufReadPre", "BufNewFile" },
+    --   requires= {{"williamboman/mason.nvim"}, {"jose-elias-alvarez/null-ls.nvim"}},
+    -- config = function()
+    --   require("mason-null-ls").setup({
+    --     ensure_installed = {"golines"}
+    --   }
+    --   )-- require your null-ls config here (example below)
+    -- end,
+-- }
+    use {
+      "WhoIsSethDaniel/mason-tool-installer",
+      config = function()
+        require('mason-tool-installer').setup {
+          ensure_installed = {
+          'gopls',
+          'golines',
+          'goimports-reviser',
+          'jq',
+          'tflint',
+          'lua-language-server',
+            },
+          }
+     end,
+    }
+
     use {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
@@ -327,10 +386,13 @@ return packer.startup {
     use { "nvim-lua/plenary.nvim" }
     use {
       "nvim-telescope/telescope.nvim",
+      tag = "0.1.2",
       requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } },
       config = function()
         require "pluginsconf.telescope"
       end,
+
+
       -- cmd = "Telescope",
       -- keys = {
       --   { "n", "<C-p>" },
@@ -354,10 +416,9 @@ return packer.startup {
     }
 
     ---- Git
-    use {
-      "airblade/vim-gitgutter"
-    }
-
+    -- use {
+    --   "airblade/vim-gitgutter"
+    -- }
     use {
       "tpope/vim-fugitive",
       -- cmd = { "Git", "Gstatus", "Gblame", "Gpush", "Gpull", "Gvdiffsplit" },
@@ -552,10 +613,33 @@ return packer.startup {
       cmd = { "SymbolsOutline", "SymbolsOutlineOpen", "SymbolsOutlineClose" },
     }
 
-    -- Typescript utils
-    -- use {
-    --   "jose-elias-alvarez/null-ls.nvim",
-    -- }
+    use {
+      "jose-elias-alvarez/null-ls.nvim",
+      -- ft = {"go"},
+      -- config = require("pluginsconf.lsp.null-ls").setup,
+        config = function()
+          require "pluginsconf.lsp.null-ls"
+        end,
+    }
+
+    use {
+      "olexsmir/gopher.nvim",
+      ft = {"go"},
+      run = function()
+        vim.cmd [[silent! GoInstallDeps]]
+      end,
+      config = function ()
+        require("gopher").setup{
+          commands = {
+              go = "go",
+              gomodifytags = "gomodifytags",
+              gotests = "~/go/bin/gotests", -- also you can set custom command path
+              impl = "impl",
+              iferr = "iferr",
+            },
+        }
+      end,
+    }
     --
     -- use {
     --   "jose-elias-alvarez/typescript.nvim",
@@ -744,7 +828,6 @@ return packer.startup {
         require "pluginsconf.deepl"
       end,
     }
-
      use {
        'rmagatti/session-lens',
        requires = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
@@ -835,6 +918,9 @@ return packer.startup {
     -- -- use {
     -- --   "mattn/emmet-vim",
     -- -- }
+    if packer_bootstrap then
+      require("packer").sync()
+    end
   end,
   config = config,
 }

@@ -7,15 +7,18 @@ vim.o.completeopt = "menu,menuone,noselect,noinsert"
 --   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 --   return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match "^%s*$" == nil
 -- end
-
 local cmp = require "cmp"
+
 -- local lspkind = require "lspkind"
 local mapping = cmp.mapping.preset.insert {
   ["<C-d>"] = cmp.mapping.scroll_docs(-4),
   ["<C-f>"] = cmp.mapping.scroll_docs(4),
   ["<C-x>"] = cmp.mapping.complete {},
   ["<C-e>"] = cmp.mapping.close(),
-  ["<CR>"] = cmp.mapping.confirm { select = true },
+  ["<CR>"] = cmp.mapping.confirm { 
+    cmp.ConfirmBehavior.Insert,
+    select = true, 
+  },
   -- ["<C-p>"] = cmp.mapping.select_prev_item(),
   -- ["<C-n>"] = cmp.mapping.select_next_item(),
   ['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i','c'}),
@@ -31,7 +34,7 @@ local mapping = cmp.mapping.preset.insert {
   --   end
   -- end),
 }
-cmp.setup({
+cmp.setup{
   formatting = {
     format = function(entry, vim_item)
       if entry.source.name == "copilot" then
@@ -39,12 +42,17 @@ cmp.setup({
         vim_item.kind_hl_group = "CmpItemKindCopilot"
         return vim_item
       end
+      if entry.source.name == "codeium" then
+        vim_item.kind = "[🜘]"
+        vim_item.kind_hl_group = "CmpItemKindCodeium"
+        return vim_item
+      end
       -- return lspkind.cmp_format { with_text = true, maxwidth = 50 }(entry, vim_item)
       return vim_item
     end,
   },
   experimental = {
-    ghost_text = { enabled = true },
+    ghost_text = true ,
   },
   snippet = {
     expand = function(args)
@@ -57,10 +65,11 @@ cmp.setup({
     { name = "vsnip" },
     { name = "path" },
     { name = "npm", keyword_length = 4 },
-    -- TODO: enable me? disabling to try and debug input lag/freeze on insert mode
-    -- { name = "nvim_lua" },
-    -- { name = "rg" },
+    { name = "rg" },
+    { name = "path"},
     -- { name = "copilot", group_index = 2 },
+    { name = "codeium", group_index = 2 },
+  },{
     { name = "buffer",
       -- load completition from all openbuffers but in init.vim set hidden must be set instead of set nohidden(bufer get offloaded)
        option = {
@@ -69,18 +78,15 @@ cmp.setup({
          end
            }
     },
-
-  })
-})
+  }),
+}
 
 vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
-
-cmp.setup.filetype("lua", {
-  sources = cmp.config.sources {
-    { name = "nvim_lsp" },
-    { name = "nvim_lua" },
-  },
-})
+-- cmp.setup.filetype("lua", {
+--   sources = cmp.config.sources {
+--     { name = "nvim_lsp" },
+--   },
+-- })
 
 -- TODO: enable me? disabling to try and debug input lag/freeze on insert mode
 -- cmp.setup.cmdline("/", {
