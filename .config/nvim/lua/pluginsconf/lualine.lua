@@ -1,14 +1,14 @@
 local function current_session()
-  return require("auto-session-library").current_session_name()
+  return require("auto-session.lib").current_session_name()
 end
 
 require("lualine").setup {
   options = {
-    theme = "gruvbox",
+    theme = "tokyonight",
   },
   extensions = { "fzf", "fugitive" },
   sections = {
-    lualine_c = { current_session },
+    lualine_c = {current_session },
     lualine_a = {
       {
         "filename",
@@ -18,12 +18,11 @@ require("lualine").setup {
     },
   },
 
-  -- TODO: Uncomment this when neovim/neovim#19458 is closed
-  -- winbar = {
-  --   lualine_b = { { 'filetype', icon_only = true }, { 'filename', path = 1 } },
-  --   lualine_c = { { 'aerial', sep = ' ❯ ' } },
-  -- },
-  -- inactive_winbar = {
-  --   lualine_b = { { 'filetype', icon_only = true }, { 'filename', path = 1 } },
-  -- }
+  winbar = {
+    lualine_b = { { 'filetype', icon_only = true }, { 'filename', path = 1 } },
+    lualine_c = { { 'aerial', sep = ' ❯ ' } },
+  },
+  inactive_winbar = {
+    lualine_b = { { 'filetype', icon_only = true }, { 'filename', path = 1 } },
+  }
 }
