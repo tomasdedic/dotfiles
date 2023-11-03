@@ -1,4 +1,4 @@
-require "impatient"
+vim.loader.enable()
 vim.g.mapleader = ","
 vim.g.maplocalleader = " "
 
@@ -111,8 +111,9 @@ end
 -- Custom autocmds
 vim.cmd [[
 autocmd BufRead,BufNewFile */templates/*.yaml,*/templates/*.tpl,*.gotmpl,helmfile.yaml,values.yaml set ft=helm
+autocmd FileType terraform setlocal commentstring=#%s
+autocmd FileType hcl setlocal commentstring=#%s
 ]]
-
 
 vim.cmd [[
 augroup goyocmds
@@ -129,10 +130,7 @@ augroup AutoAdjustResize
   autocmd VimResized * execute "normal! \<C-w>="
 augroup end
 ]]
---colorschemes
-
-vim.cmd [[colorscheme gruvbox]]
-
+--schemeswitcher
 
 vim.cmd [[
 function! s:SwitchColorscheme()
@@ -140,11 +138,11 @@ function! s:SwitchColorscheme()
     "if g:colors_name == 'PaperColor'
     if &background == 'light'
       set background=dark
-      colorscheme gruvbox
+      colorscheme tokyonight
     "elseif g:colors_name == 'gruvbox'
     elseif &background == 'dark'
       set background=light
-      colorscheme PaperColor
+      colorscheme tokyonight
     endif
   endif
 endfunction
@@ -239,5 +237,5 @@ vim.keymap.set("n", "<leader>cab!", ":call v:lua.delete_hidden_buffers(1)<CR>")
 -- TODO: remove me?
 vim.opt.syntax = "off"
 
-require "packer_compiled"
+-- require "packer_compiled"
 require "plugins"

@@ -1,3 +1,3 @@
 local npairs = require "nvim-autopairs"
-
-npairs.setup {}
+-- add option map_cr
+npairs.setup({ map_cr = true })

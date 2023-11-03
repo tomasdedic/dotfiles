@@ -5,10 +5,10 @@ map <C-l> :wincmd k<CR>
 map <C-;> :wincmd l<CR>
 
 " Move splits
-map <A-j> :wincmd H<CR>
-map <A-k> :wincmd J<CR>
-map <A-l> :wincmd K<CR>
-map <A-;> :wincmd L<CR>
+" map <A-j> :wincmd H<CR>
+" map <A-k> :wincmd J<CR>
+" map <A-l> :wincmd K<CR>
+" map <A-;> :wincmd L<CR>
 
 "make vim hard again
 noremap <Up> <NOP>
