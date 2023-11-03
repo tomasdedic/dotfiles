@@ -63,7 +63,6 @@ vnoremap p "_dP
 xnoremap p "_dP
 
 " Search from visual selection
-vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 " Copy file name or path
 nmap <leader>crp :let @+=expand("%")<CR>:echo "Copied relativepath: ".@+<CR>
@@ -81,7 +80,6 @@ function! AltCommand(path, vim_command)
   endif
 endfunction
 
-" Open alternate - powered by https://github.com/uptech/alt
 " Mnemonic open alternate
 " Mnemonic Open Vertical split Alternate
 " Mnemonic Open Split Alternate
