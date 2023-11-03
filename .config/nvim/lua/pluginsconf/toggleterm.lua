@@ -43,9 +43,6 @@ end
 
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
-
-if vim.g.neovide then
-  vim.keymap.set("n", "<D-d>", "<cmd>ToggleTerm<CR>", { noremap = true })
-  vim.keymap.set("i", "<D-d>", "<C-\\><C-n><cmd>ToggleTerm<CR>", { noremap = true })
-  vim.keymap.set("t", "<D-d>", "<C-\\><C-n><cmd>ToggleTerm<CR>", { noremap = true })
-end
+vim.keymap.set("n", "<C-\\>", "<cmd>ToggleTerm<CR>", { noremap = true })
+vim.keymap.set("i", "<C-\\>", "<cmd>ToggleTerm<CR>", { noremap = true })
+-- vim.keymap.set("i", "<silent><C-\>", "<C-\\><C-n><cmd>ToggleTerm<CR>", { noremap = true })
