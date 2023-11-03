@@ -1,3 +1,7 @@
+local function cwd()
+  return vim.fn.getcwd()
+end
+
 require("lualine").setup {
   options = {
     theme = "tokyonight",
@@ -15,7 +19,8 @@ require("lualine").setup {
     },
   },
   winbar = {
-    lualine_b = { { 'filetype', icon_only = true }, { 'filename', path = 1 } },
+    -- lualine_a = { {cwd} },
+    lualine_b = { { 'filetype', icon_only = true },{cwd}, { 'filename', path = 1 } },
     lualine_c = { { 'aerial', sep = ' ❯ ' } },
   },
   inactive_winbar = {
