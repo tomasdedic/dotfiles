@@ -104,7 +104,8 @@ return require("packer").startup {
 
     use {
       "akinsho/toggleterm.nvim",
-      tag = "v2.*",
+      after="vim-tmux-navigator",
+      -- tag = "v2.*",
       config = function()
         require "pluginsconf.toggleterm"
       end,
