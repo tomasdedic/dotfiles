@@ -5,13 +5,11 @@ M.setup = function()
   local common_on_attach = require("pluginsconf.lsp.lsp-common").common_on_attach
 
   local opts = {
-    capabilities = capabilities,
     on_attach = common_on_attach,
-    -- root_dir = util.root_pattern(vim.fn.getcwd()),
-    -- root_dir = util.root_pattern(".terraform", ".git"),
+    capabilities = capabilities,
   }
 
-  require("lspconfig").bashls.setup(opts)
+  require("lspconfig").pylsp.setup(vim.tbl_deep_extend("force", opts, {}))
 end
 
 return M

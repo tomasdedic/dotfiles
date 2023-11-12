@@ -1,6 +1,6 @@
 local M = {}
-local util = require 'lspconfig/util'
 
+local util = require 'lspconfig/util'
 M.setup = function()
   local capabilities = require("pluginsconf.lsp.lsp-common").capabilities
   local common_on_attach = require("pluginsconf.lsp.lsp-common").common_on_attach

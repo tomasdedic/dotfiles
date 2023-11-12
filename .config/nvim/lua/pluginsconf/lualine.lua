@@ -1,14 +1,15 @@
-local function current_session()
-  return require("auto-session.lib").current_session_name()
-end
+-- local function cwd()
+--   return vim.fn.getcwd()
+-- end
 
 require("lualine").setup {
   options = {
     theme = "tokyonight",
-  },
-  extensions = { "fzf", "fugitive" },
+  disabled_filetypes = { 'toggleterm','packer'}
+},
+  extensions = { 'fzf', 'fugitive' },
   sections = {
-    lualine_c = {current_session },
+    lualine_c = { require('auto-session.lib').current_session_name },
     lualine_a = {
       {
         "filename",
@@ -17,8 +18,8 @@ require("lualine").setup {
       },
     },
   },
-
   winbar = {
+    -- lualine_a = { {cwd} },
     lualine_b = { { 'filetype', icon_only = true }, { 'filename', path = 1 } },
     lualine_c = { { 'aerial', sep = ' ❯ ' } },
   },

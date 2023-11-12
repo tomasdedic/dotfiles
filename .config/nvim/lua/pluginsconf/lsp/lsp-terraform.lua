@@ -20,7 +20,7 @@ M.setup = function()
     root_dir = util.root_pattern('*.tf', '*.tfvars'),
   }
 
-  require("lspconfig").terraformls.setup(opts)
+  require("lspconfig").terraformls.setup(vim.tbl_deep_extend("force", opts, {}))
 end
 
 return M
