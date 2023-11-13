@@ -661,7 +661,7 @@ return require("packer").startup {
         require("bqf").setup {
           auto_enable = true,
         }
-      end,pl
+      end,
     }
 
     -- Aligning
