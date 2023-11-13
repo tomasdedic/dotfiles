@@ -294,6 +294,7 @@ require("lazy").setup({
   },
   {
     "tpope/vim-fugitive",
+    cmd = {"Git"},
     config = function()
       require("pluginsconf.fugitive").setup()
     end,
