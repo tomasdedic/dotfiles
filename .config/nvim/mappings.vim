@@ -1,3 +1,5 @@
+" !IMPORTANT! Config maps HJKL to JKL:
+
 " Move between splits
 map <C-j> :wincmd h<CR>
 map <C-k> :wincmd j<CR>
@@ -5,10 +7,10 @@ map <C-l> :wincmd k<CR>
 map <C-;> :wincmd l<CR>
 
 " Move splits
-map <A-j> :wincmd H<CR>
-map <A-k> :wincmd J<CR>
-map <A-l> :wincmd K<CR>
-map <A-;> :wincmd L<CR>
+" map <A-j> :wincmd H<CR>
+" map <A-k> :wincmd J<CR>
+" map <A-l> :wincmd K<CR>
+" map <A-;> :wincmd L<CR>
 
 "make vim hard again
 noremap <Up> <NOP>
@@ -19,7 +21,6 @@ noremap <Right> <NOP>
 " Copy to system clipboard mapping
 nnoremap cp "+y
 vnoremap cp "+y
-vnoremap <C-Insert> "+y
 
 " Move selection up and down plus formatting
 vnoremap K :m '>+1<CR>gv=gv
@@ -63,6 +64,7 @@ vnoremap p "_dP
 xnoremap p "_dP
 
 " Search from visual selection
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 " Copy file name or path
 nmap <leader>crp :let @+=expand("%")<CR>:echo "Copied relativepath: ".@+<CR>
@@ -80,6 +82,7 @@ function! AltCommand(path, vim_command)
   endif
 endfunction
 
+" Open alternate - powered by github.com/uptech/alt
 " Mnemonic open alternate
 " Mnemonic Open Vertical split Alternate
 " Mnemonic Open Split Alternate
@@ -119,10 +122,10 @@ nnoremap <leader>8 5gt
 nnoremap <leader>9 5gt
 
 " Tab navigation
-nnoremap tj :tabprev<CR>
-nnoremap t; :tabnext<CR>
-nnoremap tn :tabnew<CR>
-nnoremap td :tabclose<CR>
+nnoremap th :tabprev<CR>
+nnoremap tl :tabnext<CR>
+nnoremap tj :tabnew<CR>
+nnoremap tk :tabclose<CR>
 
 " function! CompilePacker()
 "   echo "Removing packer_compiled.vim"

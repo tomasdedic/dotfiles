@@ -2,6 +2,12 @@ local M = {}
 local util = require 'lspconfig/util'
 
 M.setup = function()
+  vim.api.nvim_create_autocmd({"BufWritePre"}, {
+  pattern = {"*.tf", "*.tfvars"},
+  callback = function()
+    vim.lsp.buf.format()
+  end,
+})
   local capabilities = require("pluginsconf.lsp.lsp-common").capabilities
   local common_on_attach = require("pluginsconf.lsp.lsp-common").common_on_attach
 
@@ -14,7 +20,7 @@ M.setup = function()
     root_dir = util.root_pattern('*.tf', '*.tfvars'),
   }
 
-  require("lspconfig").terraformls.setup(opts)
+  require("lspconfig").terraformls.setup(vim.tbl_deep_extend("force", opts, {}))
 end
 
 return M

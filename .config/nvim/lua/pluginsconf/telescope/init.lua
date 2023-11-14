@@ -35,14 +35,20 @@ require("telescope").setup {
     layout_strategy = "horizontal",
     layout_config = {
       horizontal = {
-        mirror = false,
+        prompt_position = "bottom",
+        preview_width = 0.55,
+        result_width = 0.8,
+        -- mirror = false,
       },
       vertical = {
         mirror = false,
       },
+      width = 0.87,
+      height = 0.80,
+      preview_cutoff = 120,
     },
     file_sorter = require("telescope.sorters").get_fuzzy_file,
-    file_ignore_patterns = {},
+    file_ignore_patterns = {"node_modules"},
     generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
     winblend = 0,
     border = {},
@@ -59,7 +65,17 @@ require("telescope").setup {
         ["<esc>"] = actions.close,
         ["<C-i>"] = require("telescope.actions").cycle_history_next,
         ["<C-o>"] = require("telescope.actions").cycle_history_prev,
+        ["<C-j>"] = require("telescope.actions").move_selection_next,
+        ["<C-k>"] = require("telescope.actions").move_selection_previous,
+        ["<C-h>"] = "which_key",
+        ["<C-d>"] = require("telescope.actions").delete_buffer,
+        ["<Tab>"] = require("telescope.actions").toggle_selection,
+        ["<C-q>"] = require("telescope.actions").send_to_qflist + require("telescope.actions").open_qflist,
+        ["<C-w>"] = require("telescope.actions").send_selected_to_qflist + require("telescope.actions").open_qflist,
       },
+      n = {
+    	  ['<c-d>'] = require('telescope.actions').delete_buffer,
+      }, -- normal
     },
     extensions = {
       fzf = {
@@ -75,7 +91,11 @@ require("telescope").setup {
   },
 }
 
+
 require("pluginsconf.telescope.buffers").setup()
-require("pluginsconf.telescope.dotfiles").setup()
-require("pluginsconf.telescope.session-searching").setup()
+-- require("pluginsconf.telescope.dotfiles").setup()
+-- require("pluginsconf.telescope.session-searching").setup()
 require("pluginsconf.telescope.mappings")
+
+-- require("telescope").load_extension "session-lens"
+-- require("telescope").load_extension "fzf"
