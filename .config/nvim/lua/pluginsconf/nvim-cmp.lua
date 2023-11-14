@@ -9,7 +9,7 @@ vim.o.completeopt = "menu,menuone,noselect,noinsert"
 -- end
 
 local cmp = require "cmp"
--- local lspkind = require "lspkind"
+local lspkind = require "lspkind"
 local mapping = cmp.mapping.preset.insert {
   ["<C-d>"] = cmp.mapping.scroll_docs(-4),
   ["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -20,7 +20,6 @@ local mapping = cmp.mapping.preset.insert {
   -- ["<C-n>"] = cmp.mapping.select_next_item(),
   ['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i','c'}),
   ['<C-k>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i','c'}),
-
   -- Disabled tab because of copilot conflict on tab
   -- ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' })
   -- ["<Tab>"] = vim.schedule_wrap(function(fallback)
@@ -54,8 +53,24 @@ cmp.setup {
       return vim_item
     end,
   },
+  -- formatting = {
+  --   format = lspkind.cmp_format {
+  --     mode = "text,symbol",
+  --     max_width = 50,
+  --     symbol_map = { 
+  --       Copilot = "",
+  --       Codeium = "🜘",
+  --   },
+  --   },
+  -- },
+  -- snippet = {
+  --   expand = function(args)
+  --     -- vim.fn["vsnip#anonymous"](args.body)
+  --     require("luasnip").lsp_expand(args.body)
+  --   end,
+  -- },
   experimental = {
-    ghost_text = true,
+    ghost_text = true ,
   },
   snippet = {
     expand = function(args)
@@ -64,35 +79,36 @@ cmp.setup {
   },
   mapping = mapping,
   sources = cmp.config.sources({
-    { name = "buffer",
-      option = {
-        get_bufnrs= function ()
-          return vim.api.nvim_list_bufs()
-        end
-      }
-      },
     { name = "nvim_lsp" },
     { name = "vsnip" },
+    -- { name = "luasnip" },
     { name = "path" },
-    { name = "npm", keyword_length = 4 },
-    { name = "rg" , group_index = 2, keyword_length = 3 },
-    -- { name = "copilot", group_index = 2 },
+    -- { name = "npm", keyword_length = 4 },
     { name = "codeium", group_index = 2 },
-
+    { name = "rg" },
+    { name = "path" },
+  }, {
+    { name = "buffer",
+      -- load completition from all openbuffers but in init.vim set hidden must be set instead of set nohidden(bufer get offloaded)
+       option = {
+         get_bufnrs = function()
+           return vim.api.nvim_list_bufs()
+         end
+           }
+  },
   }),
 }
+vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+vim.api.nvim_set_hl(0, "CmpItemKindCodeium", { fg = "#6CC644" })
+  
 
-vim.api.nvim_set_hl(0, "CmpItemKindCodeium", { fg = "#7984F9" })
-vim.api.nvim_set_hl(0, "CmpItemKindRg", { fg = "#B76819" })
+-- cmp.setup.filetype("lua", {
+--   sources = cmp.config.sources {
+--     { name = "nvim_lsp" },
+--     -- { name = "nvim_lua" },
+--   },
+-- })
 
-cmp.setup.filetype("lua", {
-  sources = cmp.config.sources {
-    { name = "nvim_lsp" },
-    -- { name = "nvim_lua" },
-  },
-})
-
--- TODO: enable me? disabling to try and debug input lag/freeze on insert mode
 -- cmp.setup.cmdline("/", {
 --   sources = {
 --     { name = "buffer" },

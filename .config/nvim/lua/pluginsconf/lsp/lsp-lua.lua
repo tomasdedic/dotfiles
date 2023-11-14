@@ -4,14 +4,19 @@ M.setup = function()
   local capabilities = require("pluginsconf.lsp.lsp-common").capabilities
   local common_on_attach = require("pluginsconf.lsp.lsp-common").common_on_attach
 
-  require("neodev").setup {}
-
-  local lua_ls_opts = {
+  local opts = {
     on_attach = common_on_attach,
     capabilities = capabilities,
+    settings = {
+      Lua = {
+        completion = {
+          callSnippet = "Replace",
+        },
+      },
+    },
   }
 
-  require("lspconfig").lua_ls.setup(vim.tbl_deep_extend("force", lua_ls_opts, {}))
+  require("lspconfig").lua_ls.setup(vim.tbl_deep_extend("force", opts, {}))
 end
 
 return M

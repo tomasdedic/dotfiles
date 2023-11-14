@@ -1,15 +1,15 @@
--- function vim.getVisualSelection()
--- 	vim.cmd('noau normal! "vy"')
--- 	local text = vim.fn.getreg('v')
--- 	vim.fn.setreg('v', {})
---
--- 	text = string.gsub(text, "\n", "")
--- 	if #text > 0 then
--- 		return text
--- 	else
--- 		return ''
--- 	end
--- end
+function vim.getVisualSelection()
+	vim.cmd('noau normal! "vy"')
+	local text = vim.fn.getreg('v')
+	vim.fn.setreg('v', {})
+
+	text = string.gsub(text, "\n", "")
+	if #text > 0 then
+		return text
+	else
+		return ''
+	end
+end
 
 
 vim.keymap.set(
@@ -23,8 +23,6 @@ vim.keymap.set("n", ";", "<cmd>lua require('telescope.builtin').buffers({sort_mr
 vim.keymap.set("n", "<C-p>", "<cmd>lua require('telescope.builtin').git_files()<CR>", {})
 vim.keymap.set("n", "<C-f>", "<cmd>lua require('telescope.builtin').find_files()<CR>", {})
 -- only open buffers
-vim.keymap.set("n", "<leader>lg", "<cmd>lua require('telescope.builtin').live_grep({grep_open_files=true})<CR>", {})
-vim.keymap.set("v", "<leader>lg", "<cmd>lua local text = vim.getVisualSelection() require('telescope.builtin').live_grep({grep_open_files=true, default_text = text })<CR>", {})
 vim.keymap.set("n", "<leader>po", "<cmd>lua require('telescope.builtin').live_grep({grep_open_files=true})<CR>", {})
 vim.keymap.set("v", "<leader>po", "<cmd>lua local text = vim.getVisualSelection() require('telescope.builtin').live_grep({grep_open_files=true, default_text = text })<CR>", {})
 -- all files in cwd
