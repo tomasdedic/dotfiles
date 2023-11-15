@@ -56,15 +56,12 @@ nnoremap <leader>Q :q!<CR>
 nnoremap <D-s> :w<CR>
 inoremap <D-s> <esc> :w<CR>
 
-" Re-ource init.vim
-noremap <leader>rr :source $HOME/.config/nvim/init.vim<CR>
 
 " Paste without yanking for easier paste repetition
 vnoremap p "_dP
 xnoremap p "_dP
 
 " Search from visual selection
-vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 " Copy file name or path
 nmap <leader>crp :let @+=expand("%")<CR>:echo "Copied relativepath: ".@+<CR>
@@ -82,18 +79,6 @@ function! AltCommand(path, vim_command)
   endif
 endfunction
 
-" Open alternate - powered by github.com/uptech/alt
-" Mnemonic open alternate
-" Mnemonic Open Vertical split Alternate
-" Mnemonic Open Split Alternate
-nnoremap <leader>oa :w<CR>:call AltCommand(expand('%'), ':e')<CR>
-nnoremap <leader>ova :w<CR>:call AltCommand(expand('%'), ':vsp')<CR>
-nnoremap <leader>osa :w<CR>:call AltCommand(expand('%'), ':sp')<CR>
-
-" Commented out in favour of lua _G.delete_hidden_buffers
-" Close all buffers but current
-" nnoremap <leader>cab :%bd <bar> e# <bar> bd#<CR>
-" nnoremap <leader>cab! :%bd! <bar> e# <bar> bd#<CR>
 
 " Leader mappings for split and vertical split
 nnoremap <leader>vsp :vsp<CR>
@@ -141,8 +126,8 @@ nnoremap tk :tabclose<CR>
 " augroup end
 
 " Paste today's date 
-nnoremap <leader>. "=strftime('%a %d %b %Y')<CR>P
-inoremap <C-d> <C-r>=strftime('%a %d %b %Y')<CR>
+" nnoremap <leader>. "=strftime('%a %d %b %Y')<CR>P
+" inoremap <C-d> <C-r>=strftime('%a %d %b %Y')<CR>
 
 " Vimwiki
 augroup vimwikigroup

@@ -71,10 +71,10 @@ require("telescope").setup {
         ["<C-d>"] = require("telescope.actions").delete_buffer,
         ["<Tab>"] = require("telescope.actions").toggle_selection,
         ["<C-q>"] = require("telescope.actions").send_to_qflist + require("telescope.actions").open_qflist,
-        ["<C-w>"] = require("telescope.actions").send_selected_to_qflist + require("telescope.actions").open_qflist,
+        -- ["<C-w>"] = require("telescope.actions").send_to_qflist + require("telescope.actions").open_qflist,
       },
       n = {
-    	  ['<c-d>'] = require('telescope.actions').delete_buffer,
+    	  ["<C-d>"] = require('telescope.actions').delete_buffer,
       }, -- normal
     },
     extensions = {
