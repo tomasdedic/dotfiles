@@ -7,7 +7,6 @@ vim.o.completeopt = "menu,menuone,noselect,noinsert"
 --   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 --   return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match "^%s*$" == nil
 -- end
-
 local cmp = require "cmp"
 local lspkind = require "lspkind"
 local mapping = cmp.mapping.preset.insert {
@@ -53,6 +52,10 @@ cmp.setup {
       return vim_item
     end,
   },
+  window = {
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
+    },
   -- formatting = {
   --   format = lspkind.cmp_format {
   --     mode = "text,symbol",
@@ -85,7 +88,7 @@ cmp.setup {
     { name = "path" },
     -- { name = "npm", keyword_length = 4 },
     { name = "codeium", group_index = 2 },
-    { name = "rg" },
+    { name = "rg", keyword_length = 3, group_index = 2 },
     { name = "path" },
   }, {
     { name = "buffer",
