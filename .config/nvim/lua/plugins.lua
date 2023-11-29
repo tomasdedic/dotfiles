@@ -210,10 +210,12 @@ require("lazy").setup({
           ensure_installed = {
           'gopls',
           'golines',
+          'gotests',
           'goimports-reviser',
           'jq',
           'tflint',
           'lua-language-server',
+          'yq'
             },
           }
      end,
@@ -626,7 +628,7 @@ require("lazy").setup({
           commands = {
               go = "go",
               gomodifytags = "gomodifytags",
-              gotests = "~/go/bin/gotests", -- also you can set custom command path
+              gotests = "gotests", -- also you can set custom command path
               impl = "impl",
               iferr = "iferr",
             },

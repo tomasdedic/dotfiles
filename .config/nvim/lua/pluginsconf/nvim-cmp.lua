@@ -33,15 +33,36 @@ local mapping = cmp.mapping.preset.insert {
 
 cmp.setup {
   formatting = {
-    format = lspkind.cmp_format {
-      mode = "symbol",
-      max_width = 50,
-      symbol_map = { 
-        Copilot = "",
-        Codeium = "🜘",
-    },
-    },
+    format = function(entry, vim_item)
+      if entry.source.name == "copilot" then
+        vim_item.kind = "[] Copilot"
+        vim_item.kind_hl_group = "CmpItemKindCopilot"
+        return vim_item
+      end
+      if entry.source.name == "codeium" then
+        vim_item.kind = "[🜘]"
+        vim_item.kind_hl_group = "CmpItemKindCopilot"
+        return vim_item
+      end
+      if entry.source.name == "rg" then
+        vim_item.kind = "RG"
+        vim_item.kind_hl_group = "CmpItemKindRg"
+        return vim_item
+      end
+      -- return lspkind.cmp_format { with_text = true, maxwidth = 50 }(entry, vim_item)
+      return vim_item
+    end,
   },
+  -- formatting = {
+  --   format = lspkind.cmp_format {
+  --     mode = "text,symbol",
+  --     max_width = 50,
+  --     symbol_map = { 
+  --       Copilot = "",
+  --       Codeium = "🜘",
+  --   },
+  --   },
+  -- },
   -- snippet = {
   --   expand = function(args)
   --     -- vim.fn["vsnip#anonymous"](args.body)
@@ -51,6 +72,13 @@ cmp.setup {
   experimental = {
     ghost_text = true ,
   },
+
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered({
+            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+        }),
+            },
   snippet = {
     expand = function(args)
       vim.fn["vsnip#anonymous"](args.body)

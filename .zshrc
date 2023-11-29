@@ -117,6 +117,7 @@ bindkey "^ " forward-word
 # zstyle ':completion:*' expand prefix suffix
 # export MANPATH="/usr/local/man:$MANPATH"
 ENABLE_CORRECTION="true"
+alias gitroot='cd $(git rev-parse --show-toplevel)'
 alias dog='git log --all --decorate --oneline --graph'
 alias sed='gsed'
 alias dircolors='gdircolors'
