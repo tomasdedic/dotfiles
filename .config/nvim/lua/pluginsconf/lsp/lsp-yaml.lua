@@ -38,7 +38,7 @@ M.setup = function()
   }
 
   require("lspconfig").yamlls.setup(opts)
-  vim.lsp.set_log_level("trace")
+  -- vim.lsp.set_log_level("trace")
 end
 
 return M
