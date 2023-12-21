@@ -346,6 +346,15 @@ require("lazy").setup({
       require "pluginsconf.tokyonight"
     end,
   },
+  -- {
+  --   "catppuccin/nvim",
+  --   name = "catppuccin",
+  --   lazy = false, -- make sure we load this during startup
+  --   priority = 1000,
+  --   config = function()
+  --     require "pluginsconf.catppuccin"
+  --   end,
+  -- },
 
   {
       "NLKNguyen/papercolor-theme",
@@ -482,11 +491,18 @@ require("lazy").setup({
   },
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = { "InsertEnter" },
+    event = "VeryLazy",
+    main = "ibl",
+    opts = {},
+    -- event = { "InsertEnter" },
     init = function()
       vim.g.indent_blankline_buftype_exclude = { "terminal" }
       vim.g.indent_blankline_filetype_exclude = { "toggleterm" }
     end,
+    config = function()
+      require("ibl").setup()
+    end,
+
   },
     -- jump in indent, usefull for yaml
   {
@@ -612,7 +628,7 @@ require("lazy").setup({
   -- },
 
    {
-      "jose-elias-alvarez/null-ls.nvim",
+      "nvimtools/none-ls.nvim",
       -- ft = {"go"},
       -- config = require("pluginsconf.lsp.null-ls").setup,
         config = function()
