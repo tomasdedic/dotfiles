@@ -250,4 +250,3 @@ export HOWDOI_COLORIZE=1
 #set open files limit
 ulimit -n 10240
 eval "$(zoxide init zsh)"
-export OPENAI_API_KEY="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"
