@@ -87,7 +87,7 @@ cmp.setup {
     -- { name = "luasnip" },
     { name = "path" },
     -- { name = "npm", keyword_length = 4 },
-    { name = "codeium", group_index = 2 },
+    { name = "codeium", keyword_length = 3, group_index = 2 },
     { name = "rg", keyword_length = 3, group_index = 2 },
     { name = "path" },
   }, {
