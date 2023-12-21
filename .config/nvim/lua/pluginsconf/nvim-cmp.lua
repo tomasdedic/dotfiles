@@ -7,7 +7,6 @@ vim.o.completeopt = "menu,menuone,noselect,noinsert"
 --   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 --   return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match "^%s*$" == nil
 -- end
-
 local cmp = require "cmp"
 local lspkind = require "lspkind"
 local mapping = cmp.mapping.preset.insert {
@@ -32,6 +31,16 @@ local mapping = cmp.mapping.preset.insert {
 }
 
 cmp.setup {
+   enabled = function ()
+        buftype = vim.api.nvim_get_option_value("buftype",{ buf = 0})
+        if buftype == "prompt" then return false end
+        if buftype == "chatgpt-input" then return false end
+
+        local context = require 'cmp.config.context'
+		-- disable autocompletion in comments 
+     		return not context.in_treesitter_capture("comment") and not context.in_syntax_group("Comment")
+    end,
+
   formatting = {
     format = function(entry, vim_item)
       if entry.source.name == "copilot" then
@@ -91,8 +100,8 @@ cmp.setup {
     -- { name = "luasnip" },
     { name = "path" },
     -- { name = "npm", keyword_length = 4 },
-    { name = "codeium", group_index = 2 },
-    { name = "rg" },
+    { name = "codeium", keyword_length = 3, group_index = 2 },
+    { name = "rg", keyword_length = 3, group_index = 2 },
     { name = "path" },
   }, {
     { name = "buffer",
