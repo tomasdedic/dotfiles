@@ -23,10 +23,6 @@ vim.opt.foldcolumn = "1"
 vim.opt.mouse = "a"
 -- set shada (print shada file contents)
 
-if vim.g.started_by_firenvim then
-  vim.opt.guifont = "JetBrainsMono Nerd Font Mono:h14"
-end
-
 vim.opt.background = "dark"
 vim.opt.ts = 2
 vim.opt.sw = 2
@@ -106,22 +102,13 @@ augroup END
 ]]
 
 vim.cmd [[
-augroup goyocmds
-  autocmd!
-  autocmd User GoyoEnter Limelight
-  autocmd User GoyoLeave Limelight!
-
-augroup end
-]]
-
-vim.cmd [[
 augroup AutoAdjustResize
   autocmd!
   autocmd VimResized * execute "normal! \<C-w>="
 augroup end
 ]]
---schemeswitcher
 
+--schemeswitcher
 vim.cmd [[
 function! s:SwitchColorscheme()
   if exists('g:colors_name')
@@ -142,25 +129,6 @@ endfunction
 map <silent> <F6> :call <SID>SwitchColorscheme()<CR>
 map <silent> <F7> :call <SID>SetColorscheme()<CR>
 ]]
--- Presentation Mode
-vim.g.in_presentation_mode = 0
-
-vim.cmd [[
-function! TogglePresentationMode()
-  if g:in_presentation_mode
-    let g:in_presentation_mode = 0
-    set guifont=FiraCode\ Nerd\ Font:h12
-    Goyo!
-  else
-    let g:in_presentation_mode = 1
-    set guifont=FiraCode\ Nerd\ Font:h30
-    " Default Goyo options, just need to use them since I don't want the toggling behaviour to trigger at all.
-    Goyo 80x85%
-  endif
-endfunction
-]]
-
-vim.cmd [[command! TogglePresentationMode :call TogglePresentationMode()<CR>]]
 
 vim.cmd [[
 augroup highlight_yank
