@@ -340,7 +340,7 @@ require("lazy").setup({
   },
   {
     "folke/tokyonight.nvim",
-    lazy = false, -- make sure we load this during startup
+    -- lazy = false, -- make sure we load this during startup
     priority = 1000,
     config = function()
       require "pluginsconf.tokyonight"
@@ -358,6 +358,11 @@ require("lazy").setup({
 
   {
       "NLKNguyen/papercolor-theme",
+  },
+  {
+    "dstein64/vim-startuptime",
+    lazy = false,
+
   },
   {
     "nvim-treesitter/nvim-treesitter",
