@@ -31,6 +31,16 @@ local mapping = cmp.mapping.preset.insert {
 }
 
 cmp.setup {
+   enabled = function ()
+        buftype = vim.api.nvim_get_option_value("buftype",{ buf = 0})
+        if buftype == "prompt" then return false end
+        if buftype == "chatgpt-input" then return false end
+
+        local context = require 'cmp.config.context'
+		-- disable autocompletion in comments 
+     		return not context.in_treesitter_capture("comment") and not context.in_syntax_group("Comment")
+    end,
+
   formatting = {
     format = function(entry, vim_item)
       if entry.source.name == "copilot" then
@@ -52,10 +62,6 @@ cmp.setup {
       return vim_item
     end,
   },
-  window = {
-      completion = cmp.config.window.bordered(),
-      documentation = cmp.config.window.bordered(),
-    },
   -- formatting = {
   --   format = lspkind.cmp_format {
   --     mode = "text,symbol",
@@ -75,6 +81,13 @@ cmp.setup {
   experimental = {
     ghost_text = true ,
   },
+
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered({
+            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+        }),
+            },
   snippet = {
     expand = function(args)
       vim.fn["vsnip#anonymous"](args.body)

@@ -43,4 +43,4 @@ style = "storm", -- The theme comes in three styles, `storm`, `moon`, a darker v
       end,
 })
 
-vim.cmd [[colorscheme tokyonight]]
+-- vim.cmd [[colorscheme tokyonight]]
