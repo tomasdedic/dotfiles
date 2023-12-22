@@ -4,7 +4,7 @@
 
 require("lualine").setup {
   options = {
-    theme = "tokyonight",
+    theme = "catppuccin-macchiato",
   disabled_filetypes = { 'toggleterm','packer'}
 },
   extensions = { 'fzf', 'fugitive' },

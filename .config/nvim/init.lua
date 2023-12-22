@@ -128,15 +128,19 @@ function! s:SwitchColorscheme()
     "if g:colors_name == 'PaperColor'
     if &background == 'light'
       set background=dark
-      colorscheme tokyonight
+      colorscheme catppuccin-frappe
     "elseif g:colors_name == 'gruvbox'
     elseif &background == 'dark'
       set background=light
-      colorscheme tokyonight
+      colorscheme catppuccin-latte
     endif
   endif
 endfunction
+function! s:SetColorscheme()
+   colorscheme catppuccin-macchiato
+endfunction
 map <silent> <F6> :call <SID>SwitchColorscheme()<CR>
+map <silent> <F7> :call <SID>SetColorscheme()<CR>
 ]]
 -- Presentation Mode
 vim.g.in_presentation_mode = 0
