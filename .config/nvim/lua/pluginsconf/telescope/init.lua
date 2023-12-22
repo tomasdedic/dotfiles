@@ -67,10 +67,10 @@ require("telescope").setup {
         ["<C-o>"] = require("telescope.actions").cycle_history_prev,
         ["<C-j>"] = require("telescope.actions").move_selection_next,
         ["<C-k>"] = require("telescope.actions").move_selection_previous,
-        ["<C-h>"] = "which_key",
+        ["<C-w>"] = "which_key",
         ["<C-d>"] = require("telescope.actions").delete_buffer,
         ["<Tab>"] = require("telescope.actions").toggle_selection,
-        ["<C-q>"] = require("telescope.actions").send_to_qflist + require("telescope.actions").open_qflist,
+        -- ["<C-q>"] = require("telescope.actions").send_to_qflist + require("telescope.actions").open_qflist,
         -- ["<C-w>"] = require("telescope.actions").send_to_qflist + require("telescope.actions").open_qflist,
       },
       n = {
