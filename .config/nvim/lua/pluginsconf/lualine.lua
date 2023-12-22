@@ -4,7 +4,7 @@
 
 require("lualine").setup {
   options = {
-    theme = "tokyonight",
+    theme = "catppuccin-macchiato",
   disabled_filetypes = { 'toggleterm','packer'}
 },
   extensions = { 'fzf', 'fugitive' },
@@ -25,6 +25,6 @@ require("lualine").setup {
   },
   inactive_winbar = {
     lualine_b = { { 'filetype', icon_only = true }, { 'filename', path = 1 } },
-  },
-  
+  }
+
 }

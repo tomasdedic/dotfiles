@@ -346,15 +346,15 @@ require("lazy").setup({
       require "pluginsconf.tokyonight"
     end,
   },
-  -- {
-  --   "catppuccin/nvim",
-  --   name = "catppuccin",
-  --   lazy = false, -- make sure we load this during startup
-  --   priority = 1000,
-  --   config = function()
-  --     require "pluginsconf.catppuccin"
-  --   end,
-  -- },
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    lazy = false, -- make sure we load this during startup
+    priority = 1000,
+    config = function()
+      require "pluginsconf.catppuccin"
+    end,
+  },
 
   {
       "NLKNguyen/papercolor-theme",
