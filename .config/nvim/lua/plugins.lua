@@ -157,18 +157,18 @@ require("lazy").setup({
     event = "InsertEnter",
   },
 
-  {
-     -- also exists codeium.nvim with vim-cmp integration instead of virtual text
-   "Exafunction/codeium.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "hrsh7th/nvim-cmp",
-    },
-    config = function()
-      require("codeium").setup({
-      })
-    end
-  },
+  -- {
+  --    -- also exists codeium.nvim with vim-cmp integration instead of virtual text
+  --  "Exafunction/codeium.nvim",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "hrsh7th/nvim-cmp",
+  --   },
+  --   config = function()
+  --     require("codeium").setup({
+  --     })
+  --   end
+  -- },
   {
     "stevearc/oil.nvim",
     lazy = false,
@@ -215,7 +215,8 @@ require("lazy").setup({
           'jq',
           'tflint',
           'lua-language-server',
-          'yq'
+          'yq',
+          'eslint_d'
             },
           }
      end,
@@ -340,7 +341,7 @@ require("lazy").setup({
   },
   {
     "folke/tokyonight.nvim",
-    lazy = false, -- make sure we load this during startup
+    -- lazy = false, -- make sure we load this during startup
     priority = 1000,
     config = function()
       require "pluginsconf.tokyonight"
@@ -360,6 +361,11 @@ require("lazy").setup({
       "NLKNguyen/papercolor-theme",
   },
   {
+    "dstein64/vim-startuptime",
+    lazy = false,
+
+  },
+  {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function()
@@ -375,10 +381,10 @@ require("lazy").setup({
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     cmd = "TSPlaygroundToggle",
   },
-  {
-    "HiPhish/rainbow-delimiters.nvim",
-    event = "BufReadPost",
-  },
+  -- {
+  --   "HiPhish/rainbow-delimiters.nvim",
+  --   event = "BufReadPost",
+  -- },
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
@@ -534,7 +540,8 @@ require("lazy").setup({
   },
   {
     "AckslD/nvim-neoclip.lua",
-    event = "BufReadPost",
+    lazy = false,
+    -- event = "BufReadPost",
     dependencies = { "tami5/sqlite.lua",module = "sqlite" },
     config = function()
       require("neoclip").setup {
@@ -549,7 +556,7 @@ require("lazy").setup({
   },
   {
     "rmagatti/auto-session",
-    lazy = false,
+    -- lazy = false,
     config = function()
       require "pluginsconf.auto-session"
     end,
@@ -660,5 +667,50 @@ require("lazy").setup({
     config = function()
       require("pluginsconf.refactoring").setup()
     end,
-  }
+  },
+  -- {
+  -- 	"robitx/gp.nvim",
+  --   lazy = false,
+  -- 	config = function()
+  -- 		require("gp").setup{
+  --           	openai_api_key = os.getenv("OPENAI_API_KEY"),
+	            -- openai_api_endpoint = "https://openai.koudela.eu/v1/chat/completions",
+  --   }
+  -- 	end,
+  -- }
+ {
+  "epwalsh/obsidian.nvim",
+  version = "*",  -- recommended, use latest release instead of latest commit
+  lazy = true,
+  -- ft = "markdown",
+  -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+  event = {
+    -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+    "BufReadPre " .. vim.fn.expand "~" .. "/vaults/person/**.md",
+    "BufReadPre " .. vim.fn.expand "~" .. "/vaults/work/**.md",
+    "BufNewfile " .. vim.fn.expand "~" .. "/vaults/person/**.md",
+    "BufNewfile " .. vim.fn.expand "~" .. "/vaults/work/**.md",
+    -- "BufReadPre ~/vaults/person/**.md",
+    -- "BufNewFile ~/vaults/work/**.md",
+  },
+  dependencies = {
+    -- Required.
+    "nvim-lua/plenary.nvim",
+
+  },
+  opts = {
+    workspaces = {
+      {
+        name = "personal",
+        path = "~/vaults/person",
+      },
+      {
+        name = "work",
+        path = "~/vaults/work",
+      },
+    },
+
+  },
+}
+
 }, { defaults = { lazy = true }, dev = { path = "~/Projects" } })
