@@ -26,3 +26,5 @@
   cmd = "nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c 'wincmd w' -c 'wincmd J'"
 [alias]
 	d = difftool
+[init]
+	defaultBranch = main
