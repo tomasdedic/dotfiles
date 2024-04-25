@@ -14,3 +14,5 @@ cp -r ~/.ctags.d/ ./
 cp -r ~/.gitconfig ./.gitconfig
 cp -r ~/.zsd.d /.zsh.d
 cp  ~/.config/* ./.config 2>/dev/null
+cp -r ~/.config/iterm2 ./.config/iterm2
+cp -r ~/.config/yamllint ./.config/yamllint
