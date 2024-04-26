@@ -6,6 +6,7 @@ rm -rf ./.zsh.d
 mkdir -p .config
 mkdir -p .oh-my-zsh/themes
 
+cp -r ~/.config/alacritty ./.config/alacritty
 cp -r ~/.oh-my-zsh/themes/fishy.zsh-theme ./.oh-my-zsh/themes
 cp -r ~/.config/nvim ./.config/nvim
 cp -r ~/.zshrc ./.zshrc
