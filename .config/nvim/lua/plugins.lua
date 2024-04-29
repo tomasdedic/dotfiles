@@ -282,13 +282,27 @@ require("lazy").setup({
     "folke/neodev.nvim"
   },
   { "nvim-lua/plenary.nvim" },
-  {
-    "ThePrimeagen/harpoon",
-    branch = "harpoon2",
-    dependencies = { "nvim-lua/plenary.nvim" },
+  -- {
+  --   "ThePrimeagen/harpoon",
+  --   branch = "harpoon2",
+  --   dependencies = { "nvim-lua/plenary.nvim" },
+  --   lazy = false,
+  --   config = function()
+  --     require "pluginsconf.harpoon"
+  --   end
+-- },
+{
+   "cbochs/grapple.nvim",
     lazy = false,
+    cmd = "Grapple",
+    dependencies = {{ "nvim-telescope/telescope.nvim" },{"nvim-tree/nvim-web-devicons"}},
+
+    keys = {
+        { "<C-e>", "<cmd>Grapple toggle_tags<cr>", desc = "Grapple open tags window" },
+        { "<leader>a", "<cmd>Grapple toggle<cr>", desc = "Grapple toggle tag" },
+    },
     config = function()
-      require "pluginsconf.harpoon"
+      require "pluginsconf.grapple"
     end
 },
   {
