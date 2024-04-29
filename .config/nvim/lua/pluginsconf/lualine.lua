@@ -17,6 +17,16 @@ require("lualine").setup {
         path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
       },
     },
+    lualine_b = {
+            {
+                function()
+                    return require("grapple").name_or_index()
+                end,
+                cond = function()
+                    return package.loaded["grapple"] and require("grapple").exists()
+                end
+            }
+        }
   },
   winbar = {
     -- lualine_a = { {cwd} },
