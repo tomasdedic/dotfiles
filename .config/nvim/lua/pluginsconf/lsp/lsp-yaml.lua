@@ -29,9 +29,10 @@ M.setup = function()
           -- ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/v1.174.2/service-schema.json"] = "pipelines/*.yaml"
           -- ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.22.0/all.json"] = "/*.yaml"
         },
-      	validate = true,
+        -- validate:off otherwise it will kill yaml with errors for Openshift manifest
+      	validate = false,
         completion = true,
-        hover = true,
+        hover = false,
 
       }
     }

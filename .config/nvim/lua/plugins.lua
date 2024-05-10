@@ -205,6 +205,7 @@ require("lazy").setup({
   },
   {
       "WhoIsSethDaniel/mason-tool-installer",
+      cmd = "MasonToolsInstall",
       config = function()
         require('mason-tool-installer').setup {
           ensure_installed = {
@@ -216,12 +217,18 @@ require("lazy").setup({
           'tflint',
           'lua-language-server',
           'yq',
-          'eslint_d'
+          'eslint_d',
+          'yaml-language-server',
+          'lua-language-server',
+          'shfmt',
+          'bashls',
+          'helm-ls',
             },
+            auto_update = true,
+            run_on_start = true,
           }
      end,
     },
-  
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
   {
@@ -648,24 +655,14 @@ require("lazy").setup({
       require("pluginsconf.dressing").setup()
     end,
   },
-  -- {
-  --   "rmagatti/gx-extended.nvim",
-  --   event = "VeryLazy",
-  --   config = function()
-  --     require("pluginsconf.gx-extended").setup()
-  --   end,
-  --   dev = true
-  -- },
-
    {
       "nvimtools/none-ls.nvim",
-      -- ft = {"go"},
-      -- config = require("pluginsconf.lsp.null-ls").setup,
+      lazy = false,
         config = function()
           require "pluginsconf.lsp.null-ls"
         end,
+      requires = { "nvim-lua/plenary.nvim" },
     },
-
     {
       "olexsmir/gopher.nvim",
       ft = {"go"},
@@ -713,8 +710,6 @@ require("lazy").setup({
     "BufReadPre " .. vim.fn.expand "~" .. "/vaults/work/**.md",
     "BufNewfile " .. vim.fn.expand "~" .. "/vaults/person/**.md",
     "BufNewfile " .. vim.fn.expand "~" .. "/vaults/work/**.md",
-    -- "BufReadPre ~/vaults/person/**.md",
-    -- "BufNewFile ~/vaults/work/**.md",
   },
   dependencies = {
     -- Required.
@@ -737,3 +732,4 @@ require("lazy").setup({
 }
 
 }, { defaults = { lazy = true }, dev = { path = "~/Projects" } })
+

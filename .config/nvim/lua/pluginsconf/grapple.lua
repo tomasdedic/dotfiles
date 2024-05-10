@@ -18,7 +18,7 @@ require("grapple").setup({
     loaded_title = nil,
     win_opts = {
         -- Can be fractional
-        width = 40,
+        width = 80,
         height = 12,
         row = 0.5,
         col = 0.5,
@@ -29,6 +29,6 @@ require("grapple").setup({
         style = "minimal",
         title_pos = "center",
         title = "Grapple",
-        title_padding = " ",
+        title_padding = "",
     },
 })
