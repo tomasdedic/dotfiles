@@ -706,30 +706,53 @@ require("lazy").setup({
   -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
   event = {
     -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+    "BufReadPre " .. vim.fn.expand "~" .. "/vaults/**.md",
     "BufReadPre " .. vim.fn.expand "~" .. "/vaults/person/**.md",
     "BufReadPre " .. vim.fn.expand "~" .. "/vaults/work/**.md",
     "BufNewfile " .. vim.fn.expand "~" .. "/vaults/person/**.md",
     "BufNewfile " .. vim.fn.expand "~" .. "/vaults/work/**.md",
+    "BufNewfile " .. vim.fn.expand "~" .. "/vaults/**.md",
   },
   dependencies = {
     -- Required.
     "nvim-lua/plenary.nvim",
 
   },
-  opts = {
+   opts = {
     workspaces = {
       {
-        name = "personal",
-        path = "~/vaults/person",
+        name = "OCP",
+        path = "~/vaults/OCP",
       },
+    },
+  },
+},
+  {
+  "folke/flash.nvim",
+  event = "VeryLazy",
+  -- @type Flash.Config
+  opts = {},
+  -- stylua: ignore
+  keys = {
+    { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+    { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+    { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+    { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+    { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+  },
+},
+  opts = {
+    workspaces = {
+      -- {
+      --   name = "personal",
+      --   path = "~/vaults/person",
+      -- },
       {
         name = "work",
-        path = "~/vaults/work",
+        path = "~/vaults/OCP",
       },
     },
 
   },
-}
-
 }, { defaults = { lazy = true }, dev = { path = "~/Projects" } })
 
