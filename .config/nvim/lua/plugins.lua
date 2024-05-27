@@ -716,16 +716,21 @@ require("lazy").setup({
   dependencies = {
     -- Required.
     "nvim-lua/plenary.nvim",
+  },
+    config = function()
+      require("pluginsconf.obsidian").setup()
+    end,
 
-  },
-   opts = {
-    workspaces = {
-      {
-        name = "OCP",
-        path = "~/vaults/OCP",
-      },
-    },
-  },
+
+
+--    opts = {
+--     workspaces = {
+--       {
+--         name = "OCP",
+--         path = "~/vaults/OCP",
+--       },
+--     },
+--   },
 },
   {
   "folke/flash.nvim",
@@ -741,18 +746,5 @@ require("lazy").setup({
     { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
   },
 },
-  opts = {
-    workspaces = {
-      -- {
-      --   name = "personal",
-      --   path = "~/vaults/person",
-      -- },
-      {
-        name = "work",
-        path = "~/vaults/OCP",
-      },
-    },
-
-  },
 }, { defaults = { lazy = true }, dev = { path = "~/Projects" } })
 
