@@ -11,7 +11,7 @@ cp -r ~/.oh-my-zsh/themes/fishy.zsh-theme ./.oh-my-zsh/themes
 cp -r ~/.config/nvim ./.config/nvim
 cp -r ~/.zshrc ./.zshrc
 cp -r ~/.tmux.conf ./.tmux.conf
-cp -r ~/.ctags.d/ ./
+# cp -r ~/.ctags.d/ ./
 cp -r ~/.gitconfig ./.gitconfig
 # cp -r ~/.zsh.d /.zsh.d
 cp  ~/.config/* ./.config 2>/dev/null

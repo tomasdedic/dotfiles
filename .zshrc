@@ -185,6 +185,17 @@ fif() {
   vim $file
 }
 
+function ctx() {
+  local pathtoconfig="$HOME/.kube/confignopass"
+  local kbconfig
+  kbconfig=$(find  $pathtoconfig -type f -name \*-config | xargs basename | sort | fzf -q "$1")
+  # export cannot be returned back to parent process, source workaround
+  [ -n "$kbconfig" ] && (echo "export KUBECONFIG=$pathtoconfig/$kbconfig" >~/tmp/kube) \
+  && printf '%b\n' "\033[1m"$pathtoconfig/$kbconfig"\033[0m"
+  source ~/tmp/kube
+
+}
+
 # Select a running docker container to stop
 function pos() {
   local cid
