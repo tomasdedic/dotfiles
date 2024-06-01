@@ -183,20 +183,29 @@ require("lazy").setup({
       { "X", mode = "x" },
     },
   },
+  -- {
+  --   "glacambre/firenvim",
+  --   lazy = false,
+  --   build = function()
+  --     vim.fn["firenvim#install"](0)
+  --   end,
+  --   config = function()
+  --     require "pluginsconf.firenvim"
+  --   end,
+  -- },
   {
-    "glacambre/firenvim",
-    lazy = false,
-    build = function()
-      vim.fn["firenvim#install"](0)
-    end,
-    config = function()
-      require "pluginsconf.firenvim"
-    end,
+      "ray-x/lsp_signature.nvim",
   },
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "j-hui/fidget.nvim"
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+      "j-hui/fidget.nvim",
+      -- Autoformatting
+      "stevearc/conform.nvim",
+      -- Schema information
+      "b0o/SchemaStore.nvim",
     },
     event = "BufReadPost",
     config = function()
@@ -223,65 +232,58 @@ require("lazy").setup({
           'shfmt',
           'bashls',
           'helm-ls',
+          'jsonls',
             },
             auto_update = true,
             run_on_start = true,
           }
      end,
     },
-  "williamboman/mason.nvim",
-  "williamboman/mason-lspconfig.nvim",
-  {
-    "j-hui/fidget.nvim",
-    tag = "legacy",
-    event = "LspAttach",
-    config = function()
-      require "pluginsconf.fidget"
-    end,
-  },
-  {
-    "ray-x/lsp_signature.nvim",
-  },
+  -- {
+  --   "j-hui/fidget.nvim",
+  --   tag = "legacy",
+  --   event = "LspAttach",
+  --   config = function()
+  --     require "pluginsconf.fidget"
+  --   end,
+  -- },
+  -- {
+  --   "ray-x/lsp_signature.nvim",
+  -- },
   {
     "hrsh7th/nvim-cmp",
-    event = "BufEnter",
+    lazy = false,
+    priority = 100,
+    -- event = "BufEnter",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
       "lukas-reineke/cmp-rg",
-      "Exafunction/codeium.nvim",
       "hrsh7th/cmp-vsnip",
-      "hrsh7th/vim-vsnip",
+      { "hrsh7th/vim-vsnip",
+      config = function()
+        vim.cmd [[let g:vsnip_snippet_dir="~/.config/nvim/vsnip"]]
+      end,
+      {
+      "L3MON4D3/LuaSnip",
+      build = "make install_jsregexp",
+      config = function()
+        require "pluginsconf.luasnip"
+      end,
+    },
+      "saadparwaiz1/cmp_luasnip",
+  },
 
     },
     config = function()
       require "pluginsconf.nvim-cmp"
     end,
   },
-  {
-    "L3MON4D3/LuaSnip",
-    -- follow latest release.
-    version = "v1.*",
-    -- install jsregexp (optional!:).
-    build = "make install_jsregexp",
-    config = function()
-      require "pluginsconf.luasnip"
-    end,
-  },
+
   { "rafamadriz/friendly-snippets"},
-  { "hrsh7th/vim-vsnip",
-      config = function()
-        vim.cmd [[let g:vsnip_snippet_dir="~/.config/nvim/vsnip"]]
-      end,
-  },
-  -- { "saadparwaiz1/cmp_luasnip" },
-  { "hrsh7th/cmp-nvim-lsp", },
-  { "hrsh7th/cmp-buffer", },
-  { "hrsh7th/cmp-path", },
-  { "hrsh7th/cmp-cmdline", },
-  { "lukas-reineke/cmp-rg", },
+
   {
     "onsails/lspkind-nvim",
   },
@@ -404,7 +406,7 @@ require("lazy").setup({
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
-    dependencies = "nvim-treesitter/nvim-treesitter-context",
+    dependencies = "nvim-treesitter/nvim-treesitter",
   },
   {
     "nvim-treesitter/playground",
@@ -460,23 +462,23 @@ require("lazy").setup({
     "wellle/targets.vim",
     event = { "BufReadPost" },
   },
-  {
-    "simrat39/symbols-outline.nvim",
-    config = function()
-      require("symbols-outline").setup {
-        highlight_hovered_item = true,
-        show_guides = true,
-      }
-    end,
-    cmd = { "SymbolsOutline", "SymbolsOutlineOpen", "SymbolsOutlineClose" },
-  },
-  {
-    'mfussenegger/nvim-lint',
-    event = "BufReadPost",
-    config = function()
-      require('pluginsconf.nvim-lint').setup()
-    end
-  },
+  -- {
+  --   "simrat39/symbols-outline.nvim",
+  --   config = function()
+  --     require("symbols-outline").setup {
+  --       highlight_hovered_item = true,
+  --       show_guides = true,
+  --     }
+  --   end,
+  --   cmd = { "SymbolsOutline", "SymbolsOutlineOpen", "SymbolsOutlineClose" },
+  -- },
+  -- {
+  --   'mfussenegger/nvim-lint',
+  --   event = "BufReadPost",
+  --   config = function()
+  --     require('pluginsconf.nvim-lint').setup()
+  --   end
+  -- },
   {
     "kevinhwang91/nvim-bqf",
     dependencies = { { "junegunn/fzf", optional = true }, { "junegunn/fzf.vim", optional = true } },
@@ -637,24 +639,24 @@ require("lazy").setup({
       { "<leader>fml" },
     },
   },
-  {
-    "sourcegraph/sg.nvim",
-    config = require("pluginsconf.sg").setup,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "hrsh7th/cmp-nvim-lsp"
-    },
-    keys = {
-      { "<leader>sg" },
-    },
-  },
-  {
-    "stevearc/dressing.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("pluginsconf.dressing").setup()
-    end,
-  },
+  -- {
+  --   "sourcegraph/sg.nvim",
+  --   config = require("pluginsconf.sg").setup,
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "hrsh7th/cmp-nvim-lsp"
+  --   },
+  --   keys = {
+  --     { "<leader>sg" },
+  --   },
+  -- },
+  -- {
+  --   "stevearc/dressing.nvim",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require("pluginsconf.dressing").setup()
+  --   end,
+  -- },
    {
       "nvimtools/none-ls.nvim",
       lazy = false,
@@ -707,10 +709,6 @@ require("lazy").setup({
   event = {
     -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
     "BufReadPre " .. vim.fn.expand "~" .. "/vaults/**.md",
-    "BufReadPre " .. vim.fn.expand "~" .. "/vaults/person/**.md",
-    "BufReadPre " .. vim.fn.expand "~" .. "/vaults/work/**.md",
-    "BufNewfile " .. vim.fn.expand "~" .. "/vaults/person/**.md",
-    "BufNewfile " .. vim.fn.expand "~" .. "/vaults/work/**.md",
     "BufNewfile " .. vim.fn.expand "~" .. "/vaults/**.md",
   },
   dependencies = {

@@ -16,6 +16,10 @@ M.setup = function()
        trace = {
          server = "on",
        },
+              schemaStore = {
+                enable = false,
+                url = "",
+              },
         format = {
           enable = true,
           singleQuote = false,
