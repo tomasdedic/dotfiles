@@ -88,10 +88,10 @@ end
 
 -- Custom autocmds
 vim.cmd [[
-autocmd BufRead,BufNewFile */templates/*.yaml,*/templates/*.tpl,*.gotmpl,helmfile.yaml,values.yaml set ft=helm
 autocmd FileType terraform setlocal commentstring=#%s foldmethod=manual
 autocmd FileType hcl setlocal commentstring=#%s
 ]]
+-- autocmd BufRead,BufNewFile */templates/*.yaml,*/templates/*.tpl,*.gotmpl,helmfile.yaml,values.yaml set ft=helm
 
 vim.cmd [[
 augroup remember_folds

@@ -10,7 +10,7 @@ require("mason-lspconfig").setup {}
 require("pluginsconf.lsp.lsp-lua").setup()
 -- require("pluginsconf.lsp.lsp-typescript").setup()
 require("pluginsconf.lsp.lsp-yaml").setup()
--- require("pluginsconf.lsp.lsp-json").setup()
+require("pluginsconf.lsp.lsp-json").setup()
 -- require("pluginsconf.lsp.lsp-vimscript").setup()
 -- require("pluginsconf.lsp.lsp-rust").setup()
 -- require("pluginsconf.lsp.lsp-prisma").setup()

@@ -1,17 +1,16 @@
-vim.o.completeopt = "menu,menuone,noselect,noinsert"
+-- vim.o.completeopt = "menu,menuone,noselect,noinsert"
 
--- local has_words_before = function()
---   if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
---     return false
---   end
---   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
---   return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match "^%s*$" == nil
--- end
+vim.opt.completeopt = { "menu", "menuone", "noselect","noinsert" }
+vim.opt.shortmess:append "c"
+
 local cmp = require "cmp"
+
 local lspkind = require "lspkind"
+lspkind.init {}
+
 local mapping = cmp.mapping.preset.insert {
-  ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-  ["<C-f>"] = cmp.mapping.scroll_docs(4),
+  -- ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+  -- ["<C-f>"] = cmp.mapping.scroll_docs(4),
   ["<C-x>"] = cmp.mapping.complete {},
   ["<C-e>"] = cmp.mapping.close(),
   ["<CR>"] = cmp.mapping.confirm { select = true },
@@ -19,15 +18,6 @@ local mapping = cmp.mapping.preset.insert {
   -- ["<C-n>"] = cmp.mapping.select_next_item(),
   ['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i','c'}),
   ['<C-k>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i','c'}),
-  -- Disabled tab because of copilot conflict on tab
-  -- ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' })
-  -- ["<Tab>"] = vim.schedule_wrap(function(fallback)
-  --   if cmp.visible() and has_words_before() then
-  --     cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
-  --   else
-  --     fallback()
-  --   end
-  -- end),
 }
 
 cmp.setup {
