@@ -9,7 +9,7 @@ export EDITOR="/usr/local/bin/nvim"
 #ZSH_THEME="powerlevel10k/powerlevel10k"
 export LC_ALL=en_US.UTF-8
 # Path to your oh-my-zsh installation.
-export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="/opt/homebrew/share/zsh-syntax-highlighting/highlighters"
+export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="/usr/local/share/zsh-syntax-highlighting/highlighters"
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="fishy"
 
@@ -93,20 +93,18 @@ plugins=(
      # docker
      # kubectl
      # helm
-     fzf
+     # fzf
 	   git
-     # zsh-vim-mode
+     # zsh-vi-mode
      # z
      kube-ps1
      # zshmarks
      golang
 )
 # KUBE-PS1
-export KUBE_PS1_BINARY=oc
-export KUBE_PS1_SYMBOL_ENABLE=true
+export KUBE_PS1_BINARY=kubectl
+export KUBE_PS1_SYMBOL_ENABLE=false
 
-export FZF_LEGACY_KEYBINDINGS=0
-export FZF_TMUX=1
 source $ZSH/oh-my-zsh.sh
 # source ${ZSH_CUSTOM}/run_complete.sh
 #ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
@@ -117,16 +115,16 @@ bindkey "^ " forward-word
 # zstyle ':completion:*' expand prefix suffix
 # export MANPATH="/usr/local/man:$MANPATH"
 ENABLE_CORRECTION="true"
-alias rm=trash
 alias gitroot='cd $(git rev-parse --show-toplevel)'
 alias dog='git log --all --decorate --oneline --graph'
 alias sed='gsed'
+alias awk='gawk'
 alias dircolors='gdircolors'
-eval $(dircolors ~/.config/dircolors.ansi-dark)
 alias setkey='~/.config/startupscripts/setkeyboard'
 alias neat='kubectl neat'
 alias ls='gls --color=auto'
 alias kn='kubectl config view --minify --output 'jsonpath={..namespace}'; echo'
+eval $(dircolors ~/.config/dircolors.ansi-dark)
 alias tmux='tmux -2'
 alias gdoc='gopherdoc'
 alias -g pbcopy='xclip -selection clipboard'
@@ -136,6 +134,8 @@ alias kb='kubectl'
 alias pb='tmux loadb -'
 alias xin='xinput --disable $(xinput list --id-only "Synaptics TM3276-022")'
 alias hr="fc -RI" #sync history
+alias viq="urxvt -e vim "
+alias vim='nvim'
 alias cat="bat -p --theme GitHub"
 # alias docker=podman
 alias bc='bc -l'
@@ -152,9 +152,6 @@ alias 7='cd -7'
 alias 8='cd -8'
 alias 9='cd -9'
 
-export HELM_REGISTRY_CONFIG=~/.config/helm/registry.json
-export HELM_REPOSITORY_CONFIG=~/.config/helm/repositories.yaml
-
 if type nvim > /dev/null 2>&1; then
   alias vim='nvim'
   alias vi='nvim'
@@ -165,8 +162,9 @@ compdef kb='kubectl'
 
 export DISABLE_MAGIC_FUNCTIONS=true
 export FZF_BASE="$HOME/.fzf"
+# export LSPPATH="$HOME/.local/share/nvim/lsp_servers/yaml/node_modules/yaml-language-server/bin":"$HOME/.local/share/nvim/lsp_servers/bash/node_modules/bash-language-server/bin":"$HOME/.local/share/nvim/lsp_servers/terraform/terraform-ls":"$HOME/.local/share/nvim/lsp_servers/terraform":"$HOME/.local/share/nvim/lsp_servers/tflint"
 
-export PATH="$HOME/bin:/usr/local/opt/grep/libexec/gnubin/:${KREW_ROOT:-$HOME/.krew}/bin:$PATH:$LSPPATH:/usr/local/bin:/usr/X11/bin:$GOPATH/bin"
+export PATH="/usr/local/opt/grep/libexec/gnubin/:${KREW_ROOT:-$HOME/.krew}/bin:$PATH:$LSPPATH:/usr/local/bin:/usr/X11/bin:$GOPATH/bin:$HOME/bin"
 export FZF_LEGACY_KEYBINDINGS=0
 export FZF_TMUX=1
 
@@ -182,18 +180,7 @@ fif() {
     return 1;
   fi
   local file=$(rg --files-with-matches --ignore-case --no-messages "$1" | fzf $FZF_PREVIEW_WINDOW --preview "rg --ignore-case --pretty --context 10 '$1' {}"|awk '{print $1}')
-  vim $file
-}
-
-function ctx() {
-  local pathtoconfig="$HOME/.kube/confignopass"
-  local kbconfig
-  kbconfig=$(find  $pathtoconfig -type f -name \*-config | xargs basename | sort | fzf -q "$1")
-  # export cannot be returned back to parent process, source workaround
-  [ -n "$kbconfig" ] && (echo "export KUBECONFIG=$pathtoconfig/$kbconfig" >~/tmp/kube) \
-  && printf '%b\n' "\033[1m"$pathtoconfig/$kbconfig"\033[0m"
-  source ~/tmp/kube
-
+  [ -n "$file" ] && vim $file
 }
 
 # Select a running docker container to stop
@@ -232,6 +219,21 @@ function azctx() {
     [ -n "$sub" ] && az account set --subscription "$sub"
 }
 
+#pet register
+function prev() {
+  PREV=$(fc -lrn | head -n 1)
+  sh -c "pet new `printf %q "$PREV"`"
+}
+#pet search
+function pet-select() {
+  BUFFER=$(pet search --query "$LBUFFER")
+  CURSOR=$#BUFFER
+  zle redisplay
+}
+zle -N pet-select
+stty -ixon
+bindkey '^s' pet-select
+
 export SUDO_ASKPASS=/usr/bin/ssh-askpass
 # profiler output
 # zprof
@@ -239,10 +241,11 @@ export SUDO_ASKPASS=/usr/bin/ssh-askpass
 bindkey "^[OA" up-history
 bindkey "^[OB" down-history
 export HOWDOI_COLORIZE=1
-FPATH=$(brew --prefix)/share/zsh-completion:~/.zsh.d/:$FPATH
-autoload -Uz +X compinit
-compinit
+# autoload -U +X compinit && compinit
+# autoload -U +X bashcompinit && bashcompinit
+# custom comletion
+#fpath=(~/.zsh.d/ $fpath)
+#source <(kubectl completion zsh )
 #set open files limit
 ulimit -n 10240
-# make cd commant good agin
 eval "$(zoxide init zsh)"

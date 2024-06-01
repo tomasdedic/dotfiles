@@ -5,7 +5,7 @@ function M.setup()
   workspaces = {
     {
       name = "OCP",
-      path = "~/vaults/OCP",
+      path = "~/vaults/HEQ",
     },
   },
   notes_subdir = "notes",
