@@ -297,8 +297,10 @@ require("lazy").setup({
 		"cbochs/grapple.nvim",
 		lazy = false,
 		cmd = "Grapple",
-		dependencies = { { "nvim-telescope/telescope.nvim" }, { "nvim-tree/nvim-web-devicons" } },
-
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+			"nvim-tree/nvim-web-devicons",
+		},
 		keys = {
 			{ "<C-e>", "<cmd>Grapple toggle_tags<cr>", desc = "Grapple open tags window" },
 			{ "<leader>a", "<cmd>Grapple toggle<cr>", desc = "Grapple toggle tag" },
@@ -340,10 +342,12 @@ require("lazy").setup({
 			{ "<leader>gd" },
 		},
 	},
+
 	{
 		"tpope/vim-rhubarb",
 		dependencies = "vim-fugitive",
 	},
+
 	{
 		"NeogitOrg/neogit",
 		cmd = { "Neogit" },
@@ -365,6 +369,7 @@ require("lazy").setup({
 			vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<CR>", {})
 		end,
 	},
+
 	{
 		"sindrets/diffview.nvim",
 		config = function()
@@ -373,14 +378,16 @@ require("lazy").setup({
 		cmd = { "DiffviewOpen" },
 		keys = "<leader>ddo",
 	},
+
 	{
 		"folke/tokyonight.nvim",
 		-- lazy = false, -- make sure we load this during startup
-		priority = 1000,
+		-- 	priority = 1000,
 		config = function()
 			require("pluginsconf.tokyonight")
 		end,
 	},
+
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
@@ -394,39 +401,25 @@ require("lazy").setup({
 	{
 		"NLKNguyen/papercolor-theme",
 	},
+
 	{
 		"dstein64/vim-startuptime",
 		lazy = false,
 	},
+
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter-context",
+			"nvim-treesitter/playground",
+			"HiPhish/rainbow-delimiters.nvim",
+			"nvim-treesitter/nvim-treesitter-textobjects",
+			"RRethy/nvim-treesitter-textsubjects",
+		},
 		config = function()
 			require("pluginsconf.treesitter")
 		end,
-	},
-	{
-		"nvim-treesitter/nvim-treesitter-context",
-		dependencies = "nvim-treesitter/nvim-treesitter",
-	},
-	{
-		"nvim-treesitter/playground",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		cmd = "TSPlaygroundToggle",
-	},
-	-- {
-	--   "HiPhish/rainbow-delimiters.nvim",
-	--   event = "BufReadPost",
-	-- },
-	{
-		"nvim-treesitter/nvim-treesitter-textobjects",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		event = { "BufReadPost" },
-	},
-	{
-		"RRethy/nvim-treesitter-textsubjects",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		event = { "BufReadPost" },
 	},
 	{
 		"lewis6991/gitsigns.nvim",
@@ -443,10 +436,7 @@ require("lazy").setup({
 		end,
 		event = { "BufReadPost" },
 	},
-	{
-		"junegunn/fzf.vim",
-		dependencies = { "kevinhwang91/nvim-bqf", "junegunn/fzf" },
-	},
+
 	{
 		"nvim-lualine/lualine.nvim",
 		event = "VeryLazy",
@@ -455,34 +445,20 @@ require("lazy").setup({
 			require("pluginsconf.lualine")
 		end,
 	},
+
 	{
 		"hashivim/vim-terraform",
 		ft = { "terraform" },
 	},
+
 	{
 		"wellle/targets.vim",
 		event = { "BufReadPost" },
 	},
-	-- {
-	--   "simrat39/symbols-outline.nvim",
-	--   config = function()
-	--     require("symbols-outline").setup {
-	--       highlight_hovered_item = true,
-	--       show_guides = true,
-	--     }
-	--   end,
-	--   cmd = { "SymbolsOutline", "SymbolsOutlineOpen", "SymbolsOutlineClose" },
-	-- },
-	-- {
-	--   'mfussenegger/nvim-lint',
-	--   event = "BufReadPost",
-	--   config = function()
-	--     require('pluginsconf.nvim-lint').setup()
-	--   end
-	-- },
+
 	{
 		"kevinhwang91/nvim-bqf",
-		dependencies = { { "junegunn/fzf", optional = true }, { "junegunn/fzf.vim", optional = true } },
+		dependencies = { { "junegunn/fzf", optional = true } },
 		ft = { "qf" },
 		-- config = function()
 		--   require("bqf").setup {
@@ -570,6 +546,7 @@ require("lazy").setup({
 		end,
 		keys = "<leader>zz",
 	},
+
 	{
 		"AckslD/nvim-neoclip.lua",
 		lazy = false,
@@ -586,6 +563,7 @@ require("lazy").setup({
 			{ "<leader>y" },
 		},
 	},
+
 	{
 		"rmagatti/auto-session",
 		-- lazy = false,
@@ -593,6 +571,7 @@ require("lazy").setup({
 			require("pluginsconf.auto-session")
 		end,
 	},
+
 	{
 		"rmagatti/alternate-toggler",
 		config = function()
@@ -609,27 +588,7 @@ require("lazy").setup({
 		end,
 		event = { "BufReadPost" },
 	},
-	-- {
-	--   "rmagatti/goto-preview",
-	--   dev = true,
-	--   config = function()
-	--     require("pluginsconf.goto-preview").setup()
-	--   end,
-	--   keys = {
-	--     { "gpd" },
-	--     { "gpi" },
-	--     { "gpr" },
-	--     { "gP" },
-	--     { "L" },
-	--   },
-	-- },
-	-- {
-	--   "rmagatti/igs.nvim",
-	--   event = { "BufReadPost" },
-	--   config = function()
-	--     require "pluginsconf.igs"
-	--   end,
-	-- },
+
 	{
 		"eandrju/cellular-automaton.nvim",
 		config = function()
@@ -639,36 +598,20 @@ require("lazy").setup({
 			{ "<leader>fml" },
 		},
 	},
-	-- {
-	--   "sourcegraph/sg.nvim",
-	--   config = require("pluginsconf.sg").setup,
-	--   dependencies = {
-	--     "nvim-lua/plenary.nvim",
-	--     "hrsh7th/cmp-nvim-lsp"
-	--   },
-	--   keys = {
-	--     { "<leader>sg" },
-	--   },
-	-- },
-	-- {
-	--   "stevearc/dressing.nvim",
-	--   event = "VeryLazy",
-	--   config = function()
-	--     require("pluginsconf.dressing").setup()
-	--   end,
-	-- },
+
 	{
 		"nvimtools/none-ls.nvim",
 		lazy = false,
-		requires = { "nvim-lua/plenary.nvim" },
+		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
-			require("pluginsconf.lsp.null-ls")
+			require("pluginsconf.lsp.null-ls").setup()
 		end,
 	},
+
 	{
 		"olexsmir/gopher.nvim",
 		ft = { "go" },
-		requires = {
+		dependencies = {
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-treesitter/nvim-treesitter" },
 		},
@@ -685,6 +628,7 @@ require("lazy").setup({
 			})
 		end,
 	},
+
 	{
 		"ThePrimeagen/refactoring.nvim",
 		dependencies = {
@@ -725,16 +669,8 @@ require("lazy").setup({
 		config = function()
 			require("pluginsconf.obsidian").setup()
 		end,
-
-		--    opts = {
-		--     workspaces = {
-		--       {
-		--         name = "OCP",
-		--         path = "~/vaults/OCP",
-		--       },
-		--     },
-		--   },
 	},
+
 	{
 		"folke/flash.nvim",
 		event = "VeryLazy",
