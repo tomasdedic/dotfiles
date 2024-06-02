@@ -307,14 +307,19 @@ require("lazy").setup({
 			require("pluginsconf.grapple")
 		end,
 	},
+
 	{
 		"nvim-telescope/telescope.nvim",
 		lazy = false,
-		dependencies = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } },
+		dependencies = {
+			{ "nvim-lua/popup.nvim" },
+			{ "nvim-lua/plenary.nvim" },
+		},
 		config = function()
 			require("pluginsconf.telescope")
 		end,
 	},
+
 	{
 		"nvim-telescope/telescope-fzf-native.nvim",
 		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
