@@ -312,19 +312,23 @@ require("lazy").setup({
 		"nvim-telescope/telescope.nvim",
 		lazy = false,
 		dependencies = {
-			{ "nvim-lua/popup.nvim" },
-			{ "nvim-lua/plenary.nvim" },
+			"nvim-lua/popup.nvim",
+			"nvim-lua/plenary.nvim",
+			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+			"nvim-telescope/telescope-smart-history.nvim",
+			"nvim-telescope/telescope-ui-select.nvim",
+			"kkharji/sqlite.lua",
 		},
 		config = function()
 			require("pluginsconf.telescope")
 		end,
 	},
 
-	{
-		"nvim-telescope/telescope-fzf-native.nvim",
-		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-		dependencies = { "nvim-telescope/telescope.nvim" },
-	},
+	-- {
+	-- 	"nvim-telescope/telescope-fzf-native.nvim",
+	-- 	build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+	-- 	dependencies = { "nvim-telescope/telescope.nvim" },
+	-- },
 	{
 		"tpope/vim-fugitive",
 		cmd = { "Git" },
@@ -570,7 +574,7 @@ require("lazy").setup({
 		"AckslD/nvim-neoclip.lua",
 		lazy = false,
 		-- event = "BufReadPost",
-		dependencies = { "tami5/sqlite.lua", module = "sqlite" },
+		dependencies = { "kkharji/sqlite.lua", module = "sqlite" },
 		config = function()
 			require("neoclip").setup({
 				enable_persistent_history = true,
@@ -656,10 +660,10 @@ require("lazy").setup({
 	{
 		"nvimtools/none-ls.nvim",
 		lazy = false,
+		requires = { "nvim-lua/plenary.nvim" },
 		config = function()
 			require("pluginsconf.lsp.null-ls")
 		end,
-		requires = { "nvim-lua/plenary.nvim" },
 	},
 	{
 		"olexsmir/gopher.nvim",
