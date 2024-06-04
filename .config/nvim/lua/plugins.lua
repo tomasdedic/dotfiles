@@ -13,17 +13,17 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 
-	{
-		"preservim/vim-markdown",
-		branch = "master",
-		dependencies = {
-			"godlygeek/tabular",
-		},
-		ft = { "markdown", "md" },
-		config = function()
-			require("pluginsconf.markdown")
-		end,
-	},
+	-- {
+	-- 	"preservim/vim-markdown",
+	-- 	branch = "master",
+	-- 	dependencies = {
+	-- 		"godlygeek/tabular",
+	-- 	},
+	-- 	ft = { "markdown", "md" },
+	-- 	config = function()
+	-- 		require("pluginsconf.markdown")
+	-- 	end,
+	-- },
 	{
 		"towolf/vim-helm",
 		ft = "helm",
@@ -410,6 +410,7 @@ require("lazy").setup({
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
+		lazy = false,
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-context",
 			"nvim-treesitter/playground",
