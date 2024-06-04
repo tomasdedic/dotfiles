@@ -22,6 +22,8 @@ noremap <Right> <NOP>
 nnoremap cp "+y
 vnoremap cp "+y
 
+nnoremap <Leader>yy ^yg_
+
 " Move selection up and down plus formatting
 vnoremap K :m '>+1<CR>gv=gv
 vnoremap L :m '<-2<CR>gv=gv
