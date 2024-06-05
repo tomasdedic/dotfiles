@@ -412,11 +412,18 @@ require("lazy").setup({
 		build = ":TSUpdate",
 		lazy = false,
 		dependencies = {
-			"nvim-treesitter/nvim-treesitter-context",
+			{
+				"nvim-treesitter/nvim-treesitter-context",
+				config = function()
+					vim.keymap.set("n", "[b", function()
+						require("treesitter-context").go_to_context(vim.v.count1)
+					end, { silent = true })
+				end,
+			},
 			"nvim-treesitter/playground",
 			"HiPhish/rainbow-delimiters.nvim",
-			"nvim-treesitter/nvim-treesitter-textobjects",
-			"RRethy/nvim-treesitter-textsubjects",
+			-- "nvim-treesitter/nvim-treesitter-textobjects",
+			-- "RRethy/nvim-treesitter-textsubjects",
 		},
 		config = function()
 			require("pluginsconf.treesitter")

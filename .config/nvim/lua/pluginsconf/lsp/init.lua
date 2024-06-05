@@ -1,12 +1,12 @@
 require("neodev").setup()
 
-require("mason").setup {
-  providers = {
-    "mason.providers.client",
-    "mason.providers.registry-api",
-  }
-}
-require("mason-lspconfig").setup {}
+require("mason").setup({
+	providers = {
+		"mason.providers.client",
+		"mason.providers.registry-api",
+	},
+})
+require("mason-lspconfig").setup({})
 require("pluginsconf.lsp.lsp-lua").setup()
 -- require("pluginsconf.lsp.lsp-typescript").setup()
 require("pluginsconf.lsp.lsp-yaml").setup()
@@ -20,3 +20,4 @@ require("pluginsconf.lsp.tflint").setup()
 require("pluginsconf.lsp.lsp-go").setup()
 require("pluginsconf.lsp.lsp-terraform").setup()
 require("pluginsconf.lsp.lsp-helm").setup()
+require("pluginsconf.lsp.lsp-markdown").setup()
