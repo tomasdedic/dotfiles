@@ -1,6 +1,34 @@
 local actions = require("telescope.actions")
 local data = assert(vim.fn.stdpath("data")) --[[@as string]]
 
+-- select multiple records and send them to buffers
+local select_one_or_multi = function(prompt_bufnr)
+	local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+	local multi = picker:get_multi_selection()
+	if not vim.tbl_isempty(multi) then
+		require("telescope.actions").close(prompt_bufnr)
+		for _, j in pairs(multi) do
+			if j.path ~= nil then
+				vim.cmd(string.format("%s %s", "edit", j.path))
+			end
+		end
+	else
+		require("telescope.actions").select_default(prompt_bufnr)
+	end
+end
+
+-- select multiple records and send them to quickfix
+local smart_send_to_qflist = function(prompt_bufnr)
+	local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+	local multi = picker:get_multi_selection()
+	if not vim.tbl_isempty(multi) then
+		actions.send_selected_to_qflist(prompt_bufnr)
+	else
+		actions.send_to_qflist(prompt_bufnr)
+	end
+	actions.open_qflist(prompt_bufnr)
+end
+
 require("telescope").setup({
 	pickers = {
 		buffers = {
@@ -70,11 +98,15 @@ require("telescope").setup({
 				["<C-w>"] = "which_key",
 				["<C-d>"] = require("telescope.actions").delete_buffer,
 				["<Tab>"] = require("telescope.actions").toggle_selection,
+				["<CR>"] = select_one_or_multi,
+				["<C-q>"] = smart_send_to_qflist,
+
 				-- ["<C-q>"] = require("telescope.actions").send_to_qflist + require("telescope.actions").open_qflist,
 				-- ["<C-w>"] = require("telescope.actions").send_to_qflist + require("telescope.actions").open_qflist,
 			},
 			n = {
 				["<C-d>"] = require("telescope.actions").delete_buffer,
+				["<C-q>"] = smart_send_to_qflist,
 			}, -- normal
 		},
 		extensions = {
