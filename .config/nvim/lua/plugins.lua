@@ -63,6 +63,7 @@ require("lazy").setup({
 			lazy = false,
 		},
 		{ "tpope/vim-abolish" },
+		{ "JoosepAlviste/nvim-ts-context-commentstring" },
 		{
 			"tpope/vim-surround",
 			keys = {
@@ -346,7 +347,7 @@ require("lazy").setup({
 					end,
 				},
 				"nvim-treesitter/playground",
-				"JoosepAlviste/nvim-ts-context-commentstring",
+				-- "JoosepAlviste/nvim-ts-context-commentstring",
 				-- "HiPhish/rainbow-delimiters.nvim",
 				-- "nvim-treesitter/nvim-treesitter-textobjects",
 				-- "RRethy/nvim-treesitter-textsubjects",
