@@ -2,6 +2,7 @@ vim.loader.enable()
 vim.g.mapleader = ","
 vim.g.maplocalleader = " "
 
+vim.opt.hlsearch = true
 vim.opt.showmode = true
 vim.opt.scrolloff = 3
 vim.opt.expandtab = true
@@ -60,7 +61,7 @@ vim.opt.shortmess = "filnxtToOFc"
 vim.opt.emoji = false
 vim.opt.undofile = true
 
-vim.g.undodir = vim.fn.stdpath "data" .. "/undodir"
+vim.g.undodir = vim.fn.stdpath("data") .. "/undodir"
 -- let &undodir = expand(stdpath('data')."/undodir")
 vim.opt.grepprg = "rg"
 --to get rid of display of last command
@@ -75,41 +76,41 @@ vim.g.loaded_python_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 
-vim.cmd [[
+vim.cmd([[
   augroup annoying
     au!
     au BufEnter * set fo-=c fo-=r fo-=o                     " stop annoying auto commenting on new lines
   augroup end
-]]
+]])
 
-if vim.fn.has "termguicolors" then
-  vim.opt.termguicolors = true
+if vim.fn.has("termguicolors") then
+	vim.opt.termguicolors = true
 end
 
 -- Custom autocmds
-vim.cmd [[
+vim.cmd([[
 autocmd FileType terraform setlocal commentstring=#%s foldmethod=manual
 autocmd FileType hcl setlocal commentstring=#%s
-]]
+]])
 -- autocmd BufRead,BufNewFile */templates/*.yaml,*/templates/*.tpl,*.gotmpl,helmfile.yaml,values.yaml set ft=helm
 
-vim.cmd [[
+vim.cmd([[
 augroup remember_folds
   autocmd!
   au BufWinLeave ?* mkview 1
   au BufWinEnter ?* silent! loadview 1
 augroup END
-]]
+]])
 
-vim.cmd [[
+vim.cmd([[
 augroup AutoAdjustResize
   autocmd!
   autocmd VimResized * execute "normal! \<C-w>="
 augroup end
-]]
+]])
 
 --schemeswitcher
-vim.cmd [[
+vim.cmd([[
 function! s:SwitchColorscheme()
   if exists('g:colors_name')
     "if g:colors_name == 'PaperColor'
@@ -128,22 +129,23 @@ function! s:SetColorscheme()
 endfunction
 map <silent> <F6> :call <SID>SwitchColorscheme()<CR>
 map <silent> <F7> :call <SID>SetColorscheme()<CR>
-]]
+]])
 
-vim.cmd [[
+vim.cmd([[
 augroup highlight_yank
   autocmd!
   autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }
 augroup end
-]]
+]])
 
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldtext = ""
 vim.opt.foldlevel = 99
-vim.opt.foldenable = true
-
+vim.opt.foldlevelstart = 1
+vim.opt.foldnestmax = 4
 -- Protip: zi toggles folding
-vim.cmd [[
+vim.cmd([[
   function! Fold()
     set foldenable
     " normal zM
@@ -153,35 +155,30 @@ vim.cmd [[
     " normal zR
     set nofoldenable
   endfunction
-]]
-
+]])
 
 -- load mappings
-vim.cmd [[
+vim.cmd([[
   source $HOME/.config/nvim/mappings.vim
-]]
+]])
 
 -- -- TODO: this mappingg isn't working, conflicts with global toggleterm mapping, fix it
 -- vim.keymap.set('t', [[<C-_>]], [[<C-\><C-n>]], { noremap = true })
 
 function _G.delete_hidden_buffers(force)
-  local buffers = vim.api.nvim_list_bufs()
-  for _, buffer in ipairs(buffers) do
-    if vim.fn.buflisted(buffer) and vim.fn.bufwinnr(buffer) == -1 then
-      if not force then
-        vim.api.nvim_command("bwipeout " .. buffer)
-      else
-        vim.api.nvim_command("bwipeout! " .. buffer)
-      end
-    end
-  end
+	local buffers = vim.api.nvim_list_bufs()
+	for _, buffer in ipairs(buffers) do
+		if vim.fn.buflisted(buffer) and vim.fn.bufwinnr(buffer) == -1 then
+			if not force then
+				vim.api.nvim_command("bwipeout " .. buffer)
+			else
+				vim.api.nvim_command("bwipeout! " .. buffer)
+			end
+		end
+	end
 end
 
 vim.keymap.set("n", "<leader>cab", ":call v:lua.delete_hidden_buffers()<CR>")
 vim.keymap.set("n", "<leader>cab!", ":call v:lua.delete_hidden_buffers(1)<CR>")
 
--- TODO: remove me?
-vim.opt.syntax = "off"
-
--- require "packer_compiled"
-require "plugins"
+require("plugins")

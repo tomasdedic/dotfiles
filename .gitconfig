@@ -3,7 +3,7 @@
 	editor = nvim
 [user]
 	name = Tomas Dedic
-	email = dedtom@gmail.com
+	email = tdedic@healthequity.com
 [alias]
   lol = log --graph --decorate --pretty=oneline --abbrev-commit
   lola = log --graph --decorate --pretty=oneline --abbrev-commit --all --date=format:%c

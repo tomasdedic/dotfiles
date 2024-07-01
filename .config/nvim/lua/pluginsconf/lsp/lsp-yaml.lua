@@ -35,7 +35,7 @@ M.setup = function()
 				-- ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.22.0/all.json"] = "/*.yaml"
 				-- },
 				-- validate:off otherwise it will kill yaml with errors for Openshift manifest
-				validate = true,
+				validate = false,
 				completion = true,
 				hover = false,
 			},
