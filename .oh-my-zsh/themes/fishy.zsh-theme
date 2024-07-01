@@ -31,8 +31,8 @@ local user_color='red'; [ $UID -eq 0 ] && user_color='red'
 # for i in {1..256}; do print -P "%F{$i}Color : $i"; done;
 local pwd_color=$FG[238]
 local bg_color=$BG[216]
-  PROMPT='%{$reset_color%}${MODE_INDICATOR_PROMPT}$bg_color%{$fg[$user_color]%}%n@:$bg_color$pwd_color$(_fishy_collapsed_wd)%{$reset_color%}%(!.#.) $(_omz_git_prompt_info|tr -d " ")%b$(kube_ps1)${NEWLINE}➤ %{$reset_color%}'
-  # PROMPT='%{$reset_color%}${MODE_INDICATOR_PROMPT}$bg_color%{$fg[$user_color]%}%n@:$bg_color$pwd_color$(_fishy_collapsed_wd)%{$reset_color%}%(!.#.) $(git_prompt_info|tr -d " ")${NEWLINE}➤ %{$reset_color%}'
+  # PROMPT='%{$reset_color%}${MODE_INDICATOR_PROMPT}$bg_color%{$fg[$user_color]%}%n@:$bg_color$pwd_color$(_fishy_collapsed_wd)%{$reset_color%}%(!.#.) $(git_prompt_info|tr -d " ")%b$(kube_ps1)${NEWLINE}➤ %{$reset_color%}'
+  PROMPT='%{$reset_color%}${MODE_INDICATOR_PROMPT}$bg_color%{$fg[$user_color]%}%n@:$bg_color$pwd_color$(_fishy_collapsed_wd)%{$reset_color%}%(!.#.) $(_omz_git_prompt_info|tr -d " ")${NEWLINE}➤ %{$reset_color%}'
 # PROMPT2='%{$fg[red]%}\ %{$reset_color%}'
 
 local return_status="%{$fg_bold[red]%}%(?..%?) %{$reset_color%}"

@@ -1,10 +1,10 @@
 " !IMPORTANT! Config maps HJKL to JKL:
 
 " Move between splits
-map <C-j> :wincmd h<CR>
-map <C-k> :wincmd j<CR>
-map <C-l> :wincmd k<CR>
-map <C-;> :wincmd l<CR>
+map <C-h> :wincmd h<CR>
+map <C-j> :wincmd j<CR>
+map <C-k> :wincmd k<CR>
+map <C-l> :wincmd l<CR>
 
 " Move splits
 " map <A-j> :wincmd H<CR>
@@ -21,6 +21,8 @@ noremap <Right> <NOP>
 " Copy to system clipboard mapping
 nnoremap cp "+y
 vnoremap cp "+y
+
+nnoremap <Leader>yy ^yg_
 
 " Move selection up and down plus formatting
 vnoremap K :m '>+1<CR>gv=gv
