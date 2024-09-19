@@ -22,6 +22,14 @@ require("lazy").setup({
 			ft = { "yaml", "helm" },
 		},
 		{
+			"cuducos/yaml.nvim",
+			ft = { "yaml" }, -- optional
+			dependencies = {
+				"nvim-treesitter/nvim-treesitter",
+				"nvim-telescope/telescope.nvim", -- optional
+			},
+		},
+		{
 			"ntpeters/vim-better-whitespace",
 			config = function()
 				vim.cmd([[let g:better_whitespace_ctermcolor='174']])
@@ -595,7 +603,6 @@ require("lazy").setup({
 			"folke/flash.nvim",
 			event = "VeryLazy",
 			-- @type Flash.Config
-			opts = {},
   -- stylua: ignore
   keys = {
     { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },

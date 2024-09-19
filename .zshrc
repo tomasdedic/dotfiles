@@ -103,7 +103,7 @@ plugins=(
 )
 # KUBE-PS1
 export KUBE_PS1_BINARY=kubectl
-export KUBE_PS1_SYMBOL_ENABLE=false
+export KUBE_PS1_SYMBOL_ENABLE=true
 
 source $ZSH/oh-my-zsh.sh
 # source ${ZSH_CUSTOM}/run_complete.sh
