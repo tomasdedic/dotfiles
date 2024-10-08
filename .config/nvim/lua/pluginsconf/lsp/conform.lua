@@ -6,7 +6,7 @@ function M.setup()
 			lua = { "stylua" },
 			-- yaml = { "yq" },
 			sh = { "shfmt" },
-			terraform = { "terraform_fmt" },
+			yaml = { "prettier" },
 
 			-- Conform will run multiple formatters sequentially
 			-- python = { "isort", "black" },
@@ -14,7 +14,7 @@ function M.setup()
 			-- javascript = { { "prettierd", "prettier" } },
 		},
 		-- Set up format-on-save
-		format_on_save = { timeout_ms = 500, lsp_fallback = false },
+		format_on_save = { timeout_ms = 500, lsp_fallback = true },
 		-- Customize formatters
 		formatters = {
 			shfmt = {

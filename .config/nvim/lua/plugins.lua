@@ -17,13 +17,13 @@ require("lazy").setup({
 			"towolf/vim-helm",
 			ft = "helm",
 		},
-		{
-			"Einenlum/yaml-revealer",
-			ft = { "yaml", "helm" },
-		},
+		-- {
+		-- 	"Einenlum/yaml-revealer",
+		-- 	ft = { "yaml", "helm" },
+		-- },
 		{
 			"cuducos/yaml.nvim",
-			ft = { "yaml" }, -- optional
+			ft = { "yaml", "helm" }, -- optional
 			dependencies = {
 				"nvim-treesitter/nvim-treesitter",
 				"nvim-telescope/telescope.nvim", -- optional
@@ -190,12 +190,13 @@ require("lazy").setup({
 						"yq",
 						"eslint_d",
 						"yaml-language-server",
-						"lua-language-server",
+						"ansible-language-server",
 						"shfmt",
 						"bashls",
 						"helm-ls",
 						"jsonls",
 						"stylua",
+						"ansible-lint",
 					},
 					auto_update = true,
 					run_on_start = true,
@@ -374,9 +375,9 @@ require("lazy").setup({
 		},
 		{
 			"junegunn/fzf",
-			build = function()
-				vim.fn["fzf#install"]()
-			end,
+			-- build = function()
+			-- 	vim.fn["fzf#install"]()
+			-- end,
 			event = { "BufReadPost" },
 		},
 		{
@@ -568,16 +569,21 @@ require("lazy").setup({
 				require("pluginsconf.refactoring").setup()
 			end,
 		},
-		-- {
-		-- 	"robitx/gp.nvim",
-		--   lazy = false,
-		-- 	config = function()
-		-- 		require("gp").setup{
-		--           	openai_api_key = os.getenv("OPENAI_API_KEY"),
-		-- openai_api_endpoint = "https://openai.koudela.eu/v1/chat/completions",
-		--   }
-		-- 	end,
-		-- }
+		{
+			"robitx/gp.nvim",
+			lazy = false,
+			config = function()
+				require("pluginsconf.gp").setup()
+			end,
+		},
+		{
+			"zbirenbaum/copilot.lua",
+			cmd = "Copilot",
+			event = "InsertEnter",
+			config = function()
+				require("copilot").setup({})
+			end,
+		},
 		{
 			"epwalsh/obsidian.nvim",
 			version = "*", -- recommended, use latest release instead of latest commit
@@ -603,6 +609,7 @@ require("lazy").setup({
 			"folke/flash.nvim",
 			event = "VeryLazy",
 			-- @type Flash.Config
+			opts = {},
   -- stylua: ignore
   keys = {
     { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
@@ -611,6 +618,15 @@ require("lazy").setup({
     { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
     { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
   },
+		},
+		{
+			"RRethy/vim-illuminate",
+			lazy = false,
+			config = function()
+				require("illuminate").configure({
+					delay = 500,
+				})
+			end,
 		},
 	},
 	defaults = { lazy = true },

@@ -1,0 +1,4 @@
+profile: basic
+skip_list:
+  - var_naming_pattern
+  - name[template]
