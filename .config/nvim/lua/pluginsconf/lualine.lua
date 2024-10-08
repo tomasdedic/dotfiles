@@ -37,16 +37,23 @@ require("lualine").setup({
 				end,
 			},
 		},
-		lualine_c = { require("auto-session.lib").current_session_name },
+		lualine_c = {
+			{
+				require("auto-session.lib").current_session_name,
+				color = { fg = "indianred", bg = "black", gui = "bold" },
+				sep = " ❯ ",
+			},
+		},
+		lualine_x = { { require("yaml_nvim").get_yaml_key, color = { fg = "grey53" } } },
+		-- lualine_y = { "filetype" },
 	},
 	winbar = {
-		lualine_b = {
-			{ "filetype", icon_only = true },
+		lualine_a = {
 			{ "filename", path = 1 },
 		},
-		lualine_c = { { "aerial", sep = " ❯ " } },
+		-- lualine_b = { { require("yaml_nvim").get_yaml_key, color = { fg = "grey53" } } },
 	},
 	inactive_winbar = {
-		lualine_b = { { "filetype", icon_only = true }, { "filename", path = 1 } },
+		lualine_a = { { "filetype", icon_only = false }, { "filename", path = 1 } },
 	},
 })

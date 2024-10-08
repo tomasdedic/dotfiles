@@ -2,7 +2,6 @@ vim.loader.enable()
 vim.g.mapleader = ","
 vim.g.maplocalleader = " "
 
-vim.opt.hlsearch = true
 vim.opt.showmode = true
 vim.opt.scrolloff = 3
 vim.opt.expandtab = true
@@ -139,11 +138,10 @@ augroup end
 ]])
 
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.opt.foldtext = ""
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldlevel = 99
-vim.opt.foldlevelstart = 1
-vim.opt.foldnestmax = 4
+vim.opt.foldenable = true
+
 -- Protip: zi toggles folding
 vim.cmd([[
   function! Fold()
@@ -181,4 +179,15 @@ end
 vim.keymap.set("n", "<leader>cab", ":call v:lua.delete_hidden_buffers()<CR>")
 vim.keymap.set("n", "<leader>cab!", ":call v:lua.delete_hidden_buffers(1)<CR>")
 
+-- -- TODO: remove me?
+-- vim.opt.syntax = "off"
+
+-- ANSIBLE/YAML --------------------------------------------------------------
+vim.filetype.add({
+	extension = {
+		yml = "yaml.ansible",
+	},
+})
+
+-- require "packer_compiled"
 require("plugins")
