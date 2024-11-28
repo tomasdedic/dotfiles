@@ -1,7 +1,7 @@
 vim.loader.enable()
 vim.g.mapleader = ","
 vim.g.maplocalleader = " "
-
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,winsize,winpos,terminal,localoptions" --not use tabpages
 vim.opt.showmode = true
 vim.opt.scrolloff = 3
 vim.opt.expandtab = true
@@ -28,7 +28,6 @@ vim.opt.ts = 2
 vim.opt.sw = 2
 vim.opt.expandtab = true
 vim.opt.signcolumn = "yes"
-vim.opt.sessionoptions = { "blank", "buffers", "curdir", "help", "tabpages", "winsize", "winpos" }
 
 -- " performance tweaks
 vim.opt.cursorline = false
