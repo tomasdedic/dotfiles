@@ -1,1 +1,0 @@
-/Users/ronnie/.SpaceVim.d
