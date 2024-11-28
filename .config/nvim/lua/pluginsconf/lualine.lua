@@ -45,15 +45,13 @@ require("lualine").setup({
 			},
 		},
 		lualine_x = { { require("yaml_nvim").get_yaml_key, color = { fg = "grey53" } } },
-		-- lualine_y = { "filetype" },
+		lualine_y = { "filetype" },
 	},
 	winbar = {
-		lualine_a = {
-			{ "filename", path = 1 },
-		},
+		lualine_a = { { "filename", path = 1 } },
 		-- lualine_b = { { require("yaml_nvim").get_yaml_key, color = { fg = "grey53" } } },
 	},
 	inactive_winbar = {
-		lualine_a = { { "filetype", icon_only = false }, { "filename", path = 1 } },
+		lualine_a = { { "filename", path = 1 } },
 	},
 })

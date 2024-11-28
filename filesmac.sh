@@ -10,6 +10,7 @@ cp -r ~/.config/alacritty ./.config/alacritty
 cp -r ~/.oh-my-zsh/themes/fishy.zsh-theme ./.oh-my-zsh/themes
 cp -r ~/.config/nvim ./.config/nvim
 cp -r ~/.zshrc ./.zshrc
+cp -r ~/.zshenv ./.zshenv
 cp -r ~/.tmux.conf ./.tmux.conf
 # cp -r ~/.ctags.d/ ./
 cp -r ~/.gitconfig ./.gitconfig
