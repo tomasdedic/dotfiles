@@ -3,7 +3,7 @@ alias gitroot='cd $(git rev-parse --show-toplevel)'
 alias dog='git log --all --decorate --oneline --graph'
 alias sed='gsed'
 alias dircolors='gdircolors'
-eval $(dircolors ~/.config/dircolors.ansi-dark)
+# eval $(dircolors ~/.config/dircolors.ansi-dark)
 alias setkey='~/.config/startupscripts/setkeyboard'
 alias neat='kubectl neat'
 alias ls='gls --color=auto'
