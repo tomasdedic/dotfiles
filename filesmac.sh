@@ -1,11 +1,12 @@
 #!/usr/bin/env zsh
 rm -rf ./.config
 rm -rf ./.oh-my-zsh
-rm -rf ./.ctags.d
+# rm -rf ./.ctags.d
 # rm -rf ./.zsh.d
 mkdir -p .config
 mkdir -p .oh-my-zsh/themes
 
+cp ~/.aerospace.toml ./.aerospace.toml
 cp -r ~/.config/alacritty ./.config/alacritty
 cp -r ~/.oh-my-zsh/themes/fishy.zsh-theme ./.oh-my-zsh/themes
 cp -r ~/.config/nvim ./.config/nvim
