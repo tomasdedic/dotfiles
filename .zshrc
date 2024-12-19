@@ -91,7 +91,7 @@ plugins=(
      zsh-syntax-highlighting
      zsh-autosuggestions
      fzf
-	   git
+	   # git
      #zsh-vi-mode
      # z
      kube-ps1
@@ -107,7 +107,8 @@ export FZF_TMUX=1
 source $ZSH/oh-my-zsh.sh
 # source ${ZSH_CUSTOM}/run_complete.sh
 #ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
-bindkey "^ " forward-word
+# one world to right in autocomplete sugestions
+bindkey "^X" forward-word
 # User configuration
 # partial completion suggestions
 # zstyle ':completion:*' list-suffixes
@@ -152,7 +153,7 @@ autoload -Uz +X compinit
 compinit
 #set open files limit
 ulimit -n 10240
+export KIND_EXPERIMENTAL_PROVIDER=podman
 # make cd commant good agin
 eval "$(zoxide init zsh)"
-export KIND_EXPERIMENTAL_PROVIDER=podman
 
