@@ -628,6 +628,11 @@ require("lazy").setup({
 				})
 			end,
 		},
+		{
+			"nanotee/zoxide.vim",
+			event = "VeryLazy",
+			-- @type Flash.Config
+		},
 	},
 	defaults = { lazy = true },
 	install = { colorscheme = { "tokyonight" } },
