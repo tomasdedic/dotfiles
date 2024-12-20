@@ -20,7 +20,12 @@ function M.setup()
 			-- ["g\\"] = "actions.toggle_trash",
 		},
 	})
+
 	vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" })
+	vim.keymap.set("n", "_", function()
+		require("oil").open(vim.fn.getcwd())
+	end, { desc = "Open CWD" })
+	-- vim.keymap.set("n", "_", require("oil").open(vim.fn.getcwd()), { desc = "Open pwd" })
 end
 
 return M

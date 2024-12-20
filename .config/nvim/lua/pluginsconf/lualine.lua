@@ -49,6 +49,14 @@ require("lualine").setup({
 	},
 	winbar = {
 		lualine_a = { { "filename", path = 1 } },
+		lualine_x = {
+			{
+				function()
+					return vim.fn.getcwd()
+				end,
+				color = { fg = "indianred", gui = "bold" },
+			},
+		},
 		-- lualine_b = { { require("yaml_nvim").get_yaml_key, color = { fg = "grey53" } } },
 	},
 	inactive_winbar = {
