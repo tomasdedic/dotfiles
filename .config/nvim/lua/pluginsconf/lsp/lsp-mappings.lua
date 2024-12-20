@@ -113,7 +113,7 @@ M.on_attach = function(client, bufnr)
 		vim.api.nvim_set_hl(0, "LspReferenceText", { bg = colors.fg_gutter })
 		vim.api.nvim_set_hl(0, "LspReferenceWrite", { bg = colors.bg_visual })
 
-		vim.api.nvim_exec_lua(
+		vim.api.nvim_exec(
 			[[
         augroup lsp_document_highlight
         autocmd! * <buffer>
