@@ -52,7 +52,7 @@ require("lualine").setup({
 		lualine_x = {
 			{
 				function()
-					return vim.fn.getcwd()
+					return vim.fn.substitute(vim.fn.getcwd(), vim.env.HOME, "~", "")
 				end,
 				color = { fg = "indianred", gui = "bold" },
 			},
