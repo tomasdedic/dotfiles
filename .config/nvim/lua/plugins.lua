@@ -190,13 +190,11 @@ require("lazy").setup({
 						"yq",
 						"eslint_d",
 						"yaml-language-server",
-						"ansible-language-server",
 						"shfmt",
 						"bashls",
 						"helm-ls",
 						"jsonls",
 						"stylua",
-						"ansible-lint",
 					},
 					auto_update = true,
 					run_on_start = true,
@@ -556,6 +554,19 @@ require("lazy").setup({
 						impl = "impl",
 						iferr = "iferr",
 					},
+					gotests = {
+						-- gotests doesn't have template named "default" so this plugin uses "default" to set the default template
+						template = "default",
+						-- path to a directory containing custom test code templates
+						template_dir = nil,
+						-- switch table tests from using slice to map (with test name for the key)
+						-- works only with gotests installed from develop branch
+						named = false,
+					},
+					gotag = {
+						transform = "snakecase",
+					},
+					log_level = vim.log.levels.INFO,
 				})
 			end,
 		},
