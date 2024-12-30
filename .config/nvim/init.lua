@@ -92,20 +92,20 @@ autocmd FileType hcl setlocal commentstring=#%s
 ]])
 -- autocmd BufRead,BufNewFile */templates/*.yaml,*/templates/*.tpl,*.gotmpl,helmfile.yaml,values.yaml set ft=helm
 
-vim.cmd([[
-augroup remember_folds
-  autocmd!
-  au BufWinLeave ?* mkview 1
-  au BufWinEnter ?* silent! loadview 1
-augroup END
-]])
+-- vim.cmd([[
+-- augroup remember_folds
+--   autocmd!
+--   au BufWinLeave ?* mkview 1
+--   au BufWinEnter ?* silent! loadview 1
+-- augroup END
+-- ]])
 
-vim.cmd([[
-augroup AutoAdjustResize
-  autocmd!
-  autocmd VimResized * execute "normal! \<C-w>="
-augroup end
-]])
+-- vim.cmd([[
+-- augroup AutoAdjustResize
+--   autocmd!
+--   autocmd VimResized * execute "normal! \<C-w>="
+-- augroup end
+-- ]])
 
 --schemeswitcher
 vim.cmd([[
@@ -178,15 +178,11 @@ end
 vim.keymap.set("n", "<leader>cab", ":call v:lua.delete_hidden_buffers()<CR>")
 vim.keymap.set("n", "<leader>cab!", ":call v:lua.delete_hidden_buffers(1)<CR>")
 
--- -- TODO: remove me?
--- vim.opt.syntax = "off"
-
 -- ANSIBLE/YAML --------------------------------------------------------------
-vim.filetype.add({
-	extension = {
-		yml = "yaml.ansible",
-	},
-})
+-- vim.filetype.add({
+-- 	extension = {
+-- 		yml = "yaml.ansible",
+-- 	},
+-- })
 
--- require "packer_compiled"
 require("plugins")
