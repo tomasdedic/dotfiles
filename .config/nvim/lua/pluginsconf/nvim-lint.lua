@@ -5,7 +5,7 @@ M.setup = function()
 		typescript = { "eslint_d" },
 		typescriptreact = { "eslint_d" },
 		javascript = { "eslint_d" },
-		-- yaml = { "yamllint" },
+		yaml = { "yamllint" },
 	}
 
 	vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter" }, {

@@ -2,6 +2,14 @@
 --   return vim.fn.getcwd()
 -- end
 
+local function get_schema()
+	local schema = require("yaml-companion").get_buf_schema(0)
+	if schema.result[1].name == "none" then
+		return ""
+	end
+	return schema.result[1].name
+end
+
 require("lualine").setup({
 	options = {
 		theme = "catppuccin-macchiato",
@@ -45,7 +53,7 @@ require("lualine").setup({
 			},
 		},
 		lualine_x = { { require("yaml_nvim").get_yaml_key, color = { fg = "grey53" } } },
-		lualine_y = { "filetype" },
+		lualine_y = { "filetype", get_schema },
 	},
 	winbar = {
 		lualine_a = { { "filename", path = 1 } },
