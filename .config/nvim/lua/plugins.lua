@@ -166,6 +166,12 @@ require("lazy").setup({
 						require("pluginsconf.lsp.conform").setup()
 					end,
 				},
+				{
+					"someone-stole-my-name/yaml-companion.nvim",
+					config = function()
+						require("telescope").load_extension("yaml_schema")
+					end,
+				},
 				-- Schema information
 				"b0o/SchemaStore.nvim",
 			},

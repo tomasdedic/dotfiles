@@ -4,9 +4,9 @@ function M.setup()
 	require("conform").setup({
 		formatters_by_ft = {
 			lua = { "stylua" },
-			yaml = { "yq" },
+			-- yaml = { "yq" },
 			sh = { "shfmt" },
-			-- yaml = { "prettier" },
+			yaml = { "prettier" },
 
 			-- Conform will run multiple formatters sequentially
 			-- python = { "isort", "black" },
