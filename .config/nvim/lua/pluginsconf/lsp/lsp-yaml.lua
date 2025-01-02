@@ -39,7 +39,8 @@ M.setup = function()
 				redhat = { telemetry = { enabled = false } },
 				yaml = {
 					trace = {
-						server = "debug",
+						-- server = "debug",
+						server = "info",
 					},
 					schemaStore = {
 						enable = false,
@@ -68,7 +69,7 @@ M.setup = function()
 					-- },
 					-- validate:off otherwise it will kill yaml with errors for Openshift manifest
 					-- also 1. Matches multiple schemas when only one must validate. [0] when using custom schemas
-					validate = false,
+					validate = true,
 					completion = true,
 					hover = true,
 				},
@@ -77,7 +78,7 @@ M.setup = function()
 	})
 
 	require("lspconfig").yamlls.setup(opts)
-	vim.lsp.set_log_level("trace")
+	vim.lsp.set_log_level("info")
 end
 
 return M
