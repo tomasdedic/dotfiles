@@ -2,7 +2,6 @@
 -- require "snippets"
 
 -- vim.opt.completeopt = { "menu", "menuone", "noselect", "noinsert" }
--- vim.opt.shortmess:append("c")
 
 local cmp = require("cmp")
 
