@@ -22,7 +22,9 @@ M.list_files = function(directory)
 	local fileList = {}
 	local dir = fs.scan_dir(directory, opts)
 	for _, fileName in ipairs(dir) do
-		table.insert(fileList, M.only_in_directory(fileName))
+		if fileName:match("^.+(%.json)$") then
+			table.insert(fileList, M.only_in_directory(fileName))
+		end
 	end
 	return fileList
 end
