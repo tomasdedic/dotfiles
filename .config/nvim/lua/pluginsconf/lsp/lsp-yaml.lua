@@ -21,11 +21,14 @@ M.setup = function()
 			{
 				name = "OpenShift 4.16",
 				uri = "file:///Users/ext90981/tmp/apispec/k8s-manifest-validation/scripts/openshift-json-schema/master-standalone/all.json",
+				-- uri = "https://raw.githubusercontent.com/tomasdedic/openshift-json-schema/all.json",
+				-- uri = "https://raw.githubusercontent.com/tomasdedic/openshift-json-schema/refs/heads/main/all.json",
 			},
-			-- {
-			-- 	name = "Kubernetes 1.22.4",
-			-- 	uri = "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.22.4-standalone-strict/all.json",
-			-- },
+			{
+				name = "Kubernetes 1.22.4",
+				uri = "file:///Users/ext90981/tmp/apispec/kubernetes-json-schema/v1.22.4-standalone-strict/all.json",
+				-- uri = "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.32.0-standalone-strict/all.json",
+			},
 		},
 
 		lspconfig = {
@@ -39,8 +42,9 @@ M.setup = function()
 				redhat = { telemetry = { enabled = false } },
 				yaml = {
 					trace = {
-						-- server = "debug",
-						server = "info",
+						-- server = "off",
+						-- server = "messages",
+						server = "verbose",
 					},
 					schemaStore = {
 						enable = false,

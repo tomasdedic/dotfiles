@@ -168,6 +168,8 @@ require("lazy").setup({
 				},
 				{
 					"someone-stole-my-name/yaml-companion.nvim",
+					-- "msvechla/yaml-companion.nvim",
+					-- branch = "kubernetes_crd_detection",
 					config = function()
 						require("telescope").load_extension("yaml_schema")
 					end,
