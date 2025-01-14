@@ -9,10 +9,20 @@ after-login-command = []
 # You can use it to add commands that run after AeroSpace startup.
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = []
+# after-startup-command = []
+after-startup-command = [
+  # Highlight focused windows with colored borders
+  # 
+  # JankyBorders has a built-in detection of already running process,
+  # so it won't be run twice on AeroSpace restart
+  # brew tap FelixKratz/formulae
+  # brew install borders
+  'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0',
+]
+
 
 # Start AeroSpace at login
-start-at-login = false
+start-at-login = true
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
@@ -63,6 +73,10 @@ outer.bottom =     0
 outer.top =        0
 outer.right =      0
 
+[exec]
+inherit-env-vars = true
+
+
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 # 'main' binding mode must be always presented
@@ -94,8 +108,11 @@ outer.right =      0
 # '''
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
+
+# alt-slash = 'layout floating tiling'
 alt-slash = 'layout tiles horizontal vertical'
 alt-comma = 'layout accordion horizontal vertical'
+alt-f = 'fullscreen'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
 alt-h = 'focus left'
@@ -123,6 +140,7 @@ alt-6 = 'workspace 6'
 alt-7 = 'workspace 7'
 alt-8 = 'workspace 8'
 alt-9 = 'workspace 9'
+alt-0 = 'workspace 10'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-1 = 'move-node-to-workspace 1'
@@ -159,6 +177,43 @@ alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
 
-down = 'volume down'
-up = 'volume up'
-shift-down = ['volume set 0', 'mode main']
+# aerospace list-apps
+[[on-window-detected]]
+if.app-id = 'com.microsoft.teams2'
+run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-id = 'org.alacritty'
+run = 'move-node-to-workspace 1'
+
+# all others move to 3
+[[on-window-detected]]
+if.app-id = 'md.obsidian'
+run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+if.app-id = 'com.vmware.hub.mac'
+run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+if.app-id = 'io.podmandesktop.PodmanDesktop'
+run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+if.app-id = 'com.citrix.receiver.nomas'
+run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+if.app-id = 'org.whispersystems.signal-desktop'
+run = 'move-node-to-workspace 3'
+
+# all apps floating by default
+[[on-window-detected]]
+check-further-callbacks = true
+run = ['layout floating']
+
+#aerospace list-monitors
+[workspace-to-monitor-force-assignment]
+1 = ['2','3']  # Non-main monitor in case when there are only two monitors'
+2 = 'main' # "Main" monitor ("main" as in System Settings → Displays → Use as) 
+3 = 'main'
