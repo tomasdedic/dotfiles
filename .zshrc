@@ -131,7 +131,7 @@ compdef kb='kubectl'
 export DISABLE_MAGIC_FUNCTIONS=true
 export FZF_BASE="$HOME/.fzf"
 
-export PATH="$HOME/bin:/usr/local/opt/grep/libexec/gnubin/:${KREW_ROOT:-$HOME/.krew}/bin:$PATH:$LSPPATH:/usr/local/bin:/usr/X11/bin:$GOPATH/bin:$HOME/.local/bin"
+export PATH="$HOME/bin:/usr/local/opt/grep/libexec/gnubin/:${KREW_ROOT:-$HOME/.krew}/bin:$PATH:$LSPPATH:/usr/local/bin:/usr/X11/bin:$GOPATH/bin:$HOME/.local/bin:$HOME/.cargo/bin"
 export FZF_LEGACY_KEYBINDINGS=0
 export FZF_TMUX=1
 
@@ -157,3 +157,5 @@ export KIND_EXPERIMENTAL_PROVIDER=podman
 # make cd commant good agin
 eval "$(zoxide init zsh)"
 
+
+. "$HOME/.cargo/env"
