@@ -10,7 +10,7 @@ M.setup = function()
 	local opts = require("yaml-companion").setup({
 		builtin_matchers = {
 			-- Detects Kubernetes files based on content
-			kubernetes = { enabled = true },
+			kubernetes = { enabled = false },
 			cloud_init = { enabled = false },
 		},
 

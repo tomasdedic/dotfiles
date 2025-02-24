@@ -228,27 +228,27 @@ require("lazy").setup({
 		-- 	"tpope/vim-rhubarb",
 		-- 	dependencies = "vim-fugitive",
 		-- },
-		{
-			"NeogitOrg/neogit",
-			cmd = { "Neogit" },
-			keys = {
-				{ "<leader>gg" },
-			},
-			dependencies = {
-				"nvim-lua/plenary.nvim", -- required
-				"nvim-telescope/telescope.nvim", -- optional
-				"sindrets/diffview.nvim", -- optional
-			},
-			config = function()
-				require("neogit").setup({
-					integrations = {
-						diffview = true,
-						telescope = true,
-					},
-				})
-				vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<CR>", {})
-			end,
-		},
+		-- {
+		-- 	"NeogitOrg/neogit",
+		-- 	cmd = { "Neogit" },
+		-- 	keys = {
+		-- 		{ "<leader>gg" },
+		-- 	},
+		-- 	dependencies = {
+		-- 		"nvim-lua/plenary.nvim", -- required
+		-- 		"nvim-telescope/telescope.nvim", -- optional
+		-- 		"sindrets/diffview.nvim", -- optional
+		-- 	},
+		-- 	config = function()
+		-- 		require("neogit").setup({
+		-- 			integrations = {
+		-- 				diffview = true,
+		-- 				telescope = true,
+		-- 			},
+		-- 		})
+		-- 		vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<CR>", {})
+		-- 	end,
+		-- },
 		{
 			"folke/tokyonight.nvim",
 			config = function()
@@ -264,7 +264,6 @@ require("lazy").setup({
 				require("pluginsconf.catppuccin")
 			end,
 		},
-		-- { "NLKNguyen/papercolor-theme" },
 
 		{
 			"dstein64/vim-startuptime",
@@ -293,25 +292,13 @@ require("lazy").setup({
 				require("pluginsconf.treesitter")
 			end,
 		},
-		-- {
-		-- 	"lewis6991/gitsigns.nvim",
-		-- 	dependencies = { "nvim-lua/plenary.nvim" },
-		-- 	config = function()
-		-- 		require("pluginsconf.gitsigns")
-		-- 	end,
-		-- 	event = "BufRead",
-		-- },
 		{
 			"junegunn/fzf",
-			-- build = function()
-			-- 	vim.fn["fzf#install"]()
-			-- end,
 			event = { "BufReadPost" },
 		},
 		{
 			"nvim-lualine/lualine.nvim",
 			event = "VeryLazy",
-			-- dependencies = { { "nvim-tree/nvim-web-devicons", optional = true } },
 			config = function()
 				require("pluginsconf.lualine")
 			end,
@@ -320,19 +307,14 @@ require("lazy").setup({
 			"hashivim/vim-terraform",
 			ft = { "terraform" },
 		},
-		{
-			"wellle/targets.vim",
-			event = { "BufReadPost" },
-		},
+		-- {
+		-- 	"wellle/targets.vim",
+		-- 	event = { "BufReadPost" },
+		-- },
 		{
 			"kevinhwang91/nvim-bqf",
 			dependencies = { { "junegunn/fzf", optional = true } },
 			ft = { "qf" },
-			-- config = function()
-			--   require("bqf").setup {
-			--     auto_enable = true,
-			--   }
-			-- end,
 		},
 		-- DAP
 		-- {
@@ -375,12 +357,7 @@ require("lazy").setup({
 				},
 			},
 		},
-		-- jump in indent, usefull for yaml
-		{ "jeetsukumaran/vim-indentwise" },
-		{
-			"AndrewRadev/bufferize.vim",
-			cmd = { "Bufferize" },
-		},
+		{ "jeetsukumaran/vim-indentwise" }, -- jump in indent, usefull for yaml
 		{
 			"folke/zen-mode.nvim",
 			config = function()
@@ -473,23 +450,13 @@ require("lazy").setup({
 				})
 			end,
 		},
-		-- {
-		-- 	"ThePrimeagen/refactoring.nvim",
-		-- 	dependencies = {
-		-- 		{ "nvim-lua/plenary.nvim" },
-		-- 		{ "nvim-treesitter/nvim-treesitter" },
-		-- 	},
-		-- 	config = function()
-		-- 		require("pluginsconf.refactoring").setup()
-		-- 	end,
-		-- },
-		-- {
-		-- 	"robitx/gp.nvim",
-		-- 	lazy = false,
-		-- 	config = function()
-		-- 		require("pluginsconf.gp").setup()
-		-- 	end,
-		-- },
+		{
+			"robitx/gp.nvim",
+			lazy = false,
+			config = function()
+				require("pluginsconf.gp").setup()
+			end,
+		},
 		-- {
 		-- 	"zbirenbaum/copilot.lua",
 		-- 	cmd = "Copilot",
@@ -533,19 +500,9 @@ require("lazy").setup({
     { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
   },
 		},
-		-- {
-		-- 	"RRethy/vim-illuminate",
-		-- 	lazy = false,
-		-- 	config = function()
-		-- 		require("illuminate").configure({
-		-- 			delay = 500,
-		-- 		})
-		-- 	end,
-		-- },
 		{
 			"nanotee/zoxide.vim",
 			event = "VeryLazy",
-			-- @type Flash.Config
 		},
 	},
 	defaults = { lazy = true },
