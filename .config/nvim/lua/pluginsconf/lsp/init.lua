@@ -1,4 +1,4 @@
-require("neodev").setup()
+require("lazydev").setup()
 require("mason").setup()
 
 require("mason-lspconfig").setup({})

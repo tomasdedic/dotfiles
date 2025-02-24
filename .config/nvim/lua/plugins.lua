@@ -180,7 +180,7 @@ require("lazy").setup({
 			"rafamadriz/friendly-snippets",
 			lazy = false,
 		},
-		{ "folke/neodev.nvim" },
+		{ "folke/lazydev.nvim" },
 		{ "nvim-lua/plenary.nvim" },
 		{
 			"cbochs/grapple.nvim",
@@ -249,12 +249,12 @@ require("lazy").setup({
 				vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<CR>", {})
 			end,
 		},
-		-- {
-		-- 	"folke/tokyonight.nvim",
-		-- 	config = function()
-		-- 		require("pluginsconf.tokyonight")
-		-- 	end,
-		-- },
+		{
+			"folke/tokyonight.nvim",
+			config = function()
+				require("pluginsconf.tokyonight")
+			end,
+		},
 		{
 			"catppuccin/nvim",
 			name = "catppuccin",
