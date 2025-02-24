@@ -180,6 +180,11 @@ alt-shift-l = ['join-with right', 'mode main']
 # aerospace list-apps
 [[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
+# run = 'move-node-to-workspace 2'
+run = ['move-node-to-workspace 2']
+
+[[on-window-detected]]
+if.app-id = 'com.vivaldi.Vivaldi'
 run = 'move-node-to-workspace 2'
 
 [[on-window-detected]]
@@ -214,6 +219,6 @@ run = ['layout floating']
 
 #aerospace list-monitors
 [workspace-to-monitor-force-assignment]
-1 = ['2','3']  # Non-main monitor in case when there are only two monitors'
+1 = ['EV2795']  # Non-main monitor in case when there are only two monitors'
 2 = 'main' # "Main" monitor ("main" as in System Settings → Displays → Use as) 
 3 = 'main'

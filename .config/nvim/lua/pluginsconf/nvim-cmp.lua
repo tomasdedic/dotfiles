@@ -1,7 +1,8 @@
 -- vim.o.completeopt = "menu,menuone,noselect,noinsert"
 -- require "snippets"
 
--- vim.opt.completeopt = { "menu", "menuone", "noselect", "noinsert" }
+-- vim.opt.completeopt = { "menu", "menuone", "noselect","noinsert" }
+-- vim.opt.shortmess:append "c"
 
 local cmp = require("cmp")
 
@@ -11,7 +12,7 @@ lspkind.init({})
 local mapping = cmp.mapping.preset.insert({
 	-- ["<C-d>"] = cmp.mapping.scroll_docs(-4),
 	-- ["<C-f>"] = cmp.mapping.scroll_docs(4),
-	["<C-x>"] = cmp.mapping.complete(),
+	["<C-x>"] = cmp.mapping.complete({}),
 	["<C-e>"] = cmp.mapping.close(),
 	["<CR>"] = cmp.mapping.confirm({ select = true }),
 	-- ["<C-p>"] = cmp.mapping.select_prev_item(),
@@ -22,7 +23,7 @@ local mapping = cmp.mapping.preset.insert({
 
 cmp.setup({
 	enabled = function()
-		local buftype = vim.api.nvim_get_option_value("buftype", { buf = 0 })
+		buftype = vim.api.nvim_get_option_value("buftype", { buf = 0 })
 		if buftype == "prompt" then
 			return false
 		end
@@ -42,14 +43,13 @@ cmp.setup({
 
 	mapping = mapping,
 	sources = cmp.config.sources({
-		{ name = "nvim_lsp", keyword_length = 1 },
+		{ name = "nvim_lsp" },
 		-- { name = "vsnip" },
-		{ name = "luasnip", keyword_length = 2 },
+		{ name = "luasnip" },
 		{ name = "path" },
 		-- { name = "npm", keyword_length = 4 },
 		-- { name = "codeium", keyword_length = 3, group_index = 2 },
 		-- { name = "rg", keyword_length = 3, group_index = 2 },
-		{ name = "path" },
 	}, {
 		{
 			name = "buffer",

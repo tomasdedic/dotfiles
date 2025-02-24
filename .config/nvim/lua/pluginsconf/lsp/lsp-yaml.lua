@@ -10,7 +10,7 @@ M.setup = function()
 	local opts = require("yaml-companion").setup({
 		builtin_matchers = {
 			-- Detects Kubernetes files based on content
-			kubernetes = { enabled = false },
+			kubernetes = { enabled = true },
 			cloud_init = { enabled = false },
 		},
 
@@ -18,17 +18,17 @@ M.setup = function()
 			-- not loaded automatically, manually select with
 			-- :Telescope yaml_schema
 			-- find new ones: https://www.schemastore.org/json/
-			{
-				name = "OpenShift 4.16",
-				uri = "file:///Users/ext90981/tmp/apispec/k8s-manifest-validation/scripts/openshift-json-schema/master-standalone/all.json",
-				-- uri = "https://raw.githubusercontent.com/tomasdedic/openshift-json-schema/all.json",
-				-- uri = "https://raw.githubusercontent.com/tomasdedic/openshift-json-schema/refs/heads/main/all.json",
-			},
-			{
-				name = "Kubernetes 1.22.4",
-				uri = "file:///Users/ext90981/tmp/apispec/kubernetes-json-schema/v1.22.4-standalone-strict/all.json",
-				-- uri = "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.32.0-standalone-strict/all.json",
-			},
+			-- {
+			-- 	name = "OpenShift 4.16",
+			-- 	uri = "file:///Users/ext90981/tmp/apispec/k8s-manifest-validation/scripts/openshift-json-schema/master-standalone/all.json",
+			-- 	-- uri = "https://raw.githubusercontent.com/tomasdedic/openshift-json-schema/all.json",
+			-- 	-- uri = "https://raw.githubusercontent.com/tomasdedic/openshift-json-schema/refs/heads/main/all.json",
+			-- },
+			-- {
+			-- 	name = "Kubernetes 1.22.4",
+			-- 	uri = "file:///Users/ext90981/tmp/apispec/kubernetes-json-schema/v1.22.4-standalone-strict/all.json",
+			-- 	-- uri = "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.32.0-standalone-strict/all.json",
+			-- },
 		},
 
 		lspconfig = {

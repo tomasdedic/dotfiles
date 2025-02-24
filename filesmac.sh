@@ -16,6 +16,6 @@ cp -r ~/.tmux.conf ./.tmux.conf
 # cp -r ~/.ctags.d/ ./
 cp -r ~/.gitconfig ./.gitconfig
 # cp -r ~/.zsh.d /.zsh.d
-cp  ~/.config/* ./.config 2>/dev/null
-cp -r ~/.config/iterm2 ./.config/iterm2
+# cp  ~/.config/* ./.config 2>/dev/null
+# cp -r ~/.config/iterm2 ./.config/iterm2
 cp -r ~/.config/yamllint ./.config/yamllint

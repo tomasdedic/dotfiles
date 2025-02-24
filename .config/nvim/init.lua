@@ -95,8 +95,8 @@ autocmd FileType hcl setlocal commentstring=#%s
 -- vim.cmd([[
 -- augroup remember_folds
 --   autocmd!
---   au BufWinLeave ?* mkview 1
---   au BufWinEnter ?* silent! loadview 1
+--   au BufWinLeave * mkview 1
+--   au BufWinEnter * silent! loadview 1
 -- augroup END
 -- ]])
 
@@ -129,12 +129,12 @@ map <silent> <F6> :call <SID>SwitchColorscheme()<CR>
 map <silent> <F7> :call <SID>SetColorscheme()<CR>
 ]])
 
-vim.cmd([[
-augroup highlight_yank
-  autocmd!
-  autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }
-augroup end
-]])
+-- vim.cmd([[
+-- augroup highlight_yank
+--   autocmd!
+--   autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }
+-- augroup end
+-- ]])
 
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
@@ -177,7 +177,16 @@ end
 
 vim.keymap.set("n", "<leader>cab", ":call v:lua.delete_hidden_buffers()<CR>")
 vim.keymap.set("n", "<leader>cab!", ":call v:lua.delete_hidden_buffers(1)<CR>")
-
+local map = vim.keymap.set
+-- better up/down
+-- If there is no count (v:count == 0), pressing j will execute gj
+-- Useful when dealing with wrapped lines in the buffer.
+-- If there is a count (v:count != 0), pressing j will execute j.
+-- For example, if you press 3j to move down three lines
+map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 -- ANSIBLE/YAML --------------------------------------------------------------
 -- vim.filetype.add({
 -- 	extension = {
