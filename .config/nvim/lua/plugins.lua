@@ -5,7 +5,7 @@ if not vim.loop.fs_stat(lazypath) then
 		"clone",
 		"--filter=blob:none",
 		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable", -- latest stable release
+		"--branch=stable",
 		lazypath,
 	})
 end
@@ -379,11 +379,11 @@ require("lazy").setup({
 			keys = "<leader>zz",
 		},
 		{
-
 			"gbprod/yanky.nvim",
 			lazy = false,
-			opts = {
-				highlight = { timer = 150 },
+			dependencies = {
+				"nvim-telescope/telescope.nvim",
+				"kkharji/sqlite.lua",
 			},
 			keys = {
 				{
@@ -413,23 +413,10 @@ require("lazy").setup({
 				{ "=p", "<Plug>(YankyPutAfterFilter)", desc = "Put After Applying a Filter" },
 				{ "=P", "<Plug>(YankyPutBeforeFilter)", desc = "Put Before Applying a Filter" },
 			},
+			config = function()
+				require("pluginsconf.yanky")
+			end,
 		},
-		-- {
-		-- 	"AckslD/nvim-neoclip.lua",
-		-- 	lazy = false,
-		-- 	-- event = "BufReadPost",
-		-- 	dependencies = { "kkharji/sqlite.lua", module = "sqlite" },
-		-- 	config = function()
-		-- 		require("neoclip").setup({
-		-- 			enable_persistent_history = true,
-		-- 			continuous_sync = true,
-		-- 		})
-		-- 		vim.cmd([[nnoremap <leader>y <cmd>lua require('telescope').extensions.neoclip.default()<CR>]])
-		-- 	end,
-		-- 	keys = {
-		-- 		{ "<leader>y" },
-		-- 	},
-		-- },
 		{
 			"rmagatti/auto-session",
 			config = function()
