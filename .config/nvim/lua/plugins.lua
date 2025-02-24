@@ -21,9 +21,10 @@ require("lazy").setup({
 		-- 	"Einenlum/yaml-revealer",
 		-- 	ft = { "yaml", "helm" },
 		-- },
+		{ "echasnovski/mini.nvim", version = false },
 		{
 			"cuducos/yaml.nvim",
-			ft = { "yaml", "helm" }, -- optional
+			-- ft = { "yaml", "helm" }, -- optional
 			dependencies = {
 				"nvim-treesitter/nvim-treesitter",
 				"nvim-telescope/telescope.nvim", -- optional

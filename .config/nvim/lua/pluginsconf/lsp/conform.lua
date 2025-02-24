@@ -6,7 +6,7 @@ function M.setup()
 			lua = { "stylua" },
 			-- yaml = { "yq" },
 			sh = { "shfmt" },
-			yaml = { "prettier" },
+			-- yaml = { "prettier" },
 
 			-- Conform will run multiple formatters sequentially
 			-- python = { "isort", "black" },
