@@ -7,6 +7,7 @@ function M.setup()
 			-- yaml = { "yq" },
 			sh = { "shfmt" },
 			-- yaml = { "prettier" },
+			go = { "golines" },
 
 			-- Conform will run multiple formatters sequentially
 			-- python = { "isort", "black" },

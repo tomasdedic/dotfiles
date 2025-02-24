@@ -15,8 +15,6 @@ _fishy_collapsed_wd() {
   echo "${(j:/:)pwd}"
 }
 
-
-
 setopt PROMPT_SUBST
 # VIM mode
 MODE_INDICATOR_PROMPT='%F{8}[%F{8}I]%f% '
@@ -33,27 +31,15 @@ local user_color='red'; [ $UID -eq 0 ] && user_color='red'
 # for i in {1..256}; do print -P "%F{$i}Color : $i"; done;
 local pwd_color=$FG[238]
 local bg_color=$BG[216]
-
-# if kube_ps1 is empty
-_show_kube_ps1() {
-if [[ -n $KUBECONFIG ]]; then
-  echo "\n %b$(kube_ps1)"
-fi
-}
-# PROMPT='%{$reset_color%}${MODE_INDICATOR_PROMPT}$bg_color%{$fg[$user_color]%}%n@:$bg_color$pwd_color$(_fishy_collapsed_wd)%{$reset_color%}%(!.#.) $(_omz_git_prompt_info|tr -d " ")${NEWLINE}%b$(kube_ps1)${NEWLINE}➤ %{$reset_color%}'
-PROMPT='%{$reset_color%}${MODE_INDICATOR_PROMPT}$bg_color%{$fg[$user_color]%}%n@:$bg_color$pwd_color$(_fishy_collapsed_wd)%{$reset_color%}%(!.#.) $(_omz_git_prompt_info|tr -d " ")$(_show_kube_ps1)${NEWLINE}➤ %{$reset_color%}'
-# if [[ -n $KUBECONFIG ]]; then
-# PROMPT='%{$reset_color%}${MODE_INDICATOR_PROMPT}$bg_color%{$fg[$user_color]%}%n@:$bg_color$pwd_color$(_fishy_collapsed_wd)%{$reset_color%}%(!.#.) $(_omz_git_prompt_info|tr -d " ")${NEWLINE}$(_show_kube_ps1)${NEWLINE}➤ %{$reset_color%}'
-# else
-# PROMPT='%{$reset_color%}${MODE_INDICATOR_PROMPT}$bg_color%{$fg[$user_color]%}%n@:$bg_color$pwd_color$(_fishy_collapsed_wd)%{$reset_color%}%(!.#.) $(_omz_git_prompt_info|tr -d " ")${NEWLINE}➤ %{$reset_color%}'
-# fi
+  PROMPT='%{$reset_color%}${MODE_INDICATOR_PROMPT}$bg_color%{$fg[$user_color]%}%n@:$bg_color$pwd_color$(_fishy_collapsed_wd)%{$reset_color%}%(!.#.) $(_omz_git_prompt_info|tr -d " ")%b$(kube_ps1)${NEWLINE}➤ %{$reset_color%}'
+  # PROMPT='%{$reset_color%}${MODE_INDICATOR_PROMPT}$bg_color%{$fg[$user_color]%}%n@:$bg_color$pwd_color$(_fishy_collapsed_wd)%{$reset_color%}%(!.#.) $(_omz_git_prompt_info|tr -d " ")${NEWLINE}➤ %{$reset_color%}'
 # PROMPT2='%{$fg[red]%}\ %{$reset_color%}'
 
 local return_status="%{$fg_bold[red]%}%(?..%?) %{$reset_color%}"
 # RPROMPT="${RPROMPT}"'(${return_status}$(git_prompt_info)$(git_prompt_status)%{$reset_color%})'
 # RPROMPT="${RPROMPT}"'${return_status}'
 # RPROMPT="${RPROMPT}"
-# RPROMPT='%{$reset_color%}'
+RPROMPT='%{$reset_color%}'
 # RPROMPT='%{$fg[$color]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
 ZSH_THEME_GIT_PROMPT_PREFIX=" "
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
