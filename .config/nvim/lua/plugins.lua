@@ -14,13 +14,26 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	spec = {
 		{
+			"echasnovski/mini.nvim",
+			version = "*",
+			event = "VeryLazy",
+			config = function()
+				require("mini.trailspace").setup()
+				require("mini.comment").setup()
+				require("mini.surround").setup()
+				require("mini.git").setup()
+				require("mini.diff").setup()
+				require("mini.notify").setup({ lsp_progress = { enable = false } })
+				require("mini.indentscope").setup()
+				require("mini.pairs").setup()
+				require("mini.icons").setup()
+				require("mini.cursorword").setup({ delay = 300 })
+			end,
+		},
+		{
 			"towolf/vim-helm",
 			ft = "helm",
 		},
-		-- {
-		-- 	"Einenlum/yaml-revealer",
-		-- 	ft = { "yaml", "helm" },
-		-- },
 		{
 			"cuducos/yaml.nvim",
 			ft = { "yaml", "helm" }, -- optional
@@ -28,15 +41,6 @@ require("lazy").setup({
 				"nvim-treesitter/nvim-treesitter",
 				"nvim-telescope/telescope.nvim", -- optional
 			},
-		},
-		{
-			"ntpeters/vim-better-whitespace",
-			config = function()
-				vim.cmd([[let g:better_whitespace_ctermcolor='174']])
-				vim.cmd(
-					[[let g:better_whitespace_filetypes_blacklist=['toggleterm','diff', 'git', 'gitcommit', 'unite', 'qf', 'help', 'fugitive'] ]]
-				)
-			end,
 		},
 		{
 			"alexghergh/nvim-tmux-navigation",
@@ -59,31 +63,12 @@ require("lazy").setup({
 		},
 		{ "tpope/vim-eunuch" },
 		{
-			"tpope/vim-commentary",
-			keys = {
-				{ "gc" },
-				{ "gc", mode = "v" },
-			},
-		},
-		-- hsearch auto on/off
-		{
-			"romainl/vim-cool",
+			"romainl/vim-cool", --hsearch auto on/off
 			lazy = false,
 		},
 		{ "tpope/vim-abolish" },
 		{ "JoosepAlviste/nvim-ts-context-commentstring" },
-		{
-			"tpope/vim-surround",
-			keys = {
-				{ "cs" },
-				{ "ds" },
-				{ "S", mode = "x" },
-				{ "ys" },
-			},
-		},
-		{
-			"tpope/vim-repeat",
-		},
+		{ "tpope/vim-repeat" },
 		{
 			"akinsho/toggleterm.nvim",
 			version = "*",
@@ -93,52 +78,6 @@ require("lazy").setup({
 			end,
 		},
 		{
-			"mbbill/undotree",
-			config = function()
-				vim.cmd([[nnoremap <leader>u :UndotreeShow<CR>]])
-			end,
-			keys = "<leader>u",
-		},
-		{
-			"jremmen/vim-ripgrep",
-			cmd = { "Rg" },
-		},
-		{
-			"mhinz/vim-grepper",
-			lazy = false,
-			init = function()
-				vim.cmd([[
-        nmap gs <plug>(GrepperOperator)
-        xmap gs <plug>(GrepperOperator)
-      ]])
-			end,
-		},
-		{
-			"nvim-tree/nvim-web-devicons",
-			config = function()
-				require("pluginsconf.nvim-web-devicons")
-			end,
-		},
-		{
-			"windwp/nvim-autopairs",
-			config = function()
-				require("pluginsconf.nvim-autopairs")
-			end,
-			event = "InsertEnter",
-		},
-		-- {
-		--    -- also exists codeium.nvim with vim-cmp integration instead of virtual text
-		--  "Exafunction/codeium.nvim",
-		--   dependencies = {
-		--     "nvim-lua/plenary.nvim",
-		--     "hrsh7th/nvim-cmp",
-		--   },
-		--   config = function()
-		--     require("codeium").setup({
-		--     })
-		--   end
-		-- },
-		{
 			"stevearc/oil.nvim",
 			lazy = false,
 			config = function()
@@ -146,19 +85,12 @@ require("lazy").setup({
 			end,
 		},
 		{
-			"tommcdo/vim-exchange",
-			keys = {
-				{ "cx" },
-				{ "X", mode = "x" },
-			},
-		},
-		{ "ray-x/lsp_signature.nvim" },
-		{
 			"neovim/nvim-lspconfig",
 			dependencies = {
 				"williamboman/mason.nvim",
 				"williamboman/mason-lspconfig.nvim",
 				"j-hui/fidget.nvim",
+				"ray-x/lsp_signature.nvim",
 				-- Autoformatting
 				{
 					"stevearc/conform.nvim",
@@ -184,6 +116,7 @@ require("lazy").setup({
 		},
 		{
 			"WhoIsSethDaniel/mason-tool-installer",
+			event = "VeryLazy",
 			cmd = "MasonToolsInstall",
 			config = function()
 				require("mason-tool-installer").setup({
@@ -229,6 +162,7 @@ require("lazy").setup({
 				{
 					"L3MON4D3/LuaSnip",
 					version = "v2.*",
+					event = "VeryLazy",
 					-- load friendly snippets before
 					dependencies = "friendly-snippets",
 					build = "make install_jsregexp",
@@ -246,9 +180,7 @@ require("lazy").setup({
 			"rafamadriz/friendly-snippets",
 			lazy = false,
 		},
-		{
-			"folke/neodev.nvim",
-		},
+		{ "folke/neodev.nvim" },
 		{ "nvim-lua/plenary.nvim" },
 		{
 			"cbochs/grapple.nvim",
@@ -281,21 +213,21 @@ require("lazy").setup({
 				require("pluginsconf.telescope")
 			end,
 		},
-		{
-			"tpope/vim-fugitive",
-			cmd = { "Git" },
-			config = function()
-				require("pluginsconf.fugitive").setup()
-			end,
-			keys = {
-				{ "<leader>gb" },
-				{ "<leader>gd" },
-			},
-		},
-		{
-			"tpope/vim-rhubarb",
-			dependencies = "vim-fugitive",
-		},
+		-- {
+		-- 	"tpope/vim-fugitive",
+		-- 	cmd = { "Git" },
+		-- 	config = function()
+		-- 		require("pluginsconf.fugitive").setup()
+		-- 	end,
+		-- 	keys = {
+		-- 		{ "<leader>gb" },
+		-- 		{ "<leader>gd" },
+		-- 	},
+		-- },
+		-- {
+		-- 	"tpope/vim-rhubarb",
+		-- 	dependencies = "vim-fugitive",
+		-- },
 		{
 			"NeogitOrg/neogit",
 			cmd = { "Neogit" },
@@ -317,22 +249,12 @@ require("lazy").setup({
 				vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<CR>", {})
 			end,
 		},
-		{
-			"sindrets/diffview.nvim",
-			config = function()
-				require("pluginsconf.diffview")
-			end,
-			cmd = { "DiffviewOpen" },
-			keys = "<leader>ddo",
-		},
-		{
-			"folke/tokyonight.nvim",
-			-- lazy = false, -- make sure we load this during startup
-			-- 	priority = 1000,
-			config = function()
-				require("pluginsconf.tokyonight")
-			end,
-		},
+		-- {
+		-- 	"folke/tokyonight.nvim",
+		-- 	config = function()
+		-- 		require("pluginsconf.tokyonight")
+		-- 	end,
+		-- },
 		{
 			"catppuccin/nvim",
 			name = "catppuccin",
@@ -342,7 +264,7 @@ require("lazy").setup({
 				require("pluginsconf.catppuccin")
 			end,
 		},
-		{ "NLKNguyen/papercolor-theme" },
+		-- { "NLKNguyen/papercolor-theme" },
 
 		{
 			"dstein64/vim-startuptime",
@@ -371,14 +293,14 @@ require("lazy").setup({
 				require("pluginsconf.treesitter")
 			end,
 		},
-		{
-			"lewis6991/gitsigns.nvim",
-			dependencies = { "nvim-lua/plenary.nvim" },
-			config = function()
-				require("pluginsconf.gitsigns")
-			end,
-			event = "BufRead",
-		},
+		-- {
+		-- 	"lewis6991/gitsigns.nvim",
+		-- 	dependencies = { "nvim-lua/plenary.nvim" },
+		-- 	config = function()
+		-- 		require("pluginsconf.gitsigns")
+		-- 	end,
+		-- 	event = "BufRead",
+		-- },
 		{
 			"junegunn/fzf",
 			-- build = function()
@@ -389,7 +311,7 @@ require("lazy").setup({
 		{
 			"nvim-lualine/lualine.nvim",
 			event = "VeryLazy",
-			dependencies = { { "nvim-tree/nvim-web-devicons", optional = true } },
+			-- dependencies = { { "nvim-tree/nvim-web-devicons", optional = true } },
 			config = function()
 				require("pluginsconf.lualine")
 			end,
@@ -442,27 +364,16 @@ require("lazy").setup({
 		{
 			"folke/which-key.nvim",
 			event = "VeryLazy",
-			init = function()
-				vim.o.timeout = true
-				vim.o.timeoutlen = 300
-			end,
-			config = function()
-				require("pluginsconf.which-key")
-			end,
-		},
-		{
-			"lukas-reineke/indent-blankline.nvim",
-			event = "VeryLazy",
-			main = "ibl",
 			opts = {},
-			-- event = { "InsertEnter" },
-			init = function()
-				vim.g.indent_blankline_buftype_exclude = { "terminal" }
-				vim.g.indent_blankline_filetype_exclude = { "toggleterm" }
-			end,
-			config = function()
-				require("ibl").setup()
-			end,
+			keys = {
+				{
+					"<leader>?",
+					function()
+						require("which-key").show({ global = false })
+					end,
+					desc = "Buffer Local Keymaps (which-key)",
+				},
+			},
 		},
 		-- jump in indent, usefull for yaml
 		{ "jeetsukumaran/vim-indentwise" },
@@ -511,22 +422,6 @@ require("lazy").setup({
 			config = function()
 				require("pluginsconf.auto-session")
 			end,
-		},
-		{
-			"rmagatti/alternate-toggler",
-			config = function()
-				require("alternate-toggler").setup({
-					alternates = {
-						["=="] = "!=",
-					},
-				})
-				vim.keymap.set(
-					"n",
-					"<leader><space>", -- <space><space>
-					require("alternate-toggler").toggleAlternate
-				)
-			end,
-			event = { "BufReadPost" },
 		},
 		{
 			"eandrju/cellular-automaton.nvim",
@@ -578,31 +473,31 @@ require("lazy").setup({
 				})
 			end,
 		},
-		{
-			"ThePrimeagen/refactoring.nvim",
-			dependencies = {
-				{ "nvim-lua/plenary.nvim" },
-				{ "nvim-treesitter/nvim-treesitter" },
-			},
-			config = function()
-				require("pluginsconf.refactoring").setup()
-			end,
-		},
-		{
-			"robitx/gp.nvim",
-			lazy = false,
-			config = function()
-				require("pluginsconf.gp").setup()
-			end,
-		},
-		{
-			"zbirenbaum/copilot.lua",
-			cmd = "Copilot",
-			event = "InsertEnter",
-			config = function()
-				require("copilot").setup({})
-			end,
-		},
+		-- {
+		-- 	"ThePrimeagen/refactoring.nvim",
+		-- 	dependencies = {
+		-- 		{ "nvim-lua/plenary.nvim" },
+		-- 		{ "nvim-treesitter/nvim-treesitter" },
+		-- 	},
+		-- 	config = function()
+		-- 		require("pluginsconf.refactoring").setup()
+		-- 	end,
+		-- },
+		-- {
+		-- 	"robitx/gp.nvim",
+		-- 	lazy = false,
+		-- 	config = function()
+		-- 		require("pluginsconf.gp").setup()
+		-- 	end,
+		-- },
+		-- {
+		-- 	"zbirenbaum/copilot.lua",
+		-- 	cmd = "Copilot",
+		-- 	event = "InsertEnter",
+		-- 	config = function()
+		-- 		require("copilot").setup({})
+		-- 	end,
+		-- },
 		{
 			"epwalsh/obsidian.nvim",
 			version = "*", -- recommended, use latest release instead of latest commit
@@ -638,15 +533,15 @@ require("lazy").setup({
     { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
   },
 		},
-		{
-			"RRethy/vim-illuminate",
-			lazy = false,
-			config = function()
-				require("illuminate").configure({
-					delay = 500,
-				})
-			end,
-		},
+		-- {
+		-- 	"RRethy/vim-illuminate",
+		-- 	lazy = false,
+		-- 	config = function()
+		-- 		require("illuminate").configure({
+		-- 			delay = 500,
+		-- 		})
+		-- 	end,
+		-- },
 		{
 			"nanotee/zoxide.vim",
 			event = "VeryLazy",

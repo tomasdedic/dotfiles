@@ -10,10 +10,10 @@ function M.setup()
 			["<C-p>"] = "actions.preview",
 			["<C-c>"] = "actions.close",
 			["<C-r>"] = "actions.refresh",
-			["-"] = "actions.parent",
-			["_"] = "actions.open_cwd",
-			["`"] = "actions.cd",
-			["~"] = "actions.tcd",
+			["-"] = { "actions.parent", mode = "n" },
+			["_"] = { "actions.open_cwd", mode = "n" },
+			["`"] = { "actions.cd", mode = "n" },
+			-- ["~"] = "actions.tcd",
 			-- ["gs"] = "actions.change_sort",
 			["gx"] = "actions.open_external",
 			["g."] = "actions.toggle_hidden",
@@ -21,11 +21,11 @@ function M.setup()
 		},
 	})
 
-	vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" })
+	-- vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" })
+	vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 	vim.keymap.set("n", "_", function()
 		require("oil").open(vim.fn.getcwd())
 	end, { desc = "Open CWD" })
-	-- vim.keymap.set("n", "_", require("oil").open(vim.fn.getcwd()), { desc = "Open pwd" })
 end
 
 return M
