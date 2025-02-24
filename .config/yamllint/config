@@ -8,10 +8,3 @@ ignore: |
 rules:
   line-length: disable
   colons: disable
-  comments:
-    min-spaces-from-content: 1
-  octal-values:
-    forbid-implicit-octal: true
-  octal-values:
-    forbid-explicit-octal: true
-
