@@ -47,7 +47,7 @@ cmp.setup({
 		-- { name = "vsnip" },
 		{ name = "luasnip" },
 		{ name = "path" },
-		{ name = "cmp_yanky" },
+		-- { name = "cmp_yanky" },
 		-- { name = "npm", keyword_length = 4 },
 		-- { name = "codeium", keyword_length = 3, group_index = 2 },
 		-- { name = "rg", keyword_length = 3, group_index = 2 },

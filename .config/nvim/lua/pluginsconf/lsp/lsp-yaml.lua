@@ -50,6 +50,7 @@ M.setup = function()
 					enable = false,
 					url = "",
 				},
+				keyOrdering = false,
 				format = {
 					enable = true,
 					singleQuote = false,
