@@ -90,22 +90,6 @@ vim.cmd([[
 autocmd FileType terraform setlocal commentstring=#%s foldmethod=manual
 autocmd FileType hcl setlocal commentstring=#%s
 ]])
--- autocmd BufRead,BufNewFile */templates/*.yaml,*/templates/*.tpl,*.gotmpl,helmfile.yaml,values.yaml set ft=helm
-
--- vim.cmd([[
--- augroup remember_folds
---   autocmd!
---   au BufWinLeave * mkview 1
---   au BufWinEnter * silent! loadview 1
--- augroup END
--- ]])
-
--- vim.cmd([[
--- augroup AutoAdjustResize
---   autocmd!
---   autocmd VimResized * execute "normal! \<C-w>="
--- augroup end
--- ]])
 
 --schemeswitcher
 vim.cmd([[
@@ -128,13 +112,6 @@ endfunction
 map <silent> <F6> :call <SID>SwitchColorscheme()<CR>
 map <silent> <F7> :call <SID>SetColorscheme()<CR>
 ]])
-
--- vim.cmd([[
--- augroup highlight_yank
---   autocmd!
---   autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }
--- augroup end
--- ]])
 
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
@@ -159,9 +136,6 @@ vim.cmd([[
   source $HOME/.config/nvim/mappings.vim
 ]])
 
--- -- TODO: this mappingg isn't working, conflicts with global toggleterm mapping, fix it
--- vim.keymap.set('t', [[<C-_>]], [[<C-\><C-n>]], { noremap = true })
-
 function _G.delete_hidden_buffers(force)
 	local buffers = vim.api.nvim_list_bufs()
 	for _, buffer in ipairs(buffers) do
@@ -175,6 +149,7 @@ function _G.delete_hidden_buffers(force)
 	end
 end
 
+-- mappings
 vim.keymap.set("n", "<leader>cab", ":call v:lua.delete_hidden_buffers()<CR>")
 vim.keymap.set("n", "<leader>cab!", ":call v:lua.delete_hidden_buffers(1)<CR>")
 local map = vim.keymap.set
@@ -187,11 +162,20 @@ map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true
 map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+
+map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Other Buffer" })
+
+-- better indenting
+map("v", "<", "<gv")
+map("v", ">", ">gv")
+
 -- ANSIBLE/YAML --------------------------------------------------------------
 -- vim.filetype.add({
 -- 	extension = {
 -- 		yml = "yaml.ansible",
 -- 	},
 -- })
-
+require("autocmd")
 require("plugins")
