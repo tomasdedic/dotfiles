@@ -93,9 +93,9 @@ nnoremap <leader>dac :g/\v^(\/\/<bar>.*\/\/)/d_<CR>:w<CR>:noh<CR>
 " Select line
 nnoremap vv V
 
-" Buffer next/previous
-nnoremap <leader>; <cmd>bn<CR>
-nnoremap <leader>j <cmd>bp<CR>
+" " Buffer next/previous
+" nnoremap <leader>; <cmd>bn<CR>
+" nnoremap <leader>j <cmd>bp<CR>
 
 " Tab navigation numbered
 nnoremap <leader>1 1gt
@@ -114,29 +114,6 @@ nnoremap tl :tabnext<CR>
 nnoremap tj :tabnew<CR>
 nnoremap tk :tabclose<CR>
 
-" function! CompilePacker()
-"   echo "Removing packer_compiled.vim"
-"   exec "!rm ~/.config/nvim/plugin/packer_compiled.lua"
-"   echo "Compiling packer..."
-"   exec ":PackerCompile"
-"   echo "Compiling done!"
-" endfunction
-
-" augroup plugins
-"   au!
-"   autocmd BufWritePost plugins.lua :call CompilePacker()
-" augroup end
-
-" Paste today's date 
-" nnoremap <leader>. "=strftime('%a %d %b %Y')<CR>P
-" inoremap <C-d> <C-r>=strftime('%a %d %b %Y')<CR>
-
-" Vimwiki
-augroup vimwikigroup
-    au!
-    " automatically update links on read diary
-    au BufRead,BufNewFile diary.md VimwikiDiaryGenerateLinks
-augroup end
 
 nnoremap <leader>mk "ayy
 nnoremap <leader>rk @a

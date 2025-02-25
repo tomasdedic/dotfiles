@@ -23,7 +23,7 @@ local mapping = cmp.mapping.preset.insert({
 
 cmp.setup({
 	enabled = function()
-		buftype = vim.api.nvim_get_option_value("buftype", { buf = 0 })
+		local buftype = vim.api.nvim_get_option_value("buftype", { buf = 0 })
 		if buftype == "prompt" then
 			return false
 		end
@@ -47,6 +47,7 @@ cmp.setup({
 		-- { name = "vsnip" },
 		{ name = "luasnip" },
 		{ name = "path" },
+		{ name = "cmp_yanky" },
 		-- { name = "npm", keyword_length = 4 },
 		-- { name = "codeium", keyword_length = 3, group_index = 2 },
 		-- { name = "rg", keyword_length = 3, group_index = 2 },
