@@ -1,5 +1,5 @@
 local function augroup(name)
-	return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
+	return vim.api.nvim_create_augroup("nvim_" .. name, { clear = true })
 end
 
 -- Check if we need to reload the file when it changed
@@ -245,5 +245,14 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 		end
 		local file = vim.uv.fs_realpath(event.match) or event.match
 		vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
+	end,
+})
+
+--unmap mini.pairs ` for markdown
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	group = augroup("markdown_disable_backtick"),
+	pattern = "markdown",
+	callback = function()
+		vim.keymap.set("i", "`", "`", { buffer = 0 })
 	end,
 })
