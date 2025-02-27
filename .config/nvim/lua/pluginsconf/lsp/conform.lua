@@ -6,6 +6,7 @@ function M.setup()
 			lua = { "stylua" },
 			-- yaml = { "yq" },
 			sh = { "shfmt" },
+			markdown = { "markdownlint-cli2" },
 			-- yaml = { "prettier" },
 
 			-- Conform will run multiple formatters sequentially

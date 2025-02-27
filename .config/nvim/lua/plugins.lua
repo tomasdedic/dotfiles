@@ -18,10 +18,10 @@ require("lazy").setup({
 			version = "*",
 			event = "VeryLazy",
 			config = function()
-				require("mini.trailspace").setup()
+				require("mini.trailspace").setup({})
 				require("mini.comment").setup()
 				require("mini.surround").setup()
-				require("mini.git").setup()
+				-- require("mini.git").setup()
 				require("mini.diff").setup()
 				require("mini.notify").setup({ lsp_progress = { enable = false } })
 				require("mini.indentscope").setup()
@@ -29,6 +29,17 @@ require("lazy").setup({
 				require("mini.icons").setup()
 				require("mini.cursorword").setup({ delay = 300 })
 			end,
+		},
+		{
+			"tpope/vim-fugitive",
+			cmd = { "Git" },
+			config = function()
+				require("pluginsconf.fugitive").setup()
+			end,
+			keys = {
+				{ "<leader>gb" },
+				{ "<leader>gd" },
+			},
 		},
 		{
 			"towolf/vim-helm",
@@ -116,12 +127,16 @@ require("lazy").setup({
 		},
 		{
 			"WhoIsSethDaniel/mason-tool-installer",
-			event = "VeryLazy",
 			cmd = "MasonToolsInstall",
 			config = function()
 				require("mason-tool-installer").setup({
 					ensure_installed = {
-						"gopls",
+						{
+							"gopls",
+							condition = function()
+								return not os.execute("go version")
+							end,
+						},
 						"golines",
 						"gotests",
 						"goimports-reviser",
@@ -136,6 +151,8 @@ require("lazy").setup({
 						"helm-ls",
 						"jsonls",
 						"stylua",
+						"markdownlint-cli2",
+						"markdown-toc",
 					},
 					auto_update = true,
 					run_on_start = true,
