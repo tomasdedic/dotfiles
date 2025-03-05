@@ -145,9 +145,9 @@ nnoremap <localleader>q :copen<CR>
 set laststatus=3
 
 cmap Q qa!
-nmap \r :!tmux send-keys -t bottom-left Up Enter <CR><CR>
-nmap \rr :!tmux send-keys -t top-left Up Enter <CR><CR>
-nmap \rj :!tmux send-keys -t bottom Up Enter <CR><CR>
+" nmap \r :!tmux send-keys -t bottom-left Up Enter <CR><CR>
+" nmap \rr :!tmux send-keys -t top-left Up Enter <CR><CR>
+nmap \r :!tmux send-keys -t bottom Up Enter <CR><CR>
 " absolute path to file
 command! -nargs=0 Path let @+=expand("%:p")
 command! -nargs=0 File let @+=expand("%:p")
