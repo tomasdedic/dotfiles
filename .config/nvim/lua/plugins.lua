@@ -15,7 +15,7 @@ require("lazy").setup({
 	spec = {
 		{
 			"echasnovski/mini.nvim",
-			version = "*",
+			version = false,
 			event = "VeryLazy",
 			config = function()
 				require("mini.trailspace").setup({})

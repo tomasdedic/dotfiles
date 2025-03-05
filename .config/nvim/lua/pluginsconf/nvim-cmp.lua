@@ -24,7 +24,7 @@ local mapping = cmp.mapping.preset.insert({
 cmp.setup({
 	enabled = function()
 		local buftype = vim.api.nvim_get_option_value("buftype", { buf = 0 })
-		if buftype == "prompt" then
+		if buftype == "prompt" or buftype == "acwrite" then --disable for prompt and oil
 			return false
 		end
 		-- if buftype == "chatgpt-input" then return false end
