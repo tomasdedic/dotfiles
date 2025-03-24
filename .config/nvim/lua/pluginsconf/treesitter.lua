@@ -12,6 +12,7 @@ require("nvim-treesitter.configs").setup({
 		"vim",
 		"markdown",
 		"hcl",
+		"query",
 	},
 
 	sync_install = true,

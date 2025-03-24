@@ -181,7 +181,7 @@ alt-shift-l = ['join-with right', 'mode main']
 [[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
 # run = 'move-node-to-workspace 2'
-run = ['move-node-to-workspace 2']
+run = ['layout floating','move-node-to-workspace 2']
 
 [[on-window-detected]]
 if.app-id = 'com.vivaldi.Vivaldi'
@@ -202,7 +202,7 @@ run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
 if.app-id = 'io.podmandesktop.PodmanDesktop'
-run = 'move-node-to-workspace 3'
+run = ['layout floating','move-node-to-workspace 3' ]
 
 [[on-window-detected]]
 if.app-id = 'com.citrix.receiver.nomas'
