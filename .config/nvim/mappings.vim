@@ -171,3 +171,10 @@ endfunction
 " Use map <buffer> to only map dd in the quickfix window. Requires +localmap
 autocmd FileType qf map <buffer> dd <cmd>call RemoveQFItem()<CR>
 
+" Running the following command will open the parent tree:
+" autocmd User fugitive
+"   \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
+"   \   nnoremap <buffer> .. :edit %:h<CR> |
+"   \ endif
+autocmd BufReadPost fugitive://* set bufhidden=delete
+
