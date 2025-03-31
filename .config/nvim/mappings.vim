@@ -155,6 +155,8 @@ command! -nargs=0 File let @+=expand("%:p")
 command! -nargs=0 Dir let @+=expand("%:p:h")
 " gp to reselect last paste text
 nnoremap gp `[v`]
+" change cwd (local win) to path of buffer
+map <leader>cd :lcd %:p:h<CR>
 
 
 " When using `dd` in the quickfix list, remove the item from the quickfix list.

@@ -4,8 +4,8 @@ function M.setup()
 	require("obsidian").setup({
 		workspaces = {
 			{
-				name = "HEQ",
-				path = "~/vaults/HEQ",
+				name = "OCP",
+				path = "~/vaults/OCP",
 			},
 		},
 		notes_subdir = "notes",
