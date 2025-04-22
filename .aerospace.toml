@@ -180,7 +180,7 @@ alt-shift-l = ['join-with right', 'mode main']
 # aerospace list-apps
 [[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
-run = 'move-node-to-workspace 3'
+run = ['layout floating','move-node-to-workspace 3']
 
 [[on-window-detected]]
 if.app-id = 'org.alacritty'
@@ -215,6 +215,10 @@ run = ['layout floating','move-node-to-workspace 2']
 if.app-id = 'com.vivaldi.Vivaldi'
 run = ['layout floating','move-node-to-workspace 4']
 
+[[on-window-detected]]
+if.app-id = 'com.apple.LocalAuthentication.UIAgent'
+check-further-callbacks = false
+run = ['layout floating']
 
 # all apps floating by default
 [[on-window-detected]]

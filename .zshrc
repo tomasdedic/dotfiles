@@ -115,7 +115,7 @@ bindkey "^X" forward-word
 # zstyle ':completion:*' expand prefix suffix
 # export MANPATH="/usr/local/man:$MANPATH"
 ENABLE_CORRECTION="true"
-eval $(dircolors ~/.config/dircolors.ansi-dark)
+eval $(gdircolors ~/.config/dircolors.ansi-dark)
 
 export HELM_REGISTRY_CONFIG=~/.config/helm/registry.json
 export HELM_REPOSITORY_CONFIG=~/.config/helm/repositories.yaml

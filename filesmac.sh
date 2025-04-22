@@ -7,6 +7,7 @@ mkdir -p .config
 mkdir -p .oh-my-zsh/themes
 
 cp ~/.aerospace.toml ./.aerospace.toml
+cp ~/.config/dircolors* ./.config
 cp -r ~/.config/alacritty ./.config/alacritty
 cp -r ~/.oh-my-zsh/themes/fishy.zsh-theme ./.oh-my-zsh/themes
 cp -r ~/.config/nvim ./.config/nvim

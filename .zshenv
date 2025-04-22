@@ -1,6 +1,11 @@
 alias rm=trash
 alias cr='cd $(git rev-parse --show-toplevel)'
 alias dog='git log --all --decorate --oneline --graph'
+#git config --global alias.lg1 'log --all --decorate --oneline --graph'
+# alias doga='git log --oneline --decorate --color --graph --all --author-date-order --pretty=format:"%C(auto)%h %d %s %C(green)(%ad)" --date=format:"%H:%M:%S"'
+alias doga='git log --graph --abbrev-commit --decorate --format=format:"%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)" --all'
+# git config --global alias.lg2 'log --graph --abbrev-commit --decorate --format=format:''%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'' --all'
+
 alias sed='gsed'
 alias dircolors='gdircolors'
 # eval $(dircolors ~/.config/dircolors.ansi-dark)
