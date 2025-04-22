@@ -520,6 +520,19 @@ require("lazy").setup({
 			end,
 			ft = { "markdown" },
 		},
+		{
+			"deponian/nvim-base64",
+			version = "*",
+			keys = {
+				-- Decode/encode selected sequence from/to base64
+				-- (mnemonic: [b]ase64)
+				{ "<localleader>b", "<Plug>(FromBase64)", mode = "x" },
+				{ "<localleader>B", "<Plug>(ToBase64)", mode = "x" },
+			},
+			config = function()
+				require("nvim-base64").setup()
+			end,
+		},
 	},
 	defaults = { lazy = true },
 	install = { colorscheme = { "tokyonight" } },

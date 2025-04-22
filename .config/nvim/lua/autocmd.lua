@@ -256,3 +256,11 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 		vim.keymap.set("i", "`", "`", { buffer = 0 })
 	end,
 })
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	group = augroup("markdown_conceal"),
+	pattern = { "markdown" },
+	callback = function()
+		vim.opt_local.conceallevel = 1
+	end,
+})

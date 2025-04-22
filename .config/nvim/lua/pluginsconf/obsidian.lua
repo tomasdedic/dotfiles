@@ -2,6 +2,9 @@ local M = {}
 
 function M.setup()
 	require("obsidian").setup({
+		ui = {
+			enable = true,
+		},
 		workspaces = {
 			{
 				name = "OCP",
