@@ -189,7 +189,7 @@ run = 'move-node-to-workspace 1'
 # all others move to 3
 [[on-window-detected]]
 if.app-id = 'md.obsidian'
-run = 'move-node-to-workspace 3'
+run = ['layout floating','move-node-to-workspace 3']
 
 [[on-window-detected]]
 if.app-id = 'com.vmware.hub.mac'
@@ -213,12 +213,12 @@ run = ['layout floating','move-node-to-workspace 2']
 
 [[on-window-detected]]
 if.app-id = 'com.vivaldi.Vivaldi'
-run = ['layout floating','move-node-to-workspace 4']
+run = ['move-node-to-workspace 2']
 
-[[on-window-detected]]
-if.app-id = 'com.apple.LocalAuthentication.UIAgent'
-check-further-callbacks = false
-run = ['layout floating']
+# [[on-window-detected]]
+# if.app-id = 'com.apple.LocalAuthentication.UIAgent'
+# check-further-callbacks = true
+# run = ['layout floating']
 
 # all apps floating by default
 [[on-window-detected]]
