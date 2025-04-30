@@ -464,27 +464,27 @@ require("lazy").setup({
 		-- 		require("copilot").setup({})
 		-- 	end,
 		-- },
-		{
-			"epwalsh/obsidian.nvim",
-			version = "*", -- recommended, use latest release instead of latest commit
-			lazy = true,
-			-- ft = "markdown",
-			-- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-			event = {
-				-- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-				"BufReadPre "
-					.. vim.fn.expand("~")
-					.. "/vaults/**.md",
-				"BufNewfile " .. vim.fn.expand("~") .. "/vaults/**.md",
-			},
-			dependencies = {
-				-- Required.
-				"nvim-lua/plenary.nvim",
-			},
-			config = function()
-				require("pluginsconf.obsidian").setup()
-			end,
-		},
+		-- {
+		-- 	"epwalsh/obsidian.nvim",
+		-- 	version = "*", -- recommended, use latest release instead of latest commit
+		-- 	lazy = true,
+		-- 	-- ft = "markdown",
+		-- 	-- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+		-- 	event = {
+		-- 		-- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+		-- 		"BufReadPre "
+		-- 			.. vim.fn.expand("~")
+		-- 			.. "/vaults/**.md",
+		-- 		"BufNewfile " .. vim.fn.expand("~") .. "/vaults/**.md",
+		-- 	},
+		-- 	dependencies = {
+		-- 		-- Required.
+		-- 		"nvim-lua/plenary.nvim",
+		-- 	},
+		-- 	config = function()
+		-- 		require("pluginsconf.obsidian").setup()
+		-- 	end,
+		-- },
 		{
 			"folke/flash.nvim",
 			event = "VeryLazy",
@@ -532,6 +532,31 @@ require("lazy").setup({
 			config = function()
 				require("nvim-base64").setup()
 			end,
+		},
+		{
+			"HakonHarnes/img-clip.nvim",
+			event = "VeryLazy",
+			opts = {
+				-- add options here
+				-- or leave it empty to use the default settings
+			},
+			keys = {
+				-- suggested keymap
+				{ "<localleader>p", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
+			},
+		},
+		{
+			-- image neni funkcni protoze
+			-- odejit z telescopu na snacks.picker
+			"folke/snacks.nvim",
+			lazy = false,
+			opts = {
+				image = {
+					-- your image configuration comes here
+					-- or leave it empty to use the default settings
+					-- refer to the configuration section below
+				},
+			},
 		},
 	},
 	defaults = { lazy = true },

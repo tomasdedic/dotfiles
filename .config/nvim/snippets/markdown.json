@@ -8,6 +8,42 @@
             "codeq"
         ]
     },
+    "obsidian": {
+        "description": "obsidian front matters",
+        "body": [
+            "---",
+            "id: \"${1:Title}\"",
+            "aliases: []",
+            "tags:",
+            "  - \"${2:Tag}\"",
+            "---"
+        ],
+        "prefix": [
+            "obs"
+        ]
+
+    },
+    "obsidiannote": {
+        "description": "obsidian note",
+        "body": [
+          ">[!NOTE]"
+        ],
+        "prefix": [
+            "not"
+        ]
+
+    },
+    "obsidianinfo": {
+        "description": "obsidian info",
+        "body": [
+          ">[!INFO]"
+        ],
+        "prefix": [
+            "inf"
+        ]
+
+    },
+
     "hugo": {
         "description": "hugo front matters",
         "body": [
