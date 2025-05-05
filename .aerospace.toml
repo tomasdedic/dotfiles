@@ -180,7 +180,12 @@ alt-shift-l = ['join-with right', 'mode main']
 # aerospace list-apps
 [[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
-run = ['layout floating','move-node-to-workspace 3']
+# run = 'move-node-to-workspace 2'
+run = ['layout floating','move-node-to-workspace 2']
+
+[[on-window-detected]]
+if.app-id = 'com.vivaldi.Vivaldi'
+run = ['layout floating','move-node-to-workspace 2' ]
 
 [[on-window-detected]]
 if.app-id = 'org.alacritty'
@@ -189,15 +194,15 @@ run = 'move-node-to-workspace 1'
 # all others move to 3
 [[on-window-detected]]
 if.app-id = 'md.obsidian'
-run = ['layout floating','move-node-to-workspace 3']
+run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
 if.app-id = 'com.vmware.hub.mac'
-run = 'move-node-to-workspace 2'
+run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
 if.app-id = 'io.podmandesktop.PodmanDesktop'
-run = 'move-node-to-workspace 3'
+run = ['layout floating','move-node-to-workspace 3' ]
 
 [[on-window-detected]]
 if.app-id = 'com.citrix.receiver.nomas'
@@ -205,20 +210,7 @@ run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
 if.app-id = 'org.whispersystems.signal-desktop'
-run = 'move-node-to-workspace 2'
-
-[[on-window-detected]]
-if.app-id = 'com.microsoft.rdc.macos'
-run = ['layout floating','move-node-to-workspace 2']
-
-[[on-window-detected]]
-if.app-id = 'com.vivaldi.Vivaldi'
-run = ['move-node-to-workspace 2']
-
-# [[on-window-detected]]
-# if.app-id = 'com.apple.LocalAuthentication.UIAgent'
-# check-further-callbacks = true
-# run = ['layout floating']
+run = 'move-node-to-workspace 3'
 
 # all apps floating by default
 [[on-window-detected]]
@@ -227,9 +219,6 @@ run = ['layout floating']
 
 #aerospace list-monitors
 [workspace-to-monitor-force-assignment]
-# 1 = ['2','3']  # Non-main monitor in case when there are only two monitors'
-# 1 = ['EV2795','^HP.*' ]  # Non-main monitor in case when there are only two monitors'
-1 = ['EV2795','^HP.*2','^HP.*1' ]  # Non-main monitor in case when there are only two monitors'
-4 = ['^HP.*1','Built-in.*']  # Non-main monitor in case when there are only two monitors'
+1 = ['EV2795']  # Non-main monitor in case when there are only two monitors'
 2 = 'main' # "Main" monitor ("main" as in System Settings → Displays → Use as) 
 3 = 'main'

@@ -2,13 +2,10 @@ local M = {}
 
 function M.setup()
 	require("obsidian").setup({
-		ui = {
-			enable = true,
-		},
 		workspaces = {
 			{
-				name = "OCP",
-				path = "~/vaults/OCP",
+				name = "HEQ",
+				path = "~/vaults/HEQ",
 			},
 		},
 		notes_subdir = "notes",
