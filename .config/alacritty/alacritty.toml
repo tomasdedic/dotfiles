@@ -22,7 +22,7 @@ family = "Hack Nerd Font Mono"
 style = "Regular"
 
 [font]
-size = 14.0
+size = 16.0
 # defaults write -g AppleFontSmoothing -int 0
 # The use_thin_strokes config field has been removed as discussed above.
 # If you still want smoothing (read: slightly bolder fonts) for the rest of the system, but not in Alacritty, you can do org.alacritty instead of -g in the above command.
@@ -33,8 +33,7 @@ style = "Block"
 unfocused_hollow = true
 
 [env]
-# TERM = "xterm-256color"
-TERM = "tmux"
+TERM = "xterm-256color"
 
 [selection]
 save_to_clipboard = true
@@ -47,6 +46,7 @@ semantic_escape_chars = ",│`|:\"' ()[]{}<>"
 [window]
 dynamic_padding = false
 opacity = 1.0
+decorations = "Buttonless"
 
 # [window.dimensions]
 # columns = 250
@@ -72,12 +72,6 @@ key = "§"
 import = [
     "~/.config/alacritty/themes/themes/enfocado_light.toml"
 ]
-
-
-# [[keyboard.bindings]]
-# chars = "\u001B[1;3D"
-# key = "Left"
-# mods = "Alt"
 
 # [[keyboard.bindings]]
 # chars = "\u001B[D"
