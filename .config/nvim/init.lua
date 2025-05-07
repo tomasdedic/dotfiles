@@ -113,10 +113,15 @@ map <silent> <F6> :call <SID>SwitchColorscheme()<CR>
 map <silent> <F7> :call <SID>SetColorscheme()<CR>
 ]])
 
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- folding
+vim.opt.foldcolumn = "0"
 vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 1
+vim.opt.foldnestmax = 4
+vim.opt.foldtext = ""
 vim.opt.foldenable = true
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 -- Protip: zi toggles folding
 vim.cmd([[

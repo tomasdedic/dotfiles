@@ -9,7 +9,7 @@ export EDITOR="/usr/local/bin/nvim"
 #ZSH_THEME="powerlevel10k/powerlevel10k"
 export LC_ALL=en_US.UTF-8
 # Path to your oh-my-zsh installation.
-# export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="/opt/homebrew/share/zsh-syntax-highlighting/highlighters"
+export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="/opt/homebrew/share/zsh-syntax-highlighting/highlighters"
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="fishy"
 
@@ -99,9 +99,8 @@ plugins=(
      golang
 )
 # KUBE-PS1
-export KUBE_PS1_BINARY=kubectl
-export KUBE_PS1_SYMBOL_ENABLE=false
-export KUBE_PS1_NS_ENABLE=false
+export KUBE_PS1_BINARY=oc
+export KUBE_PS1_SYMBOL_ENABLE=true
 
 export FZF_LEGACY_KEYBINDINGS=0
 export FZF_TMUX=1
@@ -132,7 +131,7 @@ compdef kb='kubectl'
 export DISABLE_MAGIC_FUNCTIONS=true
 export FZF_BASE="$HOME/.fzf"
 
-export PATH="$HOME/bin:/usr/local/opt/grep/libexec/gnubin/:${KREW_ROOT:-$HOME/.krew}/bin:$PATH:$LSPPATH:/usr/local/bin:/usr/X11/bin:$GOPATH/bin:$HOME/.local/bin"
+export PATH="$HOME/bin:/usr/local/opt/grep/libexec/gnubin/:${KREW_ROOT:-$HOME/.krew}/bin:$PATH:$LSPPATH:/usr/local/bin:/usr/X11/bin:$GOPATH/bin:$HOME/.local/bin:$HOME/.cargo/bin"
 export FZF_LEGACY_KEYBINDINGS=0
 export FZF_TMUX=1
 
@@ -151,7 +150,7 @@ bindkey "^[OB" down-history
 export HOWDOI_COLORIZE=1
 FPATH=$(brew --prefix)/share/zsh-completion:~/.zsh.d/:$FPATH
 autoload -Uz +X compinit
-compinit -i
+compinit
 #set open files limit
 ulimit -n 10240
 export KIND_EXPERIMENTAL_PROVIDER=podman
@@ -159,4 +158,4 @@ export KIND_EXPERIMENTAL_PROVIDER=podman
 eval "$(zoxide init zsh)"
 
 
-# . "$HOME/.cargo/env"
+. "$HOME/.cargo/env"

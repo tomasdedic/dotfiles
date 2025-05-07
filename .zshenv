@@ -1,5 +1,3 @@
-export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
-export SNACKS_GHOSTTY=true
 alias rm=trash
 alias cr='cd $(git rev-parse --show-toplevel)'
 alias dog='git log --all --decorate --oneline --graph'
