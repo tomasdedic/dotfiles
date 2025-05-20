@@ -128,6 +128,8 @@ fi
 alias compdef kb='kubectl'
 compdef kb='kubectl'
 
+alias oc='env KUBECTL_COMMAND=oc kubecolor --light-background' #color oc command output
+
 export DISABLE_MAGIC_FUNCTIONS=true
 export FZF_BASE="$HOME/.fzf"
 
@@ -151,6 +153,9 @@ export HOWDOI_COLORIZE=1
 FPATH=$(brew --prefix)/share/zsh-completion:~/.zsh.d/:$FPATH
 autoload -Uz +X compinit
 compinit
+#compdef <completion_function> <function>
+#remap must go here 
+compdef _oc kubecolor
 #set open files limit
 ulimit -n 10240
 export KIND_EXPERIMENTAL_PROVIDER=podman
