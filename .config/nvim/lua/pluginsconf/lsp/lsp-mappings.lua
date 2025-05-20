@@ -81,7 +81,7 @@ M.on_attach = function(client, bufnr)
 	buf_set_keymap("n", "<leader>dq", vim.diagnostic.setqflist, opts) -- diagnostic quickfix list
 
 	-- Symbols
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>o", "<cmd>SymbolsOutline<CR>", { noremap = true, silent = true })
+	-- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>o", "<cmd>SymbolsOutline<CR>", { noremap = true, silent = true })
 	buf_set_keymap("n", "<leader>ws", function()
 		return require("telescope.builtin").lsp_dynamic_workspace_symbols({
 			file_ignore_patterns = { "node_modules/**" },

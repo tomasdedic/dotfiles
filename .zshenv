@@ -40,8 +40,7 @@ alias 9='cd -9'
 alias vim='nvim'
 alias vi='nvim'
 alias ym='vim -c "set ft=yaml"'
-# setopt complete_aliases
-alias compdef kb='kubectl'
+
 
 fif() {
   if [ ! "$#" -gt 0 ]; then

@@ -558,6 +558,10 @@ require("lazy").setup({
 				},
 			},
 		},
+		{
+			"karb94/neoscroll.nvim",
+			opts = {},
+		},
 	},
 	defaults = { lazy = true },
 	install = { colorscheme = { "tokyonight" } },
