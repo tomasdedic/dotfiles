@@ -261,6 +261,23 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 	group = augroup("markdown_conceal"),
 	pattern = { "markdown" },
 	callback = function()
-		vim.opt_local.conceallevel = 1
+		vim.opt_local.conceallevel = 0
+		vim.opt.foldmethod = "expr"
 	end,
 })
+
+-- vim.api.nvim_create_autocmd({ "BufWinLeave" }, {
+-- 	group = augroup("remember_folds"),
+-- 	callback = function()
+-- 		vim.cmd("autocmd!")
+-- 		vim.cmd("autocmd BufWinLeave *.* mkview")
+-- 	end,
+-- })
+--
+-- vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+-- 	group = augroup("remember_folds"),
+-- 	callback = function()
+-- 		vim.cmd("autocmd!")
+-- 		vim.cmd("autocmd BufWinEnter *.* silent! loadview")
+-- 	end,
+-- })

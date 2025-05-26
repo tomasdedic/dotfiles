@@ -19,6 +19,7 @@ vim.opt.splitbelow = true
 vim.opt.swapfile = false
 vim.opt.foldcolumn = "1"
 vim.opt.clipboard = "unnamedplus"
+vim.opt.shell = "zsh"
 
 vim.opt.mouse = "a"
 -- set shada (print shada file contents)
@@ -182,5 +183,10 @@ map("v", ">", ">gv")
 -- 		yml = "yaml.ansible",
 -- 	},
 -- })
+vim.filetype.add({
+	pattern = {
+		[".*/%.github[%w/]+workflows[%w/]+.*%.ya?ml"] = "yaml.gh",
+	},
+})
 require("autocmd")
 require("plugins")

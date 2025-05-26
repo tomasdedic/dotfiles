@@ -44,7 +44,7 @@ M.setup = function()
 				trace = {
 					-- server = "off",
 					-- server = "messages",
-					server = "verbose",
+					-- server = "verbose",
 				},
 				schemaStore = {
 					enable = false,
