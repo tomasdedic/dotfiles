@@ -2,6 +2,7 @@ local M = {}
 
 function M.setup()
 	require("oil").setup({
+		watch_for_changes = true,
 		use_default_keymaps = false,
 		keymaps = {
 			["g?"] = "actions.show_help",

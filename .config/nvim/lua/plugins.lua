@@ -425,6 +425,8 @@ require("lazy").setup({
 			},
 			config = function()
 				require("gopher").setup({
+					timeout = 2000,
+					installer_timeout = 2000,
 					commands = {
 						go = "go",
 						dlv = "delve",
@@ -446,6 +448,9 @@ require("lazy").setup({
 						transform = "snakecase",
 					},
 					log_level = vim.log.levels.INFO,
+					iferr = {
+						message = nil,
+					},
 				})
 			end,
 		},
@@ -556,11 +561,12 @@ require("lazy").setup({
 					-- or leave it empty to use the default settings
 					-- refer to the configuration section below
 				},
+				terminal = {
+					-- your terminal configuration comes here
+					-- or leave it empty to use the default settings
+					-- refer to the configuration section below
+				},
 			},
-		},
-		{
-			"karb94/neoscroll.nvim",
-			opts = {},
 		},
 	},
 	defaults = { lazy = true },

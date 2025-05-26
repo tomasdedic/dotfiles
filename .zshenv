@@ -1,3 +1,5 @@
+export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
+export SNACKS_GHOSTTY=true
 alias rm=trash
 alias cr='cd $(git rev-parse --show-toplevel)'
 alias dog='git log --all --decorate --oneline --graph'
@@ -40,7 +42,9 @@ alias 9='cd -9'
 alias vim='nvim'
 alias vi='nvim'
 alias ym='vim -c "set ft=yaml"'
-
+# setopt complete_aliases
+alias compdef kb='kubectl'
+alias paks='source ~/bin/paks'
 
 fif() {
   if [ ! "$#" -gt 0 ]; then

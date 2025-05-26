@@ -1,5 +1,7 @@
 require("toggleterm").setup({
 	open_mapping = [[<C-\>]],
+
+	shell = vim.o.shell,
 	autochdir = true,
 	direction = "horizontal",
 	float_opts = {
@@ -13,6 +15,7 @@ require("toggleterm").setup({
 		-- NOTE: this is only a subset of values, any group placed here will be set for the terminal window split
 		Normal = {
 			guibg = "White",
+			guifg = "#444444",
 		},
 	},
 	winbar = {
@@ -21,7 +24,7 @@ require("toggleterm").setup({
 	},
 	size = function(term)
 		if term.direction == "horizontal" then
-			return 15
+			return 20
 		elseif term.direction == "vertical" then
 			return 80
 		end
@@ -32,7 +35,9 @@ require("toggleterm").setup({
 
 function _G.set_terminal_keymaps()
 	local opts = { buffer = 0 }
-	vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
+	vim.keymap.set("t", "<C-k>", [[<C-\><C-n>]], opts)
+	vim.keymap.set("t", "<C-h>", [[<C-\><C-n>]], opts)
+	vim.keymap.set("t", "<C-l>", [[<C-\><C-n>]], opts)
 	vim.keymap.set("t", "jk", [[<C-\><C-n>]], opts)
 	-- vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
 	-- vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)

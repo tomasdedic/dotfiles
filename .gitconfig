@@ -3,7 +3,7 @@
 	editor = nvim
 [user]
 	name = Tomas Dedic
-	email = dedtom@gmail.com
+	email = tdedic@healthequity.com
 [alias]
   lol = log --graph --decorate --pretty=oneline --abbrev-commit
   lola = log --graph --decorate --pretty=oneline --abbrev-commit --all --date=format:%c
@@ -28,3 +28,11 @@
 	d = difftool
 [init]
 	defaultBranch = main
+[http]
+	postBuffer = 157286400
+[credential]
+	helper = store
+[credential "https://github.com/HQY01"]
+  username = tdedic@healthequity.com
+[credential "https://github.com/"]
+  username = tomasdedic
