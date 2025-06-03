@@ -162,5 +162,8 @@ export KIND_EXPERIMENTAL_PROVIDER=podman
 # make cd commant good agin
 eval "$(zoxide init zsh)"
 
-
+#DECSCUSR
+echo -e -n "\x1b[\x32 q" #changes to steady block cursor
+# . "$HOME/.cargo/env"
+HOMEBREW_NO_VERIFY_ATTESTATIONS=1
 . "$HOME/.cargo/env"
