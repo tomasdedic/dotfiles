@@ -546,7 +546,6 @@ require("lazy").setup({
 				-- or leave it empty to use the default settings
 			},
 			keys = {
-				-- suggested keymap
 				{ "<localleader>p", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
 			},
 		},
@@ -566,6 +565,16 @@ require("lazy").setup({
 					-- or leave it empty to use the default settings
 					-- refer to the configuration section below
 				},
+			},
+		},
+		{
+			"AntonVanAssche/md-headers.nvim",
+			version = "*",
+			opts = {},
+			ft = { "markdown" },
+			keys = {
+				{ "<leader>mc", "<cmd>MDHeadersCurrent<CR>", desc = "ShowMarkdownHeaders" },
+				{ "<leader>mm", "<cmd>MDHeadersTelescope<CR>", desc = "ShowMarkdownHeadersTelescope" },
 			},
 		},
 	},
