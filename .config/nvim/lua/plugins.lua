@@ -416,44 +416,39 @@ require("lazy").setup({
 		-- 		require("pluginsconf.lsp.null-ls").setup()
 		-- 	end,
 		-- },
-		{
-			"olexsmir/gopher.nvim",
-			ft = { "go" },
-			dependencies = {
-				{ "nvim-lua/plenary.nvim" },
-				{ "nvim-treesitter/nvim-treesitter" },
-			},
-			config = function()
-				require("gopher").setup({
-					timeout = 2000,
-					installer_timeout = 2000,
-					commands = {
-						go = "go",
-						dlv = "delve",
-						gomodifytags = "gomodifytags",
-						gotests = "gotests", -- also you can set custom command path
-						impl = "impl",
-						iferr = "iferr",
-					},
-					gotests = {
-						-- gotests doesn't have template named "default" so this plugin uses "default" to set the default template
-						template = "default",
-						-- path to a directory containing custom test code templates
-						template_dir = nil,
-						-- switch table tests from using slice to map (with test name for the key)
-						-- works only with gotests installed from develop branch
-						named = false,
-					},
-					gotag = {
-						transform = "snakecase",
-					},
-					log_level = vim.log.levels.INFO,
-					iferr = {
-						message = nil,
-					},
-				})
-			end,
-		},
+		-- {
+		-- 	"olexsmir/gopher.nvim",
+		-- 	ft = { "go" },
+		-- 	dependencies = {
+		-- 		{ "nvim-lua/plenary.nvim" },
+		-- 		{ "nvim-treesitter/nvim-treesitter" },
+		-- 	},
+		-- 	config = function()
+		-- 		require("gopher").setup({
+		-- 			commands = {
+		-- 				go = "go",
+		-- 				dlv = "delve",
+		-- 				gomodifytags = "gomodifytags",
+		-- 				gotests = "gotests", -- also you can set custom command path
+		-- 				impl = "impl",
+		-- 				iferr = "iferr",
+		-- 			},
+		-- 			gotests = {
+		-- 				-- gotests doesn't have template named "default" so this plugin uses "default" to set the default template
+		-- 				template = "default",
+		-- 				-- path to a directory containing custom test code templates
+		-- 				template_dir = nil,
+		-- 				-- switch table tests from using slice to map (with test name for the key)
+		-- 				-- works only with gotests installed from develop branch
+		-- 				named = false,
+		-- 			},
+		-- 			gotag = {
+		-- 				transform = "snakecase",
+		-- 			},
+		-- 			log_level = vim.log.levels.INFO,
+		-- 		})
+		-- 	end,
+		-- },
 		{
 			"robitx/gp.nvim",
 			lazy = false,
@@ -546,6 +541,7 @@ require("lazy").setup({
 				-- or leave it empty to use the default settings
 			},
 			keys = {
+				-- suggested keymap
 				{ "<localleader>p", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
 			},
 		},
@@ -560,12 +556,37 @@ require("lazy").setup({
 					-- or leave it empty to use the default settings
 					-- refer to the configuration section below
 				},
-				terminal = {
-					-- your terminal configuration comes here
-					-- or leave it empty to use the default settings
-					-- refer to the configuration section below
-				},
 			},
+		},
+		{
+			"karb94/neoscroll.nvim",
+			opts = {},
+		},
+		{
+			"ray-x/go.nvim",
+			dependencies = { -- optional packages
+				"ray-x/guihua.lua",
+				"neovim/nvim-lspconfig",
+				"nvim-treesitter/nvim-treesitter",
+			},
+			opts = {
+				-- lsp_keymaps = false,
+				-- other options
+			},
+			config = function(opts)
+				require("go").setup(opts)
+				local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
+				vim.api.nvim_create_autocmd("BufWritePre", {
+					pattern = "*.go",
+					callback = function()
+						require("go.format").goimports()
+					end,
+					group = format_sync_grp,
+				})
+			end,
+			event = { "CmdlineEnter" },
+			ft = { "go", "gomod" },
+			build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
 		},
 		{
 			"AntonVanAssche/md-headers.nvim",
