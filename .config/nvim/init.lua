@@ -117,7 +117,7 @@ map <silent> <F7> :call <SID>SetColorscheme()<CR>
 -- folding
 vim.opt.foldcolumn = "0"
 vim.opt.foldlevel = 99
-vim.opt.foldlevelstart = 1
+vim.opt.foldlevelstart = 2
 vim.opt.foldnestmax = 4
 vim.opt.foldtext = ""
 vim.opt.foldenable = true

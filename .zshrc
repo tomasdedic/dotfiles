@@ -115,7 +115,7 @@ bindkey "^X" forward-word
 # zstyle ':completion:*' list-suffixes
 # zstyle ':completion:*' expand prefix suffix
 # export MANPATH="/usr/local/man:$MANPATH"
-ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 eval $(gdircolors ~/.config/dircolors.ansi-dark)
 
 export HELM_REGISTRY_CONFIG=~/.config/helm/registry.json
@@ -149,7 +149,7 @@ export SUDO_ASKPASS=/usr/bin/ssh-askpass
 bindkey "^[OA" up-history
 bindkey "^[OB" down-history
 export HOWDOI_COLORIZE=1
-FPATH=$(brew --prefix)/share/zsh-completion:~/.zsh.d/:$FPATH
+FPATH=~/.zsh.d/:$FPATH
 autoload -Uz +X compinit
 compinit -i
 #set open files limit
