@@ -1,4 +1,3 @@
-require("luasnip.loaders.from_vscode").lazy_load()
 -- load snippets from path/of/your/nvim/config/snippets
 -- need to put package.json into this directory
 require("luasnip.loaders.from_vscode").lazy_load({

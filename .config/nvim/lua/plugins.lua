@@ -117,36 +117,70 @@ require("lazy").setup({
 				require("pluginsconf.oil").setup()
 			end,
 		},
+
+		--LSP
 		{
 			"neovim/nvim-lspconfig",
 			dependencies = {
-				"williamboman/mason.nvim",
-				"williamboman/mason-lspconfig.nvim",
 				"j-hui/fidget.nvim",
-				"ray-x/lsp_signature.nvim",
-				-- Autoformatting
-				{
-					"stevearc/conform.nvim",
-					config = function()
-						require("pluginsconf.lsp.conform").setup()
-					end,
-				},
-				{
-					"someone-stole-my-name/yaml-companion.nvim",
-					-- "msvechla/yaml-companion.nvim",
-					-- branch = "kubernetes_crd_detection",
-					config = function()
-						require("telescope").load_extension("yaml_schema")
-					end,
-				},
-				-- Schema information
-				"b0o/SchemaStore.nvim",
+				"williamboman/mason-lspconfig.nvim",
 			},
 			event = "BufReadPost",
 			config = function()
 				require("pluginsconf.lsp")
 			end,
 		},
+		{
+			"mason-org/mason-lspconfig.nvim",
+			opts = {},
+			dependencies = {
+				{ "mason-org/mason.nvim", opts = {} },
+				"neovim/nvim-lspconfig",
+			},
+			config = function()
+				require("mason-lspconfig").setup({
+					automatic_enable = false,
+					ensure_installed = {},
+				})
+			end,
+		},
+		{
+			"ray-x/lsp_signature.nvim",
+			event = "LspAttach",
+		},
+		{
+			"stevearc/conform.nvim",
+			config = function()
+				require("pluginsconf.lsp.conform").setup()
+			end,
+		},
+
+		{
+			"onsails/lspkind-nvim",
+			event = "InsertEnter",
+		},
+
+		{
+			"folke/lazydev.nvim",
+			ft = "lua", -- only load on lua files
+			opts = {
+				library = {
+					{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+				},
+			},
+		},
+
+		{
+			"someone-stole-my-name/yaml-companion.nvim",
+			config = function()
+				require("telescope").load_extension("yaml_schema")
+			end,
+		},
+
+		{
+			"b0o/SchemaStore.nvim",
+		},
+
 		{
 			"WhoIsSethDaniel/mason-tool-installer",
 			cmd = "MasonToolsInstall",
@@ -220,7 +254,6 @@ require("lazy").setup({
 			"rafamadriz/friendly-snippets",
 			lazy = false,
 		},
-		{ "folke/lazydev.nvim" },
 		{ "nvim-lua/plenary.nvim" },
 		{
 			"cbochs/grapple.nvim",
@@ -286,7 +319,7 @@ require("lazy").setup({
 						end, { silent = true })
 					end,
 				},
-				"nvim-treesitter/playground",
+				-- "nvim-treesitter/playground",
 				-- "JoosepAlviste/nvim-ts-context-commentstring",
 				-- "HiPhish/rainbow-delimiters.nvim",
 				-- "nvim-treesitter/nvim-treesitter-textobjects",
