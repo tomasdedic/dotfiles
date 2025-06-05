@@ -9,19 +9,18 @@ M.setup = function()
 		capabilities = capabilities,
 		settings = {
 			Lua = {
-				completion = {
-					callSnippet = "Replace",
-				},
 				diagnostics = {
 					-- Get the language server to recognize the `vim` global
 					globals = { "vim" },
 				},
+				-- completion = {
+				-- 	callSnippet = "Replace",
+				-- },
 			},
 		},
 	}
 
-	-- require("lspconfig").lua_ls.setup(vim.tbl_deep_extend("force", opts, {}))
-	require("lspconfig").lua_ls.setup(opts)
+	require("lspconfig").lua_ls.setup(vim.tbl_deep_extend("force", opts, {}))
 end
 
 return M
