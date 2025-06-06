@@ -14,7 +14,8 @@ local mapping = cmp.mapping.preset.insert({
 	-- ["<C-f>"] = cmp.mapping.scroll_docs(4),
 	["<C-x>"] = cmp.mapping.complete({}),
 	["<C-e>"] = cmp.mapping.close(),
-	["<CR>"] = cmp.mapping.confirm({ select = true }),
+	["<CR>"] = cmp.mapping.confirm({ select = true, }), -- command line completion run it
+	["<C-l>"] = cmp.mapping.confirm({ select = true, }),
 	-- ["<C-p>"] = cmp.mapping.select_prev_item(),
 	-- ["<C-n>"] = cmp.mapping.select_next_item(),
 	["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),

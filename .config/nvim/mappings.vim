@@ -178,3 +178,10 @@ autocmd FileType qf map <buffer> dd <cmd>call RemoveQFItem()<CR>
 "   \ endif
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
+" ['<localleader>y'] = { name = '󰆏 Copy...' },
+" ['<localleader>yp'] = { function() vim.fn.setreg('+', vim.fn.expand('%:p:.')) end, desc = 'Copy file path' },
+" ['<localleader>yd'] = { function() vim.fn.setreg('+', vim.fn.expand('%:h')) end, desc = 'Copy directory path' },
+" ['<localleader>yf'] = { function() vim.fn.setreg('+', vim.fn.expand('%:t:r')) end, desc = 'Copy file name' },
+"vim.fn.expand('%:p:.')
+"vim.fn.expand('%:h') 
+"vim.fn.expand('%:t:r')
