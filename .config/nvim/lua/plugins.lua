@@ -28,7 +28,20 @@ require("lazy").setup({
 				require("mini.pairs").setup()
 				require("mini.icons").setup()
 				require("mini.cursorword").setup({ delay = 300 })
+        require("mini.files").setup({
+           mappings = {
+              close       = 'q',
+              go_in       = '<CR>',
+              go_out      = '-',
+          },
+        })
 			end,
+      keys = {
+				{ "-", "<cmd>lua MiniFiles.open(vim.fn.expand('%:h'))<CR>", desc = "Open files at current file path" },
+				{ "_", "<cmd>lua MiniFiles.open()<CR>", desc = "Open files at cwd path" },
+        -- {"<leader>gd", "<cmd>lua MiniDiff.toggle_overlay()<CR>", desc = "Git overlay"},
+        -- {"", "<cmd>lua MiniTrailspace.trim()<CR>", desc = "Trim white space"},
+      }
 		},
 		{
 			"LunarVim/bigfile.nvim",
@@ -110,13 +123,13 @@ require("lazy").setup({
 				require("pluginsconf.toggleterm")
 			end,
 		},
-		{
-			"stevearc/oil.nvim",
-			lazy = false,
-			config = function()
-				require("pluginsconf.oil").setup()
-			end,
-		},
+		-- {
+		-- 	"stevearc/oil.nvim",
+		-- 	lazy = false,
+		-- 	config = function()
+		-- 		require("pluginsconf.oil").setup()
+		-- 	end,
+		-- },
 
 		--LSP
 		{
@@ -631,6 +644,17 @@ require("lazy").setup({
 				{ "<leader>mm", "<cmd>MDHeadersTelescope<CR>", desc = "ShowMarkdownHeadersTelescope" },
 			},
 		},
+    {
+  "folke/noice.nvim",
+  event = "VeryLazy",
+  opts = {
+    -- add any options here
+  },
+  dependencies = {
+    -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+    "MunifTanjim/nui.nvim",
+    }
+},
 	},
 	defaults = { lazy = true },
 	install = { colorscheme = { "tokyonight" } },
