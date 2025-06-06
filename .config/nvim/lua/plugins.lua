@@ -23,7 +23,7 @@ require("lazy").setup({
 				require("mini.surround").setup()
 				-- require("mini.git").setup()
 				require("mini.diff").setup()
-				require("mini.notify").setup({ lsp_progress = { enable = false } })
+				require("mini.notify").setup({ lsp_progress = { enable = false }})
 				require("mini.indentscope").setup()
 				require("mini.pairs").setup()
 				require("mini.icons").setup()
@@ -647,15 +647,43 @@ require("lazy").setup({
     {
   "folke/noice.nvim",
   event = "VeryLazy",
-  opts = {
-    -- add any options here
-  },
+  opts = {},
   dependencies = {
     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
     "MunifTanjim/nui.nvim",
-    }
-},
+    },
+  config = function()
+			require("noice").setup({
+        lsp = {
+    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+    override = {
+      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+      ["vim.lsp.util.stylize_markdown"] = true,
+      ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+    },
+  },
+  presets = {
+    bottom_search = true, -- use a classic bottom cmdline for search
+    -- command_palette = true, -- position the cmdline and popupmenu together
+    long_message_to_split = true, -- long messages will be sent to a split
+    inc_rename = false, -- enables an input dialog for inc-rename.nvim
+    lsp_doc_border = false, -- add a border to hover docs and signature help
+  },
+  views = {
+					mini = {
+						align = "message-left", -- Align messages to the left
+						position = {
+							col = 0, -- Align to the leftmost column
+						},
+            win_options = {
+              winblend = 5,
+            }
+					},
+				},
+  })
+end,
 	},
+},
 	defaults = { lazy = true },
 	install = { colorscheme = { "tokyonight" } },
 })
