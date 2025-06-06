@@ -19,7 +19,7 @@ end, { desc = "telescope fzfBuffer" })
 
 -- map("n", ";", "<cmd>lua require('telescope.builtin').buffers({sort_mru=true})<CR>", { desc = "telescope buffers" })
 map("n", ";", function()
-	require("telescope.builtin").buffers({ sort_mru = true })
+	require("telescope.builtin").buffers({ sort_mru = true,previewer = false  })
 end, { desc = "telescope buffers" })
 
 map("n", "<leader>gf", function()
