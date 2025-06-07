@@ -23,7 +23,7 @@ require("lazy").setup({
 				require("mini.surround").setup()
 				-- require("mini.git").setup()
 				require("mini.diff").setup()
-				require("mini.notify").setup({ lsp_progress = { enable = false }})
+				-- require("mini.notify").setup({ lsp_progress = { enable = false }})
 				require("mini.indentscope").setup()
 				require("mini.pairs").setup()
 				require("mini.icons").setup()
@@ -660,6 +660,11 @@ require("lazy").setup({
       ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
       ["vim.lsp.util.stylize_markdown"] = true,
       ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+    },
+    signature = {
+      auto_open = {
+        enabled = false,
+      },
     },
   },
   presets = {
