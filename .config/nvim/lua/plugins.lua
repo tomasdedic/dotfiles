@@ -32,7 +32,10 @@ require("lazy").setup({
            mappings = {
               close       = 'q',
               go_in       = '<CR>',
+              go_in_plus  = 'l',
+              go_out_plus  = 'h',
               go_out      = '-',
+              synchronize = 'w',
           },
         })
 			end,
@@ -57,6 +60,10 @@ require("lazy").setup({
 				{ "<leader>gd" },
 			},
 		},
+		{
+			"tpope/vim-rhubarb",
+			lazy = false,
+    },
 		{
 			"kdheepak/lazygit.nvim",
 			cmd = {
