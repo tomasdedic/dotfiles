@@ -18,9 +18,9 @@ require("pluginsconf.lsp.lsp-helm").setup()
 require("pluginsconf.lsp.lsp-markdown").setup()
 require("pluginsconf.lsp.lsp-ghactions").setup()
 
-vim.diagnostic.config({
-	virtual_text = true, -- Show inline error/warning messages
-	signs = true, -- Show signs in the gutter
-	underline = true, -- Underline problematic code
-	update_in_insert = false,
-})
+-- vim.diagnostic.config({
+-- 	virtual_text = true, -- Show inline error/warning messages
+-- 	signs = true, -- Show signs in the gutter
+-- 	underline = true, -- Underline problematic code
+-- 	update_in_insert = false,
+-- })
