@@ -1,0 +1,26 @@
+{
+"Xamarin.Android": {
+"prefix": "adoXamarinAndroid1",
+"body": [
+"- task: XamarinAndroid@1",
+"  inputs:",
+"    project: ${1:**/*.csproj}  # Required  # Relative path from repo root of Xamarin.Android project(s) to build.  Wildcards can be used ([more information](https://go.microsoft.com/fwlink/?linkid=856077)).  For example, `**/*.csproj` for all csproj files in all subfolders.  The project must have a PackageForAndroid target if `Create App Package` is selected.",
+"    #target:  # Optional  # Build these targets in this project. Use a semicolon to separate multiple targets.",
+"    #outputDir:  # Optional  # Optionally provide the output directory for the build. Example: $(build.binariesDirectory)/bin/Release.",
+"    #configuration:  # Optional ",
+"    #createAppPackage:  # Optional  # Passes the target (/t:PackageForAndroid) during build to generate an APK.",
+"    #clean:  # Optional  # Passes the clean target (/t:clean) during build.",
+"    #msbuildLocationMethod: # Options: 'version', 'location' # Optional ",
+"    #msbuildVersion: # Options: 'latest', '17.0', '16.0', '15.0', '14.0', '12.0', '4.0' # Optional  # If the preferred version cannot be found, the latest version found will be used instead. On macOS, xbuild (Mono) or MSBuild (Visual Studio for Mac) will be used.",
+"    msbuildLocation: $2  # Required when msbuildLocationMethod = location  # Optionally supply the path to MSBuild (on Windows) or xbuild (on macOS).",
+"    #msbuildArchitecture: # Options: 'x86', 'x64' # Optional  # Optionally supply the architecture (x86, x64) of MSBuild to run.",
+"    #msbuildArguments:  # Optional  # Additional arguments passed to MSBuild (on Windows) or xbuild (on macOS).",
+"    jdkSelection: ${3:JDKVersion} # Options: 'JDKVersion', 'Path' # Required  # Pick the JDK to be used during the build by selecting a JDK version that will be discovered during builds or by manually entering a JDK path.",
+"    #jdkVersion: # Options: 'default', '1.11', '1.10', '1.9', '1.8', '1.7', '1.6' # Optional  # Use the selected JDK version during build.",
+"    jdkUserInputPath: $4  # Required when jdkSelection = Path  # Use the JDK version at specified path during build.",
+"    #jdkArchitecture: # Options: 'x86', 'x64' # Optional  # Optionally supply the architecture (x86, x64) of JDK.",
+"$5"
+],
+"description": "Build an Android app with Xamarin"
+}
+}

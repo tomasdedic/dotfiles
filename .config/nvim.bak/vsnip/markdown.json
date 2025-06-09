@@ -1,0 +1,51 @@
+{
+    "codeq": {
+        "description": "code shortcode out of page scope",
+        "body": [
+            "{{< codeq file=\"${1:file}\" lang=\"${2:yaml}\" >}}"
+        ],
+        "prefix": [
+            "codeq"
+        ]
+    },
+    "hugo": {
+        "description": "hugo front matters",
+        "body": [
+            "---",
+            "title: \"${1:Title}\"",
+            "date: ",
+            "author: Tomas Dedic",
+            "description: \"${2:Desc}\"",
+            "lead: \"working\"",
+            "categories:",
+            "  - \"Openshift\"",
+            "tags:",
+            "  - \"OCP\"",
+            "toc: true",
+            "autonumbering: true",
+            "thumbnail: \"img/${3:Thumbnail}\"",
+            "---"
+        ],
+        "prefix": [
+            "hugo"
+        ]
+    },
+    "fig": {
+        "description": "figure shortcode",
+        "body": [
+            "{{< figure src=\"${1:file}\" caption=\"${2:caption}\" >}}"
+        ],
+        "prefix": [
+            "fig"
+        ]
+    },
+    "code": {
+        "description": "code shortcode",
+        "body": [
+            "{{< code file=\"${1:file}\" lang=\"${2:yaml}\" >}}"
+        ],
+        "prefix": [
+            "code"
+        ]
+    }
+}
