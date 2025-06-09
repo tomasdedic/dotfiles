@@ -1,0 +1,13 @@
+{
+"Python pip authenticate": {
+"prefix": "adoPipAuthenticate0",
+"body": [
+"- task: PipAuthenticate@0",
+"  inputs:",
+"    feedList: $1  # Required  # Select feeds to authenticate present in this organization",
+"    #externalSources:  # Optional  # Select endpoints to authenticate outside this organization.",
+"$2"
+],
+"description": "Authentication task for the pip client used for installing Python distributions"
+}
+}

@@ -1,0 +1,16 @@
+{
+"Download artifacts from file share": {
+"prefix": "adoDownloadFileshareArtifacts1",
+"body": [
+"- task: DownloadFileshareArtifacts@1",
+"  inputs:",
+"    filesharePath: $1  # Required  # File share path e.g /\//\/server/\/folder",
+"    artifactName: $2  # Required  # The name of the artifact to download e.g drop",
+"    #itemPattern:  # Optional  # Specify files to be downloaded as multi line minimatch pattern. [More Information](https://aka.ms/minimatchexamples) <p>The default pattern (/\/*/\/*) will download all files within the artifact.</p>",
+"    downloadPath: ${3:$(System.ArtifactsDirectory)}  # Required  # Path on the agent machine where the artifacts will be downloaded",
+"    #parallelizationLimit:  # Optional  # Number of files to download simultaneously",
+"$4"
+],
+"description": "Download artifacts from a file share, like /\//\/share/\/drop"
+}
+}

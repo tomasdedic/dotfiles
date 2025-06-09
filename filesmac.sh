@@ -11,6 +11,7 @@ cp ~/.config/dircolors* ./.config
 cp -r ~/.config/alacritty ./.config/alacritty
 cp -r ~/.oh-my-zsh/themes/fishy.zsh-theme ./.oh-my-zsh/themes
 cp -r ~/.config/nvim ./.config/nvim
+cp -r ~/.config/nvim.bak ./.config/nvim.bak
 cp -r ~/.config/ghostty ./.config/ghostty
 cp -r ~/.zshrc ./.zshrc
 cp -r ~/.zshenv ./.zshenv

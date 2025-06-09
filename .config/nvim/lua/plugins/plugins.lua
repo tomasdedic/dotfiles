@@ -93,28 +93,28 @@ return {
       { "<localleader>p", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
     },
   },
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        gh_actions_ls = {
-          filetypes = { "yaml.gh" },
-        },
-      },
-    },
-  },
+  -- {
+  --   "neovim/nvim-lspconfig",
+  --   opts = {
+  --     servers = {
+  --       gh_actions_ls = {
+  --         filetypes = { "yaml.gh" },
+  --       },
+  --     },
+  --   },
+  -- },
   {
     "cuducos/yaml.nvim",
     ft = { "yaml", "helm", "yaml.gh" }, -- optional
   },
-  {
-    "williamboman/mason.nvim",
-    opts = {
-      ensure_installed = {
-        "gh-actions-language-server",
-      },
-    },
-  },
+  -- {
+  --   "williamboman/mason.nvim",
+  --   opts = {
+  --     ensure_installed = {
+  --       "gh-actions-language-server",
+  --     },
+  --   },
+  -- },
   {
     "nvim-treesitter/nvim-treesitter",
     -- opts = function(_, opts)

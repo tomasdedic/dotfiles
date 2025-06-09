@@ -1,0 +1,25 @@
+{
+"Visual Studio build": {
+"prefix": "adoVSBuild1",
+"body": [
+"- task: VSBuild@1",
+"  inputs:",
+"    solution: ${1:**/\/*.sln}  # Required  # Relative path from repo root of the solution(s) or MSBuild project to run.  Wildcards can be used.  For example, `**/\/*.sln` for all sln files in all sub folders.",
+"    #vsVersion: # Options: 'latest', '17.0', '16.0', '15.0', '14.0', '12.0', '11.0' # Optional  # If the preferred version cannot be found, the latest version found will be used instead.",
+"    #msbuildArgs:  # Optional  # Additional arguments passed to MSBuild.",
+"    #platform:  # Optional  # Specify the platform you want to build such as Win32, x86, x64 or any cpu.",
+"    #configuration:  # Optional  # Specify the configuration you want to build such as debug or release.",
+"    #clean:  # Optional  # Set to False if you want to make this an incremental build.",
+"    #maximumCpuCount:  # Optional  # If your MSBuild target configuration is compatible with building in parallel, you can optionally check this input to pass the /m switch to MSBuild (Windows only). If your target configuration is not compatible with building in parallel, checking this option may cause your build to result in file-in-use errors, or intermittent or inconsistent build failures.",
+"    #restoreNugetPackages:  # Optional  # This option is deprecated. To restore NuGet packages, add a [NuGet Tool Installer](https://docs.microsoft.com/vsts/pipelines/tasks/tool/nuget) task before the build.",
+"    #msbuildArchitecture: # Options: 'x86', 'x64' # Optional  # Optionally supply the architecture (x86, x64) of MSBuild to run.",
+"    #logProjectEvents:  # Optional  # Optionally record timeline details for each project.",
+"    #createLogFile:  # Optional  # Optionally create a log file (Windows only).",
+"    #logFileVerbosity: # Options: 'quiet', 'minimal', 'normal', 'detailed', 'diagnostic' # Optional  # Optional log file verbosity.",
+"    #enableDefaultLogger:  # Optional  # If true - enables default logger for msbuild",
+"    #customVersion:  # Optional  # Allows setting custom version of Visual Studio. Examples: 15.0, 16.0, 17.0. Make sure that the required version of Visual Studio is installed in the system.",
+"$2"
+],
+"description": "Build with MSBuild and set the Visual Studio version property"
+}
+}

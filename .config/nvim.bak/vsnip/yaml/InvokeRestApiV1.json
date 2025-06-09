@@ -1,0 +1,20 @@
+{
+"Invoke REST API": {
+"prefix": "adoInvokeRESTAPI1",
+"body": [
+"- task: InvokeRESTAPI@1",
+"  inputs:",
+"    connectedServiceNameSelector: ${1:connectedServiceName} # Options: 'connectedServiceName', 'connectedServiceNameARM' # Required  # Select the service connection type to use to invoke the REST API.",
+"    connectedServiceName: $2  # Required when connectedServiceNameSelector = connectedServiceName  # Select a generic service connection that should be used to pick the URL and construct authorization header for the http request.",
+"    connectedServiceNameARM: $3  # Required when connectedServiceNameSelector = connectedServiceNameARM  # Select an Azure Resource Manager subscription to use for invoking a management API. 'ManagementPortalUrl' of the cloud is used as the baseURL",
+"    method: ${4:POST} # Options: 'OPTIONS', 'GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'TRACE', 'PATCH' # Required  # Select the HTTP method with which the API should be invoked.",
+"    headers: ${5:{\"Content-Type\":\"application/json\", \"PlanUrl\": \"$(system.CollectionUri)\", \"ProjectId\": \"$(system.TeamProjectId)\", \"HubName\": \"$(system.HostType)\", \"PlanId\": \"$(system.PlanId)\", \"JobId\": \"$(system.JobId)\", \"TimelineId\": \"$(system.TimelineId)\", \"TaskInstanceId\": \"$(system.TaskInstanceId)\", \"AuthToken\": \"$(system.AccessToken)\"}}  # Required  # Define header in JSON format. The header shall be attached with request to be sent.",
+"    body: $6  # Required when method != GET && method != HEAD ",
+"    #urlSuffix:  # Optional  # Given string append to the URL. Example: If the service connection URL is https:...TestProj/_apis/Release/releases and the URL suffix is /2/environments/1, the service connection URL becomes https:.../TestProj/_apis/Release/releases/2/environments/1. If the URL suffix is ?definitionId=1&releaseCount=1 then the service connection URL becomes https//...TestProj/_apis/Release/releases?definitionId=1&releaseCount=1.",
+"    waitForCompletion: ${7:false} # Options: 'true', 'false' # Required  # Default value \"ApiResponse\". Available values :  \"ApiResponse\", \"Callback\" call where the REST API calls back to update the timeline record​.",
+"    #successCriteria:  # Optional  # Criteria which defines when to pass the task. No criteria means response content does not influence the result. Example:- For response {\"status\" : \"successful\"}, the expression can be eq(root['status'], 'successful'). [More information](https://go.microsoft.com/fwlink/?linkid=842996)​",
+"$8"
+],
+"description": "Invoke a REST API as a part of your pipeline."
+}
+}
