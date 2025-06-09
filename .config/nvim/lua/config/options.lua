@@ -10,3 +10,4 @@ vim.filetype.add({
     [".*/%.github[%w/]+workflows[%w/]+.*%.ya?ml"] = "yaml.gh",
   },
 })
+vim.opt_local.spell = false

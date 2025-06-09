@@ -6,6 +6,21 @@ return {
     },
   },
   { "folke/snacks.nvim", opts = { dashboard = { enabled = false } } },
+  -- disable linter for markdown
+  {
+    "mfussenegger/nvim-lint",
+    enabled = false,
+    -- optional = true,
+    -- opts = {
+    --   linters_by_ft = {
+    --     markdown = {},
+    --   },
+    -- },
+  },
+  {
+    "nvimtools/none-ls.nvim",
+    enabled = false,
+  },
   {
     "catppuccin/nvim",
     name = "catppuccin",
@@ -89,10 +104,35 @@ return {
     },
   },
   {
+    "cuducos/yaml.nvim",
+    ft = { "yaml", "helm", "yaml.gh" }, -- optional
+  },
+  {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
         "gh-actions-language-server",
+      },
+    },
+  },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    -- opts = function(_, opts)
+    --   opts.textobjects.move.goto_next_start["]c"] = nil
+    --   opts.textobjects.move.goto_next_start["]l"] = "@class.outer"
+    --   opts.textobjects.move.goto_previous_start["[c"] = nil
+    --   opts.textobjects.move.goto_previous_start["[l"] = "@class.outer"
+    --
+    --   opts.textobjects.move.goto_next_end["]C"] = nil
+    --   opts.textobjects.move.goto_next_end["]L"] = "@class.outer"
+    --   opts.textobjects.move.goto_previous_end["[C"] = nil
+    --   opts.textobjects.move.goto_previous_end["[L"] = "@class.outer"
+    -- end,
+    opts = {
+      textobjects = {
+        move = {
+          enable = false,
+        },
       },
     },
   },
