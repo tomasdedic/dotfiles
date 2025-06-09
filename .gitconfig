@@ -15,11 +15,11 @@
 [difftool]
   prompt = false
 [diff]
-  tool = nvimdiff
+  tool = vimdiff
 [difftool "vimdiff"]
   cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [merge]
-  tool = nvimdiff
+  tool = vimdiff
 [mergetool]
   prompt = true
 [mergetool "vimdiff"]

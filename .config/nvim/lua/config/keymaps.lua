@@ -11,4 +11,6 @@ vim.keymap.set("n", ";", "<cmd>FzfLua buffers sort_mru=true previewer=false sort
 vim.keymap.set("n", "-", function()
   Snacks.explorer({ cwd = LazyVim.root() })
 end, {})
-vim.keymap.set("n", "<leader>cd", "<cmd>lcd %:p:h<CR>", {})
+-- vim.keymap.set("n", "<leader>cd", "<cmd>lcd %:p:h<CR>", {})
+--
+vim.keymap.set("n", "<leader>dd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
