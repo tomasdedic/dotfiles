@@ -5,6 +5,7 @@
 	name = Tomas Dedic
 	email = tdedic@healthequity.com
 [alias]
+  r = rev-parse --show-toplevel
   lol = log --graph --decorate --pretty=oneline --abbrev-commit
   lola = log --graph --decorate --pretty=oneline --abbrev-commit --all --date=format:%c
   hide = update-index --assume-unchanged
