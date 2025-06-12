@@ -48,6 +48,15 @@ return {
         },
       },
     },
+    -- keys = {
+    --   {
+    --     {
+    --       "<leader>fl",
+    --       LazyVim.pick("files", { cwd = vim.fn.expand("%:h:") }),
+    --       desc = "Pick files under current buffer",
+    --     },
+    --   },
+    -- },
   },
 
   -- disable linter for markdown
