@@ -5,8 +5,9 @@ export GOPATH=$HOME/go
 export EDITOR="/usr/local/bin/nvim"
 export LC_ALL=en_US.UTF-8
 # Path to your oh-my-zsh installation.
-# export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="/opt/homebrew/share/zsh-syntax-highlighting/highlighters"
+export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="/opt/homebrew/share/zsh-syntax-highlighting/highlighters"
 export ZSH="$HOME/.oh-my-zsh"
+eval $(/opt/homebrew/bin/brew shellenv)
 ZSH_THEME="fishy"
 
 
@@ -93,7 +94,14 @@ export SUDO_ASKPASS=/usr/bin/ssh-askpass
 bindkey "^[OA" up-history
 bindkey "^[OB" down-history
 export HOWDOI_COLORIZE=1
-FPATH=~/.zsh.d/:$FPATH
+FPATH=~/.zsh.d:$(brew --prefix)/share/zsh-completions:$FPATH
+autoload -Uz compinit
+for dump in ~/.zcompdump(N.mh+24); do
+  compinit
+done
+compinit -C
+# autoload -U compinit
+# compinit -i
 ## completion
 # setopt complete_aliases
 alias compdef kb='kubectl'
