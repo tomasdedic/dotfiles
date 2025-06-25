@@ -40,3 +40,19 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>sB", function()
   Snacks.picker.grep_buffers()
 end, { desc = "Grep Open Buffers" })
+
+vim.keymap.set(
+  "n",
+  "<leader>tl",
+  "<cmd>!tmux send-keys -t right Up Enter<CR><CR>",
+  { desc = "tmux right last command" }
+)
+vim.keymap.set(
+  "n",
+  "<leader>tj",
+  "<cmd>!tmux send-keys -t bottom Up Enter<CR><CR>",
+  { desc = "tmux down last command" }
+)
+-- " nmap \r :!tmux send-keys -t bottom-left Up Enter <CR><CR>
+-- " nmap \rr :!tmux send-keys -t top-left Up Enter <CR><CR>
+-- nmap \r :!tmux send-keys -t bottom Up Enter <CR><CR>
