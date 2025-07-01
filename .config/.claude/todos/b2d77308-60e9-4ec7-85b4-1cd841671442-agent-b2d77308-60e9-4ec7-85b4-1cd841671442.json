@@ -1,0 +1,26 @@
+[
+  {
+    "content": "Examine the main.go changes to understand new config loading approach",
+    "status": "completed",
+    "priority": "high",
+    "id": "1"
+  },
+  {
+    "content": "Review existing test file to see what's broken",
+    "status": "completed",
+    "priority": "high",
+    "id": "2"
+  },
+  {
+    "content": "Fix tests to work with new config loading mechanism",
+    "status": "completed",
+    "priority": "high",
+    "id": "3"
+  },
+  {
+    "content": "Run tests to verify fixes work",
+    "status": "completed",
+    "priority": "medium",
+    "id": "4"
+  }
+]

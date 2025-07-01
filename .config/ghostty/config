@@ -1,4 +1,4 @@
-initial-command = /usr/local/bin/zsh
+initial-command = /opt/homebrew/bin/zsh
 title=""
 #theme=catppuccin-latte
 theme=PencilLight
