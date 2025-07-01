@@ -1,0 +1,26 @@
+[
+  {
+    "content": "Fix missing config.yaml volume mount",
+    "status": "completed",
+    "priority": "high",
+    "id": "1"
+  },
+  {
+    "content": "Add proper RBAC permissions",
+    "status": "completed",
+    "priority": "high",
+    "id": "2"
+  },
+  {
+    "content": "Add security context and resource limits",
+    "status": "completed",
+    "priority": "medium",
+    "id": "3"
+  },
+  {
+    "content": "Fix service account reference",
+    "status": "completed",
+    "priority": "high",
+    "id": "4"
+  }
+]

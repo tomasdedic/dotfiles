@@ -33,7 +33,7 @@
 	postBuffer = 157286400
 [credential]
 	helper = store
-[credential "https://github.com/HQY01"]
-  username = tdedic@healthequity.com
-[credential "https://github.com/"]
-  username = tomasdedic
+; [credential "https://github.com/HQY01"]
+;   username = tdedic@healthequity.com
+; [credential "https://github.com/"]
+;   username = tomasdedic

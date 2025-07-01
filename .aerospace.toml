@@ -67,11 +67,11 @@ preset = 'qwerty'
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
 inner.horizontal = 0
-inner.vertical =   0
-outer.left =       0
-outer.bottom =     0
-outer.top =        0
-outer.right =      0
+inner.vertical = 0
+outer.left = 0
+outer.bottom = 0
+outer.top = 0
+outer.right = 0
 
 [exec]
 inherit-env-vars = true
@@ -166,7 +166,10 @@ alt-shift-semicolon = 'mode service'
 [mode.service.binding]
 esc = ['reload-config', 'mode main']
 r = ['flatten-workspace-tree', 'mode main'] # reset layout
-f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
+f = [
+  'layout floating tiling',
+  'mode main',
+] # Toggle between floating and tiling layout
 backspace = ['close-all-windows-but-current', 'mode main']
 
 # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
@@ -181,7 +184,7 @@ alt-shift-l = ['join-with right', 'mode main']
 [[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
 # run = 'move-node-to-workspace 2'
-run = ['layout floating','move-node-to-workspace 3']
+run = ['layout floating', 'move-node-to-workspace 3']
 
 [[on-window-detected]]
 if.app-id = 'com.vivaldi.Vivaldi'
@@ -203,7 +206,7 @@ run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
 if.app-id = 'io.podmandesktop.PodmanDesktop'
-run = ['layout floating','move-node-to-workspace 3' ]
+run = ['layout floating', 'move-node-to-workspace 3']
 
 [[on-window-detected]]
 if.app-id = 'com.citrix.receiver.nomas'
@@ -220,7 +223,7 @@ run = ['layout floating']
 
 #aerospace list-monitors
 [workspace-to-monitor-force-assignment]
-1 = 'EV2795'  # Non-main monitor in case when there are only two monitors'
-2 = 'EV2795'  # Non-main monitor in case when there are only two monitors'
-3 = 'main' # "Main" monitor ("main" as in System Settings → Displays → Use as) 
+1 = 'secondary' # Non-main monitor in case when there are only two monitors'
+2 = 'secondary' # Non-main monitor in case when there are only two monitors'
+3 = 'main'      # "Main" monitor ("main" as in System Settings → Displays → Use as) 
 # 3 = 'main'
