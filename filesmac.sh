@@ -11,7 +11,7 @@ cp ~/.config/dircolors* ./.config
 cp -r ~/.config/alacritty ./.config/alacritty
 cp -r ~/.oh-my-zsh/themes/fishy.zsh-theme ./.oh-my-zsh/themes
 cp -r ~/.config/nvim ./.config/nvim
-cp -r ~/.config/nvim.bak ./.config/nvim.bak
+# cp -r ~/.config/nvim.bak ./.config/nvim.bak
 cp -r ~/.config/ghostty ./.config/ghostty
 cp -r ~/.zshrc ./.zshrc
 cp -r ~/.zshenv ./.zshenv
@@ -22,4 +22,4 @@ cp -r ~/.gitconfig ./.gitconfig
 # cp  ~/.config/* ./.config 2>/dev/null
 # cp -r ~/.config/iterm2 ./.config/iterm2
 cp -r ~/.config/yamllint ./.config/yamllint
-cp -r ~/.claude ./.config/.claude
+# cp -r ~/.claude ./.config/.claude

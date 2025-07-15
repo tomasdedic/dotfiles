@@ -2,7 +2,7 @@
 # export TERM=xterm-256color
 export DISPLAY=:0
 export GOPATH=$HOME/go
-export EDITOR="/usr/local/bin/nvim"
+export EDITOR=nvim
 export LC_ALL=en_US.UTF-8
 # Path to your oh-my-zsh installation.
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="/opt/homebrew/share/zsh-syntax-highlighting/highlighters"
