@@ -1,4 +1,0 @@
-{"type":"summary","summary":"Local Command Execution: MCP Command Attempted","leafUuid":"cf9a87ae-8f46-4f93-9df6-b80562f88f1b"}
-{"type":"summary","summary":"Vim Config Search in OpenShift Dev Repo","leafUuid":"9f03dad1-5e7b-4094-982e-7b99b455e19f"}
-{"type":"summary","summary":"Nvim Scroll Issue and MCP Server Discussion","leafUuid":"ca918c8c-8f26-49c2-8461-c7c34a880424"}
-{"parentUuid":null,"isSidechain":false,"userType":"external","cwd":"/Users/ext90981/GIT/OPENSHIFT/dev-lin-blaster","sessionId":"1ae41bd2-1b59-4cb4-b1a0-9dffedd97e3c","version":"1.0.35","type":"user","message":{"role":"user","content":":Q"},"uuid":"98e5124e-c732-4dcc-95fd-be4d903da847","timestamp":"2025-06-27T07:18:10.451Z"}
