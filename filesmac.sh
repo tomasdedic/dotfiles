@@ -22,4 +22,4 @@ cp -r ~/.gitconfig ./.gitconfig
 # cp  ~/.config/* ./.config 2>/dev/null
 # cp -r ~/.config/iterm2 ./.config/iterm2
 cp -r ~/.config/yamllint ./.config/yamllint
-cp -r ~/.claude/agents .claude/
+cp -r ~/.claude/agents/ .claude/
