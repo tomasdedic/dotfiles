@@ -1,3 +1,39 @@
+[core]
+	excludesfile = /Users/ts/.gitignore_global
+	editor = nvim
 [user]
-	email = tomas.dedic.ext@siemens.com
 	name = Tomas Dedic
+	email = tdedic@healthequity.com
+[alias]
+  r = rev-parse --show-toplevel
+  lol = log --graph --decorate --pretty=oneline --abbrev-commit
+  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all --date=format:%c
+  hide = update-index --assume-unchanged
+  unhide = update-index --no-assume-unchanged
+  ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+  f = "!git ls-files | grep -i"
+[difftool]
+  prompt = false
+[diff]
+  tool = vimdiff
+[difftool "vimdiff"]
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+[merge]
+  tool = vimdiff
+[mergetool]
+  prompt = true
+[mergetool "vimdiff"]
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c 'wincmd w' -c 'wincmd J'"
+[alias]
+	d = difftool
+[init]
+	defaultBranch = main
+[http]
+	postBuffer = 157286400
+[credential]
+	helper = store
+; [credential "https://github.com/HQY01"]
+;   username = tdedic@healthequity.com
+[credential "https://github.com/"]
+  username = tomasdedic

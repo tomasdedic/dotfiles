@@ -5,7 +5,6 @@ vim.g.snacks_animate = false
 vim.g.mapleader = ","
 vim.g.maplocalleader = " "
 vim.opt.textwidth = 80
-vim.opt.clipboard = ""
 -- vim.filetype.add({
 --   pattern = {
 --     [".*/%.github[%w/]+workflows[%w/]+.*%.ya?ml"] = "yaml.gh",
