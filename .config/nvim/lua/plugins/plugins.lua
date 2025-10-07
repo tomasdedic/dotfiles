@@ -47,18 +47,6 @@ return {
           keys = {},
         },
       },
-      -- explorer = {
-      --   win = {
-      --     input = { -- list, preview
-      --       keys = {
-      --         ["<C-h>"] = { "<C-w>h", expr = true, mode = { "i" } },
-      --         ["<C-j>"] = { "<C-w>j", expr = true, mode = { "i" } },
-      --         ["<C-k>"] = { "<C-w>k", expr = true, mode = { "i" } },
-      --         ["<C-l>"] = { "<C-w>l", expr = true, mode = { "i" } },
-      --       },
-      --     },
-      --   },
-      -- },
     },
     -- keys = {
     --   {
@@ -99,7 +87,7 @@ return {
       show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
       term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
       dim_inactive = {
-        enabled = true, -- dims the background color of inactive window
+        enabled = false, -- dims the background color of inactive window
         shade = "dark",
         percentage = 0.15, -- percentage of the shade to apply to the inactive window
       },
@@ -128,18 +116,18 @@ return {
     "alexghergh/nvim-tmux-navigation",
     opts = {
       disable_when_zoomed = true,
-      keybindings = {
-        left = "<C-h>",
-        down = "<C-j>",
-        up = "<C-k>",
-        right = "<C-l>",
-      },
     },
   },
 
   {
     "folke/noice.nvim",
     opts = {
+      routes = {
+        {
+          view = "notify",
+          filter = { event = "msg_showmode" },
+        },
+      },
       views = {
         mini = {
           align = "message-left", -- Align messages to the left
@@ -178,6 +166,17 @@ return {
     "cuducos/yaml.nvim",
     ft = { "yaml", "helm", "yaml.gh" }, -- optional
   },
+  {
+    "mason-org/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "stylua",
+        "shellcheck",
+        "shfmt",
+        "flake8",
+      },
+    },
+  },
   -- {
   --   "williamboman/mason.nvim",
   --   opts = {
@@ -207,13 +206,7 @@ return {
       },
     },
   },
-  {
-    "roxma/vim-tmux-clipboard",
-  },
-  -- {
-  --   "akinsho/bufferline.nvim",
-  --   enabled = false,
-  -- },
+
   {
     "rasulomaroff/reactive.nvim",
     opts = {
