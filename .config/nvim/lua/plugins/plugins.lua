@@ -47,6 +47,18 @@ return {
           keys = {},
         },
       },
+      -- explorer = {
+      --   win = {
+      --     input = { -- list, preview
+      --       keys = {
+      --         ["<C-h>"] = { "<C-w>h", expr = true, mode = { "i" } },
+      --         ["<C-j>"] = { "<C-w>j", expr = true, mode = { "i" } },
+      --         ["<C-k>"] = { "<C-w>k", expr = true, mode = { "i" } },
+      --         ["<C-l>"] = { "<C-w>l", expr = true, mode = { "i" } },
+      --       },
+      --     },
+      --   },
+      -- },
     },
     -- keys = {
     --   {
@@ -87,7 +99,7 @@ return {
       show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
       term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
       dim_inactive = {
-        enabled = false, -- dims the background color of inactive window
+        enabled = true, -- dims the background color of inactive window
         shade = "dark",
         percentage = 0.15, -- percentage of the shade to apply to the inactive window
       },
@@ -113,18 +125,15 @@ return {
     },
   },
   {
-    "akinsho/bufferline.nvim",
-    optional = true,
-    opts = function(_, opts)
-      if (vim.g.colors_name or ""):find("catppuccin") then
-        opts.highlights = require("catppuccin.groups.integrations.bufferline").get_theme()
-      end
-    end,
-  },
-  {
     "alexghergh/nvim-tmux-navigation",
     opts = {
       disable_when_zoomed = true,
+      keybindings = {
+        left = "<C-h>",
+        down = "<C-j>",
+        up = "<C-k>",
+        right = "<C-l>",
+      },
     },
   },
 
@@ -195,6 +204,24 @@ return {
         move = {
           enable = false,
         },
+      },
+    },
+  },
+  {
+    "roxma/vim-tmux-clipboard",
+  },
+  -- {
+  --   "akinsho/bufferline.nvim",
+  --   enabled = false,
+  -- },
+  {
+    "rasulomaroff/reactive.nvim",
+    opts = {
+      -- load = { "catppuccin-late-cursor", "catppuccin-late-cursorline" },
+      builtin = {
+        cursorline = true,
+        cursor = true,
+        modemsg = true,
       },
     },
   },
