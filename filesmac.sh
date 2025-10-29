@@ -5,6 +5,7 @@ rm -rf ./.oh-my-zsh
 # rm -rf ./.zsh.d
 mkdir -p .config
 mkdir -p .oh-my-zsh/themes
+mkdir -p .claude
 
 cp ~/.aerospace.toml ./.aerospace.toml
 cp ~/.config/dircolors* ./.config
