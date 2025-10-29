@@ -1,6 +1,5 @@
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
 export SNACKS_GHOSTTY=true
-alias rm=trash
 alias cr='cd $(git rev-parse --show-toplevel)'
 alias dog='git log --all --decorate --oneline --graph'
 #git config --global alias.lg1 'log --all --decorate --oneline --graph'
@@ -8,12 +7,10 @@ alias dog='git log --all --decorate --oneline --graph'
 alias doga='git log --graph --abbrev-commit --decorate --format=format:"%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)" --all'
 # git config --global alias.lg2 'log --graph --abbrev-commit --decorate --format=format:''%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'' --all'
 
-alias sed='gsed'
-alias dircolors='gdircolors'
-# eval $(dircolors ~/.config/dircolors.ansi-dark)
+eval $(dircolors ~/.config/dircolors.ansi-dark)
 alias setkey='~/.config/startupscripts/setkeyboard'
 alias neat='kubectl neat'
-alias ls='gls --color=auto'
+alias ls='ls --color=auto'
 alias kn='kubectl config view --minify --output 'jsonpath={..namespace}'; echo'
 alias tmux='tmux -2'
 alias gdoc='gopherdoc'
@@ -43,7 +40,7 @@ alias vim='nvim'
 alias vi='nvim'
 alias ym='vim -c "set ft=yaml"'
 # setopt complete_aliases
-alias compdef kb='kubectl'
+#alias compdef kb='kubectl'
 alias paks='source ~/bin/paks'
 
 fif() {
@@ -58,7 +55,7 @@ fif() {
 function ctx() {
   local pathtoconfig="$HOME/.kube/confignopass"
   local kbconfig
-  kbconfig=$(find  $pathtoconfig -type f -name \*-config | xargs basename | sort | fzf -q "$1")
+  kbconfig=$(find  $pathtoconfig -type f -name \*-config -printf "%f\n"|sort | fzf -q "$1")
   # export cannot be returned back to parent process, source workaround
   [ -n "$kbconfig" ] && (echo "export KUBECONFIG=$pathtoconfig/$kbconfig" >~/tmp/kube) \
   && printf '%b\n' "\033[1m"$pathtoconfig/$kbconfig"\033[0m"
@@ -69,8 +66,6 @@ function ctx() {
 # Select a running docker container to stop
 function pos() {
   local cid
-  cid=$(podman ps | sed 1d | fzf -q "$1" | awk '{print $1}')
-
   [ -n "$cid" ] && (set -x; podman stop "$cid")
 }
 # Select a docker container to remove

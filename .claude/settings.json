@@ -1,0 +1,10 @@
+{
+  "feedbackSurveyState": {
+    "lastShownTime": 1754077999876
+  },
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "statusLine": {
+    "type": "command",
+    "command": "bash -c 'input=$(cat); current_dir=$(echo \"$input\" | jq -r \".workspace.current_dir // .cwd\"); model_name=$(echo \"$input\" | jq -r \".model.display_name\"); full_dir=\"${current_dir/#$HOME/~}\"; git_info=\"\"; if git -C \"$current_dir\" rev-parse --git-dir >/dev/null 2>&1; then branch=$(git -C \"$current_dir\" branch --show-current 2>/dev/null || git -C \"$current_dir\" rev-parse --short HEAD 2>/dev/null); if [ -n \"$branch\" ]; then git_info=\" [git:$branch]\"; fi; fi; k8s_cluster=$(kubectl config view --minify -o jsonpath=\"{.clusters[0].name}\" 2>/dev/null | sed \"s/api-//;s/-intranet-siemens-com:6443//\" || echo \"no-k8s\"); k8s_info=\"\"; if [ \"$k8s_cluster\" != \"no-k8s\" ]; then k8s_info=\" [k8s:$k8s_cluster]\"; fi; printf \"\\033[1m%s\\033[0m:\\033[34m%s\\033[0m\\033[32m%s\\033[0m\\033[33m%s\\033[0m → %s\" \"$(whoami)\" \"$full_dir\" \"$git_info\" \"$k8s_info\" \"$model_name\"'"
+  }
+}
