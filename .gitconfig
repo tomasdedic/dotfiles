@@ -1,3 +1,5 @@
+[init]
+	defaultBranch = main
 [user]
-	email = tomas.dedic.ext@siemens.com
 	name = Tomas Dedic
+	email = dedtom@gmail.com

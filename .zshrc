@@ -1,14 +1,14 @@
 # zmodload zsh/zprof #load profiler
-export TERM=tmux-256color
+# export TERM=xterm-256color
 export DISPLAY=:0
 export GOPATH=$HOME/go
-export EDITOR=nvim
+export EDITOR="nvim"
 export LC_ALL=en_US.UTF-8
 # Path to your oh-my-zsh installation.
-export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="/home/linuxbrew/.linuxbrew/share/zsh-syntax-highlighting/highlighters"
+export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="/opt/homebrew/share/zsh-syntax-highlighting/highlighters"
 export ZSH="$HOME/.oh-my-zsh"
+eval $(/opt/homebrew/bin/brew shellenv)
 ZSH_THEME="fishy"
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 
 # Uncomment the following line if pasting URLs and other text is messed up.
@@ -66,7 +66,7 @@ export FZF_LEGACY_KEYBINDINGS=0
 export FZF_TMUX=1
 source $ZSH/oh-my-zsh.sh
 bindkey "^X" forward-word #jump word by word
-#eval $(gdircolors ~/.config/dircolors.ansi-dark)
+eval $(gdircolors ~/.config/dircolors.ansi-dark)
 
 export HELM_REGISTRY_CONFIG=~/.config/helm/registry.json
 export HELM_REPOSITORY_CONFIG=~/.config/helm/repositories.yaml
@@ -90,7 +90,7 @@ rmf() {
     ls -p | fzf -m | while read filename; do rm -rf $filename; done
 }
 
-export SUDO_ASKPASS=/usr/bin/ssh-askpass
+export SUDO_ASKPASS=ssh-askpass
 bindkey "^[OA" up-history
 bindkey "^[OB" down-history
 export HOWDOI_COLORIZE=1
@@ -105,7 +105,7 @@ compinit -C
 ## completion
 # setopt complete_aliases
 alias compdef kb='kubectl'
-# compdef kb='kubectl'
+compdef kb='kubectl'
 # autoload -Uz +X compinit
 # compinit -i
 
@@ -119,11 +119,8 @@ echo -e -n "\x1b[\x32 q" #changes to steady block cursor
 # . "$HOME/.cargo/env"
 HOMEBREW_NO_VERIFY_ATTESTATIONS=1
 # zprof #profiler output
+KUBECONFIG=~/.kube/config
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export NODE_TLS_REJECT_UNAUTHORIZED=0
-export KUBECONFIG=~/.kube/kubeconfig
-compinit
+# Task Master aliases added on 10/29/2025
+alias tm='task-master'
+alias taskmaster='task-master'
