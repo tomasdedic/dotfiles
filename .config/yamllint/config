@@ -1,0 +1,10 @@
+extends: relaxed
+
+ignore: |
+  templates/**/*.yaml
+  templates/*.yaml
+  templates/
+
+rules:
+  line-length: disable
+  colons: disable

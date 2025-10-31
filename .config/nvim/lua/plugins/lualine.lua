@@ -96,6 +96,14 @@ return {
         },
         inactive_winbar = {
           lualine_a = { { "filename", path = 1 } },
+          lualine_y = {
+            {
+              function()
+                return vim.fn.substitute(LazyVim.root(), vim.env.HOME, "~", "")
+              end,
+              color = { fg = "indianred" },
+            },
+          },
         },
       }
     end,

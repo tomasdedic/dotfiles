@@ -1,0 +1,192 @@
+apiVersion: ocs.openshift.io/v1
+kind: StorageCluster
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"ocs.openshift.io/v1","kind":"StorageCluster","metadata":{"annotations":{},"name":"ocs-storagecluster","namespace":"openshift-storage"},"spec":{"defaultStorageProfile":"lean","managedResources":{"cephBlockPool":{"replicated":{"replicasPerFailureDomain":1,"size":3}},"cephCluster":{},"cephConfig":{},"cephDashboard":{},"cephFilesystem":{},"cephObjectStore":{},"cephObjectStoreUser":{}},"monDataDirHostPath":"/var/lib/rook","monitoring":{"enabled":true},"storageDeviceSets":[{"config":{},"count":3,"dataPVCTemplate":{"metadata":{},"spec":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"1"}},"storageClassName":"localblockforodf","volumeMode":"Block"},"status":{}},"name":"ocs-deviceset","placement":{"nodeAffinity":{"requiredDuringSchedulingIgnoredDuringExecution":{"nodeSelectorTerms":[{"matchExpressions":[{"key":"node-role.kubernetes.io/master","operator":"Exists"}]}]}},"tolerations":[{"effect":"NoSchedule","key":"node-role.kubernetes.io/master","operator":"Equal","value":""}]},"portable":false,"preparePlacement":{"nodeAffinity":{"requiredDuringSchedulingIgnoredDuringExecution":{"nodeSelectorTerms":[{"matchExpressions":[{"key":"node-role.kubernetes.io/master","operator":"Exists"}]}]}},"tolerations":[{"effect":"NoSchedule","key":"node-role.kubernetes.io/master","operator":"Equal","value":""}]},"replica":1,"resources":{"limits":{"cpu":"2","memory":"5Gi"},"requests":{"cpu":"1","memory":"5Gi"}}}]}}
+    uninstall.ocs.openshift.io/cleanup-policy: delete
+    uninstall.ocs.openshift.io/mode: graceful
+  creationTimestamp: "2025-07-14T10:49:30Z"
+  finalizers:
+  - storagecluster.ocs.openshift.io
+  generation: 4
+  name: ocs-storagecluster
+  namespace: openshift-storage
+  ownerReferences:
+  - apiVersion: odf.openshift.io/v1alpha1
+    kind: StorageSystem
+    name: ocs-storagecluster-storagesystem
+    uid: 5ea2f8a9-0ebe-4161-b35e-75c29d662040
+  resourceVersion: "25317433"
+  uid: ffc8e45d-2d72-4cf1-880e-568ffa461c38
+spec:
+  arbiter: {}
+  defaultStorageProfile: lean
+  enableCephTools: true
+  encryption:
+    keyRotation:
+      schedule: '@weekly'
+    kms: {}
+  externalStorage: {}
+  managedResources:
+    cephBlockPools: {}
+    cephCluster: {}
+    cephConfig: {}
+    cephDashboard: {}
+    cephFilesystems:
+      dataPoolSpec:
+        application: ""
+        erasureCoded:
+          codingChunks: 0
+          dataChunks: 0
+        mirroring: {}
+        quotas: {}
+        replicated:
+          size: 0
+        statusCheck:
+          mirror: {}
+    cephNonResilientPools:
+      count: 1
+      resources: {}
+      volumeClaimTemplate:
+        metadata: {}
+        spec:
+          resources: {}
+        status: {}
+    cephObjectStoreUsers: {}
+    cephObjectStores: {}
+    cephRBDMirror:
+      daemonCount: 1
+    cephToolbox: {}
+  monDataDirHostPath: /var/lib/rook
+  monitoring: {}
+  storageDeviceSets:
+  - config: {}
+    count: 3
+    dataPVCTemplate:
+      metadata: {}
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: "1"
+        storageClassName: localblockforodf
+        volumeMode: Block
+      status: {}
+    name: ocs-deviceset
+    placement:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.kubernetes.io/master
+              operator: Exists
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/master
+        operator: Equal
+        value: ""
+    portable: false
+    preparePlacement:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.kubernetes.io/master
+              operator: Exists
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/master
+        operator: Equal
+        value: ""
+    replica: 1
+    resources:
+      limits:
+        cpu: "2"
+        memory: 5Gi
+      requests:
+        cpu: "1"
+        memory: 5Gi
+status:
+  conditions:
+  - lastHeartbeatTime: "2025-07-14T10:49:30Z"
+    lastTransitionTime: "2025-07-14T10:49:30Z"
+    message: Version check successful
+    reason: VersionMatched
+    status: "False"
+    type: VersionMismatch
+  - lastHeartbeatTime: "2025-08-08T09:02:16Z"
+    lastTransitionTime: "2025-08-07T23:07:10Z"
+    message: Reconcile completed successfully
+    reason: ReconcileCompleted
+    status: "True"
+    type: ReconcileComplete
+  - lastHeartbeatTime: "2025-08-08T09:02:16Z"
+    lastTransitionTime: "2025-08-07T20:41:14Z"
+    message: Reconcile completed successfully
+    reason: ReconcileCompleted
+    status: "True"
+    type: Available
+  - lastHeartbeatTime: "2025-08-08T09:02:16Z"
+    lastTransitionTime: "2025-08-08T01:06:59Z"
+    message: Reconcile completed successfully
+    reason: ReconcileCompleted
+    status: "False"
+    type: Progressing
+  - lastHeartbeatTime: "2025-08-08T09:02:16Z"
+    lastTransitionTime: "2025-08-07T20:41:14Z"
+    message: Reconcile completed successfully
+    reason: ReconcileCompleted
+    status: "False"
+    type: Degraded
+  - lastHeartbeatTime: "2025-08-08T09:02:16Z"
+    lastTransitionTime: "2025-08-08T01:06:59Z"
+    message: Reconcile completed successfully
+    reason: ReconcileCompleted
+    status: "True"
+    type: Upgradeable
+  currentMonCount: 3
+  defaultCephDeviceClass: ssd
+  failureDomain: rack
+  failureDomainKey: topology.rook.io/rack
+  failureDomainValues:
+  - rack0
+  - rack1
+  - rack2
+  images:
+    ceph:
+      actualImage: registry.redhat.io/rhceph/rhceph-8-rhel9@sha256:b001a7b0c1bf6d0f90a29727eb5418422ccd6be91d32c5da3e923dfe55d37374
+      desiredImage: registry.redhat.io/rhceph/rhceph-8-rhel9@sha256:b001a7b0c1bf6d0f90a29727eb5418422ccd6be91d32c5da3e923dfe55d37374
+    noobaaCore:
+      actualImage: registry.redhat.io/odf4/mcg-core-rhel9@sha256:f3c5f4172395fbf5dd8cc2b1a4461fcbf12a2d4ce33fe9de934f33815fdf09a1
+      desiredImage: registry.redhat.io/odf4/mcg-core-rhel9@sha256:f3c5f4172395fbf5dd8cc2b1a4461fcbf12a2d4ce33fe9de934f33815fdf09a1
+    noobaaDB:
+      actualImage: registry.redhat.io/rhel9/postgresql-15@sha256:2b7a8dceeabdcb099f87feb52f0f007ef8ac2ea66f6946173b16bc1b8e981885
+      desiredImage: registry.redhat.io/rhel9/postgresql-15@sha256:2b7a8dceeabdcb099f87feb52f0f007ef8ac2ea66f6946173b16bc1b8e981885
+  kmsServerConnection: {}
+  nodeTopologies:
+    labels:
+      kubernetes.io/hostname:
+      - master1.ocps.trasklab.cz
+      - master2.ocps.trasklab.cz
+      - master3.ocps.trasklab.cz
+      topology.rook.io/rack:
+      - rack0
+      - rack1
+      - rack2
+  phase: Ready
+  relatedObjects:
+  - apiVersion: ceph.rook.io/v1
+    kind: CephCluster
+    name: ocs-storagecluster-cephcluster
+    namespace: openshift-storage
+    resourceVersion: "25317423"
+    uid: dbd32418-dc1b-480e-aba5-07c8705cf349
+  - apiVersion: noobaa.io/v1alpha1
+    kind: NooBaa
+    name: noobaa
+    namespace: openshift-storage
+    resourceVersion: "25317410"
+    uid: f5b636e5-b894-40d7-87c1-06adfcac0ee1
+  version: 4.18.7
