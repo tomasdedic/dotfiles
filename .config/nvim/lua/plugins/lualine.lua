@@ -6,7 +6,8 @@ return {
 
         options = {
           theme = "catppuccin-macchiato",
-          disabled_filetypes = { "toggleterm", "packer", "snack_picker_list", "qf" },
+          disabled_filetypes = { winbar = { "snacks_picker_list", "toggleterm", "packer", "qf" } },
+          globalstatus = true,
         },
         extensions = { "fzf", "fugitive" },
         sections = {
@@ -47,16 +48,18 @@ return {
               color = { fg = "grey53" },
             },
           },
-          lualine_b = {
-            {
-              function()
-                return require("grapple").name_or_index()
-              end,
-              cond = function()
-                return package.loaded["grapple"] and require("grapple").exists()
-              end,
-            },
-          },
+          lualine_b = {},
+          lualine_c = {},
+          -- lualine_b = {
+          --   {
+          --     function()
+          --       return require("grapple").name_or_index()
+          --     end,
+          --     cond = function()
+          --       return package.loaded["grapple"] and require("grapple").exists()
+          --     end,
+          --   },
+          -- },
           lualine_x = {
             -- { require("yaml_nvim").get_yaml_key, color = { fg = "grey53" } },
             {
@@ -80,7 +83,7 @@ return {
           lualine_x = {
             {
               function()
-                return vim.fn.substitute(vim.fn.getcwd(), vim.env.HOME, "~", "")
+                return "cwd:" .. vim.fn.substitute(vim.fn.getcwd(), vim.env.HOME, "~", "")
               end,
               color = { fg = "indianred" },
             },
