@@ -6,7 +6,23 @@ vim.keymap.set("n", "<C-j>", "<Cmd>NvimTmuxNavigateDown<CR>", {})
 vim.keymap.set("n", "<C-k>", "<Cmd>NvimTmuxNavigateUp<CR>", {})
 vim.keymap.set("n", "<C-l>", "<Cmd>NvimTmuxNavigateRight<CR>", {})
 vim.keymap.set("n", "<C-\\>", "<Cmd>NvimTmuxNavigateLastActive<CR>", {})
-vim.keymap.set("n", "<Leader>yy", "^yg_", { noremap = true }) --copy line without begining whitespace
+vim.keymap.set("n", "<Leader>yy", "^yg_", { noremap = true }) --copy line without begining whitespacel
+vim.keymap.set("v", "<Leader>yy", function()
+  local start_line = vim.fn.line("'<")
+  local end_line = vim.fn.line("'>")
+  local lines = vim.fn.getline(start_line, end_line)
+
+  -- Handle both single line (string) and multiple lines (table)
+  if type(lines) == "string" then
+    lines = { lines }
+  end
+
+  for i, line in ipairs(lines) do
+    lines[i] = line:gsub("^%s+", "")
+  end
+
+  vim.fn.setreg(vim.v.register, lines, "l")
+end, { noremap = true })
 -- vim.keymap.set("n", "<C-Space>", "<Cmd>NvimTmuxNavigateNext<CR>", {})
 -- vim.keymap.set(
 --   "n",
