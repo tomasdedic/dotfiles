@@ -188,15 +188,11 @@ run = ['layout floating', 'move-node-to-workspace 3']
 
 [[on-window-detected]]
 if.app-id = 'com.vivaldi.Vivaldi'
-run = ['layout floating', 'move-node-to-workspace 2']
+run = 'move-node-to-workspace 2'
 
 [[on-window-detected]]
 # if.app-id = 'org.alacritty'
 if.app-id = 'com.mitchellh.ghostty'
-run = 'move-node-to-workspace 2'
-
-[[on-window-detected]]
-if.app-id = 'com.microsoft.rdc.macos'
 run = 'move-node-to-workspace 1'
 
 # all others move to 3
