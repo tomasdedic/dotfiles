@@ -1,7 +1,7 @@
 initial-command = /opt/homebrew/bin/zsh
 title=""
 #theme=catppuccin-latte
-theme="Pencil Light"
+theme=PencilLight
 window-height=100
 window-width=210
 window-decoration = false
@@ -33,4 +33,3 @@ confirm-close-surface=false
 adjust-cell-width= -7%
 adjust-cell-height= -7%
 
-keybind = shift+enter=text:\n

@@ -7,33 +7,22 @@ vim.keymap.set("n", "<C-k>", "<Cmd>NvimTmuxNavigateUp<CR>", {})
 vim.keymap.set("n", "<C-l>", "<Cmd>NvimTmuxNavigateRight<CR>", {})
 vim.keymap.set("n", "<C-\\>", "<Cmd>NvimTmuxNavigateLastActive<CR>", {})
 vim.keymap.set("n", "<Leader>yy", "^yg_", { noremap = true }) --copy line without begining whitespacel
+vim.keymap.set("v", "<Leader>yy", function()
+  local start_line = vim.fn.line("'<")
+  local end_line = vim.fn.line("'>")
+  local lines = vim.fn.getline(start_line, end_line)
 
--- Copy visual block selection removing as much whitespace as first line has
-vim.keymap.set("x", "<Leader>yy", function()
-  -- First, yank the visual selection normally
-  vim.cmd('normal! "' .. vim.v.register .. "y")
-
-  -- Now get what was just yanked as a string and split it
-  local yanked_str = vim.fn.getreg(vim.v.register)
-  local lines = vim.split(yanked_str, "\n", { plain = true })
-
-  -- Only process if we have lines
-  if #lines > 0 and lines[1] then
-    -- Count leading whitespace in first line
-    local first_line_whitespace = lines[1]:match("^(%s*)") or ""
-    local whitespace_count = #first_line_whitespace
-
-    -- Remove that amount of whitespace from each line
-    for i, line in ipairs(lines) do
-      if type(line) == "string" and whitespace_count > 0 and #line >= whitespace_count then
-        lines[i] = line:sub(whitespace_count + 1)
-      end
-    end
-
-    -- Put the processed content back in the register as a string
-    vim.fn.setreg(vim.v.register, table.concat(lines, "\n"))
+  -- Handle both single line (string) and multiple lines (table)
+  if type(lines) == "string" then
+    lines = { lines }
   end
-end, { noremap = true, desc = "Copy removing first line's leading whitespace" })
+
+  for i, line in ipairs(lines) do
+    lines[i] = line:gsub("^%s+", "")
+  end
+
+  vim.fn.setreg(vim.v.register, lines, "l")
+end, { noremap = true })
 -- vim.keymap.set("n", "<C-Space>", "<Cmd>NvimTmuxNavigateNext<CR>", {})
 -- vim.keymap.set(
 --   "n",
