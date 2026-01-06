@@ -144,14 +144,14 @@ return {
       },
     },
   },
-  -- {
-  --   "HakonHarnes/img-clip.nvim",
-  --   event = "VeryLazy",
-  --   opts = {},
-  --   keys = {
-  --     { "<localleader>p", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
-  --   },
-  -- },
+  {
+    "HakonHarnes/img-clip.nvim",
+    event = "VeryLazy",
+    opts = {},
+    keys = {
+      { "<localleader>p", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
+    },
+  },
   -- {
   --   "neovim/nvim-lspconfig",
   --   opts = {
