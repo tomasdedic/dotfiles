@@ -122,6 +122,7 @@ return {
   {
     "folke/noice.nvim",
     opts = {
+      -- cmdline = { enabled = false },
       routes = {
         {
           view = "notify",
