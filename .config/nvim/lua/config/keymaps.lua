@@ -78,6 +78,3 @@ vim.keymap.set(
   "<cmd>!tmux send-keys -t bottom Up Enter<CR><CR>",
   { desc = "tmux down last command" }
 )
--- " nmap \r :!tmux send-keys -t bottom-left Up Enter <CR><CR>
--- " nmap \rr :!tmux send-keys -t top-left Up Enter <CR><CR>
--- nmap \r :!tmux send-keys -t bottom Up Enter <CR><CR>
