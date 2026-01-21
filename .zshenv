@@ -62,7 +62,6 @@ function ctx() {
   # export cannot be returned back to parent process, source workaround
   [ -n "$kbconfig" ] && (echo "export KUBECONFIG=$pathtoconfig/$kbconfig" >~/tmp/kube) \
   && printf '%b\n' "\033[1m"$pathtoconfig/$kbconfig"\033[0m"
-  export HTTPS_PROXY=http://localhost:8888
   source ~/tmp/kube
 
 }
@@ -101,4 +100,9 @@ function azctx() {
     local sub
     sub=$(az account list --query "[].name" -o tsv | sort -f | fzf -q "$1")
     [ -n "$sub" ] && az account set --subscription "$sub"
+}
+
+function grt()
+{
+    git rev-parse --show-toplevel
 }
