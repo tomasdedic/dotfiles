@@ -1,0 +1,3 @@
+- use oc instead of kubectl
+- use oc explain to validate manifest changes
+- dont't use ascii art in markdown, use simple ascii

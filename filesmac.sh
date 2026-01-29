@@ -25,3 +25,4 @@ cp -r ~/.gitconfig ./.gitconfig
 cp -r ~/.config/yamllint ./.config/yamllint
 cp -r ~/.claude/agents/ .claude/agents
 cp -r ~/.claude/settings.json .claude/
+cp -r ~/.claude/CLAUDE.md .claude/
