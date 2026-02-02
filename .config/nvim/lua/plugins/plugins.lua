@@ -148,7 +148,19 @@ return {
   {
     "HakonHarnes/img-clip.nvim",
     event = "VeryLazy",
-    opts = {},
+    opts = {
+      default = {
+        file_name = function()
+          local base = vim.fn.expand("%:t:r")
+          local suffix = vim.fn.input("IN: " .. base .. "-")
+          if suffix ~= "" then
+            return base .. "-" .. suffix
+          end
+          return base
+        end,
+        prompt_for_file_name = false,
+      },
+    },
     keys = {
       { "<localleader>p", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
     },

@@ -2,9 +2,13 @@
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "permissions": {
     "allow": [
-      "Bash(ls:*)",
-      "Bash(oc explain:*)",
-      "Bash(oc get:*)"
+      "Bash(oc get *)",
+      "Bash(oc describe *)",
+      "Bash(oc explain *)",
+      "Bash(oc logs *)",
+      "Grep",
+      "Glob",
+      "Read"
     ]
   },
   "statusLine": {
@@ -16,6 +20,6 @@
     "lastShownTime": 1754077999876
   },
   "enabledPlugins": {
-    "gopls-lsp@claude-plugins-official": true
+    "ralph-loop@claude-plugins-official": true
   }
 }
