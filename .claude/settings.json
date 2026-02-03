@@ -6,6 +6,8 @@
       "Bash(oc describe *)",
       "Bash(oc explain *)",
       "Bash(oc logs *)",
+      "Bash(find *)",
+      "Bash(ls *)",
       "Grep",
       "Glob",
       "Read"
