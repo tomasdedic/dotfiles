@@ -33,4 +33,3 @@ confirm-close-surface=false
 adjust-cell-width= -7%
 adjust-cell-height= -7%
 
-keybind = shift+enter=text:\n
