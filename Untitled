@@ -1,192 +1,280 @@
-apiVersion: ocs.openshift.io/v1
-kind: StorageCluster
+apiVersion: v1
+kind: Node
 metadata:
   annotations:
-    kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"ocs.openshift.io/v1","kind":"StorageCluster","metadata":{"annotations":{},"name":"ocs-storagecluster","namespace":"openshift-storage"},"spec":{"defaultStorageProfile":"lean","managedResources":{"cephBlockPool":{"replicated":{"replicasPerFailureDomain":1,"size":3}},"cephCluster":{},"cephConfig":{},"cephDashboard":{},"cephFilesystem":{},"cephObjectStore":{},"cephObjectStoreUser":{}},"monDataDirHostPath":"/var/lib/rook","monitoring":{"enabled":true},"storageDeviceSets":[{"config":{},"count":3,"dataPVCTemplate":{"metadata":{},"spec":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"1"}},"storageClassName":"localblockforodf","volumeMode":"Block"},"status":{}},"name":"ocs-deviceset","placement":{"nodeAffinity":{"requiredDuringSchedulingIgnoredDuringExecution":{"nodeSelectorTerms":[{"matchExpressions":[{"key":"node-role.kubernetes.io/master","operator":"Exists"}]}]}},"tolerations":[{"effect":"NoSchedule","key":"node-role.kubernetes.io/master","operator":"Equal","value":""}]},"portable":false,"preparePlacement":{"nodeAffinity":{"requiredDuringSchedulingIgnoredDuringExecution":{"nodeSelectorTerms":[{"matchExpressions":[{"key":"node-role.kubernetes.io/master","operator":"Exists"}]}]}},"tolerations":[{"effect":"NoSchedule","key":"node-role.kubernetes.io/master","operator":"Equal","value":""}]},"replica":1,"resources":{"limits":{"cpu":"2","memory":"5Gi"},"requests":{"cpu":"1","memory":"5Gi"}}}]}}
-    uninstall.ocs.openshift.io/cleanup-policy: delete
-    uninstall.ocs.openshift.io/mode: graceful
-  creationTimestamp: "2025-07-14T10:49:30Z"
-  finalizers:
-  - storagecluster.ocs.openshift.io
-  generation: 4
-  name: ocs-storagecluster
-  namespace: openshift-storage
-  ownerReferences:
-  - apiVersion: odf.openshift.io/v1alpha1
-    kind: StorageSystem
-    name: ocs-storagecluster-storagesystem
-    uid: 5ea2f8a9-0ebe-4161-b35e-75c29d662040
-  resourceVersion: "25317433"
-  uid: ffc8e45d-2d72-4cf1-880e-568ffa461c38
+    csi.volume.kubernetes.io/nodeid: '{"csi.trident.netapp.io":"infra01.tocp4s.csin.cz"}'
+    k8s.ovn.org/host-cidrs: '["10.88.56.70/21"]'
+    k8s.ovn.org/l3-gateway-config: '{"default":{"mode":"shared","interface-id":"br-ex_infra01.tocp4s.csin.cz","mac-address":"00:50:56:93:cd:ed","ip-addresses":["10.88.56.70/21"],"ip-address":"10.88.56.70/21","next-hops":["10.88.56.1"],"next-hop":"10.88.56.1","node-port-enable":"true","vlan-id":"0"}}'
+    k8s.ovn.org/network-ids: '{"default":"0"}'
+    k8s.ovn.org/node-chassis-id: c0fe631d-4e54-43ac-ac48-cbfc21f3b201
+    k8s.ovn.org/node-gateway-router-lrp-ifaddr: '{"ipv4":"100.64.0.20/16"}'
+    k8s.ovn.org/node-id: "20"
+    k8s.ovn.org/node-mgmt-port-mac-address: de:2a:3b:6d:07:83
+    k8s.ovn.org/node-primary-ifaddr: '{"ipv4":"10.88.56.70/21"}'
+    k8s.ovn.org/node-subnets: '{"default":["100.96.20.0/24"]}'
+    k8s.ovn.org/node-transit-switch-port-ifaddr: '{"ipv4":"100.88.0.20/16"}'
+    k8s.ovn.org/remote-zone-migrated: infra01.tocp4s.csin.cz
+    k8s.ovn.org/zone-name: infra01.tocp4s.csin.cz
+    machineconfiguration.openshift.io/controlPlaneTopology: HighlyAvailable
+    machineconfiguration.openshift.io/currentConfig: rendered-infra-a98b9ae75418bb82cd886f8f9a87a466
+    machineconfiguration.openshift.io/desiredConfig: rendered-infra-a98b9ae75418bb82cd886f8f9a87a466
+    machineconfiguration.openshift.io/desiredDrain: uncordon-rendered-infra-a98b9ae75418bb82cd886f8f9a87a466
+    machineconfiguration.openshift.io/lastAppliedDrain: uncordon-rendered-infra-a98b9ae75418bb82cd886f8f9a87a466
+    machineconfiguration.openshift.io/lastObservedServerCAAnnotation: "false"
+    machineconfiguration.openshift.io/lastSyncedControllerConfigResourceVersion: "5990749574"
+    machineconfiguration.openshift.io/post-config-action: ""
+    machineconfiguration.openshift.io/reason: ""
+    machineconfiguration.openshift.io/state: Done
+    volumes.kubernetes.io/controller-managed-attach-detach: "true"
+  creationTimestamp: "2024-07-17T21:10:18Z"
+  labels:
+    beta.kubernetes.io/arch: amd64
+    beta.kubernetes.io/os: linux
+    dr: infra
+    kubernetes.io/arch: amd64
+    kubernetes.io/hostname: infra01.tocp4s.csin.cz
+    kubernetes.io/os: linux
+    machineconfiguration.openshift.io/role: infra
+    node-role.kubernetes.io/infra: ""
+    node-role.kubernetes.io/worker: ""
+    node.openshift.io/os_id: rhcos
+    role: infra
+    topology.kubernetes.io/zone: dc1
+  name: infra01.tocp4s.csin.cz
+  resourceVersion: "6067136002"
+  uid: 791f10c4-8b93-4a13-86c3-5567fe23ee3d
 spec:
-  arbiter: {}
-  defaultStorageProfile: lean
-  enableCephTools: true
-  encryption:
-    keyRotation:
-      schedule: '@weekly'
-    kms: {}
-  externalStorage: {}
-  managedResources:
-    cephBlockPools: {}
-    cephCluster: {}
-    cephConfig: {}
-    cephDashboard: {}
-    cephFilesystems:
-      dataPoolSpec:
-        application: ""
-        erasureCoded:
-          codingChunks: 0
-          dataChunks: 0
-        mirroring: {}
-        quotas: {}
-        replicated:
-          size: 0
-        statusCheck:
-          mirror: {}
-    cephNonResilientPools:
-      count: 1
-      resources: {}
-      volumeClaimTemplate:
-        metadata: {}
-        spec:
-          resources: {}
-        status: {}
-    cephObjectStoreUsers: {}
-    cephObjectStores: {}
-    cephRBDMirror:
-      daemonCount: 1
-    cephToolbox: {}
-  monDataDirHostPath: /var/lib/rook
-  monitoring: {}
-  storageDeviceSets:
-  - config: {}
-    count: 3
-    dataPVCTemplate:
-      metadata: {}
-      spec:
-        accessModes:
-        - ReadWriteOnce
-        resources:
-          requests:
-            storage: "1"
-        storageClassName: localblockforodf
-        volumeMode: Block
-      status: {}
-    name: ocs-deviceset
-    placement:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: node-role.kubernetes.io/master
-              operator: Exists
-      tolerations:
-      - effect: NoSchedule
-        key: node-role.kubernetes.io/master
-        operator: Equal
-        value: ""
-    portable: false
-    preparePlacement:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: node-role.kubernetes.io/master
-              operator: Exists
-      tolerations:
-      - effect: NoSchedule
-        key: node-role.kubernetes.io/master
-        operator: Equal
-        value: ""
-    replica: 1
-    resources:
-      limits:
-        cpu: "2"
-        memory: 5Gi
-      requests:
-        cpu: "1"
-        memory: 5Gi
+  taints:
+  - effect: NoExecute
+    key: server-role
+    value: infra
 status:
+  addresses:
+  - address: 10.88.56.70
+    type: InternalIP
+  - address: infra01.tocp4s.csin.cz
+    type: Hostname
+  allocatable:
+    cpu: 11900m
+    ephemeral-storage: "114396791822"
+    hugepages-1Gi: "0"
+    hugepages-2Mi: "0"
+    memory: 250688956Ki
+    pods: "250"
+  capacity:
+    cpu: "12"
+    ephemeral-storage: 125293548Ki
+    hugepages-1Gi: "0"
+    hugepages-2Mi: "0"
+    memory: 263374268Ki
+    pods: "250"
   conditions:
-  - lastHeartbeatTime: "2025-07-14T10:49:30Z"
-    lastTransitionTime: "2025-07-14T10:49:30Z"
-    message: Version check successful
-    reason: VersionMatched
+  - lastHeartbeatTime: "2026-01-29T09:44:15Z"
+    lastTransitionTime: "2025-05-17T20:46:28Z"
+    message: kubelet has sufficient memory available
+    reason: KubeletHasSufficientMemory
     status: "False"
-    type: VersionMismatch
-  - lastHeartbeatTime: "2025-08-08T09:02:16Z"
-    lastTransitionTime: "2025-08-07T23:07:10Z"
-    message: Reconcile completed successfully
-    reason: ReconcileCompleted
-    status: "True"
-    type: ReconcileComplete
-  - lastHeartbeatTime: "2025-08-08T09:02:16Z"
-    lastTransitionTime: "2025-08-07T20:41:14Z"
-    message: Reconcile completed successfully
-    reason: ReconcileCompleted
-    status: "True"
-    type: Available
-  - lastHeartbeatTime: "2025-08-08T09:02:16Z"
-    lastTransitionTime: "2025-08-08T01:06:59Z"
-    message: Reconcile completed successfully
-    reason: ReconcileCompleted
+    type: MemoryPressure
+  - lastHeartbeatTime: "2026-01-29T09:44:15Z"
+    lastTransitionTime: "2025-05-17T20:46:28Z"
+    message: kubelet has no disk pressure
+    reason: KubeletHasNoDiskPressure
     status: "False"
-    type: Progressing
-  - lastHeartbeatTime: "2025-08-08T09:02:16Z"
-    lastTransitionTime: "2025-08-07T20:41:14Z"
-    message: Reconcile completed successfully
-    reason: ReconcileCompleted
+    type: DiskPressure
+  - lastHeartbeatTime: "2026-01-29T09:44:15Z"
+    lastTransitionTime: "2025-05-17T20:46:28Z"
+    message: kubelet has sufficient PID available
+    reason: KubeletHasSufficientPID
     status: "False"
-    type: Degraded
-  - lastHeartbeatTime: "2025-08-08T09:02:16Z"
-    lastTransitionTime: "2025-08-08T01:06:59Z"
-    message: Reconcile completed successfully
-    reason: ReconcileCompleted
+    type: PIDPressure
+  - lastHeartbeatTime: "2026-01-29T09:44:15Z"
+    lastTransitionTime: "2025-07-02T09:20:17Z"
+    message: kubelet is posting ready status
+    reason: KubeletReady
     status: "True"
-    type: Upgradeable
-  currentMonCount: 3
-  defaultCephDeviceClass: ssd
-  failureDomain: rack
-  failureDomainKey: topology.rook.io/rack
-  failureDomainValues:
-  - rack0
-  - rack1
-  - rack2
+    type: Ready
+  daemonEndpoints:
+    kubeletEndpoint:
+      Port: 10250
   images:
-    ceph:
-      actualImage: registry.redhat.io/rhceph/rhceph-8-rhel9@sha256:b001a7b0c1bf6d0f90a29727eb5418422ccd6be91d32c5da3e923dfe55d37374
-      desiredImage: registry.redhat.io/rhceph/rhceph-8-rhel9@sha256:b001a7b0c1bf6d0f90a29727eb5418422ccd6be91d32c5da3e923dfe55d37374
-    noobaaCore:
-      actualImage: registry.redhat.io/odf4/mcg-core-rhel9@sha256:f3c5f4172395fbf5dd8cc2b1a4461fcbf12a2d4ce33fe9de934f33815fdf09a1
-      desiredImage: registry.redhat.io/odf4/mcg-core-rhel9@sha256:f3c5f4172395fbf5dd8cc2b1a4461fcbf12a2d4ce33fe9de934f33815fdf09a1
-    noobaaDB:
-      actualImage: registry.redhat.io/rhel9/postgresql-15@sha256:2b7a8dceeabdcb099f87feb52f0f007ef8ac2ea66f6946173b16bc1b8e981885
-      desiredImage: registry.redhat.io/rhel9/postgresql-15@sha256:2b7a8dceeabdcb099f87feb52f0f007ef8ac2ea66f6946173b16bc1b8e981885
-  kmsServerConnection: {}
-  nodeTopologies:
-    labels:
-      kubernetes.io/hostname:
-      - master1.ocps.trasklab.cz
-      - master2.ocps.trasklab.cz
-      - master3.ocps.trasklab.cz
-      topology.rook.io/rack:
-      - rack0
-      - rack1
-      - rack2
-  phase: Ready
-  relatedObjects:
-  - apiVersion: ceph.rook.io/v1
-    kind: CephCluster
-    name: ocs-storagecluster-cephcluster
-    namespace: openshift-storage
-    resourceVersion: "25317423"
-    uid: dbd32418-dc1b-480e-aba5-07c8705cf349
-  - apiVersion: noobaa.io/v1alpha1
-    kind: NooBaa
-    name: noobaa
-    namespace: openshift-storage
-    resourceVersion: "25317410"
-    uid: f5b636e5-b894-40d7-87c1-06adfcac0ee1
-  version: 4.18.7
+  - names:
+    - artifactory.csin.cz/diagnostic-pod-docker-local/openshift-diagnostic-pod@sha256:c968fb52f0cd5295eb002be297384e54064cf1d7e0a033264f6c4e3872d6fca2
+    - artifactory.csin.cz/diagnostic-pod-docker-local/openshift-diagnostic-pod:1.3.87-master.3eafcf75-expire202505120224
+    sizeBytes: 2069355351
+  - names:
+    - artifactory.csin.cz/diagnostic-pod-docker-local/openshift-diagnostic-pod@sha256:f6e4d695af90ac62fadaab8819517c9ed3a1d085bf981e57e30b29dc6cedb158
+    - artifactory.csin.cz/diagnostic-pod-docker-local/openshift-diagnostic-pod:1.3.81-master.0ebb03c2-expire202503240118
+    sizeBytes: 2052307800
+  - names:
+    - artifactory.csin.cz/diagnostic-pod-docker-local/openshift-diagnostic-pod@sha256:0bac3ca9f9a21bdf72747bfd1afd6f62f5f0bfac4ad76f0385429c1a357df387
+    - artifactory.csin.cz/diagnostic-pod-docker-local/openshift-diagnostic-pod:1.3.110-master.cc2c5183-expire202510130223
+    sizeBytes: 2018389813
+  - names:
+    - artifactory.csin.cz/diagnostic-pod-docker-local/openshift-diagnostic-pod@sha256:952f6d3c27836eda6e85212c9fd97425ee8c54ddee591ae0b9d4b8ce33893548
+    - artifactory.csin.cz/diagnostic-pod-docker-local/openshift-diagnostic-pod:1.3.108-master.41f39241-expire202509290224
+    sizeBytes: 1986830133
+  - names:
+    - artifactory.csin.cz/diagnostic-pod-docker-local/openshift-diagnostic-pod@sha256:9c97f43ec1b717b574998df65f1042191f9701981c5db6392adf25000e1a8266
+    - artifactory.csin.cz/diagnostic-pod-docker-local/openshift-diagnostic-pod:1.3.107-master.b993a397-expire202509220224
+    sizeBytes: 1983561014
+  - names:
+    - artifactory.csin.cz/diagnostic-pod-docker-local/openshift-diagnostic-pod@sha256:ae1438ad2e588ee57f0718a13046f2ea0844abcc8074390827356f742c5f0ec3
+    - artifactory.csin.cz/diagnostic-pod-docker-local/openshift-diagnostic-pod:1.3.106-master.f87e0ea4-expire202509150228
+    sizeBytes: 1979597618
+  - names:
+    - artifactory.csin.cz/diagnostic-pod-docker-local/openshift-diagnostic-pod@sha256:964d169dd5fe66346fe68d3f8e95ea60665ff61daa7f88cda9bfd326e3aa8469
+    - artifactory.csin.cz/diagnostic-pod-docker-local/openshift-diagnostic-pod:1.3.101-master.7356fc63-expire202508040227
+    sizeBytes: 1937820980
+  - names:
+    - artifactory.csin.cz/appd-docker-local/psa/sum-chrome-agent@sha256:54eafd47e16244c615df04bd4f790590b2af7ea517682b45bb7b3ff0f6e994e7
+    - artifactory.csin.cz/appd-docker-local/psa/sum-chrome-agent:23.12.0.143-pf
+    sizeBytes: 1425424572
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:61eec9b620d3fa2744b5c382780143d2acc7c9a67991f93e01bce0ebb535cc4a
+    sizeBytes: 1349181478
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:637dcb3f4d1cefd07e6a89c208dce1e055e7084d2621e0f12ae34c4d36213b25
+    sizeBytes: 1318078847
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:df19d0508dcfc7f4a0b11c10ef98a64e1043482502840d554cc4b3e58429198b
+    sizeBytes: 1311025149
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:55785ad7566274eac517084bae97bf5d2f4e8ae7a1681f47433da22a9cf4cfa0
+    sizeBytes: 1307302916
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:b98f77e23f528b3b85de2e389e8c0fb4da0a7349a4f2cb01c84befeebd7742bf
+    sizeBytes: 1263798653
+  - names:
+    - artifactory.csin.cz/appd-docker-local/machine-agent-analytics-custom@sha256:c1559558fd980262754696026f28ed8f74a5a5f6dda724bcacd4b31f33113242
+    - artifactory.csin.cz/appd-docker-local/machine-agent-analytics-custom:24.2.1
+    sizeBytes: 1256341931
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:39b84939c730a2aeecd69847b280734f100c898dc296202dca3e9fc757d3fdb7
+    sizeBytes: 1245770201
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:e7b72b2e6a074b62ad07a29c6207eb9f4dd717641baa186e6689922d20ae58af
+    sizeBytes: 1178595720
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6bdeae7651ce37e6497ead2acc8ab49d9d1e84aebafaaf74f58098da6f2a0942
+    sizeBytes: 1174876558
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:9982abe6286db73ed57e7a14203f3df5fd1e5602834f88bcde4d4bcbf528576e
+    sizeBytes: 1164996923
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:476bcd488022220eb35577e7cc67f842a608d07a80e1323c214b3548d5012fad
+    sizeBytes: 1115273947
+  - names:
+    - artifactory.csin.cz/diagnostic-pod-docker-local/openshift-diagnostic-pod@sha256:cdafbd1784fb649cbe8b5c537a23179c616ba20c06ec9325c9f6850216f6ba03
+    - artifactory.csin.cz/diagnostic-pod-docker-local/openshift-diagnostic-pod:1.3.25-master.e0ac8306-expire202408050218
+    sizeBytes: 1112669237
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6aad9fd822ff4bddfaa803ac95e004c5ef93442dd691944cfadab690af0ad4b7
+    sizeBytes: 949732528
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:99d39c9560193a342b5523193ef5ea40e5378a46bcff8f1370c5ae3a2120f83a
+    sizeBytes: 910370011
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:f9561c7dd1daaf280948a7f6fecc691b9d51930499fb767cc4ebb318879fcc69
+    sizeBytes: 860276837
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:3d4421b9f44204746f1df16b5e5c79b28669899b906d564f0878ab6905f7e8c3
+    sizeBytes: 810205603
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:f9c2ca2ecfc2626abf4610884a8a5efc1171435dbfbd7f60bb47c64ea9e29827
+    sizeBytes: 782607025
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bfbb5fdfbe23a2d1cafb7c213244deb0b1ef96dc4d808275ceb24690035d4fda
+    sizeBytes: 778710710
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:05584a634eb479bd2df49b5af484fbb4368364aa9fd1bdc65452adb443218afb
+    sizeBytes: 769695764
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:7322ae0a4a9b0d8550ac92435010461ed4bedf0b59b03b83bf85bfb34c2de2f8
+    sizeBytes: 748641522
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:30ca1db1de29c0d82fa3040271ce8c0f03d45ea4c2b55c802fcaf770fdaf73e7
+    sizeBytes: 732451901
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:90837aaae96f4d01d6121cb317591f7f5a5f9a18d3907f8c8e441dc6263cc7ff
+    sizeBytes: 729130480
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:c3f8ce7dea2e0399e08920ab02333b583fcae1024f2a663b44bf4c6cd2cd59a6
+    sizeBytes: 728313920
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:15d8504c45bd1af72eca928c214dee3156eb4d192250c2e57305387f9de691e0
+    sizeBytes: 711162682
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ee0008404860ae0a0cd637e993bcb4f3029a9041f9e328b34c89baa1380da78e
+    sizeBytes: 711115750
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:26149380a47414251c35dc10c73c70f0f56c9afc5e5b62f89fca57df14b149cb
+    sizeBytes: 705508213
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:346184236a84e7b5a978ddbf831196a96e52e2d23fa84f09127bbb5c09a5cc8e
+    sizeBytes: 670025998
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:357b7c281c3984364137b1b767456154d19a8803e8f4509ffd5390c39a88d7f7
+    sizeBytes: 666328851
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:b9f8eaf0f8267b9d1e4237bb8d6aac6334104000fd22f7d75acaa24598a42f73
+    sizeBytes: 663696239
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:4eb4e7bb30cdfe4a7ebc5109534714a694e99d676b650b591ef929f5fc30992d
+    sizeBytes: 662282893
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:82552f70c1292239539594b1170de68885197350dda49772375ac94797cd4b8f
+    sizeBytes: 650329274
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:56660457d8194df6081fbf20675824c54681b9c49ae2086c6c216834f010cb0e
+    sizeBytes: 642063898
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:d6966fd5504bc1401645eea795172a9edd270f9a8791dd4a26bc1a7a8e9edbc2
+    sizeBytes: 642022844
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:dfef5e94e5774f01a39bd43fc55fd7e4cc893cb2ceebbbe4c00731363bc6e811
+    sizeBytes: 638344216
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:056ace953aa838337a0bd0da31b2794198fb45a7663a6e43a44ee050d35a9a49
+    sizeBytes: 636079021
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:55fd6fca8a63d3c90cf169fe29ac0f3a9f8a0c1579c23a4953fd89983d99b1a7
+    sizeBytes: 630799327
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:b3413f9deb40e709eef39571dfe63328d8c8f5f311a58c15939d17f5acef8687
+    sizeBytes: 628006373
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:b5f9b893f625888d835ca4def95fa89e3a19303ec3fa4c86a92ab24f8b8d1479
+    sizeBytes: 623259956
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ac202e407ad75c65b390a39c2e222cee16c21ef3f9e7eb63ed7f1ac51306a444
+    sizeBytes: 610415699
+  - names:
+    - docker.io/nicolaka/netshoot@sha256:34eeca872db74067b1ed7fdc6201f278578bf57df7bd3081e99b5097a28464b5
+    - docker.io/nicolaka/netshoot@sha256:7f08c4aff13ff61a35d30e30c5c1ea8396eac6ab4ce19fd02d5a4b3b5d0d09a2
+    - docker.io/nicolaka/netshoot:latest
+    sizeBytes: 608360476
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:658fd159c21abb2e6c0f573a1c687565b45858a3122a56769a95e3378642f278
+    sizeBytes: 608179815
+  - names:
+    - quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:9fe5a51e368734b1617215b1bb666ac2098dd2478e6ae7c3d8916e7d8b989942
+    sizeBytes: 606452806
+  nodeInfo:
+    architecture: amd64
+    bootID: 979f269c-6d48-4a4e-9cb7-b80921586246
+    containerRuntimeVersion: cri-o://1.29.13-7.rhaos4.16.git9b9e68b.el9
+    kernelVersion: 5.14.0-427.72.1.el9_4.x86_64
+    kubeProxyVersion: v1.29.14+7cf4c05
+    kubeletVersion: v1.29.14+7cf4c05
+    machineID: fefd6f37d5854e2c96aa2175fdbe094f
+    operatingSystem: linux
+    osImage: Red Hat Enterprise Linux CoreOS 416.94.202506022250-0
+    systemUUID: d7bd1342-e726-1fc7-f5bf-3b2f54541d1c
+  volumesAttached:
+  - devicePath: ""
+    name: kubernetes.io/csi/csi.trident.netapp.io^pvc-a56a0359-3717-40c0-9c54-0036e37c7a5b
+  - devicePath: ""
+    name: kubernetes.io/csi/csi.trident.netapp.io^pvc-8810e4ce-83f1-460d-a843-4e80de852408
+  volumesInUse:
+  - kubernetes.io/csi/csi.trident.netapp.io^pvc-8810e4ce-83f1-460d-a843-4e80de852408
+  - kubernetes.io/csi/csi.trident.netapp.io^pvc-a56a0359-3717-40c0-9c54-0036e37c7a5b

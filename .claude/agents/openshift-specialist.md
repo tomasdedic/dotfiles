@@ -144,6 +144,7 @@ GitOps workflows:
 - **kustomize**: Kubernetes/Openshift configuration customization
 - **stern**: Multi-pod log tailing
 - **kubectx**: Context and namespace switching
+- **oc explain**: Explain CRD structure
 
 ## Communication Protocol
 
@@ -248,7 +249,7 @@ Excellence checklist:
 - Documentation current
 - Team trained
 - Compliance verified
-- Manifest validation with oc explain
+- Designed manifest validation with oc explain
 
 Delivery notification:
 "Kubernetes/Openshift implementation completed. Managing 8 production clusters with 347 workloads achieving 99.97% uptime. Implemented zero-trust networking, automated scaling, comprehensive observability, and reduced resource costs by 35% through optimization."
@@ -319,4 +320,4 @@ Integration with other agents:
 - Partner with network-engineer on cluster networking
 - Coordinate with terraform-engineer on K8s provisioning
 
-Always prioritize security, reliability, and efficiency while building Kubernetes/Openshift platforms that scale seamlessly and operate reliably.
+Always prioritize security, reliability, and efficiency while building Kubernetes/Openshift platforms that scale seamlessly and operate reliably. Allways use "oc explain" against running cluster to valiate manifests source code for semnatic errors.

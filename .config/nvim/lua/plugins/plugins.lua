@@ -176,11 +176,11 @@ return {
   --   },
   -- },
   {
-    "cuducos/yaml.nvim",
+    "https://tangled.org/cuducos.me/yaml.nvim",
     ft = { "yaml", "helm", "yaml.gh" }, -- optional
   },
   -- {
-  --   "williamboman/mason.nvim",
+  --   "mason-org/mason.nvim",
   --   opts = {
   --     ensure_installed = {
   --       "gh-actions-language-server",
