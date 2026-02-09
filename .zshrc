@@ -2,7 +2,7 @@
 # export TERM=xterm-256color
 export DISPLAY=:0
 export GOPATH=$HOME/go
-export EDITOR=nvim
+export EDITOR="nvim"
 export LC_ALL=en_US.UTF-8
 # Path to your oh-my-zsh installation.
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="/opt/homebrew/share/zsh-syntax-highlighting/highlighters"
@@ -90,7 +90,7 @@ rmf() {
     ls -p | fzf -m | while read filename; do rm -rf $filename; done
 }
 
-export SUDO_ASKPASS=/usr/bin/ssh-askpass
+export SUDO_ASKPASS=ssh-askpass
 bindkey "^[OA" up-history
 bindkey "^[OB" down-history
 export HOWDOI_COLORIZE=1
@@ -119,3 +119,8 @@ echo -e -n "\x1b[\x32 q" #changes to steady block cursor
 # . "$HOME/.cargo/env"
 HOMEBREW_NO_VERIFY_ATTESTATIONS=1
 # zprof #profiler output
+KUBECONFIG=~/.kube/config
+
+# Task Master aliases added on 10/29/2025
+alias tm='task-master'
+alias taskmaster='task-master'

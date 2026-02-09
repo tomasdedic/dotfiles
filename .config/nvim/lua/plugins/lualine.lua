@@ -64,10 +64,14 @@ return {
             -- { require("yaml_nvim").get_yaml_key, color = { fg = "grey53" } },
             {
               function()
-                if vim.bo.filetype ~= "yaml" then
-                  return ""
+                local msg = ""
+                local yaml = vim.api.nvim_get_option_value("filetype", { buf = 0 })
+                if yaml ~= "yaml" then
+                  return msg
+                else
+                  msg = require("yaml_nvim").get_yaml_key()
+                  return msg
                 end
-                return require("yaml_nvim").get_yaml_key() or ""
               end,
               color = { fg = "grey53" },
             },

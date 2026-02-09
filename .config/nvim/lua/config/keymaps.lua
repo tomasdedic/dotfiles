@@ -64,6 +64,10 @@ vim.api.nvim_create_user_command("File", function()
   vim.fn.setreg("+", vim.fn.expand("%:p:."))
 end, { nargs = 0 })
 
+vim.api.nvim_create_user_command("Path", function()
+  vim.fn.setreg("+", vim.fn.expand("%:p"))
+end, { nargs = 0 })
+
 vim.api.nvim_create_user_command("Name", function()
   vim.fn.setreg("+", vim.fn.expand("%:t:r"))
 end, { nargs = 0 })
