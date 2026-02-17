@@ -13,7 +13,7 @@ macos-titlebar-style = hidden
 font-family="Hack Nerd Font Mono"
 # font-family="MesloLGS Nerd Font"
 font-size=16
-font-feature=-liga
+# font-feature=-liga
 font-thicken=false
 cursor-style = block
 cursor-style-blink = false
@@ -26,11 +26,10 @@ shell-integration-features = no-cursor,sudo,no-title
 copy-on-select = clipboard
 focus-follows-mouse = true
 link-url = true
-adjust-underline-position = 40%
+adjust-underline-position = 20%
 adjust-underline-thickness = -60%
 bold-is-bright=true
 confirm-close-surface=false
 adjust-cell-width= -7%
 adjust-cell-height= -7%
 
-keybind = shift+enter=text:\n

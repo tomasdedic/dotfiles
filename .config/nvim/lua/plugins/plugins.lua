@@ -8,6 +8,13 @@ return {
   {
     "folke/snacks.nvim",
     opts = {
+      terminal = {
+        win = {
+          wo = {
+            winhighlight = "Normal:SnacksTerminalNormal",
+          },
+        },
+      },
       dashboard = {
         preset = {
           pick = function(cmd, opts)
@@ -98,6 +105,12 @@ return {
         comments = { "italic" }, -- Change the style of comments
         conditionals = { "italic" },
       },
+      custom_highlights = function()
+        -- Use catppuccin latte (light) colors for a bright terminal
+        return {
+          SnacksTerminalNormal = { bg = "#eff1f5", fg = "#4c4f69" },
+        }
+      end,
       integrations = {
         cmp = true,
         gitsigns = true,
@@ -176,11 +189,11 @@ return {
   --   },
   -- },
   {
-    "cuducos/yaml.nvim",
+    "https://tangled.org/cuducos.me/yaml.nvim",
     ft = { "yaml", "helm", "yaml.gh" }, -- optional
   },
   -- {
-  --   "williamboman/mason.nvim",
+  --   "mason-org/mason.nvim",
   --   opts = {
   --     ensure_installed = {
   --       "gh-actions-language-server",
