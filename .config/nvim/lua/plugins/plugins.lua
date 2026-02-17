@@ -15,6 +15,22 @@ return {
           },
         },
       },
+      picker = {
+        sources = {
+          explorer = {
+            win = {
+              list = {
+                keys = {
+                  ["<C-h>"] = { function() vim.fn.system("tmux select-pane -L") end, desc = "Tmux Left" },
+                  ["<C-j>"] = { function() vim.fn.system("tmux select-pane -D") end, desc = "Tmux Down" },
+                  ["<C-k>"] = { function() vim.fn.system("tmux select-pane -U") end, desc = "Tmux Up" },
+                  ["<C-l>"] = { function() vim.fn.system("tmux select-pane -R") end, desc = "Tmux Right" },
+                },
+              },
+            },
+          },
+        },
+      },
       dashboard = {
         preset = {
           pick = function(cmd, opts)
