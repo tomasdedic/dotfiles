@@ -44,7 +44,7 @@ return {
               format = {
                 enable = true,
               },
-              validate = true,
+              validate = false,
               schemaStore = {
                 -- Must disable built-in schemaStore support to use
                 -- schemas from SchemaStore.nvim plugin
