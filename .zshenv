@@ -101,3 +101,8 @@ function azctx() {
     sub=$(az account list --query "[].name" -o tsv | sort -f | fzf -q "$1")
     [ -n "$sub" ] && az account set --subscription "$sub"
 }
+
+function grt()
+{
+    git rev-parse --show-toplevel
+}
