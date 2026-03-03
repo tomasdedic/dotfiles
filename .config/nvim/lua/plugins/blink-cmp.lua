@@ -3,6 +3,25 @@ return {
   {
     "saghen/blink.cmp",
     opts = {
+      keymap = {
+        preset = "default",
+        ["<M-x>"] = { "show", "fallback" },
+        ["<CR>"] = {
+          function(cmp)
+            if cmp.is_visible() then
+              return cmp.accept()
+            end
+          end,
+          "fallback",
+        },
+      },
+      completion = {
+        list = {
+          selection = {
+            auto_insert = true,
+          },
+        },
+      },
       sources = {
         default = { "lsp", "path", "snippets", "buffer" },
         providers = {

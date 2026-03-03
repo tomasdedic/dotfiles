@@ -6,6 +6,7 @@ window-height=100
 window-width=210
 window-decoration = false
 macos-titlebar-style = hidden
+macos-option-as-alt = true
 
 
 #window-title-font-family="MonoLisa Variable"
