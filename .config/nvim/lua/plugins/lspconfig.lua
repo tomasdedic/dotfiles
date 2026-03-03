@@ -73,6 +73,20 @@ return {
             },
           },
         },
+        vtsls = {
+          settings = {
+            typescript = {
+              suggest = {
+                completeFunctionCalls = false,
+              },
+            },
+            javascript = {
+              suggest = {
+                completeFunctionCalls = false,
+              },
+            },
+          },
+        },
         lua_ls = {
           settings = {
             Lua = {
