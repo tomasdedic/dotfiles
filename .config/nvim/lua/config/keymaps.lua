@@ -98,3 +98,12 @@ vim.keymap.set(
 -- " nmap \r :!tmux send-keys -t bottom-left Up Enter <CR><CR>
 -- " nmap \rr :!tmux send-keys -t top-left Up Enter <CR><CR>
 -- nmap \r :!tmux send-keys -t bottom Up Enter <CR><CR>
+
+vim.keymap.set({ "n", "v" }, "<leader>gY", function()
+  Snacks.gitbrowse({
+    open = function(url)
+      vim.fn.setreg("+", url)
+      vim.notify("Copied: " .. url, vim.log.levels.INFO)
+    end,
+  })
+end, { desc = "Copy git link" })

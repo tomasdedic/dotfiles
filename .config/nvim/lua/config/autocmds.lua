@@ -12,3 +12,20 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.spell = false
   end,
 })
+
+local function remove_link_underlines()
+  vim.api.nvim_set_hl(0, "@markup.link", { underline = false })
+  vim.api.nvim_set_hl(0, "@markup.link.url", { italic = true, underline = false, fg = "#9cb7e8" })
+  vim.api.nvim_set_hl(0, "@markup.link.label", { underline = false, fg = "#8caaee" })
+  vim.api.nvim_set_hl(0, "@string.special.url", { italic = true, underline = false, fg = "#9cb7e8" })
+  vim.api.nvim_set_hl(0, "markdownLinkText", { underline = false, fg = "#8caaee" })
+  vim.api.nvim_set_hl(0, "markdownUrl", { underline = false, fg = "#9cb7e8" })
+end
+
+-- Apply now (colorscheme already loaded by the time VeryLazy fires)
+remove_link_underlines()
+
+-- Re-apply if colorscheme changes
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = remove_link_underlines,
+})

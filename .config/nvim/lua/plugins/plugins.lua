@@ -8,6 +8,17 @@ return {
   {
     "folke/snacks.nvim",
     opts = {
+      -- customize for code.siemens.com
+      gitbrowse = {
+        url_patterns = {
+          ["code%.siemens%.com"] = {
+            branch = "/-/tree/{branch}",
+            file = "/-/blob/{branch}/{file}#L{line_start}-{line_end}",
+            permalink = "/-/blob/{commit}/{file}#L{line_start}-{line_end}",
+            commit = "/-/commit/{commit}",
+          },
+        },
+      },
       terminal = {
         win = {
           wo = {
