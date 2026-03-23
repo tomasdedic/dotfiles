@@ -23,11 +23,19 @@ return {
               function()
                 return vim.fn.substitute(LazyVim.root(), vim.env.HOME, "~", "")
               end,
+              color = { bg = "indianred" },
             },
             {
               "filename",
               file_status = true, -- displays file status (readonly status, modified status)
               path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
+            },
+            {
+              function()
+                local remote = vim.fn.system("git remote get-url origin 2>/dev/null"):gsub("%s+$", "")
+                if remote == "" then return "" end
+                return (remote:match("([^/]+)$") or ""):gsub("%.git$", "")
+              end,
             },
             {
               "branch",
@@ -42,6 +50,7 @@ return {
                   return msg
                 end
                 for _, client in ipairs(clients) do
+                  ---@diagnostic disable-next-line: undefined-field
                   local filetypes = client.config.filetypes
                   if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
                     return client.name
@@ -87,9 +96,16 @@ return {
           lualine_a = {
             {
               function()
-                return "cwd:" .. vim.fn.substitute(vim.fn.getcwd(), vim.env.HOME, "~", "")
+                return vim.fn.substitute(LazyVim.root(), vim.env.HOME, "~", "")
               end,
-              color = { fg = "indianred", bg = "none" },
+              color = { bg = "indianred" },
+            },
+          },
+          lualine_b = {
+            {
+              function()
+                return vim.fn.substitute(vim.fn.getcwd(), vim.env.HOME, "~", "")
+              end,
             },
           },
         },
