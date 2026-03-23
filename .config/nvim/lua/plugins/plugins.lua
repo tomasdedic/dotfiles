@@ -9,6 +9,7 @@ return {
     "folke/snacks.nvim",
     opts = {
       -- customize for code.siemens.com
+      explorer = {},
       gitbrowse = {
         url_patterns = {
           ["code%.siemens%.com"] = {
@@ -27,21 +28,25 @@ return {
         },
       },
       picker = {
-        --  sources = {
-        --    explorer = {
-        --      win = {
-        --        list = {
-        --          keys = {
-        --            ["<C-h>"] = { function() vim.fn.system("tmux select-pane -L") end, desc = "Tmux Left" },
-        --            ["<C-j>"] = { function() vim.fn.system("tmux select-pane -D") end, desc = "Tmux Down" },
-        --            ["<C-k>"] = { function() vim.fn.system("tmux select-pane -U") end, desc = "Tmux Up" },
-        --            ["<C-l>"] = { function() vim.fn.system("tmux select-pane -R") end, desc = "Tmux Right" },
-        --          },
-        --        },
-        --      },
-        --    },
-        --  },
+        sources = {
+          explorer = {
+            layout = "bottom",
+            jump = { close = true },
+            win = {
+              -- unmap tmux keys
+              list = {
+                keys = {
+                  ["<C-h>"] = false,
+                  ["<C-j>"] = false,
+                  ["<C-k>"] = false,
+                  ["<C-l>"] = false,
+                },
+              },
+            },
+          },
+        },
       },
+
       dashboard = {
         preset = {
           pick = function(cmd, opts)

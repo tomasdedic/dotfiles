@@ -20,6 +20,11 @@ return {
               end,
             },
             {
+              function()
+                return vim.fn.substitute(LazyVim.root(), vim.env.HOME, "~", "")
+              end,
+            },
+            {
               "filename",
               file_status = true, -- displays file status (readonly status, modified status)
               path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
@@ -78,35 +83,45 @@ return {
           },
           lualine_y = { "filetype" },
         },
-        winbar = {
-          lualine_a = { { "filename", path = 1 } },
-          lualine_x = {
+        tabline = {
+          lualine_a = {
             {
               function()
                 return "cwd:" .. vim.fn.substitute(vim.fn.getcwd(), vim.env.HOME, "~", "")
               end,
-              color = { fg = "indianred" },
-            },
-          },
-          lualine_y = {
-            {
-              function()
-                return vim.fn.substitute(LazyVim.root(), vim.env.HOME, "~", "")
-              end,
-              color = { fg = "indianred" },
+              color = { fg = "indianred", bg = "none" },
             },
           },
         },
+        winbar = {
+          lualine_a = { { "filename", path = 1 } },
+          -- lualine_x = {
+          --   {
+          --     function()
+          --       return "cwd:" .. vim.fn.substitute(vim.fn.getcwd(), vim.env.HOME, "~", "")
+          --     end,
+          --     color = { fg = "indianred" },
+          --   },
+          -- },
+          -- lualine_y = {
+          --   {
+          --     function()
+          --       return vim.fn.substitute(LazyVim.root(), vim.env.HOME, "~", "")
+          --     end,
+          --     color = { fg = "indianred" },
+          --   },
+          -- },
+        },
         inactive_winbar = {
           lualine_a = { { "filename", path = 1 } },
-          lualine_y = {
-            {
-              function()
-                return vim.fn.substitute(LazyVim.root(), vim.env.HOME, "~", "")
-              end,
-              color = { fg = "indianred" },
-            },
-          },
+          -- lualine_y = {
+          --   {
+          --     function()
+          --       return vim.fn.substitute(LazyVim.root(), vim.env.HOME, "~", "")
+          --     end,
+          --     color = { fg = "indianred" },
+          --   },
+          -- },
         },
       }
     end,
