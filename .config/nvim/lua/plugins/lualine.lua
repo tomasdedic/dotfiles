@@ -19,17 +19,17 @@ return {
                 return str:sub(1, 1)
               end,
             },
-            {
-              function()
-                return vim.fn.substitute(LazyVim.root(), vim.env.HOME, "~", "")
-              end,
-              color = { bg = "indianred" },
-            },
-            {
-              "filename",
-              file_status = true, -- displays file status (readonly status, modified status)
-              path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
-            },
+            -- {
+            --   function()
+            --     return vim.fn.substitute(LazyVim.root(), vim.env.HOME, "~", "")
+            --   end,
+            --   color = { bg = "indianred" },
+            -- },
+            -- {
+            --   "filename",
+            --   file_status = true,
+            --   path = 0,
+            -- },
             {
               function()
                 local remote = vim.fn.system("git remote get-url origin 2>/dev/null"):gsub("%s+$", "")

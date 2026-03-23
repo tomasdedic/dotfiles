@@ -6,7 +6,7 @@ vim.keymap.set("n", "<C-j>", "<Cmd>NvimTmuxNavigateDown<CR>", {})
 vim.keymap.set("n", "<C-k>", "<Cmd>NvimTmuxNavigateUp<CR>", {})
 vim.keymap.set("n", "<C-l>", "<Cmd>NvimTmuxNavigateRight<CR>", {})
 vim.keymap.set("n", "<C-\\>", "<Cmd>NvimTmuxNavigateLastActive<CR>", {})
-vim.keymap.set("n", "<Leader>yy", "^yg_", { noremap = true }) --copy line without begining whitespacel
+-- vim.keymap.set("n", "<Leader>yy", "^yg_", { noremap = true }) --copy line without begining whitespacel
 
 -- Copy visual block selection removing as much whitespace as first line has
 vim.keymap.set("x", "<Leader>yy", function()
