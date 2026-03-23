@@ -74,7 +74,7 @@ return {
                 if yaml ~= "yaml" then
                   return msg
                 else
-                  msg = require("yaml_nvim").get_yaml_key()
+                  msg = require("yaml_nvim").get_yaml_key() or ""
                   return msg
                 end
               end,
