@@ -32,9 +32,14 @@ return {
             -- },
             {
               function()
-                local remote = vim.fn.system("git remote get-url origin 2>/dev/null"):gsub("%s+$", "")
-                if remote == "" then return "" end
-                return (remote:match("([^/]+)$") or ""):gsub("%.git$", "")
+                local cwd = vim.fn.getcwd()
+                local cache = vim.g._lualine_remote_cache or {}
+                if not cache[cwd] then
+                  local remote = vim.fn.system("git remote get-url origin 2>/dev/null"):gsub("%s+$", "")
+                  cache[cwd] = remote ~= "" and ((remote:match("([^/]+)$") or ""):gsub("%.git$", "")) or ""
+                  vim.g._lualine_remote_cache = cache
+                end
+                return cache[cwd]
               end,
             },
             {

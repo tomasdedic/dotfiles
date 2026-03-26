@@ -2,7 +2,7 @@
 # export TERM=xterm-256color
 export DISPLAY=:0
 export GOPATH=$HOME/go
-export EDITOR="nvim"
+export EDITOR=nvim
 export LC_ALL=en_US.UTF-8
 # Path to your oh-my-zsh installation.
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="/opt/homebrew/share/zsh-syntax-highlighting/highlighters"
@@ -64,6 +64,10 @@ export KUBE_PS1_NS_ENABLE=true
 
 export FZF_LEGACY_KEYBINDINGS=0
 export FZF_TMUX=1
+VI_MODE_SET_CURSOR=true
+VI_MODE_CURSOR_NORMAL=2   # steady block
+VI_MODE_CURSOR_INSERT=2   # steady block
+VI_MODE_CURSOR_VISUAL=2   # steady block
 source $ZSH/oh-my-zsh.sh
 bindkey "^X" forward-word #jump word by word
 eval $(gdircolors ~/.config/dircolors.ansi-dark)
@@ -80,7 +84,7 @@ fi
 export DISABLE_MAGIC_FUNCTIONS=true
 export FZF_BASE="$HOME/.fzf"
 
-export PATH="/opt/homebrew/bin/:/opt/homebrew/opt/coreutils/libexec/gnubin/:$HOME/bin:/usr/local/opt/grep/libexec/gnubin/:${KREW_ROOT:-$HOME/.krew}/bin:$PATH:$LSPPATH:/usr/local/bin:/usr/X11/bin:$GOPATH/bin:$HOME/.local/bin"
+export PATH="$HOME/bin:/usr/local/opt/grep/libexec/gnubin/:${KREW_ROOT:-$HOME/.krew}/bin:$PATH:$LSPPATH:/usr/local/bin:/usr/X11/bin:$GOPATH/bin:$HOME/.local/bin"
 export FZF_LEGACY_KEYBINDINGS=0
 export FZF_TMUX=1
 
@@ -90,7 +94,7 @@ rmf() {
     ls -p | fzf -m | while read filename; do rm -rf $filename; done
 }
 
-export SUDO_ASKPASS=ssh-askpass
+export SUDO_ASKPASS=/usr/bin/ssh-askpass
 bindkey "^[OA" up-history
 bindkey "^[OB" down-history
 export HOWDOI_COLORIZE=1
@@ -119,18 +123,12 @@ echo -e -n "\x1b[\x32 q" #changes to steady block cursor
 # . "$HOME/.cargo/env"
 HOMEBREW_NO_VERIFY_ATTESTATIONS=1
 # zprof #profiler output
-KUBECONFIG=~/.kube/config
-
-# Task Master aliases added on 10/29/2025
-alias tm='task-master'
-alias taskmaster='task-master'
 
 # bun completions
-[ -s "/Users/ts/.bun/_bun" ] && source "/Users/ts/.bun/_bun"
+[ -s "/Users/ext90981/.bun/_bun" ] && source "/Users/ext90981/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-alias claude-mem='/Users/ts/.bun/bin/bun "/Users/ts/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"'
-alias ls='gls --color=auto'
+alias claude-mem='/Users/ext90981/.bun/bin/bun "/Users/ext90981/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"'

@@ -30,7 +30,7 @@ return {
       picker = {
         sources = {
           explorer = {
-            layout = "bottom",
+            -- layout = "bottom",
             jump = { close = true },
             win = {
               -- unmap tmux keys
