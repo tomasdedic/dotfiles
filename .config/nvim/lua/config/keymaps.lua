@@ -79,6 +79,9 @@ vim.keymap.set(
   LazyVim.pick("files", { cwd = vim.fn.expand("%:h:") }),
   { desc = "Pick files under current buffer" }
 )
+vim.keymap.set("n", ",fl", function()
+  LazyVim.pick("files", { cwd = vim.fn.expand("%:h") })()
+end, { desc = "Pick files under current buffer" })
 vim.keymap.set("n", "<leader>sB", function()
   Snacks.picker.grep_buffers()
 end, { desc = "Grep Open Buffers" })
