@@ -1,0 +1,47 @@
+{
+  "providers": {
+    "honza1": {
+      "baseUrl": "http://localhost:11436/v1",
+      "api": "openai-completions",
+      "apiKey": "$HLOCAL_API_KEY",
+      "models": [{ "id": "Qwen3.6-35B-A3B-default" }]
+    },
+    "honza1-vpn": {
+      "baseUrl": "http://localhost:11438/v1",
+      "api": "openai-completions",
+      "apiKey": "$HLOCAL_API_KEY",
+      "models": [{ "id": "Qwen3.6-35B-A3B-default" }]
+    },
+    "honza2": {
+      "baseUrl": "http://localhost:11437/v1",
+      "api": "openai-completions",
+      "apiKey": "$HLOCAL_API_KEY",
+      "models": [{ "id": "gemma-4-26B-A4B-it-default" }]
+    },
+    "ol": {
+      "baseUrl": "https://ollama.com/v1",
+      "api": "openai-completions",
+      "apiKey": "$OLLAMA_API_KEY",
+      "models": [{ "id": "gtr" }]
+    },
+    "ollama": {
+      "baseUrl": "https://ollama.com/v1",
+      "api": "openai-completions",
+      "apiKey": "$OLLAMA_API_KEY",
+      "models": [
+        {
+          "id": "gemma4:31b",
+          "name": "gemma4:31b",
+          "reasoning": false,
+          "input": ["text", "image"],
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        }
+      ]
+    }
+  }
+}
