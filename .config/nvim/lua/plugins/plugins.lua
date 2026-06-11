@@ -2,7 +2,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin-frappe",
+      colorscheme = "catppuccin",
     },
   },
   {
@@ -13,12 +13,6 @@ return {
       gitbrowse = {
         url_patterns = {
           ["code%.siemens%.com"] = {
-            branch = "/-/tree/{branch}",
-            file = "/-/blob/{branch}/{file}#L{line_start}-{line_end}",
-            permalink = "/-/blob/{commit}/{file}#L{line_start}-{line_end}",
-            commit = "/-/commit/{commit}",
-          },
-          ["gitlab%.trask%.cz"] = {
             branch = "/-/tree/{branch}",
             file = "/-/blob/{branch}/{file}#L{line_start}-{line_end}",
             permalink = "/-/blob/{commit}/{file}#L{line_start}-{line_end}",
@@ -35,9 +29,6 @@ return {
       },
       picker = {
         sources = {
-          grep = {
-            live = true,
-          },
           explorer = {
             -- layout = "bottom",
             jump = { close = true },

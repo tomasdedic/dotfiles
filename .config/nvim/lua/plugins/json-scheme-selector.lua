@@ -7,7 +7,7 @@ return {
     },
     opts = {
       schemas_catalog = "tomasdedic/openshift-json-schema",
-      schemas_catalog_local_path = vim.fn.expand("~/GIT/OPENSHIFT/openshift-json-schema/4.19"),
+      schemas_catalog_local_path = vim.fn.expand("~/GIT/OPENSHIFT/openshift-json-schema/4.16"),
       schema_catalog_branch = "main",
       local_schemas = true, -- Use local file paths (true) or GitHub URLs (false)
     },

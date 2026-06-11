@@ -5,8 +5,7 @@ return {
       return {
 
         options = {
-          -- theme = "papercolor_light",
-          -- theme = "catppuccin_macchiato",
+          theme = "catppuccin-macchiato",
           disabled_filetypes = { winbar = { "snacks_picker_list", "toggleterm", "packer", "qf" } },
           globalstatus = true,
         },

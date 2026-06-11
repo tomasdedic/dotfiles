@@ -4,6 +4,14 @@ return {
     opts = {
       -- make sure mason installs the server
       servers = {
+        -- ansiblels = {
+        --   root_dir = function(bufnr, on_dir)
+        --     local root = vim.fs.root(bufnr, { "ansible.cfg", ".ansible-lint" })
+        --       or vim.fs.root(bufnr, { ".git" })
+        --       or vim.uv.cwd()
+        --     on_dir(root)
+        --   end,
+        -- },
         yamlls = {
           -- Have to add this for yamlls to understand that we support line folding
           capabilities = {
