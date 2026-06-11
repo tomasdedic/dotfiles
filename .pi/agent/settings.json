@@ -1,29 +1,13 @@
 {
-  "lastChangelogVersion": "0.78.1",
+  "lastChangelogVersion": "0.79.1",
   "theme": "light",
   "defaultProvider": "ollama",
   "defaultModel": "gemma4:31b",
   "defaultThinkingLevel": "high",
-  "enabledModels": [
-    "anthropic/claude-opus-4-6",
-    "anthropic/claude-sonnet-4-6",
-    "anthropic/claude-haiku-4-5"
-  ],
-  "hideThinkingBlock": false,
   "packages": [
-    "packages/pi-amplike",
-    "packages/pi-sub/packages/sub-core",
-    "packages/pi-sub/packages/sub-bar",
-    "~/GIT/ai/pi-side-agents",
-    "~/GIT/ai/pi-read-mode",
-    "~/GIT/ai/pi-context-usage",
-    "packages/chrome-cdp-skill",
-    "packages/pi-k8s-ctx"
-  ],
-  "extensions": [
-    "extensions/tps.ts"
-  ],
-  "claudeAgentSdkProvider": {
-    "overrideSystemPrompt": true
-  }
+    "npm:pi-web-access",
+    "npm:@juanibiapina/pi-extension-settings",
+    "npm:@juanibiapina/pi-powerbar"
+  ]
 }
+
