@@ -1,8 +1,8 @@
 {
-  "lastChangelogVersion": "0.79.1",
-  "defaultProvider": "github-copilot",
+  "lastChangelogVersion": "0.79.4",
+  "defaultProvider": "omlx",
   "theme": "light",
-  "defaultModel": "claude-opus-4.8",
+  "defaultModel": "Qwen3.5-9B-OptiQ-4bit",
   "defaultThinkingLevel": "high",
   "enabledModels": [
     "github-copilot/gpt-5.3-codex",
@@ -21,7 +21,9 @@
     "npm:pi-simplify",
     "npm:pi-slopchop",
     "npm:pi-memory-md",
-    "npm:pi-boomerang"
+    "npm:pi-boomerang",
+    "git:github.com/DietrichGebert/ponytail",
+    "npm:pi-autoresearch"
   ],
   "extensions": [
     "extensions/tps.ts"
@@ -29,7 +31,7 @@
   "claudeAgentSdkProvider": {
     "overrideSystemPrompt": true
   },
-  "quietStartup": true,
+  "quietStartup": false,
   "pi-memory-md": {
     "memoryDir": {
       "repoUrl": "https://github.com/tomasdedic/pimem.git",
