@@ -29,3 +29,24 @@ remove_link_underlines()
 vim.api.nvim_create_autocmd("ColorScheme", {
   callback = remove_link_underlines,
 })
+
+local function set_terminal_light_bg()
+  vim.api.nvim_set_hl(0, "SnacksTerminalNormal", { bg = "#eff1f5", fg = "#4c4f69" })
+end
+
+set_terminal_light_bg()
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = set_terminal_light_bg,
+})
+
+vim.api.nvim_create_autocmd("TermOpen", {
+  pattern = "*",
+  callback = function()
+    local win = vim.api.nvim_get_current_win()
+    local whl = vim.wo[win].winhighlight
+    if not whl:find("SnacksTerminalNormal") then
+      vim.wo[win].winhighlight = (whl ~= "" and whl .. "," or "") .. "Normal:SnacksTerminalNormal"
+    end
+  end,
+})

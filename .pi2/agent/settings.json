@@ -1,0 +1,27 @@
+{
+  "lastChangelogVersion": "0.80.1",
+  "theme": "light",
+  "defaultProvider": "ollama",
+  "defaultModel": "gemma4:31b",
+  "defaultThinkingLevel": "high",
+  "packages": [
+    "npm:pi-simplify",
+    "npm:pi-slopchop",
+    "npm:pi-memory-md",
+    "npm:pi-boomerang",
+    "git:github.com/DietrichGebert/ponytail",
+    "npm:pi-autoresearch",
+    "npm:pi-add-dir"
+  ],
+  "claudeAgentSdkProvider": {
+    "overrideSystemPrompt": true
+  },
+  "quietStartup": false,
+  "pi-memory-md": {
+    "memoryDir": {
+      "repoUrl": "https://github.com/tomasdedic/pimem.git",
+      "localPath": "~/.pi/memory-md",
+      "globalMemory": "global"
+    }
+  }
+}

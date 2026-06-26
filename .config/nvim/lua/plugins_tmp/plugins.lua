@@ -2,7 +2,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin",
+      colorscheme = "catppuccin-frappe",
     },
   },
   {
@@ -13,6 +13,12 @@ return {
       gitbrowse = {
         url_patterns = {
           ["code%.siemens%.com"] = {
+            branch = "/-/tree/{branch}",
+            file = "/-/blob/{branch}/{file}#L{line_start}-{line_end}",
+            permalink = "/-/blob/{commit}/{file}#L{line_start}-{line_end}",
+            commit = "/-/commit/{commit}",
+          },
+          ["gitlab%.trask%.cz"] = {
             branch = "/-/tree/{branch}",
             file = "/-/blob/{branch}/{file}#L{line_start}-{line_end}",
             permalink = "/-/blob/{commit}/{file}#L{line_start}-{line_end}",
@@ -29,6 +35,9 @@ return {
       },
       picker = {
         sources = {
+          grep = {
+            live = true,
+          },
           explorer = {
             -- layout = "bottom",
             jump = { close = true },
@@ -137,7 +146,8 @@ return {
         comments = { "italic" }, -- Change the style of comments
         conditionals = { "italic" },
       },
-      custom_highlights = function(colors)
+      custom_highlights = function()
+        -- Use catppuccin latte (light) colors for a bright terminal
         return {
           SnacksTerminalNormal = { bg = "#eff1f5", fg = "#4c4f69" },
         }
@@ -259,15 +269,15 @@ return {
   --   "akinsho/bufferline.nvim",
   --   enabled = false,
   -- },
-  -- {
-  --   "rasulomaroff/reactive.nvim",
-  --   opts = {
-  --     -- load = { "catppuccin-late-cursor", "catppuccin-late-cursorline" },
-  --     builtin = {
-  --       cursorline = true,
-  --       cursor = true,
-  --       modemsg = true,
-  --     },
-  --   },
-  -- },
+  {
+    "rasulomaroff/reactive.nvim",
+    opts = {
+      -- load = { "catppuccin-late-cursor", "catppuccin-late-cursorline" },
+      builtin = {
+        cursorline = true,
+        cursor = true,
+        modemsg = true,
+      },
+    },
+  },
 }

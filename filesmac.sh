@@ -7,6 +7,7 @@ mkdir -p .config
 mkdir -p .oh-my-zsh/themes
 mkdir -p .claude
 mkdir -p .pi/agent
+mkdir -p .pi2/agent
 
 cp ~/.aerospace.toml ./.aerospace.toml
 cp ~/.config/dircolors* ./.config
@@ -27,5 +28,6 @@ cp -r ~/.config/yamllint ./.config/yamllint
 cp -r ~/.claude/agents/ .claude/agents
 cp -r ~/.claude/settings.json .claude/
 cp -r ~/.claude/CLAUDE.md .claude/
-cp -r ~/.pi/agent/settings.json .pi/agent/ 
-cp -r ~/.pi/agent/models.json .pi/agent/ 
+
+cp -r ~/.pi/agent/settings.json .pi2/agent/ 
+cp -r ~/.pi/agent/models.json .pi2/agent/ 
