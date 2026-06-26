@@ -1,5 +1,4 @@
 return {
-  -- {  "mini.pairs", enabled = false },
-  -- { "folke/noice.nvim", enabled = false },
-  -- { "folke/persistence.nvim", enabled = false },
+  { "mini.pairs", enabled = false },
+  { "reactive.nvim", enabled = false },
 }
