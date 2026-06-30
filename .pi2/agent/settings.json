@@ -1,23 +1,10 @@
 {
-  "lastChangelogVersion": "0.80.2",
-  "defaultProvider": "github-copilot",
+  "lastChangelogVersion": "0.80.1",
   "theme": "light",
-  "defaultModel": "claude-opus-4.8",
+  "defaultProvider": "ollama",
+  "defaultModel": "gemma4:31b",
   "defaultThinkingLevel": "high",
-  "enabledModels": [
-    "github-copilot/gpt-5.3-codex",
-    "github-copilot/gemini-3.1-pro-preview",
-    "github-copilot/claude-sonnet-4.6",
-    "github-copilot/claude-sonnet-4.5"
-  ],
-  "hideThinkingBlock": true,
   "packages": [
-    "packages/pi-amplike",
-    "packages/pi-sub/packages/sub-core",
-    "packages/pi-sub/packages/sub-bar",
-    "~/GIT/AI/pi-side-agents",
-    "packages/chrome-cdp-skill",
-    "packages/pi-k8s-ctx",
     "npm:pi-simplify",
     "npm:pi-slopchop",
     "npm:pi-memory-md",
@@ -25,9 +12,6 @@
     "git:github.com/DietrichGebert/ponytail",
     "npm:pi-autoresearch",
     "npm:pi-add-dir"
-  ],
-  "extensions": [
-    "extensions/tps.ts"
   ],
   "claudeAgentSdkProvider": {
     "overrideSystemPrompt": true

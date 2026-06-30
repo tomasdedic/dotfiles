@@ -9,47 +9,7 @@
           "id": "gemma4:31b",
           "name": "gemma4:31b",
           "reasoning": false,
-          "input": [
-            "text",
-            "image"
-          ],
-          "cost": {
-            "input": 0,
-            "output": 0,
-            "cacheRead": 0,
-            "cacheWrite": 0
-          }
-        },
-        {
-          "id": "kimi-k2.5",
-          "name": "kimi-k2.5",
-          "reasoning": false,
-          "input": [
-            "text",
-            "image"
-          ],
-          "cost": {
-            "input": 0,
-            "output": 0,
-            "cacheRead": 0,
-            "cacheWrite": 0
-          }
-        }
-      ]
-    },
-    "omlx": {
-      "baseUrl": "http://127.0.0.1:8000/v1",
-      "api": "openai-completions",
-      "apiKey": "$OMLX_API_KEY",
-      "models": [
-        {
-          "id": "Qwen3.5-9B-OptiQ-4bit",
-          "name": "qwen3.5",
-          "reasoning": false,
-          "input": [
-            "text",
-            "image"
-          ],
+          "input": ["text", "image"],
           "cost": {
             "input": 0,
             "output": 0,
