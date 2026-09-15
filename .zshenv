@@ -1,6 +1,6 @@
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
 export SNACKS_GHOSTTY=true
-source ~/.apikeys
+export HOMEBREW_NO_REQUIRE_TAP_TRUST=1
 alias rm=trash
 alias cr='cd $(git rev-parse --show-toplevel)'
 alias dog='git log --all --decorate --oneline --graph'
@@ -14,7 +14,7 @@ alias dircolors='gdircolors'
 # eval $(dircolors ~/.config/dircolors.ansi-dark)
 alias setkey='~/.config/startupscripts/setkeyboard'
 alias neat='kubectl neat'
-# alias ls='gls --color=auto'
+alias ls='gls --color=auto'
 alias kn='kubectl config view --minify --output 'jsonpath={..namespace}'; echo'
 alias tmux='tmux -2'
 alias gdoc='gopherdoc'
@@ -59,7 +59,7 @@ fif() {
 function ctx() {
   local pathtoconfig="$HOME/.kube/confignopass"
   local kbconfig
-  kbconfig=$(find  $pathtoconfig -type f -name \*-config | xargs -n1 basename | sort | fzf -q "$1")
+  kbconfig=$(find  $pathtoconfig -type f -name \*-config | xargs basename | sort | fzf -q "$1")
   # export cannot be returned back to parent process, source workaround
   [ -n "$kbconfig" ] && (echo "export KUBECONFIG=$pathtoconfig/$kbconfig" >~/tmp/kube) \
   && printf '%b\n' "\033[1m"$pathtoconfig/$kbconfig"\033[0m"
@@ -103,4 +103,8 @@ function azctx() {
     [ -n "$sub" ] && az account set --subscription "$sub"
 }
 
+function grt()
+{
+    git rev-parse --show-toplevel
+}
 source ~/.zshapikeys

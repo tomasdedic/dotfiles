@@ -6,6 +6,28 @@ vim.keymap.set("n", "<C-j>", "<Cmd>NvimTmuxNavigateDown<CR>", {})
 vim.keymap.set("n", "<C-k>", "<Cmd>NvimTmuxNavigateUp<CR>", {})
 vim.keymap.set("n", "<C-l>", "<Cmd>NvimTmuxNavigateRight<CR>", {})
 vim.keymap.set("n", "<C-\\>", "<Cmd>NvimTmuxNavigateLastActive<CR>", {})
+
+-- send a command to the snacks terminal (same one as <c-/>)
+local function term_send(cmd)
+  local term = Snacks.terminal.get(nil, { cwd = LazyVim.root() })
+  vim.fn.chansend(vim.b[term.buf].terminal_job_id, cmd .. "\r")
+end
+
+vim.keymap.set("n", "<leader>tc", function()
+  term_send("cd " .. vim.fn.fnameescape(vim.fn.expand("%:p:h")))
+end, { desc = "Terminal: cd to file dir" })
+
+vim.keymap.set("x", "<leader>ts", function()
+  vim.cmd('normal! "zy')
+  term_send(vim.fn.getreg("z"))
+end, { desc = "Terminal: send selection" })
+
+vim.keymap.set("x", "<leader>tp", function()
+  vim.cmd('normal! "zy')
+  local term = Snacks.terminal.get(nil, { cwd = LazyVim.root() })
+  vim.fn.chansend(vim.b[term.buf].terminal_job_id, vim.fn.getreg("z"))
+end, { desc = "Terminal: paste selection (no Enter)" })
+
 -- vim.keymap.set("n", "<Leader>yy", "^yg_", { noremap = true }) --copy line without begining whitespacel
 
 -- Copy visual block selection removing as much whitespace as first line has

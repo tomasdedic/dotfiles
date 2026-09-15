@@ -137,7 +137,8 @@ return {
         comments = { "italic" }, -- Change the style of comments
         conditionals = { "italic" },
       },
-      custom_highlights = function(colors)
+      custom_highlights = function()
+        -- Use catppuccin latte (light) colors for a bright terminal
         return {
           SnacksTerminalNormal = { bg = "#eff1f5", fg = "#4c4f69" },
         }
@@ -158,6 +159,7 @@ return {
   },
   {
     "alexghergh/nvim-tmux-navigation",
+
     opts = {
       disable_when_zoomed = true,
     },
@@ -173,7 +175,14 @@ return {
           filter = { event = "msg_showmode" },
         },
       },
+      presets = {
+        bottom_search = false, -- `/` in the popup too, not the classic bottom line
+        command_palette = false, -- cmdline back in the middle (LazyVim pins it to row 3)
+      },
       views = {
+        cmdline_popup = {
+          position = { row = 3, col = "50%" },
+        },
         mini = {
           align = "message-left", -- Align messages to the left
           position = {
@@ -253,21 +262,12 @@ return {
     },
   },
   {
-    "roxma/vim-tmux-clipboard",
+    "akinsho/bufferline.nvim",
+    enabled = false,
+    opts = {
+      options = {
+        always_show_bufferline = true, -- stops bufferline from hiding tabline
+      },
+    },
   },
-  -- {
-  --   "akinsho/bufferline.nvim",
-  --   enabled = false,
-  -- },
-  -- {
-  --   "rasulomaroff/reactive.nvim",
-  --   opts = {
-  --     -- load = { "catppuccin-late-cursor", "catppuccin-late-cursorline" },
-  --     builtin = {
-  --       cursorline = true,
-  --       cursor = true,
-  --       modemsg = true,
-  --     },
-  --   },
-  -- },
 }
