@@ -79,7 +79,15 @@ return {
           },
         },
         sources = {
+          fsbookmark = {
+            config = function(opts)
+              return require("fsbookmark.picker").source(opts)
+            end,
+          },
           explorer = {
+            format = function(item, picker)
+              return require("fsbookmark.explorer").format(item, picker)
+            end,
             -- layout = "bottom",
             jump = { close = true },
             win = {
