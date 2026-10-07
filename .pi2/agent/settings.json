@@ -1,15 +1,11 @@
 {
-  "lastChangelogVersion": "0.87.0",
+  "tuiMode": "regular",
+  "defaultTools": ["+codemode"],
+  "lastChangelogVersion": "1.0.4",
   "defaultProvider": "github-copilot",
   "theme": "light",
   "defaultModel": "claude-sonnet-5",
   "defaultThinkingLevel": "high",
-  "enabledModels": [
-    "github-copilot/gpt-5.3-codex",
-    "github-copilot/gemini-3.1-pro-preview",
-    "github-copilot/claude-sonnet-4.6",
-    "github-copilot/claude-sonnet-4.5"
-  ],
   "hideThinkingBlock": true,
   "packages": [
     "packages/pi-amplike",
@@ -24,7 +20,8 @@
     "npm:pi-boomerang",
     "git:github.com/DietrichGebert/ponytail",
     "npm:pi-autoresearch",
-    "npm:pi-add-dir"
+    "npm:pi-add-dir",
+    "../../../../opt/homebrew/lib/node_modules/@jmfederico/pi-web/dist/pi-packages/relays"
   ],
   "extensions": [
     "extensions/tps.ts"
