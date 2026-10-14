@@ -1,7 +1,9 @@
 {
   "tuiMode": "regular",
-  "defaultTools": ["+codemode"],
-  "lastChangelogVersion": "1.0.4",
+  "defaultTools": [
+    "+codemode"
+  ],
+  "lastChangelogVersion": "1.2.0",
   "defaultProvider": "github-copilot",
   "theme": "light",
   "defaultModel": "claude-sonnet-5",
