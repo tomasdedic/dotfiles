@@ -140,3 +140,6 @@ _tmux_pub_kubeconfig() {
   tmux set -p @kubeconfig "$KUBECONFIG" && _tmux_last_kubeconfig=$KUBECONFIG
 }
 add-zsh-hook precmd _tmux_pub_kubeconfig
+#aliases
+alias ls='gls --color=auto'
+alias ansible-lint="ansible-lint -c ~/.config/ansible-lint"

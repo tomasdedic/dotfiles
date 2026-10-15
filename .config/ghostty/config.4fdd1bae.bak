@@ -1,0 +1,35 @@
+initial-command = /opt/homebrew/bin/zsh
+title=""
+#theme=catppuccin-latte
+theme=PencilLight
+window-height=100
+window-width=210
+window-decoration = false
+macos-titlebar-style = hidden
+
+
+#window-title-font-family="MonoLisa Variable"
+
+font-family="Hack Nerd Font Mono"
+# font-family="MesloLGS Nerd Font"
+font-size=16
+font-feature=-liga
+font-thicken=false
+cursor-style = block
+cursor-style-blink = false
+cursor-invert-fg-bg = true
+mouse-hide-while-typing = true
+
+# extras
+shell-integration = detect
+shell-integration-features = no-cursor,sudo,no-title
+copy-on-select = clipboard
+focus-follows-mouse = true
+link-url = true
+adjust-underline-position = 40%
+adjust-underline-thickness = -60%
+bold-is-bright=true
+confirm-close-surface=false
+adjust-cell-width= -7%
+adjust-cell-height= -7%
+
