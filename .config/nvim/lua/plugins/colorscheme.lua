@@ -2,12 +2,12 @@ return {
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    lazy = false,    -- load at startup
+    lazy = false, -- load at startup
     priority = 1000, -- load before all other plugins
     config = function()
       require("catppuccin").setup({
         flavour = "frappe", -- latte, frappe, macchiato, mocha
-        background = {    -- :h background
+        background = { -- :h background
           light = "latte",
           dark = "mocha",
         },

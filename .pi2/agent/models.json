@@ -1,5 +1,13 @@
 {
   "providers": {
+    "siemens": {
+      "package": "@opencode/ai/providers/openai-compatible",
+      "name": "code.siemens.com",
+      "settings": {
+        "baseURL": "https://api.siemens.com/llm/v1"
+      }
+    }
+
     "trask": {
       "baseUrl": "https://llm-api.trask.cz/v1",
       "api": "openai-completions",
