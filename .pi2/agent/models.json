@@ -1,13 +1,35 @@
 {
+  "$schema": "https://pi.dev/schemas/models.schema.json",
   "providers": {
     "siemens": {
-      "package": "@opencode/ai/providers/openai-compatible",
       "name": "code.siemens.com",
-      "settings": {
-        "baseURL": "https://api.siemens.com/llm/v1"
-      }
-    }
-
+      "baseUrl": "https://api.siemens.com/llm/v1",
+      "api": "openai-completions",
+      "apiKey": "!. $HOME/.zshapikeys >/dev/null 2>&1; printf %s \"$SIEMENS_API_KEY\"",
+      "models": [
+        {
+          "id": "deepseek-v4.1-flash",
+          "name": "Siemens DeepSeek v4.1 Flash",
+          "input": ["text", "image"],
+          "contextWindow": 1048576,
+          "maxTokens": 32768
+        },
+        {
+          "id": "qwen-3.8-27b",
+          "name": "Siemens Qwen 3.8 27B",
+          "input": ["text", "image"],
+          "contextWindow": 262144,
+          "maxTokens": 32768
+        },
+        {
+          "id": "ministral-3-14b-instruct-2512",
+          "name": "Siemens Ministral 3 14B Instruct",
+          "input": ["text", "image"],
+          "contextWindow": 256000,
+          "maxTokens": 16384
+        }
+      ]
+    },
     "trask": {
       "baseUrl": "https://llm-api.trask.cz/v1",
       "api": "openai-completions",
@@ -30,10 +52,7 @@
           "id": "gemma4:31b",
           "name": "gemma4:31b",
           "reasoning": false,
-          "input": [
-            "text",
-            "image"
-          ],
+          "input": ["text", "image"],
           "cost": {
             "input": 0,
             "output": 0,

@@ -9,7 +9,7 @@
     "claude-haiku-5-5"
   ],
   "hideThinkingBlock": true,
-  "lastChangelogVersion": "1.3.0",
+  "lastChangelogVersion": "1.4.0",
   "theme": "light",
   "defaultProvider": "trask",
   "defaultModel": "general",
