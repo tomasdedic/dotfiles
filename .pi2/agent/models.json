@@ -38,8 +38,8 @@
         {
           "id": "general",
           "name": "Trask general",
-          "contextWindow": 1000000,
-          "maxTokens": 32768
+          "contextWindow": 524288,
+          "maxTokens": 65536
         }
       ]
     },

@@ -138,7 +138,58 @@ return {
   -- },
   {
     "https://tangled.org/cuducos.me/yaml.nvim",
-    ft = { "yaml", "helm", "yaml.gh" }, -- optional
+    ft = { "yaml", "helm", "yaml.gh", "yaml.ansible" }, -- optional
+    -- plugin silently no-ops when &filetype is not in this list
+    opts = { ft = { "yaml", "eruby.yaml", "helm", "yaml.gh", "yaml.ansible" } },
+    config = function(_, opts)
+      require("yaml_nvim").setup(opts)
+      local document = require("yaml_nvim.document")
+      local key_of = require("yaml_nvim.pair")
+
+      -- Raw value text with newlines kept; the plugin's own yank flattens it and doubles quotes.
+      local function raw_value(node)
+        while node and not (node:type() == "block_mapping_pair" and node:field("value")[1]) do
+          node = node:parent()
+        end
+        if not node then
+          return ""
+        end
+        local lines = vim.split(vim.treesitter.get_node_text(node:field("value")[1], 0), "\n", { plain = true })
+        local from = 2 -- first line of a plain value starts mid-line, so it has no indent to strip
+        if lines[1]:match("^[|>]") then
+          table.remove(lines, 1) -- drop block scalar header
+          from = 1
+        end
+        local min = math.huge
+        for i = from, #lines do
+          if lines[i]:match("%S") then
+            min = math.min(min, #lines[i]:match("^%s*"))
+          end
+        end
+        if min < math.huge then
+          for i = from, #lines do
+            lines[i] = lines[i]:sub(min + 1)
+          end
+        end
+        return (table.concat(lines, "\n"):gsub("%s+$", ""))
+      end
+
+      -- register defaults to + because the plugin's default (") does not reach the system clipboard
+      local function yank(key, value)
+        return function(a)
+          local node = document.get_key_relevant_to_cursor()
+          if not node then
+            return vim.notify("yaml: no key under cursor", vim.log.levels.WARN)
+          end
+          local k, v = key_of.parse(node).key, raw_value(node)
+          local text = (key and value) and (k .. " = " .. v) or key and k or v
+          vim.fn.setreg(a.args ~= "" and a.args or "+", text)
+        end
+      end
+      vim.api.nvim_create_user_command("YAMLYank", yank(true, true), { nargs = "?" })
+      vim.api.nvim_create_user_command("YAMLYankKey", yank(true, false), { nargs = "?" })
+      vim.api.nvim_create_user_command("YAMLYankValue", yank(false, true), { nargs = "?" })
+    end,
   },
   -- {
   --   "mason-org/mason.nvim",
