@@ -1,0 +1,50 @@
+{
+  "tuiMode": "regular",
+  "defaultTools": [
+    "+codemode"
+  ],
+  "enabledModels": [
+    "general",
+    "claude-sonnet-5-5",
+    "claude-opus-5-5"
+  ],
+  "hideThinkingBlock": true,
+  "lastChangelogVersion": "1.5.0",
+  "theme": "light",
+  "defaultProvider": "trask",
+  "defaultModel": "general",
+  "defaultThinkingLevel": "high",
+  "packages": [
+    "npm:pi-simplify",
+    "npm:pi-slopchop",
+    "npm:pi-memory-md",
+    "npm:pi-boomerang",
+    "git:github.com/DietrichGebert/ponytail",
+    "npm:pi-autoresearch",
+    "npm:pi-add-dir",
+    "git:github.com/paoloanzn/pi-black",
+    "../../../../opt/homebrew/lib/node_modules/@jmfederico/pi-web/dist/pi-packages/relays",
+    "npm:@narumitw/pi-goal",
+    "npm:pi-agents"
+  ],
+  "claudeAgentSdkProvider": {
+    "overrideSystemPrompt": true
+  },
+  "quietStartup": false,
+  "pi-memory-md": {
+    "memoryDir": {
+      "repoUrl": "https://github.com/tomasdedic/pimem.git",
+      "localPath": "~/.pi/memory-md",
+      "globalMemory": "global"
+    }
+  },
+  "markdown": {
+    "mermaid": "streaming"
+  },
+  "extensionChangelogVersions": {
+    "{\"source\":\"npm:pi-memory-md\",\"scope\":\"user\"}": "0.1.38",
+    "{\"source\":\"npm:pi-boomerang\",\"scope\":\"user\"}": "0.7.0",
+    "{\"source\":\"npm:pi-autoresearch\",\"scope\":\"user\"}": "1.9.0",
+    "{\"source\":\"npm:@narumitw/pi-goal\",\"scope\":\"user\"}": "0.54.15"
+  }
+}

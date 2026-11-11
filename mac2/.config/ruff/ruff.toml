@@ -1,0 +1,5 @@
+[lint]
+extend-ignore = ["C408", "I001", "UP031", "PLR0402", "SIM117"]
+
+[lint.per-file-ignores]
+"*.ipynb" = ["F841"]

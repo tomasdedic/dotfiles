@@ -1,0 +1,11 @@
+skip_list:
+  - key-order[task]          # Task key ordering is a matter of style
+  - fqcn[action-core]        # short module names are fine (uri, copy, command...)
+  - fqcn[action]             # same for non-core modules
+  - name[template]           # Jinja vars anywhere in task names are fine
+  - name[casing]             # Task names don't need to start with uppercase
+  - yaml[truthy]             # yes/no is valid YAML, no need to force true/false
+  - yaml[line-length]        # govc/coreos-installer commands are inherently long
+  - no-free-form             # free-form command/shell is often cleaner
+  - ignore-errors            # ignore_errors is valid on blocks; failed_when is task-only
+  - jinja[spacing]           # annoying jinja spacing template
