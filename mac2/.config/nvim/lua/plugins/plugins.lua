@@ -77,6 +77,10 @@ return {
     "folke/noice.nvim",
     opts = {
       -- cmdline = { enabled = false },
+      lsp = {
+        progress = { enabled = false }, -- no "pyright: checking" mini float
+        message = { enabled = true }, -- LSP log/show messages stay in noice, not the hit-enter prompt
+      },
       routes = {
         {
           view = "notify",

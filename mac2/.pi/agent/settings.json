@@ -9,7 +9,7 @@
     "claude-opus-5-5"
   ],
   "hideThinkingBlock": true,
-  "lastChangelogVersion": "1.5.0",
+  "lastChangelogVersion": "1.5.2",
   "theme": "light",
   "defaultProvider": "trask",
   "defaultModel": "general",
@@ -45,6 +45,6 @@
     "{\"source\":\"npm:pi-memory-md\",\"scope\":\"user\"}": "0.1.38",
     "{\"source\":\"npm:pi-boomerang\",\"scope\":\"user\"}": "0.7.0",
     "{\"source\":\"npm:pi-autoresearch\",\"scope\":\"user\"}": "1.9.0",
-    "{\"source\":\"npm:@narumitw/pi-goal\",\"scope\":\"user\"}": "0.54.15"
+    "{\"source\":\"npm:@narumitw/pi-goal\",\"scope\":\"user\"}": "0.55.0"
   }
 }
