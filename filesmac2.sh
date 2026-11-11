@@ -10,4 +10,6 @@ cp -r ~/.config/dircolors* ~/.config/nvim ~/.config/ghostty \
 cp -r ~/.oh-my-zsh/themes/fishy.zsh-theme $d/.oh-my-zsh/themes/
 # models.json is safe to store: every apiKey here is $ENV or a !command, never a literal
 cp ~/.pi/agent/{settings.json,models.json,AGENTS.md} $d/.pi/agent/
-echo "ok: $(find $d -type f | wc -l | tr -d ' ') files in $d/"
+# Per-machine package list. Restore on a new mac: brew bundle install --file=mac2/Brewfile
+brew bundle dump --force --file="$d/Brewfile"
+echo "ok: $(find $d -type f | wc -l | tr -d ' ') files in $d/, Brewfile $(wc -l <"$d/Brewfile" | tr -d ' ') lines"
