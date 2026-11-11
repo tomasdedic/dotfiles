@@ -117,8 +117,6 @@ brew "jansson"
 brew "snappy"
 # Data serialization system
 brew "avro-c"
-# Microsoft Azure CLI 2.0
-brew "azure-cli", link: false
 # Terminal bandwidth utilization tool
 brew "bandwhich"
 # Bourne-Again SHell, a UNIX command interpreter

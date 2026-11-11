@@ -1,6 +1,11 @@
 {
   "$schema": "https://pi.dev/schemas/models.schema.json",
   "providers": {
+    "anthropic": {
+      "compat": {
+        "supportsMessageThreads": false
+      }
+    },
     "siemens": {
       "name": "code.siemens.com",
       "baseUrl": "https://api.siemens.com/llm/v1",
@@ -33,7 +38,7 @@
     "trask": {
       "baseUrl": "https://llm-api.trask.cz/v1",
       "api": "openai-completions",
-      "apiKey": "$TRASK_API_KEY",
+      "apiKey": "!. $HOME/.zshapikeys >/dev/null 2>&1; printf %s \"$TRASK_API_KEY\"",
       "models": [
         {
           "id": "general",
@@ -46,7 +51,7 @@
     "ollama": {
       "baseUrl": "https://ollama.com/v1",
       "api": "openai-completions",
-      "apiKey": "$OLLAMA_API_KEY",
+      "apiKey": "!. $HOME/.zshapikeys >/dev/null 2>&1; printf %s \"$OLLAMA_API_KEY\"",
       "models": [
         {
           "id": "gemma4:31b",
