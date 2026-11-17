@@ -6,10 +6,10 @@ return {
     priority = 1000, -- load before all other plugins
     config = function()
       require("catppuccin").setup({
-        flavour = "frappe", -- latte, frappe, macchiato, mocha
+        flavour = "frappe", -- F1 toggles latte and frappe
         background = { -- :h background
           light = "latte",
-          dark = "mocha",
+          dark = "frappe", -- was mocha, so F12 toggles back to the flavour below
         },
         transparent_background = false,
         float = {

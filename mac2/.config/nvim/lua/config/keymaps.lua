@@ -170,3 +170,17 @@ vim.keymap.set("n", "<leader>tb", function()
   end
   zsh_send("zsh " .. vim.fn.fnameescape(path))
 end, { desc = "Shell: run buffer as script" })
+
+-- F1: toggle catppuccin latte (light) and frappe (dark). Rewrites the flavour in
+-- lua/plugins/colorscheme.lua, so the choice also survives a restart.
+vim.keymap.set({ "n", "i", "v", "t" }, "<F1>", function()
+  local flavour = vim.g.colors_name == "catppuccin-latte" and "frappe" or "latte"
+  local file = vim.fn.stdpath("config") .. "/lua/plugins/colorscheme.lua"
+  local lines = vim.fn.readfile(file)
+  for i, line in ipairs(lines) do
+    lines[i] = line:gsub('^%s*flavour = "[a-z]-",.*', '        flavour = "' .. flavour .. '", -- F1 toggles latte and frappe')
+  end
+  vim.fn.writefile(lines, file)
+  vim.o.background = flavour == "latte" and "light" or "dark"
+  vim.cmd.colorscheme("catppuccin-" .. flavour)
+end, { desc = "Toggle catppuccin light and dark" })

@@ -597,6 +597,8 @@ brew "pngpaste"
 brew "podman"
 # Code formatter for JavaScript, CSS, JSON, GraphQL, Markdown, YAML
 brew "prettier"
+# Service monitoring system and time series database
+brew "prometheus"
 # Password generator
 brew "pwgen"
 # Easily download, build, install, upgrade, and uninstall Python packages
