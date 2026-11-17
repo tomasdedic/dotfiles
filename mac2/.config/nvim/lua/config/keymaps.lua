@@ -170,21 +170,11 @@ vim.keymap.set("n", "<leader>tb", function()
   end
   zsh_send("zsh " .. vim.fn.fnameescape(path))
 end, { desc = "Shell: run buffer as script" })
--- Theme switch, F1 or :Color. Writes the flavour into lua/plugins/colorscheme.lua,
--- so the choice also survives a restart. :Color with no argument toggles.
+-- Theme switch, F1 or :Color, for this session only. :Color with no argument toggles.
 local function set_theme(flavour)
   if flavour ~= "latte" and flavour ~= "frappe" then
     flavour = vim.g.colors_name == "catppuccin-latte" and "frappe" or "latte"
   end
-  local file = vim.fn.stdpath("config") .. "/lua/plugins/colorscheme.lua"
-  local lines = vim.fn.readfile(file)
-  for i, line in ipairs(lines) do
-    lines[i] = line:gsub(
-      '^%s*flavour = "[a-z]-",.*',
-      '        flavour = "' .. flavour .. '", -- F1 and :Color switch latte and frappe'
-    )
-  end
-  vim.fn.writefile(lines, file)
   vim.o.background = flavour == "latte" and "light" or "dark"
   vim.cmd.colorscheme("catppuccin-" .. flavour)
 end
