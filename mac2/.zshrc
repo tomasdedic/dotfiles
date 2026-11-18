@@ -116,6 +116,17 @@ bindkey '^[OA' history-substring-search-up
 bindkey '^[OB' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
+
+# vi-mode: green cursor outside insert mode. Wraps the vi-mode plugin function that runs on
+# every mode change; OSC 12 sets the cursor color, OSC 112 resets it to the terminal default.
+functions[_vi-mode-shape-orig]=$functions[_vi-mode-set-cursor-shape-for-keymap]
+_vi-mode-set-cursor-shape-for-keymap() {
+  _vi-mode-shape-orig "$@"
+  case "${1:-${VI_KEYMAP:-main}}" in
+    vicmd|visual|viopp) printf '\e]12;#40a02b\a' ;;
+    *) printf '\e]112\a' ;;
+  esac
+}
 export HOWDOI_COLORIZE=1
 FPATH=~/.zsh.d:$(brew --prefix)/share/zsh-completions:$FPATH
 autoload -Uz compinit
