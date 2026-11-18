@@ -92,6 +92,20 @@ return {
               return require("fsbookmark.explorer").format(item, picker)
             end,
             -- layout = "bottom",
+            -- float in the top-right corner instead of a split, so the bottom terminals keep their size
+            -- row/col: number >= 1 = cell, 0..1 = fraction, negative = from bottom/right, unset = center
+            layout = {
+              preset = "sidebar",
+              layout = {
+                position = "float",
+                width = 60,
+                min_width = 60,
+                height = 0.5, -- half the screen height
+                row = 1,
+                col = -2,
+                border = "rounded",
+              },
+            },
             jump = { close = true },
             win = {
               -- unmap tmux keys

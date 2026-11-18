@@ -65,9 +65,15 @@ vim.keymap.set("n", "<leader>,", function()
   Snacks.picker.buffers({ current = false, sort_lastused = true })
 end, { desc = "Bufers" })
 
+-- explorer: open it, or jump back into it when it is open but focus is elsewhere, or close it
 vim.keymap.set("n", "-", function()
-  Snacks.explorer({ cwd = LazyVim.root() })
-end, {})
+  local explorer = Snacks.picker.get({ source = "explorer" })[1]
+  if explorer and not explorer:is_focused() then
+    explorer:focus()
+  else
+    Snacks.explorer({ cwd = LazyVim.root() })
+  end
+end, { desc = "Explorer: open / focus / close" })
 vim.keymap.set("n", "<leader>cd", "<cmd>lcd %:p:h<CR>", {})
 --
 vim.keymap.set("n", "<leader>dd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
