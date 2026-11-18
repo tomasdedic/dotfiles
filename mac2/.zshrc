@@ -119,14 +119,27 @@ bindkey -M vicmd 'j' history-substring-search-down
 
 # vi-mode: green cursor outside insert mode. Wraps the vi-mode plugin function that runs on
 # every mode change; OSC 12 sets the cursor color, OSC 112 resets it to the terminal default.
+# Nvim's terminal drops OSC 112, so inside Nvim ($NVIM set) the reset is sent as OSC 12 "default".
 functions[_vi-mode-shape-orig]=$functions[_vi-mode-set-cursor-shape-for-keymap]
 _vi-mode-set-cursor-shape-for-keymap() {
   _vi-mode-shape-orig "$@"
   case "${1:-${VI_KEYMAP:-main}}" in
     vicmd|visual|viopp) printf '\e]12;#40a02b\a' ;;
-    *) printf '\e]112\a' ;;
+    *) if [[ -n $NVIM ]]; then printf '\e]12;default\a'; else printf '\e]112\a'; fi ;;
   esac
 }
+
+# Transient prompt: the prompt you type at is the full two-line theme prompt; after Enter it is
+# redrawn as just "➤ <command>", so scrollback shows commands and the info line appears once.
+_prompt_full=$PROMPT
+_prompt_restore() { PROMPT=$_prompt_full }
+_prompt_transient() {
+  PROMPT='%{$reset_color%}➤ '
+  zle reset-prompt
+}
+autoload -Uz add-zsh-hook add-zle-hook-widget
+add-zsh-hook precmd _prompt_restore
+add-zle-hook-widget zle-line-finish _prompt_transient
 export HOWDOI_COLORIZE=1
 FPATH=~/.zsh.d:$(brew --prefix)/share/zsh-completions:$FPATH
 autoload -Uz compinit

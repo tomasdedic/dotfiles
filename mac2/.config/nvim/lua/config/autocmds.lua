@@ -50,3 +50,22 @@ vim.api.nvim_create_autocmd("TermOpen", {
     end
   end,
 })
+
+-- zsh vi-mode colors the cursor with OSC 12. Nvim's terminal does not apply it itself, so map it to
+-- TermCursor, the highlight 'guicursor' uses in terminal mode. "default" restores the colorscheme value.
+local term_cursor_default
+vim.api.nvim_create_autocmd("TermRequest", {
+  callback = function(ev)
+    local seq = ev.data.sequence
+    local color = seq:match("^\27%]12;(.+)")
+    if not color then
+      return
+    end
+    term_cursor_default = term_cursor_default or vim.api.nvim_get_hl(0, { name = "TermCursor" })
+    if color == "default" then -- sent by ~/.zshrc instead of OSC 112, which Nvim drops
+      vim.api.nvim_set_hl(0, "TermCursor", term_cursor_default)
+    else
+      vim.api.nvim_set_hl(0, "TermCursor", { bg = color, fg = "#ffffff" })
+    end
+  end,
+})
