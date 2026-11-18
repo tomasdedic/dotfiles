@@ -53,6 +53,30 @@ return {
             nav_l = term_key("<C-l>", "NvimTmuxNavigateRight"),
             -- Ctrl-n leaves terminal mode without sending Esc (pi cancels a request on Esc)
             normal_mode = { "<C-n>", function() vim.cmd("stopinsert") end, mode = "t", desc = "Terminal: normal mode" },
+            -- ,p in terminal Normal mode: the global yank history pastes into the editor window,
+            -- so send the chosen entry to the shell instead, as a bracketed paste (not executed)
+            yank_history = {
+              "<leader>p",
+              function(self)
+                local job = vim.b[self.buf].terminal_job_id
+                Snacks.picker.yanky({
+                  confirm = function(picker, item)
+                    picker:close()
+                    if item then
+                      local text = item.regcontents:gsub("\n$", "")
+                      vim.fn.chansend(job, "\27[200~" .. text .. "\27[201~")
+                    end
+                    vim.schedule(function() -- the picker returns focus to the editor window
+                      if self:win_valid() then
+                        vim.api.nvim_set_current_win(self.win)
+                      end
+                    end)
+                  end,
+                })
+              end,
+              mode = "n",
+              desc = "Yank history: paste into terminal",
+            },
           },
         },
       },

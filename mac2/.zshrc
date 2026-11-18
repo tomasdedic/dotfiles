@@ -117,14 +117,14 @@ bindkey '^[OB' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
-# vi-mode: green cursor outside insert mode. Wraps the vi-mode plugin function that runs on
+# vi-mode: blue cursor outside insert mode. Wraps the vi-mode plugin function that runs on
 # every mode change; OSC 12 sets the cursor color, OSC 112 resets it to the terminal default.
 # Nvim's terminal drops OSC 112, so inside Nvim ($NVIM set) the reset is sent as OSC 12 "default".
 functions[_vi-mode-shape-orig]=$functions[_vi-mode-set-cursor-shape-for-keymap]
 _vi-mode-set-cursor-shape-for-keymap() {
   _vi-mode-shape-orig "$@"
   case "${1:-${VI_KEYMAP:-main}}" in
-    vicmd|visual|viopp) printf '\e]12;#40a02b\a' ;;
+    vicmd|visual|viopp) printf '\e]12;#1e66f5\a' ;;
     *) if [[ -n $NVIM ]]; then printf '\e]12;default\a'; else printf '\e]112\a'; fi ;;
   esac
 }
