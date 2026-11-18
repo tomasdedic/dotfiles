@@ -62,6 +62,10 @@ export KUBE_PS1_BINARY=kubectl
 export KUBE_PS1_SYMBOL_ENABLE=false
 export KUBE_PS1_NS_ENABLE=true
 
+# autosuggestion color: the default fg=8 is #424242 in Ghostty "Pencil Light",
+# the same as normal text, so use an explicit light gray
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#9e9e9e'
+
 export FZF_LEGACY_KEYBINDINGS=0
 export FZF_TMUX=1
 VI_MODE_SET_CURSOR=true
@@ -69,7 +73,16 @@ VI_MODE_CURSOR_NORMAL=2   # steady block
 VI_MODE_CURSOR_INSERT=2   # steady block
 VI_MODE_CURSOR_VISUAL=2   # steady block
 source $ZSH/oh-my-zsh.sh
-bindkey "^X" forward-word #jump word by word
+# bindkey "^X" forward-word #jump word by word (use Ctrl-F; ^X is the prefix of ^Xa, ^Xe, ...)
+# Ctrl-X shortcuts (zsh completion widgets; ^X alone is unbound, so no timeout):
+#   Ctrl-X a  expand alias under cursor           ll -> ls -lh
+#   Ctrl-X e  expand word: glob, $VAR, ~, $(cmd)  *.py -> a.py b.py
+#   Ctrl-X m  insert most recently modified file  tar xzf <newest file>
+#   Ctrl-X d  list expansions, leave the word as it is
+#   Ctrl-X c  spelling correction of the word
+#   Ctrl-X h  completion help for the cursor position
+bindkey '^F' forward-word  # Ctrl-f (Alt-f is AeroSpace fullscreen)
+bindkey '^B' backward-word # Ctrl-b
 eval $(gdircolors ~/.config/dircolors.ansi-dark)
 
 export HELM_REGISTRY_CONFIG=~/.config/helm/registry.json
@@ -95,8 +108,14 @@ rmf() {
 }
 
 export SUDO_ASKPASS=/usr/bin/ssh-askpass
-bindkey "^[OA" up-history
-bindkey "^[OB" down-history
+# history search by any part of the command (zsh-history-substring-search plugin)
+# ^[[A/^[[B = arrows in normal cursor mode, ^[OA/^[OB = arrows in application mode
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey '^[OA' history-substring-search-up
+bindkey '^[OB' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
 export HOWDOI_COLORIZE=1
 FPATH=~/.zsh.d:$(brew --prefix)/share/zsh-completions:$FPATH
 autoload -Uz compinit

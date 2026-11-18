@@ -51,6 +51,8 @@ return {
             nav_j = term_key("<C-j>", "NvimTmuxNavigateDown"),
             nav_k = term_key("<C-k>", "NvimTmuxNavigateUp"),
             nav_l = term_key("<C-l>", "NvimTmuxNavigateRight"),
+            -- Ctrl-n leaves terminal mode without sending Esc (pi cancels a request on Esc)
+            normal_mode = { "<C-n>", function() vim.cmd("stopinsert") end, mode = "t", desc = "Terminal: normal mode" },
           },
         },
       },
