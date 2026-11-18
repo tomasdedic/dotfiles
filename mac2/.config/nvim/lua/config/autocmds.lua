@@ -69,3 +69,15 @@ vim.api.nvim_create_autocmd("TermRequest", {
     end
   end,
 })
+
+-- A terminal window only follows new output when its cursor is on the last buffer line. The terminal
+-- cursor is usually higher (blank rows below the prompt), so leaving from terminal mode froze the view.
+-- Leaving from terminal mode now parks the cursor on the last line; leaving from terminal Normal
+-- mode keeps your position, so you can read scrollback in another window.
+vim.api.nvim_create_autocmd("WinLeave", {
+  callback = function()
+    if vim.bo.buftype == "terminal" and vim.fn.mode() == "t" then
+      vim.api.nvim_win_set_cursor(0, { vim.api.nvim_buf_line_count(0), 0 })
+    end
+  end,
+})
