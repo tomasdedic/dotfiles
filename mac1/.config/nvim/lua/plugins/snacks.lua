@@ -1,0 +1,183 @@
+local function tmux_nav(cmd, win)
+  local next_win = vim.api.nvim_win_call(win, function()
+    vim.cmd(cmd)
+    return vim.api.nvim_get_current_win()
+  end)
+  vim.api.nvim_set_current_win(next_win)
+end
+
+local function make_tmux_action(cmd)
+  return function(picker) ---@param picker snacks.Picker
+    tmux_nav(cmd, assert(picker.layout.root.win))
+  end
+end
+
+-- reuse LazyVim's key names (lazyvim/plugins/util.lua) so these override instead of duplicating
+local function term_key(lhs, cmd)
+  return {
+    lhs,
+    function(self)
+      tmux_nav(cmd, self.win)
+    end,
+    mode = { "n", "t" },
+    expr = false, -- LazyVim sets expr=true; deep merge keeps it unless overridden -> E565
+  }
+end
+
+return {
+  {
+    "folke/snacks.nvim",
+    opts = {
+      -- customize for code.siemens.com
+      explorer = {},
+      image = { enabled = true },
+      gitbrowse = {
+        url_patterns = {
+          ["code%.siemens%.com"] = {
+            branch = "/-/tree/{branch}",
+            file = "/-/blob/{branch}/{file}#L{line_start}-{line_end}",
+            permalink = "/-/blob/{commit}/{file}#L{line_start}-{line_end}",
+            commit = "/-/commit/{commit}",
+          },
+        },
+      },
+      terminal = {
+        win = {
+          wo = {
+            winhighlight = "Normal:SnacksTerminalNormal",
+          },
+          keys = {
+            nav_h = term_key("<C-h>", "NvimTmuxNavigateLeft"),
+            nav_j = term_key("<C-j>", "NvimTmuxNavigateDown"),
+            nav_k = term_key("<C-k>", "NvimTmuxNavigateUp"),
+            nav_l = term_key("<C-l>", "NvimTmuxNavigateRight"),
+            -- Ctrl-n leaves terminal mode without sending Esc (pi cancels a request on Esc)
+            normal_mode = { "<C-n>", function() vim.cmd("stopinsert") end, mode = "t", desc = "Terminal: normal mode" },
+            -- ,p in terminal Normal mode: the global yank history pastes into the editor window,
+            -- so send the chosen entry to the shell instead, as a bracketed paste (not executed)
+            yank_history = {
+              "<leader>p",
+              function(self)
+                local job = vim.b[self.buf].terminal_job_id
+                Snacks.picker.yanky({
+                  confirm = function(picker, item)
+                    picker:close()
+                    if item then
+                      local text = item.regcontents:gsub("\n$", "")
+                      vim.fn.chansend(job, "\27[200~" .. text .. "\27[201~")
+                    end
+                    vim.schedule(function() -- the picker returns focus to the editor window
+                      if self:win_valid() then
+                        vim.api.nvim_set_current_win(self.win)
+                      end
+                    end)
+                  end,
+                })
+              end,
+              mode = "n",
+              desc = "Yank history: paste into terminal",
+            },
+          },
+        },
+      },
+      picker = {
+        actions = {
+          tmux_h = make_tmux_action("NvimTmuxNavigateLeft"),
+          tmux_j = make_tmux_action("NvimTmuxNavigateDown"),
+          tmux_k = make_tmux_action("NvimTmuxNavigateUp"),
+          tmux_l = make_tmux_action("NvimTmuxNavigateRight"),
+        },
+        win = {
+          input = {
+            keys = {
+              ["<c-h>"] = { "tmux_h", mode = { "i", "n" } },
+              ["<c-j>"] = { "tmux_j", mode = { "i", "n" } },
+              ["<c-k>"] = { "tmux_k", mode = { "i", "n" } },
+              ["<c-l>"] = { "tmux_l", mode = { "i", "n" } },
+            },
+          },
+          list = {
+            keys = {
+              ["<c-h>"] = "tmux_h",
+              ["<c-j>"] = "tmux_j",
+              ["<c-k>"] = "tmux_k",
+              ["<c-l>"] = "tmux_l",
+            },
+          },
+        },
+        sources = {
+          fsbookmark = {
+            config = function(opts)
+              return require("fsbookmark.picker").source(opts)
+            end,
+          },
+          explorer = {
+            format = function(item, picker)
+              return require("fsbookmark.explorer").format(item, picker)
+            end,
+            -- layout = "bottom",
+            -- float in the top-right corner instead of a split, so the bottom terminals keep their size
+            -- row/col: number >= 1 = cell, 0..1 = fraction, negative = from bottom/right, unset = center
+            layout = {
+              preset = "sidebar",
+              layout = {
+                position = "float",
+                width = 60,
+                min_width = 60,
+                height = 0.5, -- half the screen height
+                row = 1,
+                col = -2,
+                border = "rounded",
+              },
+            },
+            jump = { close = true },
+            win = {
+              -- unmap tmux keys
+              list = {
+                keys = {
+                  ["<C-h>"] = false,
+                  ["<C-j>"] = false,
+                  ["<C-k>"] = false,
+                  ["<C-l>"] = false,
+                },
+              },
+            },
+          },
+        },
+      },
+
+      dashboard = {
+        preset = {
+          pick = function(cmd, opts)
+            return LazyVim.pick(cmd, opts)()
+          end,
+          header = [[
+
+   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+   ▒░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░▒
+   ▒▒░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░▒▒
+   ▒▒░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░▒▒
+   ▒▒▒░░░░░░▒▒▒▒░░░░░░░░░░▒▒▒▒░░░░░░▒▒▒
+   ▒▒▒░░░░░▒▒░░░░░░░░░░░░░░░░▒▒░░░░░▒▒▒
+   ▒▒▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒
+   ▒▒▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒
+   ▒▒▒▒░░░░░███░░░░░░░░░░░░███░░░░░▒▒▒▒
+   ▒▒▒▒░░░░██ ██░░░░░░░░░░██ ██░░░░▒▒▒▒
+   ▒▒▒▒░░░░░███░░░░░░░░░░░░███░░░░░▒▒▒▒
+   ▒▒▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒
+   ▒▒▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒
+   ▒▒▒▒░░░░░░░░░▓▓▓▓▓▓▓▓▓▓░░░░░░░░░▒▒▒▒
+   ▒▒▒▒░░░░░░░░▓▓██▓▓▓▓██▓▓░░░░░░░░▒▒▒▒
+   ▒▒▒▒▒░░░░░░▓▓▓██▓▓▓▓██▓▓▓░░░░░░▒▒▒▒▒
+   ▒▒▒▒▒▒░░░░░░▓▓██▓▓▓▓██▓▓░░░░░░▒▒▒▒▒▒
+   ▒▒▒▒▒▒▒░░░░░░▓▓▓▓▓▓▓▓▓▓░░░░░░▒▒▒▒▒▒▒
+   ▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒
+   ▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒
+   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+]],
+          keys = {},
+        },
+      },
+    },
+  },
+}
