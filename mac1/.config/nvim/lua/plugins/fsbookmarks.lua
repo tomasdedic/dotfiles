@@ -1,9 +1,10 @@
 return {
   {
-    "tya5/fsbookmark.nvim",
+    "tomasdedic/fsbookmark.nvim",
+    -- dir = "~/GIT/moje/fsbookmark.nvim", -- local checkout; remove to use GitHub
     dependencies = { "folke/snacks.nvim" },
     opts = {
-      explorer = { enabled = true, key = "b" },
+      explorer = { enabled = true, key = "b", global_key = "B" },
       icons = { bookmark = "*", broken = "!", global = "@", workspace = "~", shared = "+" },
       workspace = { enabled = true },
     },

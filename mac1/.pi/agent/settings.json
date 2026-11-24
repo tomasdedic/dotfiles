@@ -11,7 +11,7 @@
     "gpt-6-sol",
     "general"
   ],
-  "lastChangelogVersion": "1.5.2",
+  "lastChangelogVersion": "1.6.0",
   "defaultProvider": "github-copilot",
   "theme": "light",
   "defaultModel": "claude-opus-5.5",
@@ -51,6 +51,6 @@
     "{\"source\":\"npm:pi-boomerang\",\"scope\":\"user\"}": "0.7.0",
     "{\"source\":\"npm:pi-autoresearch\",\"scope\":\"user\"}": "1.9.0",
     "{\"source\":\"npm:@marckrenn/pi-sub-bar\",\"scope\":\"user\"}": "1.5.0",
-    "{\"source\":\"npm:@narumitw/pi-goal\",\"scope\":\"user\"}": "0.55.0"
+    "{\"source\":\"npm:@narumitw/pi-goal\",\"scope\":\"user\"}": "0.55.4"
   }
 }
