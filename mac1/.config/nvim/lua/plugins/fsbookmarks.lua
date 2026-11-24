@@ -4,7 +4,8 @@ return {
     -- dir = "~/GIT/moje/fsbookmark.nvim", -- local checkout; remove to use GitHub
     dependencies = { "folke/snacks.nvim" },
     opts = {
-      explorer = { enabled = true, key = "b", global_key = "B" },
+      -- b/B are mapped in the snacks explorer config instead: b cycles the scope, B filters
+      explorer = { enabled = true, key = false, global_key = false },
       icons = { bookmark = "*", broken = "!", global = "@", workspace = "~", shared = "+" },
       workspace = { enabled = true },
     },

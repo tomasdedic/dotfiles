@@ -12,11 +12,6 @@
       "description": ""
     },
     {
-      "path": "lua/plugins/blink-cmp.lua",
-      "type": "file",
-      "description": ""
-    },
-    {
       "path": "lua/plugins/fsbookmarks.lua",
       "type": "file",
       "description": ""

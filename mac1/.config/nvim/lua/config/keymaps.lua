@@ -74,6 +74,21 @@ vim.keymap.set("n", "-", function()
     Snacks.explorer({ cwd = LazyVim.root() })
   end
 end, { desc = "Explorer: open / focus / close" })
+
+-- same, but with the bookmarks-only filter already on (B toggles it inside the explorer too)
+vim.keymap.set("n", ",B", function()
+  local explorer = Snacks.picker.get({ source = "explorer" })[1]
+  if explorer and not explorer:is_focused() then
+    explorer:focus()
+  else
+    explorer = Snacks.explorer({ cwd = LazyVim.root() })
+  end
+  vim.schedule(function()
+    if explorer and not explorer.opts.bookmarks_only then
+      explorer.opts.actions.bookmarks_only(explorer)
+    end
+  end)
+end, { desc = "Explorer: bookmarks only" })
 vim.keymap.set("n", "<leader>cd", "<cmd>lcd %:p:h<CR>", {})
 --
 vim.keymap.set("n", "<leader>dd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
