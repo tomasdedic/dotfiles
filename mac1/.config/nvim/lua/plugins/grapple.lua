@@ -3,6 +3,7 @@ return {
   {
     {
       "cbochs/grapple.nvim",
+      enabled = false,
       opts = {
         scope = "global", -- also try out "git_branch"
         icons = false, -- setting to "true" requires "nvim-web-devicons"

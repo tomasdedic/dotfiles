@@ -118,8 +118,12 @@ vim.api.nvim_create_autocmd("WinEnter", {
             end
             vim.api.nvim_win_call(win, function()
               if at_bottom then
-                -- keep the live output in sight: last line at the bottom of the window
-                vim.cmd("normal! Gzb")
+                -- keep the live output in sight: last line at the bottom of the window.
+                -- `normal!` is not allowed while the window is in terminal mode, so set the
+                -- view directly.
+                local last = vim.api.nvim_buf_line_count(vim.api.nvim_win_get_buf(win))
+                local height = vim.api.nvim_win_get_height(win)
+                vim.fn.winrestview({ lnum = last, col = 0, topline = math.max(1, last - height + 1) })
               else
                 vim.fn.winrestview(view)
               end

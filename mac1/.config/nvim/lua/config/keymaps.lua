@@ -181,6 +181,13 @@ vim.keymap.set("n", "<leader>tl", function()
   zsh_send(vim.api.nvim_get_current_line())
 end, { desc = "Shell: run line" })
 
+-- same terminals as 1<C-/> and 2<C-/>: snacks keys them by `count`
+for _, n in ipairs({ 1, 2 }) do
+  vim.keymap.set({ "n", "t" }, "<leader>t" .. n, function()
+    Snacks.terminal.focus(nil, { cwd = LazyVim.root(), count = n })
+  end, { desc = "Terminal " .. n })
+end
+
 -- Runs as one script (zsh <file>), so loops, heredocs and exit behave like a real run and the
 -- terminal gets a single command. Unsaved changes are written to a temp file.
 vim.keymap.set("n", "<leader>tb", function()
