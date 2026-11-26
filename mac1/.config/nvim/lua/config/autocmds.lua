@@ -34,6 +34,7 @@ local function set_terminal_light_bg()
   vim.api.nvim_set_hl(0, "SnacksTerminalNormal", { bg = "#eff1f5", fg = "#4c4f69" })
   -- the colorscheme Visual is made for a dark background; use catppuccin latte's on the light one
   vim.api.nvim_set_hl(0, "SnacksTerminalVisual", { bg = "#bcc0cc" })
+  vim.api.nvim_set_hl(0, "SnacksTerminalCursorLine", { bg = "#dce0e8" }) -- latte crust
 end
 
 set_terminal_light_bg()
@@ -49,7 +50,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
     local whl = vim.wo[win].winhighlight
     if not whl:find("SnacksTerminalNormal") then
       vim.wo[win].winhighlight = (whl ~= "" and whl .. "," or "")
-        .. "Normal:SnacksTerminalNormal,Visual:SnacksTerminalVisual"
+        .. "Normal:SnacksTerminalNormal,Visual:SnacksTerminalVisual,CursorLine:SnacksTerminalCursorLine"
     end
   end,
 })
@@ -57,7 +58,12 @@ vim.api.nvim_create_autocmd("TermOpen", {
 -- winhighlight is window-local, so the light terminal colors stay on a window after it switches to
 -- a normal buffer (:e in the only window, or a split that copies the terminal window's options).
 -- Keep them in sync with the buffer the window shows; other winhighlight entries are left alone.
-local TERM_HL = { "Normal:SnacksTerminalNormal", "NormalFloat:SnacksTerminalNormal", "Visual:SnacksTerminalVisual" }
+local TERM_HL = {
+  "Normal:SnacksTerminalNormal",
+  "NormalFloat:SnacksTerminalNormal",
+  "Visual:SnacksTerminalVisual",
+  "CursorLine:SnacksTerminalCursorLine",
+}
 -- Checked for every window of the tab page, one tick later: a file can be opened into the terminal
 -- window from another window (a picker), and snacks then moves it out with :sbuffer into a new
 -- window that copies the terminal window's options, so the current window is not always the one.
@@ -223,7 +229,7 @@ vim.api.nvim_create_autocmd("WinEnter", {
         return
       end
       vim.wo[win].winhighlight =
-        "Normal:SnacksTerminalNormal,NormalFloat:SnacksTerminalNormal,Visual:SnacksTerminalVisual"
+        "Normal:SnacksTerminalNormal,NormalFloat:SnacksTerminalNormal,Visual:SnacksTerminalVisual,CursorLine:SnacksTerminalCursorLine"
       if not want_normal or vim.api.nvim_get_current_win() ~= win then
         return
       end

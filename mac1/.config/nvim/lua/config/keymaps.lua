@@ -159,10 +159,12 @@ end, { desc = "Copy git link" })
 -- Run shell code in the same terminal <c-/> uses (Snacks keys a terminal by cmd + cwd, so nil cmd
 -- and LazyVim.root() match it). That shell keeps running, so variables, cd, aliases and functions
 -- persist between runs. Focus stays on the code; <C-/> or <C-w>j to type in the terminal.
-local function zsh_send(code)
+-- count: the count typed before the key, read at the start of the mapping, because input() and
+-- :normal inside the mapping reset v:count. 0 means terminal 2 (the one 2<C-/> opens).
+local function zsh_send(code, count)
   local term = Snacks.terminal.get(nil, {
     cwd = LazyVim.root(),
-    count = vim.v.count > 0 and vim.v.count or 2, -- terminal 2 (2<C-/>), or the count you type first
+    count = count > 0 and count or 2,
     start_insert = false,
     win = { position = "bottom", size = 0.3, enter = false },
   })
@@ -173,20 +175,22 @@ local function zsh_send(code)
 end
 
 vim.keymap.set("x", "<leader>ts", function()
+  local count = vim.v.count
   -- marks '< '> are not set yet inside a visual-mode callback, so yank the selection
   vim.cmd('normal! "zy')
-  zsh_send(vim.fn.getreg("z"))
+  zsh_send(vim.fn.getreg("z"), count)
 end, { desc = "Shell: run selection" })
 
 vim.keymap.set("n", "<leader>ts", function()
+  local count = vim.v.count
   local code = vim.fn.input("zsh: ")
   if code ~= "" then
-    zsh_send(code)
+    zsh_send(code, count)
   end
 end, { desc = "Shell: run command" })
 
 vim.keymap.set("n", "<leader>tl", function()
-  zsh_send(vim.api.nvim_get_current_line())
+  zsh_send(vim.api.nvim_get_current_line(), vim.v.count)
 end, { desc = "Shell: run line" })
 
 -- same terminals as 1<C-/> and 2<C-/>: snacks keys them by `count`
@@ -199,12 +203,13 @@ end
 -- Runs as one script (zsh <file>), so loops, heredocs and exit behave like a real run and the
 -- terminal gets a single command. Unsaved changes are written to a temp file.
 vim.keymap.set("n", "<leader>tb", function()
+  local count = vim.v.count
   local path = vim.api.nvim_buf_get_name(0)
   if path == "" or vim.bo.modified then
     path = vim.fn.tempname() .. ".zsh"
     vim.fn.writefile(vim.api.nvim_buf_get_lines(0, 0, -1, false), path)
   end
-  zsh_send("zsh " .. vim.fn.fnameescape(path))
+  zsh_send("zsh " .. vim.fn.fnameescape(path), count)
 end, { desc = "Shell: run buffer as script" })
 -- Theme switch, F1 or :Color, for this session only. :Color with no argument toggles.
 local function set_theme(flavour)

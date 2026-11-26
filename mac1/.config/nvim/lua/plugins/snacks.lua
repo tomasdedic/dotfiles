@@ -51,7 +51,8 @@ return {
       terminal = {
         win = {
           wo = {
-            winhighlight = "Normal:SnacksTerminalNormal,Visual:SnacksTerminalVisual",
+            winhighlight = "Normal:SnacksTerminalNormal,Visual:SnacksTerminalVisual,CursorLine:SnacksTerminalCursorLine",
+            cursorline = true, -- snacks windows are "minimal" (cursorline off) by default
           },
           keys = {
             nav_h = term_key("<C-h>", "NvimTmuxNavigateLeft"),

@@ -50,6 +50,7 @@ return {
         return {
           SnacksTerminalNormal = { bg = "#eff1f5", fg = "#4c4f69" },
           SnacksTerminalVisual = { bg = "#bcc0cc" },
+          SnacksTerminalCursorLine = { bg = "#dce0e8" },
         }
       end,
       integrations = {
