@@ -125,6 +125,26 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end,
 })
 
+-- Remember the last command run in each terminal (for the ,tt picker). oh-my-zsh sets the title
+-- to the command line before it runs (OSC 2 "cmd", then OSC 1 "first word") and back to
+-- "user@host:dir" at the prompt, so b:term_title loses it. Take an OSC 2 that is followed by an
+-- OSC 1 and is not the prompt title; a program's own title (pi) comes without OSC 1.
+vim.api.nvim_create_autocmd("TermRequest", {
+  callback = function(ev)
+    local seq = ev.data.sequence or ""
+    local title = seq:match("^\27%]2;(.*)")
+    if title then
+      vim.b[ev.buf].term_pending_cmd = title
+    elseif seq:match("^\27%]1;") then
+      local cmd = vim.b[ev.buf].term_pending_cmd
+      if cmd and not cmd:find("^" .. vim.pesc(vim.env.USER or "") .. "@") then
+        vim.b[ev.buf].term_last_cmd = cmd
+      end
+      vim.b[ev.buf].term_pending_cmd = nil
+    end
+  end,
+})
+
 -- zsh vi-mode colors the cursor with OSC 12. Nvim's terminal does not apply it itself, so map it to
 -- TermCursor, the highlight 'guicursor' uses in terminal mode. "default" restores the colorscheme value.
 local term_cursor_default
@@ -284,5 +304,19 @@ vim.api.nvim_create_autocmd("WinEnter", {
         end)
       )
     end)
+  end,
+})
+
+-- Session restore (,qs / ,ql / ,qS) loads the saved buffers but keeps the ones already open. Sessions
+-- never save terminals, so terminals open before the restore were left over from the old session.
+-- Wipe them first. This ends the programs running in them.
+vim.api.nvim_create_autocmd("User", {
+  pattern = "PersistenceLoadPre",
+  callback = function()
+    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+      if vim.bo[buf].buftype == "terminal" then
+        pcall(vim.api.nvim_buf_delete, buf, { force = true })
+      end
+    end
   end,
 })

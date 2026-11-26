@@ -91,24 +91,19 @@ return {
       picker = {
         actions = {
           tmux_h = make_tmux_action("NvimTmuxNavigateLeft"),
-          tmux_j = make_tmux_action("NvimTmuxNavigateDown"),
-          tmux_k = make_tmux_action("NvimTmuxNavigateUp"),
           tmux_l = make_tmux_action("NvimTmuxNavigateRight"),
         },
         win = {
           input = {
             keys = {
+              -- <c-j>/<c-k> keep snacks' default: move down/up in the list
               ["<c-h>"] = { "tmux_h", mode = { "i", "n" } },
-              ["<c-j>"] = { "tmux_j", mode = { "i", "n" } },
-              ["<c-k>"] = { "tmux_k", mode = { "i", "n" } },
               ["<c-l>"] = { "tmux_l", mode = { "i", "n" } },
             },
           },
           list = {
             keys = {
               ["<c-h>"] = "tmux_h",
-              ["<c-j>"] = "tmux_j",
-              ["<c-k>"] = "tmux_k",
               ["<c-l>"] = "tmux_l",
             },
           },
@@ -247,8 +242,6 @@ return {
               list = {
                 keys = {
                   ["<C-h>"] = false,
-                  ["<C-j>"] = false,
-                  ["<C-k>"] = false,
                   ["<C-l>"] = false,
                   ["B"] = { "bookmarks_only", desc = "Only bookmarked paths" },
                   ["b"] = { "bookmark_cycle", desc = "Cycle bookmark scope" },

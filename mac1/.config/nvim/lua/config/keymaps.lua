@@ -193,6 +193,39 @@ vim.keymap.set("n", "<leader>tl", function()
   zsh_send(vim.api.nvim_get_current_line(), vim.v.count)
 end, { desc = "Shell: run line" })
 
+-- pick a terminal, with the last command run in it (stored by a TermRequest autocmd). Snacks
+-- terminals are unlisted buffers, so hidden = true. <CR> shows the picked one in its own snacks
+-- window (bottom split), like <C-/>, instead of replacing the current buffer.
+vim.keymap.set("n", "<leader>tt", function()
+  Snacks.picker.buffers({
+    title = "Terminals",
+    hidden = true,
+    layout = { preview = false },
+    transform = function(item)
+      if vim.bo[item.buf].buftype ~= "terminal" then
+        return false
+      end
+      item.last_cmd = vim.b[item.buf].term_last_cmd or ""
+      item.text = item.file .. " " .. item.last_cmd -- the search matches the command too
+    end,
+    format = function(item)
+      return { { item.file, "SnacksPickerFile" }, { "  " }, { item.last_cmd, "SnacksPickerComment" } }
+    end,
+    confirm = function(picker, item)
+      picker:close()
+      if not item then
+        return
+      end
+      for _, term in ipairs(Snacks.terminal.list()) do
+        if term.buf == item.buf then
+          return term:show():focus()
+        end
+      end
+      vim.api.nvim_set_current_buf(item.buf) -- a terminal not made by snacks
+    end,
+  })
+end, { desc = "Terminals: pick" })
+
 -- same terminals as 1<C-/> and 2<C-/>: snacks keys them by `count`
 for _, n in ipairs({ 1, 2 }) do
   vim.keymap.set({ "n", "t" }, "<leader>t" .. n, function()
