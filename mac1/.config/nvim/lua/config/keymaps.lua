@@ -89,6 +89,13 @@ vim.keymap.set("n", ",B", function()
     end
   end)
 end, { desc = "Explorer: bookmarks only" })
+-- Ctrl-x: toggle zoom (same as <leader>wm) from any mode, terminal mode included. A Lua function
+-- mapping runs without leaving the current mode, so the terminal zoom keeps insert/Normal mode.
+-- Replaces the built-in Ctrl-x: number decrement (n/x) and the insert-mode completion prefix.
+vim.keymap.set({ "n", "i", "x", "t" }, "<C-x>", function()
+  Snacks.zen.zoom()
+end, { desc = "Toggle zoom" })
+
 vim.keymap.set("n", "<leader>cd", "<cmd>lcd %:p:h<CR>", {})
 --
 vim.keymap.set("n", "<leader>dd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })

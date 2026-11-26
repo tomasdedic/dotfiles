@@ -21,6 +21,12 @@ after-startup-command = [
 ]
 
 
+# Opt in to current config behavior
+config-version = 2
+
+# Keep these workspaces alive when empty (same set as v1 inferred from the alt-N bindings)
+persistent-workspaces = ['1','2','3','4','5']
+
 # Start AeroSpace at login
 start-at-login = true
 
@@ -196,7 +202,7 @@ run = 'move-node-to-workspace 2'
 
 [[on-window-detected]]
 if.app-id = 'com.google.Chrome'
-run = 'move-node-to-workspace 2'
+run = ['layout floating', 'move-node-to-workspace 2']
 
 [[on-window-detected]]
 # if.app-id = 'org.alacritty'

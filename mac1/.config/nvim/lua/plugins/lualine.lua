@@ -1,3 +1,41 @@
+-- Terminal mode tag for the winbar: T terminal (insert) mode, N Normal mode.
+-- The focused window shows the live mode. Other terminal windows show the mode you left them in,
+-- which is also the mode you get when you go back (see the WinLeave/WinEnter autocmds).
+local function term_tag(focused)
+  return {
+    function()
+      local normal
+      if focused then
+        normal = vim.fn.mode() ~= "t"
+      else
+        normal = vim.b.term_left_normal == true
+      end
+      return normal and "N" or "T"
+    end,
+    cond = function()
+      return vim.bo.buftype == "terminal"
+    end,
+  }
+end
+
+-- winbar: "T term://1" for terminals (no [-] modifiable mark), the relative path otherwise
+local function winbar_a(focused)
+  local function is_term()
+    return vim.bo.buftype == "terminal"
+  end
+  return {
+    term_tag(focused),
+    { "filename", path = 1, file_status = false, cond = is_term },
+    {
+      "filename",
+      path = 1,
+      cond = function()
+        return not is_term()
+      end,
+    },
+  }
+end
+
 return {
   {
     "nvim-lualine/lualine.nvim",
@@ -115,7 +153,7 @@ return {
           },
         },
         winbar = {
-          lualine_a = { { "filename", path = 1 } },
+          lualine_a = winbar_a(true),
           -- lualine_x = {
           --   {
           --     function()
@@ -134,7 +172,7 @@ return {
           -- },
         },
         inactive_winbar = {
-          lualine_a = { { "filename", path = 1 } },
+          lualine_a = winbar_a(false),
           -- lualine_y = {
           --   {
           --     function()

@@ -31,6 +31,13 @@ return {
       -- customize for code.siemens.com
       explorer = {},
       image = { enabled = true },
+      -- zoom (<leader>wm, Ctrl-x) and zen open a float. lualine skips floats when it refreshes, so the
+      -- float keeps a frozen copy of the winbar. Make it an expression, evaluated on every redraw.
+      zen = {
+        on_open = function(win)
+          vim.wo[win.win].winbar = "%{%v:lua.require'lualine'.winbar()%}"
+        end,
+      },
       gitbrowse = {
         url_patterns = {
           ["code%.siemens%.com"] = {
@@ -44,7 +51,7 @@ return {
       terminal = {
         win = {
           wo = {
-            winhighlight = "Normal:SnacksTerminalNormal",
+            winhighlight = "Normal:SnacksTerminalNormal,Visual:SnacksTerminalVisual",
           },
           keys = {
             nav_h = term_key("<C-h>", "NvimTmuxNavigateLeft"),

@@ -49,6 +49,7 @@ return {
         -- Use catppuccin latte (light) colors for a bright terminal
         return {
           SnacksTerminalNormal = { bg = "#eff1f5", fg = "#4c4f69" },
+          SnacksTerminalVisual = { bg = "#bcc0cc" },
         }
       end,
       integrations = {

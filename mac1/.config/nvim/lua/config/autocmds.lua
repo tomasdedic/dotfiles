@@ -32,6 +32,8 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 
 local function set_terminal_light_bg()
   vim.api.nvim_set_hl(0, "SnacksTerminalNormal", { bg = "#eff1f5", fg = "#4c4f69" })
+  -- the colorscheme Visual is made for a dark background; use catppuccin latte's on the light one
+  vim.api.nvim_set_hl(0, "SnacksTerminalVisual", { bg = "#bcc0cc" })
 end
 
 set_terminal_light_bg()
@@ -46,7 +48,43 @@ vim.api.nvim_create_autocmd("TermOpen", {
     local win = vim.api.nvim_get_current_win()
     local whl = vim.wo[win].winhighlight
     if not whl:find("SnacksTerminalNormal") then
-      vim.wo[win].winhighlight = (whl ~= "" and whl .. "," or "") .. "Normal:SnacksTerminalNormal"
+      vim.wo[win].winhighlight = (whl ~= "" and whl .. "," or "")
+        .. "Normal:SnacksTerminalNormal,Visual:SnacksTerminalVisual"
+    end
+  end,
+})
+
+-- Name snacks terminals term://1, term://2, ... after their count (1<C-/>, 2<C-/>) instead of
+-- term://<cwd>//<pid>:<shell>. The "://" is needed: Nvim prepends the cwd to any other name, as if
+-- it were a file. Names must be unique, so a count already in use (same count, another directory)
+-- gets the buffer number appended.
+local function buf_by_name(name)
+  for _, b in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.api.nvim_buf_get_name(b) == name then
+      return b
+    end
+  end
+end
+
+vim.api.nvim_create_autocmd("TermOpen", {
+  callback = function(ev)
+    local term = vim.b[ev.buf].snacks_terminal
+    if not term then
+      return
+    end
+    local old = vim.api.nvim_buf_get_name(ev.buf)
+    local name = "term://" .. (term.id or 1)
+    local taken = buf_by_name(name)
+    if taken and taken ~= ev.buf then
+      name = name .. "-" .. ev.buf
+    end
+    if not pcall(vim.api.nvim_buf_set_name, ev.buf, name) then
+      return
+    end
+    -- renaming keeps the old name in a new, empty, unlisted buffer; drop it
+    local stale = buf_by_name(old)
+    if stale and stale ~= ev.buf then
+      pcall(vim.api.nvim_buf_delete, stale, { force = true })
     end
   end,
 })
@@ -74,66 +112,84 @@ vim.api.nvim_create_autocmd("TermRequest", {
 -- cursor is usually higher (blank rows below the prompt), so leaving from terminal mode froze the view.
 -- Leaving from terminal mode now parks the cursor on the last line; leaving from terminal Normal
 -- mode keeps your position, so you can read scrollback in another window.
+-- The mode is also remembered, so coming back restores it (see WinEnter below).
 vim.api.nvim_create_autocmd("WinLeave", {
   callback = function()
-    if vim.bo.buftype == "terminal" and vim.fn.mode() == "t" then
+    if vim.bo.buftype ~= "terminal" then
+      return
+    end
+    local terminal_mode = vim.fn.mode() == "t"
+    vim.b.term_left_normal = not terminal_mode
+    if terminal_mode then
       vim.api.nvim_win_set_cursor(0, { vim.api.nvim_buf_line_count(0), 0 })
     end
   end,
 })
 
--- winhighlight is window-local, so zoom (<leader>wm) shows the terminal buffer in a new float that
--- has snacks' own colors. Re-apply the light background there. Scheduled because snacks.win opens
--- the window first and sets its wo (NormalFloat:Normal) afterwards, overwriting an immediate set.
+-- Snacks terminal windows:
+-- 1. winhighlight is window-local, so zoom (<leader>wm) shows the buffer in a new float with snacks'
+--    own colors. Re-apply the light background there.
+-- 2. snacks' auto_insert always enters terminal mode on BufEnter, which also jumps the view to the
+--    job cursor at the end of the buffer. If you left the terminal in Normal mode (or zoom from
+--    Normal mode), go back to Normal mode and to the place you were reading.
+-- Scheduled because snacks.win sets its own window options after the window is entered.
 vim.api.nvim_create_autocmd("WinEnter", {
   callback = function(ev)
     if not vim.b[ev.buf].snacks_terminal then
       return
     end
     local win = vim.api.nvim_get_current_win()
-    -- Take the view from the window we came from, while it still exists. WinLeave does not fire
-    -- when snacks opens the zoom float, so a view stored earlier would be stale.
-    local view ---@type vim.fn.winsaveview.ret?
-    local at_bottom = false
+
+    -- Zoom opens a float on the same buffer, and WinLeave does not fire for it, so the mode and the
+    -- view come from the window we came from. Any other entry uses the mode stored by WinLeave.
     local prev = vim.fn.win_getid(vim.fn.winnr("#"))
-    if prev ~= 0 and prev ~= win and vim.api.nvim_win_is_valid(prev) and vim.api.nvim_win_get_buf(prev) == ev.buf then
-      view = vim.api.nvim_win_call(prev, vim.fn.winsaveview)
-      local last = vim.api.nvim_buf_line_count(ev.buf)
-      -- the end of the buffer was on screen (a TUI such as pi keeps its cursor well above it),
-      -- so the window was showing the live output, not scrollback
-      at_bottom = view.topline + vim.api.nvim_win_get_height(prev) - 1 >= last
+    local zoom = prev ~= 0
+      and prev ~= win
+      and vim.api.nvim_win_is_valid(prev)
+      and vim.api.nvim_win_get_buf(prev) == ev.buf
+    local want_normal
+    if zoom then
+      want_normal = vim.fn.mode() ~= "t"
+    else
+      want_normal = vim.b[ev.buf].term_left_normal == true
     end
+    local from = zoom and prev or win
+    local view = vim.api.nvim_win_call(from, vim.fn.winsaveview)
+    -- the end of the buffer was on screen (a TUI such as pi keeps its cursor well above it),
+    -- so the window was showing the live output, not scrollback
+    local at_bottom = view.topline + vim.api.nvim_win_get_height(from) - 1 >= vim.api.nvim_buf_line_count(ev.buf)
+
     vim.schedule(function()
-      if vim.api.nvim_win_is_valid(win) and vim.bo[vim.api.nvim_win_get_buf(win)].buftype == "terminal" then
-        vim.wo[win].winhighlight = "Normal:SnacksTerminalNormal,NormalFloat:SnacksTerminalNormal"
-        -- snacks' auto_insert starts terminal mode here, which always jumps the view to the job
-        -- cursor at the end of the buffer. Coming from terminal Normal mode, stay there instead.
-        -- stopinsert only takes effect on the next loop pass, and leaving terminal mode moves the
-        -- cursor to the job cursor, so the view must be restored one tick later.
-        if view and vim.api.nvim_get_current_win() == win then
-          vim.cmd("stopinsert")
-          local function apply()
-            if not vim.api.nvim_win_is_valid(win) then
-              return
-            end
-            vim.api.nvim_win_call(win, function()
-              if at_bottom then
-                -- keep the live output in sight: last line at the bottom of the window.
-                -- `normal!` is not allowed while the window is in terminal mode, so set the
-                -- view directly.
-                local last = vim.api.nvim_buf_line_count(vim.api.nvim_win_get_buf(win))
-                local height = vim.api.nvim_win_get_height(win)
-                vim.fn.winrestview({ lnum = last, col = 0, topline = math.max(1, last - height + 1) })
-              else
-                vim.fn.winrestview(view)
-              end
-            end)
-          end
-          vim.schedule(apply)
-          -- Nvim scrolls the window itself about 100ms after the terminal is resized, so apply again
-          vim.defer_fn(apply, 200)
-        end
+      -- A new split first shows the current buffer and gets its own buffer after WinEnter (this is
+      -- how a second terminal opens). That is not a return to this terminal: leave it alone.
+      if not vim.api.nvim_win_is_valid(win) or vim.api.nvim_win_get_buf(win) ~= ev.buf then
+        return
       end
+      vim.wo[win].winhighlight =
+        "Normal:SnacksTerminalNormal,NormalFloat:SnacksTerminalNormal,Visual:SnacksTerminalVisual"
+      if not want_normal or vim.api.nvim_get_current_win() ~= win then
+        return
+      end
+      vim.cmd("stopinsert")
+      -- stopinsert takes effect on the next loop pass and moves the cursor to the job cursor, so the
+      -- view is restored after it. `normal!` is not allowed in terminal mode, so use winrestview.
+      local function apply()
+        if not vim.api.nvim_win_is_valid(win) then
+          return
+        end
+        vim.api.nvim_win_call(win, function()
+          if at_bottom then
+            local last = vim.api.nvim_buf_line_count(ev.buf)
+            local height = vim.api.nvim_win_get_height(win)
+            vim.fn.winrestview({ lnum = last, col = 0, topline = math.max(1, last - height + 1) })
+          else
+            vim.fn.winrestview(view)
+          end
+        end)
+      end
+      vim.schedule(apply)
+      -- Nvim scrolls the window itself about 100ms after a terminal is resized (zoom), so apply again
+      vim.defer_fn(apply, 200)
     end)
   end,
 })
