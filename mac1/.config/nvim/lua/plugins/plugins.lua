@@ -125,6 +125,10 @@ return {
           return base
         end,
         prompt_for_file_name = false,
+        -- img-clip wraps vim.paste to catch images dropped into the terminal. It checks every
+        -- one-line text paste in Normal mode and warns "Content is not an image" (its quiet mode
+        -- does not reach util.warn). Images are pasted with <localleader>p, so turn it off.
+        drag_and_drop = { enabled = false },
       },
     },
     keys = {

@@ -54,6 +54,36 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end,
 })
 
+-- winhighlight is window-local, so the light terminal colors stay on a window after it switches to
+-- a normal buffer (:e in the only window, or a split that copies the terminal window's options).
+-- Keep them in sync with the buffer the window shows; other winhighlight entries are left alone.
+local TERM_HL = { "Normal:SnacksTerminalNormal", "NormalFloat:SnacksTerminalNormal", "Visual:SnacksTerminalVisual" }
+-- Checked for every window of the tab page, one tick later: a file can be opened into the terminal
+-- window from another window (a picker), and snacks then moves it out with :sbuffer into a new
+-- window that copies the terminal window's options, so the current window is not always the one.
+local function sync_term_hl()
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    local whl = vim.wo[win].winhighlight
+    local parts = vim.tbl_filter(function(p)
+      return p ~= "" and not vim.tbl_contains(TERM_HL, p)
+    end, vim.split(whl, ","))
+    if vim.bo[buf].buftype == "terminal" then
+      vim.list_extend(parts, TERM_HL)
+    end
+    local new = table.concat(parts, ",")
+    if new ~= whl then
+      vim.wo[win].winhighlight = new
+    end
+  end
+end
+
+vim.api.nvim_create_autocmd({ "BufWinEnter", "WinEnter", "WinNew" }, {
+  callback = function()
+    vim.schedule(sync_term_hl)
+  end,
+})
+
 -- Name snacks terminals term://1, term://2, ... after their count (1<C-/>, 2<C-/>) instead of
 -- term://<cwd>//<pid>:<shell>. The "://" is needed: Nvim prepends the cwd to any other name, as if
 -- it were a file. Names must be unique, so a count already in use (same count, another directory)
@@ -122,6 +152,12 @@ vim.api.nvim_create_autocmd("WinLeave", {
     vim.b.term_left_normal = not terminal_mode
     if terminal_mode then
       vim.api.nvim_win_set_cursor(0, { vim.api.nvim_buf_line_count(0), 0 })
+    else
+      -- hiding the terminal (<C-/>) closes its window, and showing it opens a new one with a fresh
+      -- view, so remember where you were reading
+      local view = vim.fn.winsaveview()
+      vim.b.term_view = view
+      vim.b.term_at_bottom = view.topline + vim.api.nvim_win_get_height(0) - 1 >= vim.api.nvim_buf_line_count(0)
     end
   end,
 })
@@ -147,17 +183,38 @@ vim.api.nvim_create_autocmd("WinEnter", {
       and prev ~= win
       and vim.api.nvim_win_is_valid(prev)
       and vim.api.nvim_win_get_buf(prev) == ev.buf
-    local want_normal
-    if zoom then
-      want_normal = vim.fn.mode() ~= "t"
-    else
-      want_normal = vim.b[ev.buf].term_left_normal == true
-    end
-    local from = zoom and prev or win
-    local view = vim.api.nvim_win_call(from, vim.fn.winsaveview)
+    local want_normal, view, at_bottom
+    local last = vim.api.nvim_buf_line_count(ev.buf)
     -- the end of the buffer was on screen (a TUI such as pi keeps its cursor well above it),
     -- so the window was showing the live output, not scrollback
-    local at_bottom = view.topline + vim.api.nvim_win_get_height(from) - 1 >= vim.api.nvim_buf_line_count(ev.buf)
+    local function bottom(v, w)
+      return v.topline + vim.api.nvim_win_get_height(w) - 1 >= last
+    end
+    if zoom and vim.api.nvim_win_get_config(win).relative ~= "" then
+      -- zoom in: take the view of the window below, and keep it for the way back
+      want_normal = vim.fn.mode() ~= "t"
+      view = vim.api.nvim_win_call(prev, vim.fn.winsaveview)
+      at_bottom = bottom(view, prev)
+      vim.w[prev].term_zoom_view = view
+    elseif zoom then
+      -- zoom out (prev is the float): its view does not fit the smaller window. If you did not move
+      -- in the zoom, go back to the view from before the zoom; else keep the line, centered.
+      want_normal = vim.fn.mode() ~= "t"
+      local zoomed = vim.api.nvim_win_call(prev, vim.fn.winsaveview)
+      local before = vim.w[win].term_zoom_view
+      vim.w[win].term_zoom_view = nil
+      if before and before.lnum == zoomed.lnum then
+        view = before
+        at_bottom = bottom(before, win)
+      else
+        view = { lnum = zoomed.lnum, col = zoomed.col, topline = math.max(1, zoomed.lnum - math.floor(vim.api.nvim_win_get_height(win) / 2)) }
+        at_bottom = bottom(zoomed, prev)
+      end
+    else
+      want_normal = vim.b[ev.buf].term_left_normal == true
+      view = vim.b[ev.buf].term_view or vim.fn.winsaveview()
+      at_bottom = vim.b[ev.buf].term_at_bottom == true
+    end
 
     vim.schedule(function()
       -- A new split first shows the current buffer and gets its own buffer after WinEnter (this is
@@ -178,18 +235,48 @@ vim.api.nvim_create_autocmd("WinEnter", {
           return
         end
         vim.api.nvim_win_call(win, function()
+          local target = view
           if at_bottom then
             local last = vim.api.nvim_buf_line_count(ev.buf)
             local height = vim.api.nvim_win_get_height(win)
-            vim.fn.winrestview({ lnum = last, col = 0, topline = math.max(1, last - height + 1) })
-          else
-            vim.fn.winrestview(view)
+            target = { lnum = last, col = 0, topline = math.max(1, last - height + 1) }
+          end
+          local now = vim.fn.winsaveview()
+          if now.lnum ~= target.lnum or now.topline ~= target.topline then
+            vim.fn.winrestview(target)
           end
         end)
       end
-      vim.schedule(apply)
-      -- Nvim scrolls the window itself about 100ms after a terminal is resized (zoom), so apply again
-      vim.defer_fn(apply, 200)
+      -- Nvim scrolls the window again when the resized terminal is redrawn, and that can come late
+      -- (a busy TUI such as pi repaints only after it gets the resize). So hold the view for one
+      -- second, and stop at the first key you press, so this never fights your own movement.
+      local timer = assert(vim.uv.new_timer())
+      local ns ---@type integer?
+      local function stop()
+        if not timer:is_closing() then
+          timer:stop()
+          timer:close()
+        end
+        if ns then
+          vim.on_key(nil, ns)
+          ns = nil
+        end
+      end
+      ns = vim.on_key(function()
+        vim.schedule(stop)
+      end)
+      local ticks = 0
+      timer:start(
+        0,
+        50,
+        vim.schedule_wrap(function()
+          ticks = ticks + 1
+          if ticks > 20 or timer:is_closing() or not vim.api.nvim_win_is_valid(win) then
+            return stop()
+          end
+          apply()
+        end)
+      )
     end)
   end,
 })

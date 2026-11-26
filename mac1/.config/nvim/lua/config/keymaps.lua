@@ -162,6 +162,7 @@ end, { desc = "Copy git link" })
 local function zsh_send(code)
   local term = Snacks.terminal.get(nil, {
     cwd = LazyVim.root(),
+    count = vim.v.count > 0 and vim.v.count or 2, -- terminal 2 (2<C-/>), or the count you type first
     start_insert = false,
     win = { position = "bottom", size = 0.3, enter = false },
   })
