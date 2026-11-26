@@ -183,7 +183,8 @@ vim.api.nvim_create_autocmd("WinLeave", {
       -- view, so remember where you were reading
       local view = vim.fn.winsaveview()
       vim.b.term_view = view
-      vim.b.term_at_bottom = view.topline + vim.api.nvim_win_get_height(0) - 1 >= vim.api.nvim_buf_line_count(0)
+      vim.b.term_view_last = vim.api.nvim_buf_line_count(0)
+      vim.b.term_at_bottom = view.topline + vim.api.nvim_win_get_height(0) - 1 >= vim.b.term_view_last
     end
   end,
 })
@@ -211,6 +212,7 @@ vim.api.nvim_create_autocmd("WinEnter", {
       and vim.api.nvim_win_get_buf(prev) == ev.buf
     local want_normal, view, at_bottom
     local last = vim.api.nvim_buf_line_count(ev.buf)
+    local view_last = last -- buffer length when `view` was taken
     -- the end of the buffer was on screen (a TUI such as pi keeps its cursor well above it),
     -- so the window was showing the live output, not scrollback
     local function bottom(v, w)
@@ -240,6 +242,7 @@ vim.api.nvim_create_autocmd("WinEnter", {
       want_normal = vim.b[ev.buf].term_left_normal == true
       view = vim.b[ev.buf].term_view or vim.fn.winsaveview()
       at_bottom = vim.b[ev.buf].term_at_bottom == true
+      view_last = vim.b[ev.buf].term_view_last or last
     end
 
     vim.schedule(function()
@@ -263,9 +266,12 @@ vim.api.nvim_create_autocmd("WinEnter", {
         vim.api.nvim_win_call(win, function()
           local target = view
           if at_bottom then
-            local last = vim.api.nvim_buf_line_count(ev.buf)
+            -- keep the end of the output at the bottom of the window (it may have grown), and the
+            -- cursor the same number of lines above the end as before, not on the last line
+            local now_last = vim.api.nvim_buf_line_count(ev.buf)
             local height = vim.api.nvim_win_get_height(win)
-            target = { lnum = last, col = 0, topline = math.max(1, last - height + 1) }
+            local lnum = math.max(1, now_last - (view_last - view.lnum))
+            target = { lnum = lnum, col = view.col, topline = math.max(1, math.min(now_last - height + 1, lnum)) }
           end
           local now = vim.fn.winsaveview()
           if now.lnum ~= target.lnum or now.topline ~= target.topline then

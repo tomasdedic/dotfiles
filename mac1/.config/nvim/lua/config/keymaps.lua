@@ -206,22 +206,41 @@ vim.keymap.set("n", "<leader>tt", function()
         return false
       end
       item.last_cmd = vim.b[item.buf].term_last_cmd or ""
+      -- the mode the terminal was left in, which is the mode it opens in (same letters as the winbar)
+      item.term_mode = vim.b[item.buf].term_left_normal and "N" or "T"
       item.text = item.file .. " " .. item.last_cmd -- the search matches the command too
     end,
     format = function(item)
-      return { { item.file, "SnacksPickerFile" }, { "  " }, { item.last_cmd, "SnacksPickerComment" } }
+      return {
+        { item.term_mode, "SnacksPickerSpecial" },
+        { "  " },
+        { item.file, "SnacksPickerFile" },
+        { "  " },
+        { item.last_cmd, "SnacksPickerComment" },
+      }
     end,
     confirm = function(picker, item)
       picker:close()
       if not item then
         return
       end
-      for _, term in ipairs(Snacks.terminal.list()) do
-        if term.buf == item.buf then
-          return term:show():focus()
+      -- The picker leaves insert mode with stopinsert, which lands later. Open the terminal only
+      -- after that, or the late stopinsert switches the terminal to Normal mode. The WinEnter
+      -- autocmd then restores the mode the terminal was left in.
+      local tries = 0
+      local function open()
+        tries = tries + 1
+        if vim.fn.mode():find("^i") and tries < 50 then
+          return vim.defer_fn(open, 10)
         end
+        for _, term in ipairs(Snacks.terminal.list()) do
+          if term.buf == item.buf then
+            return term:show():focus()
+          end
+        end
+        vim.api.nvim_set_current_buf(item.buf) -- a terminal not made by snacks
       end
-      vim.api.nvim_set_current_buf(item.buf) -- a terminal not made by snacks
+      vim.schedule(open)
     end,
   })
 end, { desc = "Terminals: pick" })
