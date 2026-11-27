@@ -49,6 +49,8 @@ return {
         -- Use catppuccin latte (light) colors for a bright terminal
         return {
           SnacksTerminalNormal = { bg = "#eff1f5", fg = "#4c4f69" },
+          SnacksTerminalVisual = { bg = "#bcc0cc" },
+          SnacksTerminalCursorLine = { bg = "#dce0e8" },
         }
       end,
       integrations = {
@@ -71,6 +73,23 @@ return {
     opts = {
       disable_when_zoomed = true,
     },
+    config = function(_, opts)
+      local nav = require("nvim-tmux-navigation")
+      nav.setup(opts)
+      -- Snacks zoom (,wm) shows the window as a float; `wincmd` from it leaves the float, which
+      -- ends the zoom. From the zoom window go straight to the tmux pane, so the zoom stays.
+      local tmux_dir = { Left = "-L", Down = "-D", Up = "-U", Right = "-R" }
+      for name, flag in pairs(tmux_dir) do
+        vim.api.nvim_create_user_command("NvimTmuxNavigate" .. name, function()
+          local zoom = Snacks.zen.win
+          if vim.env.TMUX and zoom and zoom:valid() and zoom.win == vim.api.nvim_get_current_win() then
+            vim.fn.system({ "tmux", "select-pane", flag })
+          else
+            nav["NvimTmuxNavigate" .. name]()
+          end
+        end, {})
+      end
+    end,
   },
 
   {
@@ -124,6 +143,10 @@ return {
           return base
         end,
         prompt_for_file_name = false,
+        -- img-clip wraps vim.paste to catch images dropped into the terminal. It checks every
+        -- one-line text paste in Normal mode and warns "Content is not an image" (its quiet mode
+        -- does not reach util.warn). Images are pasted with <localleader>p, so turn it off.
+        drag_and_drop = { enabled = false },
       },
     },
     keys = {

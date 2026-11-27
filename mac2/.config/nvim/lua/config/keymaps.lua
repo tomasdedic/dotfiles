@@ -74,6 +74,28 @@ vim.keymap.set("n", "-", function()
     Snacks.explorer({ cwd = LazyVim.root() })
   end
 end, { desc = "Explorer: open / focus / close" })
+
+-- same, but with the bookmarks-only filter already on (B toggles it inside the explorer too)
+vim.keymap.set("n", ",B", function()
+  local explorer = Snacks.picker.get({ source = "explorer" })[1]
+  if explorer and not explorer:is_focused() then
+    explorer:focus()
+  else
+    explorer = Snacks.explorer({ cwd = LazyVim.root() })
+  end
+  vim.schedule(function()
+    if explorer and not explorer.opts.bookmarks_only then
+      explorer.opts.actions.bookmarks_only(explorer)
+    end
+  end)
+end, { desc = "Explorer: bookmarks only" })
+-- Ctrl-x: toggle zoom (same as <leader>wm) from any mode, terminal mode included. A Lua function
+-- mapping runs without leaving the current mode, so the terminal zoom keeps insert/Normal mode.
+-- Replaces the built-in Ctrl-x: number decrement (n/x) and the insert-mode completion prefix.
+vim.keymap.set({ "n", "i", "x", "t" }, "<C-x>", function()
+  Snacks.zen.zoom()
+end, { desc = "Toggle zoom" })
+
 vim.keymap.set("n", "<leader>cd", "<cmd>lcd %:p:h<CR>", {})
 --
 vim.keymap.set("n", "<leader>dd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
@@ -137,9 +159,12 @@ end, { desc = "Copy git link" })
 -- Run shell code in the same terminal <c-/> uses (Snacks keys a terminal by cmd + cwd, so nil cmd
 -- and LazyVim.root() match it). That shell keeps running, so variables, cd, aliases and functions
 -- persist between runs. Focus stays on the code; <C-/> or <C-w>j to type in the terminal.
-local function zsh_send(code)
+-- count: the count typed before the key, read at the start of the mapping, because input() and
+-- :normal inside the mapping reset v:count. 0 means terminal 2 (the one 2<C-/> opens).
+local function zsh_send(code, count)
   local term = Snacks.terminal.get(nil, {
     cwd = LazyVim.root(),
+    count = count > 0 and count or 2,
     start_insert = false,
     win = { position = "bottom", size = 0.3, enter = false },
   })
@@ -150,31 +175,93 @@ local function zsh_send(code)
 end
 
 vim.keymap.set("x", "<leader>ts", function()
+  local count = vim.v.count
   -- marks '< '> are not set yet inside a visual-mode callback, so yank the selection
   vim.cmd('normal! "zy')
-  zsh_send(vim.fn.getreg("z"))
+  zsh_send(vim.fn.getreg("z"), count)
 end, { desc = "Shell: run selection" })
 
 vim.keymap.set("n", "<leader>ts", function()
+  local count = vim.v.count
   local code = vim.fn.input("zsh: ")
   if code ~= "" then
-    zsh_send(code)
+    zsh_send(code, count)
   end
 end, { desc = "Shell: run command" })
 
 vim.keymap.set("n", "<leader>tl", function()
-  zsh_send(vim.api.nvim_get_current_line())
+  zsh_send(vim.api.nvim_get_current_line(), vim.v.count)
 end, { desc = "Shell: run line" })
+
+-- pick a terminal, with the last command run in it (stored by a TermRequest autocmd). Snacks
+-- terminals are unlisted buffers, so hidden = true. <CR> shows the picked one in its own snacks
+-- window (bottom split), like <C-/>, instead of replacing the current buffer.
+vim.keymap.set("n", "<leader>tt", function()
+  Snacks.picker.buffers({
+    title = "Terminals",
+    hidden = true,
+    layout = { preview = false },
+    transform = function(item)
+      if vim.bo[item.buf].buftype ~= "terminal" then
+        return false
+      end
+      item.last_cmd = vim.b[item.buf].term_last_cmd or ""
+      -- the mode the terminal was left in, which is the mode it opens in (same letters as the winbar)
+      item.term_mode = vim.b[item.buf].term_left_normal and "N" or "T"
+      item.text = item.file .. " " .. item.last_cmd -- the search matches the command too
+    end,
+    format = function(item)
+      return {
+        { item.term_mode, "SnacksPickerSpecial" },
+        { "  " },
+        { item.file, "SnacksPickerFile" },
+        { "  " },
+        { item.last_cmd, "SnacksPickerComment" },
+      }
+    end,
+    confirm = function(picker, item)
+      picker:close()
+      if not item then
+        return
+      end
+      -- The picker leaves insert mode with stopinsert, which lands later. Open the terminal only
+      -- after that, or the late stopinsert switches the terminal to Normal mode. The WinEnter
+      -- autocmd then restores the mode the terminal was left in.
+      local tries = 0
+      local function open()
+        tries = tries + 1
+        if vim.fn.mode():find("^i") and tries < 50 then
+          return vim.defer_fn(open, 10)
+        end
+        for _, term in ipairs(Snacks.terminal.list()) do
+          if term.buf == item.buf then
+            return term:show():focus()
+          end
+        end
+        vim.api.nvim_set_current_buf(item.buf) -- a terminal not made by snacks
+      end
+      vim.schedule(open)
+    end,
+  })
+end, { desc = "Terminals: pick" })
+
+-- same terminals as 1<C-/> and 2<C-/>: snacks keys them by `count`
+for _, n in ipairs({ 1, 2 }) do
+  vim.keymap.set({ "n", "t" }, "<leader>t" .. n, function()
+    Snacks.terminal.focus(nil, { cwd = LazyVim.root(), count = n })
+  end, { desc = "Terminal " .. n })
+end
 
 -- Runs as one script (zsh <file>), so loops, heredocs and exit behave like a real run and the
 -- terminal gets a single command. Unsaved changes are written to a temp file.
 vim.keymap.set("n", "<leader>tb", function()
+  local count = vim.v.count
   local path = vim.api.nvim_buf_get_name(0)
   if path == "" or vim.bo.modified then
     path = vim.fn.tempname() .. ".zsh"
     vim.fn.writefile(vim.api.nvim_buf_get_lines(0, 0, -1, false), path)
   end
-  zsh_send("zsh " .. vim.fn.fnameescape(path))
+  zsh_send("zsh " .. vim.fn.fnameescape(path), count)
 end, { desc = "Shell: run buffer as script" })
 -- Theme switch, F1 or :Color, for this session only. :Color with no argument toggles.
 local function set_theme(flavour)
